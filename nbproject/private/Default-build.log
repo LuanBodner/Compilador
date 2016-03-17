@@ -1,0 +1,6 @@
+gcc edge.c -c -O0 -Wall -ggdb
+gcc: error: edge.c: No such file or directory
+gcc: fatal error: no input files
+compilation terminated.
+Makefile:10: recipe for target 'lib' failed
+make: *** [lib] Error 1
