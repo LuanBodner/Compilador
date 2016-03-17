@@ -16,6 +16,8 @@
 #include "LexicalAnalyzer.h"
 
 //Regular Expressions
+
+//Operations
 std::string t_SUM = "^+",
         t_SUB = "^-",
         t_MUL = "^*",
@@ -30,6 +32,7 @@ std::string t_SUM = "^+",
         t_OPA = "^(",
         t_CPA = "^)";
 
+//Reserved words
 std::string k_IF = "^se",
         k_TH = "^então",
         k_OT = "^senão",
@@ -43,6 +46,7 @@ std::string k_IF = "^se",
         k_IN = "^inteiro",
         k_RT = "^retorna";
 
+//Comments
 std::string c_OT = "^{",
         c_CT = "^}";
 
