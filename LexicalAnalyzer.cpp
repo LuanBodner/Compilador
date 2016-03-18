@@ -11,52 +11,36 @@
  * Created on 17 de Março de 2016, 00:56
  */
 
-#include <iostream>
 #include "LexicalAnalyzer.h"
 
 namespace Lex {
     //Regular Expressions
 
+
     //Operations
-    std::string p_SUM = "^+",
-            o_SUB = "^-",
-            o_MUL = "^*",
-            o_DIV = "^/",
-            o_EQU = "^=",
-            o_COM = "^,",
-            o_ATT = "^:=",
-            o_SMA = "^<",
-            o_BIG = "^>",
-            o_SME = "^<=",
-            o_BGE = "^>=",
-            o_OPA = "^(",
-            o_CPA = "^)";
+    std::tr1::regex p_SUM("^+"), o_SUB("^-"), o_MUL("^*"), o_DIV("^/"),
+    o_EQU("^="), o_COM("^,"), o_ATT("^:="), o_SMA("^<"), o_BIG("^>"),
+    o_SME("^<="), o_BGE("^>="), o_OPA("^("), o_CPA("^)");
 
     //Keywords
-    std::string k_IF = "^\\bse\\b",
-            k_TH = "^\\bentão\\b",
-            k_OT = "^\\bsenão\\b",
-            k_EN = "^\\bfim\\b",
-            k_RP = "^\\brepita\\b",
-            k_FL = "^\\bflutuante\\b",
-            k_VO = "^\\bvazio\\b",
-            k_TL = "^\\baté\\b",
-            k_RE = "^\\bleia\\b",
-            k_WR = "^\\bescreve\\b",
-            k_IN = "^\\binteiro\\b",
-            k_RT = "^\\bretorna\\b";
+    std::tr1::regex k_IF("^\\bse\\b"), k_TH("^\\bentão\\b"),
+    k_OT("^\\bsenão\\b"), k_EN("^\\bfim\\b"),
+    k_RP("^\\brepita\\b"), k_FL("^\\bflutuante\\b"),
+    k_VO("^\\bvazio\\b"), k_TL("^\\baté\\b"),
+    k_RE("^\\bleia\\b"), k_WR("^\\bescreve\\b"),
+    k_IN("^\\binteiro\\b"), k_RT("^\\bretorna\\b");
 
     //Comments
-    std::string c_CM = "^{.*}";
+    std::tr1::regex c_CM("^{.*}");
 
     //Numbers
-    std::string n_IN = "^(?:^|(?<=\\s))[0-9]+(?=$|\\s)",
-            n_SI = "^(?:^|(?<=\\s))[0-9]+e[+|-]*[0-9]+(?=$|\\s)",
-            n_FL = "^[-+]?[0-9]+\\.[0-9]+",
-            n_SF = "^(?:^|(?<=\\s))[0-9]+e[+|-]*[0-9]+(?=$|\\s)";
+    std::tr1::regex n_IN("^(?:^|(?<=\\s))[0-9]+(?=$|\\s)"),
+    n_SI("^(?:^|(?<=\\s))[0-9]+e[+|-]*[0-9]+(?=$|\\s)"),
+    n_FL("^[-+]?[0-9]+\\.[0-9]+"),
+    n_SF("^(?:^|(?<=\\s))[0-9]+e[+|-]*[0-9]+(?=$|\\s)");
 
     //Identifier
-    std::string i_ID = "^\\b[A-Za-zÀ-ú_][A-Za-zÀ-ú0-9_]*";
+    std::tr1::regex i_ID("^\\b[A-Za-zÀ-ú_][A-Za-zÀ-ú0-9_]*");
 
     LexicalAnalyzer::LexicalAnalyzer() {
     }
@@ -81,15 +65,12 @@ namespace Lex {
     void LexicalAnalyzer::tokenFinder(std::string fileName) {
 
         std::string bufferCharVec = readFile(fileName);
-        std::string tokenTemp;
+        std::tr1::cmatch match;
 
-        unsigned int sizeCount = 0;
+        std::tr1::regex_search(bufferCharVec.c_str(), match, k_IN);
 
-        while (bufferCharVec.size() >= sizeCount) {
-            break;
-        }
+        std::cout << match.str() << std::endl;
 
-        std::cout << tokenTemp;
     }
 }
 

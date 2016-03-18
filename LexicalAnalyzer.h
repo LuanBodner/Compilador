@@ -15,7 +15,11 @@
 #define LEXICALANALYZER_H
 
 #include <string>
+#include <iostream>
 #include <fstream>
+#include <string>
+#include <tr1/regex>
+#include <regex>
 
 namespace Lex {
 
