@@ -16,32 +16,36 @@
 #include <string>
 #include <iostream>
 
-typedef enum {
-    IF, THEN, OTHERWISE, END, REPEAT, FLOAT, VOID, UNTIL,
-    READ, WRITE, INTEGER, INTEGER_TYPE, COMMENTS, FLOAT_TYPE,
-    RETURN, SUM, SUBTRACTION, MULTIPLICATION, DIVISION,
-    EQUAL, COMMA, ATTRIBUTION, SMALLER_THAN, BIGGER_THAN,
-    SMALL_EQUAL, BIGGER_EQUAL, OPEN, CLOSE, NUMBER
-} TokenType;
+namespace Token {
 
-class Token {
-public:
+    typedef enum {
+        IF, THEN, OTHERWISE, END, REPEAT,
+        FLOAT, VOID, UNTIL, READ, WRITE,
+        INTEGER, INTEGER_TYPE, COMMENTS, FLOAT_TYPE, RETURN,
+        SUM, SUBTRACTION, MULTIPLICATION, DIVISION, EQUAL,
+        COMMA, ATTRIBUTION, SMALLER_THAN, BIGGER_THAN, SMALL_EQUAL,
+        BIGGER_EQUAL, OPEN, CLOSE, NUMBER
+    } TokenType;
 
-    //Constructor & destructor
-    Token();
-    virtual ~Token();
+    class Token {
+    public:
 
-    //Other methods
-    std::string getTokenName();
-    TokenType getTokenType();
-    void setTokenName(std::string);
-    void setTokenType(TokenType);
-    void print();
+        //Constructor & destructor
+        Token();
+        virtual ~Token();
 
-private:
-    std::string tokenName;
-    TokenType token;
-};
+        //Other methods
+        std::string getTokenName();
+        TokenType getTokenType();
+        void setTokenName(std::string);
+        void setTokenType(TokenType);
+        void print();
+
+    private:
+        std::string tokenName;
+        TokenType token;
+    };
+}
 
 #endif /* TOKEN_H */
 

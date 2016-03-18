@@ -19,6 +19,9 @@
 #include <fstream>
 #include <string>
 #include <boost/regex.hpp>
+
+#include "Token.h"
+
 namespace Lex {
 
     class LexicalAnalyzer {
@@ -31,7 +34,11 @@ namespace Lex {
         //Other methods
         std::string readFile(std::string); //Leitura do arquivo
         void tokenFinder(std::string);
+
+        static std::vector<Token::Token> tokens;
     };
+
 }
+
 #endif /* LEXICALANALYZER_H */
 

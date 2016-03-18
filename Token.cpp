@@ -13,33 +13,35 @@
 
 #include "Token.h"
 
-Token::Token() {
+namespace Token {
+
+    Token::Token() {
+    }
+
+    Token::~Token() {
+    }
+
+    std::string Token::getTokenName() {
+        return this->tokenName;
+    }
+
+    TokenType Token::getTokenType() {
+        return this->token;
+    }
+
+    void Token::setTokenName(std::string name) {
+        this->tokenName = name;
+    }
+
+    void Token::setTokenType(TokenType token) {
+        this->token = token;
+    }
+
+    void Token::print() {
+
+        std::cout << "Token\n";
+        std::cout << "Token type :" << this->token << std::endl;
+        std::cout << "Token name :" + this->tokenName << std::endl;
+        std::cout << std::endl;
+    }
 }
-
-Token::~Token() {
-}
-
-std::string Token::getTokenName() {
-    return this->tokenName;
-}
-
-TokenType Token::getTokenType() {
-    return this->token;
-}
-
-void Token::setTokenName(std::string name) {
-    this->tokenName = name;
-}
-
-void Token::setTokenType(TokenType token) {
-    this->token = token;
-}
-
-void Token::print() {
-
-    std::cout << "Token\n";
-    std::cout << "Token type :" << this->token << std::endl;
-    std::cout << "Token name : " + this->tokenName << std::endl;
-    std::cout << std::endl;
-}
-
