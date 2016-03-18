@@ -1,4 +1,4 @@
--+inteiro: n
+)(<inteiro: n
 inteiro fatorial(inteiro: n) inicio
 inteiro: fat
 se n > 0 então {não calcula se n > 0}

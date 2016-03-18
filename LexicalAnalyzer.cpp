@@ -23,13 +23,14 @@ namespace Lex {
     o_SUB("^\\-"),
     o_MUL("^\\*"),
     o_DIV("^\\/"),
-    o_EQU("^\\="),
-    o_COM("\\^,"),
+    o_SME("^<="),
+    o_BGE("^>="),
     o_ATT("^\\:="),
-    o_SMA("^\\<"),
-    o_BIG("^\\>"),
-    o_SME("^\\<="),
-    o_BGE("^\\>="),
+    o_EQU("^\\="),
+    o_COM("^\\,"),
+    o_DOP("^\\:"),
+    o_SMA("^<"),
+    o_BIG("^>"),
     o_OPA("^\\("),
     o_CPA("^\\)");
 
@@ -96,6 +97,7 @@ namespace Lex {
             tokens.push_back(tokenTemp);
 
             bufferCharVec = boost::regex_replace(bufferCharVec, o_SUM, remove); //
+
         } else if (boost::regex_search(bufferCharVec, match, o_SUB)) {
 
             tokenTemp.setTokenName(match.str());
@@ -128,6 +130,54 @@ namespace Lex {
             tokens.push_back(tokenTemp);
 
             bufferCharVec = boost::regex_replace(bufferCharVec, o_COM, remove); //
+        } else if (boost::regex_search(bufferCharVec, match, o_SME)) {
+
+            tokenTemp.setTokenName(match.str());
+            tokenTemp.setTokenType(Token::SMALL_EQUAL);
+
+            tokens.push_back(tokenTemp);
+
+            bufferCharVec = boost::regex_replace(bufferCharVec, o_SME, remove); //
+        } else if (boost::regex_search(bufferCharVec, match, o_BGE)) {
+
+            tokenTemp.setTokenName(match.str());
+            tokenTemp.setTokenType(Token::BIGGER_EQUAL);
+
+            tokens.push_back(tokenTemp);
+
+            bufferCharVec = boost::regex_replace(bufferCharVec, o_BGE, remove); //
+        } else if (boost::regex_search(bufferCharVec, match, o_ATT)) {
+
+            tokenTemp.setTokenName(match.str());
+            tokenTemp.setTokenType(Token::ATTRIBUTION);
+
+            tokens.push_back(tokenTemp);
+
+            bufferCharVec = boost::regex_replace(bufferCharVec, o_ATT, remove); //
+        } else if (boost::regex_search(bufferCharVec, match, o_EQU)) {
+
+            tokenTemp.setTokenName(match.str());
+            tokenTemp.setTokenType(Token::EQUAL);
+
+            tokens.push_back(tokenTemp);
+
+            bufferCharVec = boost::regex_replace(bufferCharVec, o_EQU, remove); //
+        } else if (boost::regex_search(bufferCharVec, match, o_COM)) {
+
+            tokenTemp.setTokenName(match.str());
+            tokenTemp.setTokenType(Token::COMMA);
+
+            tokens.push_back(tokenTemp);
+
+            bufferCharVec = boost::regex_replace(bufferCharVec, o_COM, remove); //
+        } else if (boost::regex_search(bufferCharVec, match, o_DOP)) {
+
+            tokenTemp.setTokenName(match.str());
+            tokenTemp.setTokenType(Token::DOUBLE_POINT);
+
+            tokens.push_back(tokenTemp);
+
+            bufferCharVec = boost::regex_replace(bufferCharVec, o_DOP, remove); //
         } else if (boost::regex_search(bufferCharVec, match, o_SMA)) {
 
             tokenTemp.setTokenName(match.str());
@@ -160,39 +210,9 @@ namespace Lex {
             tokens.push_back(tokenTemp);
 
             bufferCharVec = boost::regex_replace(bufferCharVec, o_CPA, remove); //
-        } else if (boost::regex_search(bufferCharVec, match, o_EQU)) {
-
-            tokenTemp.setTokenName(match.str());
-            tokenTemp.setTokenType(Token::EQUAL);
-
-            tokens.push_back(tokenTemp);
-
-            bufferCharVec = boost::regex_replace(bufferCharVec, o_EQU, remove); //
-        } else if (boost::regex_search(bufferCharVec, match, o_ATT)) {
-
-            tokenTemp.setTokenName(match.str());
-            tokenTemp.setTokenType(Token::ATTRIBUTION);
-
-            tokens.push_back(tokenTemp);
-
-            bufferCharVec = boost::regex_replace(bufferCharVec, o_ATT, remove); //
-        } else if (boost::regex_search(bufferCharVec, match, o_SME)) {
-
-            tokenTemp.setTokenName(match.str());
-            tokenTemp.setTokenType(Token::SMALL_EQUAL);
-
-            tokens.push_back(tokenTemp);
-
-            bufferCharVec = boost::regex_replace(bufferCharVec, o_SME, remove); //
-        } else if (boost::regex_search(bufferCharVec, match, o_BGE)) {
-
-            tokenTemp.setTokenName(match.str());
-            tokenTemp.setTokenType(Token::BIGGER_EQUAL);
-
-            tokens.push_back(tokenTemp);
-
-            bufferCharVec = boost::regex_replace(bufferCharVec, o_BGE, remove); //
         }
+
+        std::cout << bufferCharVec;
     }
 }
 
