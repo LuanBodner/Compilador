@@ -18,9 +18,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <tr1/regex>
-#include <regex>
-
+#include <boost/regex.hpp>
 namespace Lex {
 
     class LexicalAnalyzer {

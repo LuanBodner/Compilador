@@ -1,7 +1,7 @@
 CC=g++ -std=c++11
 DEBUG=-ggdb
 CFLAGS=-Wall
-LDFLAGS=
+LDFLAGS= -lboost_regex
 OPT=-O0
 
 all: lib main link_main
