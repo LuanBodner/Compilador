@@ -18,37 +18,42 @@
 //Regular Expressions
 
 //Operations
-std::string t_SUM = "^+",
-        t_SUB = "^-",
-        t_MUL = "^*",
-        t_DIV = "^/",
-        t_EQU = "^=",
-        t_COM = "^,",
-        t_ATT = "^:=",
-        t_SMA = "^<",
-        t_BIG = "^>",
-        t_SME = "^<=",
-        t_BGE = "^>=",
-        t_OPA = "^(",
-        t_CPA = "^)";
+std::string p_SUM = "^+",
+        o_SUB = "^-",
+        o_MUL = "^*",
+        o_DIV = "^/",
+        o_EQU = "^=",
+        o_COM = "^,",
+        o_ATT = "^:=",
+        o_SMA = "^<",
+        o_BIG = "^>",
+        o_SME = "^<=",
+        o_BGE = "^>=",
+        o_OPA = "^(",
+        o_CPA = "^)";
 
-//Reserved words
-std::string k_IF = "^se",
-        k_TH = "^então",
-        k_OT = "^senão",
-        k_EN = "^fim",
-        k_RP = "^repita",
-        k_FL = "^flutuante",
-        k_VO = "^vazio",
-        k_TL = "^até",
-        k_RE = "^leia",
-        k_WR = "^escreve",
-        k_IN = "^inteiro",
-        k_RT = "^retorna";
+//Keywords
+std::string k_IF = "^\\bse\\b",
+        k_TH = "^\\bentão\\b",
+        k_OT = "^\\bsenão\\b",
+        k_EN = "^\\bfim\\b",
+        k_RP = "^\\brepita\\b",
+        k_FL = "^\\bflutuante\\b",
+        k_VO = "^\\bvazio\\b",
+        k_TL = "^\\baté\\b",
+        k_RE = "^\\bleia\\b",
+        k_WR = "^\\bescreve\\b",
+        k_IN = "^\\binteiro\\b",
+        k_RT = "^\\bretorna\\b";
 
 //Comments
-std::string c_OT = "^{",
-        c_CT = "^}";
+std::string c_CM = "^{.*}";
+
+//Numbers
+std::string n_IN = "^(?:^|(?<=\\s))[0-9]+(?=$|\\s)",
+        n_SI = "^(?:^|(?<=\\s))[0-9]+e[+|-]*[0-9]+(?=$|\\s)",
+        n_FL = "^[-+]?[0-9]+\\.[0-9]+",
+        n_SF = "^(?:^|(?<=\\s))[0-9]+e[+|-]*[0-9]+(?=$|\\s)";
 
 namespace Lex {
 
