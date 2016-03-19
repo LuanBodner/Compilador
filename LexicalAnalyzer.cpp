@@ -38,20 +38,22 @@ namespace Lex {
     //Keywords
     boost::regex
     k_IF("^\\bse\\b"),
-    k_TH("^\\bentão.*?\\b"),
+    k_TH("^\\bentão\\b"),
     k_OT("^\\bsenão\\b"),
     k_EN("^\\bfim\\b"),
     k_RP("^\\brepita\\b"),
     k_FL("^\\bflutuante\\b"),
     k_VO("^\\bvazio\\b"),
-    k_TL("^\\baté\\b"),
+    k_TL("^\\bate\\b"),
     k_RE("^\\bleia\\b"),
     k_WR("^\\bescreve\\b"),
     k_IN("^\\binteiro\\b"),
     k_RT("^\\bretorna\\b");
 
     //Comments
-    boost::regex c_CM("^{.*}");
+    boost::regex
+    c_CM("^\\{\\w.[^}]+"),
+    c_CC("^\\}");
 
     //Blank space
     boost::regex b_SP("^ ");
@@ -98,8 +100,28 @@ namespace Lex {
         boost::smatch match;
 
         Token::Token tokenTemp;
+        if (boost::regex_search(bufferCharVec, match, c_CM)) {
 
-        if (boost::regex_search(bufferCharVec, match, o_SUM)) {
+            bufferCharVec = boost::regex_replace(bufferCharVec, c_CM,
+                    remove, boost::regex_constants::format_first_only);
+
+            bufferCharVec = boost::regex_replace(bufferCharVec, c_CC,
+                    remove, boost::regex_constants::format_first_only);
+
+        } else if (boost::regex_search(bufferCharVec, match, b_SP)) {
+
+            bufferCharVec = boost::regex_replace(bufferCharVec, b_SP,
+                    remove, boost::regex_constants::format_first_only);
+        } else if (boost::regex_search(bufferCharVec, match, o_SUM)) {
+
+            tokenTemp.setTokenName(match.str());
+            tokenTemp.setTokenType(Token::SUM);
+
+            tokens.push_back(tokenTemp);
+
+            bufferCharVec = boost::regex_replace(bufferCharVec, o_SUM,
+                    remove, boost::regex_constants::format_first_only);
+        } else if (boost::regex_search(bufferCharVec, match, o_SUM)) {
 
             tokenTemp.setTokenName(match.str());
             tokenTemp.setTokenType(Token::SUM);
