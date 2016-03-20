@@ -39,9 +39,6 @@ namespace Token {
 
     void Token::print() {
 
-        std::cout << "Token\n";
-        std::cout << "Token type :" << this->token << std::endl;
-        std::cout << "Token name :" + this->tokenName << std::endl;
-        std::cout << std::endl;
+        std::cout << "<" << this->tokenName << "," << this->token << ">" << std::endl;
     }
 }

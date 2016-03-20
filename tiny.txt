@@ -1,18 +1,1 @@
- então inteiro: n
-inteiro fatorial(inteiro: n) inicio
-inteiro: fat
-se n > 0 então {não calcula se n > 0}
-fat := 1
-repita
-fat := fat * n
-n := n - 1
-ate n = 0
-retorna(fat) {retorna o valor do fatorial de n}
-senão
-retorna(0)
-fim
-fim
-vazio principal() inicio
-leia(n)
-escreva(fatorial(n))
-fim
+inteiro: n

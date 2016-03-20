@@ -23,7 +23,19 @@ int main(int argc, char** argv) {
     Lex::LexicalAnalyzer lex;
 
     lex.tokenFinder("tiny.txt");
-    
+
+    Token::Token tokenTemp;
+    /*
+        do {
+
+            tokenTemp = lex.getNextToken();
+            tokenTemp.print();
+        } while (!lex.emptyTokenList());*/
+
+    tokenTemp = lex.getNextToken();
+    tokenTemp.print();
+    tokenTemp = lex.getNextToken();
+    tokenTemp.print();
     return 0;
 }
 
