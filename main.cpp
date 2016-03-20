@@ -25,17 +25,17 @@ int main(int argc, char** argv) {
     lex.tokenFinder("tiny.txt");
 
     Token::Token tokenTemp;
-    /*
-        do {
 
-            tokenTemp = lex.getNextToken();
-            tokenTemp.print();
-        } while (!lex.emptyTokenList());*/
+    std::ofstream output;
 
-    tokenTemp = lex.getNextToken();
-    tokenTemp.print();
-    tokenTemp = lex.getNextToken();
-    tokenTemp.print();
+    output.open("outputTokens.txt", std::ofstream::out);
+
+    do {
+
+        tokenTemp = lex.getNextToken();
+        output << "<" << tokenTemp.getTokenName() << "," << tokenTemp.getTokenType() << ">\n";
+    } while (!lex.emptyTokenList());
+
     return 0;
 }
 
