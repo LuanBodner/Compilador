@@ -73,16 +73,17 @@ namespace Lex {
 
     LexicalAnalyzer::LexicalAnalyzer(std::string fileName) {
 
+
         tokenFinder(fileName);
     }
 
     LexicalAnalyzer::~LexicalAnalyzer() {
     }
 
-    void LexicalAnalyzer::tokenFinder(std::string fileName) {
+    void LexicalAnalyzer::tokenCollector(std::string fileName) {
 
-        std::ifstream tinyFile;
-        tinyFile.open(fileName);
+        std::ifstream file;
+        file.open(fileName);
 
         std::string remove = "";
 
@@ -90,322 +91,284 @@ namespace Lex {
 
         Token::Token tokenTemp;
 
-        while (!tinyFile.eof()) {
+        while (!file.eof()) {
 
-            std::string bufferCharVec;
-            std::getline(tinyFile, bufferCharVec);
+            std::string bufferString;
+            std::getline(file, bufferString);
 
-            while (bufferCharVec.size() > 0) {
+            while (bufferString.size() > 0) {
 
-                if (boost::regex_search(bufferCharVec, match, c_CM)) {
+                if (boost::regex_search(bufferString, match, c_CM)) {
 
-                    bufferCharVec = boost::regex_replace(bufferCharVec, c_CM,
-                            remove, boost::regex_constants::format_first_only);
+                    bufferString = boost::regex_replace(bufferString, c_CM, remove);
+                    bufferString = boost::regex_replace(bufferString, c_CC, remove);
+                } else if (boost::regex_search(bufferString, match, b_SP)) {
 
-                    bufferCharVec = boost::regex_replace(bufferCharVec, c_CC,
-                            remove, boost::regex_constants::format_first_only);
-
-                } else if (boost::regex_search(bufferCharVec, match, b_SP)) {
-
-                    bufferCharVec = boost::regex_replace(bufferCharVec, b_SP,
-                            remove, boost::regex_constants::format_first_only);
-                } else if (boost::regex_search(bufferCharVec, match, o_SUM)) {
+                    bufferString = boost::regex_replace(bufferString, b_SP, remove);
+                } else if (boost::regex_search(bufferString, match, o_SUM)) {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::SUM);
 
                     tokens.push_back(tokenTemp);
 
-                    bufferCharVec = boost::regex_replace(bufferCharVec, o_SUM,
-                            remove, boost::regex_constants::format_first_only);
-                } else if (boost::regex_search(bufferCharVec, match, o_SUM)) {
+                    bufferString = boost::regex_replace(bufferString, o_SUM, remove);
+                } else if (boost::regex_search(bufferString, match, o_SUM)) {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::SUM);
 
                     tokens.push_back(tokenTemp);
 
-                    bufferCharVec = boost::regex_replace(bufferCharVec, o_SUM,
-                            remove, boost::regex_constants::format_first_only); //
-                } else if (boost::regex_search(bufferCharVec, match, o_SUB)) {
+                    bufferString = boost::regex_replace(bufferString, o_SUM, remove);
+                } else if (boost::regex_search(bufferString, match, o_SUB)) {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::SUBTRACTION);
 
                     tokens.push_back(tokenTemp);
 
-                    bufferCharVec = boost::regex_replace(bufferCharVec, o_SUB,
-                            remove, boost::regex_constants::format_first_only); //
-                } else if (boost::regex_search(bufferCharVec, match, o_MUL)) {
+                    bufferString = boost::regex_replace(bufferString, o_SUB, remove);
+                } else if (boost::regex_search(bufferString, match, o_MUL)) {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::MULTIPLICATION);
 
                     tokens.push_back(tokenTemp);
 
-                    bufferCharVec = boost::regex_replace(bufferCharVec, o_MUL,
-                            remove, boost::regex_constants::format_first_only); //
-                } else if (boost::regex_search(bufferCharVec, match, o_DIV)) {
+                    bufferString = boost::regex_replace(bufferString, o_MUL, remove);
+                } else if (boost::regex_search(bufferString, match, o_DIV)) {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::DIVISION);
 
                     tokens.push_back(tokenTemp);
 
-                    bufferCharVec = boost::regex_replace(bufferCharVec, o_DIV,
-                            remove, boost::regex_constants::format_first_only); //
-                } else if (boost::regex_search(bufferCharVec, match, o_COM)) {
+                    bufferString = boost::regex_replace(bufferString, o_DIV, remove);
+                } else if (boost::regex_search(bufferString, match, o_COM)) {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::COMMA);
 
                     tokens.push_back(tokenTemp);
 
-                    bufferCharVec = boost::regex_replace(bufferCharVec, o_COM,
-                            remove, boost::regex_constants::format_first_only); //
-                } else if (boost::regex_search(bufferCharVec, match, o_SME)) {
+                    bufferString = boost::regex_replace(bufferString, o_COM, remove);
+                } else if (boost::regex_search(bufferString, match, o_SME)) {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::SMALL_EQUAL);
 
                     tokens.push_back(tokenTemp);
 
-                    bufferCharVec = boost::regex_replace(bufferCharVec, o_SME,
-                            remove, boost::regex_constants::format_first_only); //
-                } else if (boost::regex_search(bufferCharVec, match, o_BGE)) {
+                    bufferString = boost::regex_replace(bufferString, o_SME, remove);
+                } else if (boost::regex_search(bufferString, match, o_BGE)) {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::BIGGER_EQUAL);
 
                     tokens.push_back(tokenTemp);
 
-                    bufferCharVec = boost::regex_replace(bufferCharVec, o_BGE,
-                            remove, boost::regex_constants::format_first_only); //
-                } else if (boost::regex_search(bufferCharVec, match, o_ATT)) {
+                    bufferString = boost::regex_replace(bufferString, o_BGE, remove);
+                } else if (boost::regex_search(bufferString, match, o_ATT)) {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::ATTRIBUTION);
 
                     tokens.push_back(tokenTemp);
 
-                    bufferCharVec = boost::regex_replace(bufferCharVec, o_ATT,
-                            remove, boost::regex_constants::format_first_only); //
-                } else if (boost::regex_search(bufferCharVec, match, o_EQU)) {
+                    bufferString = boost::regex_replace(bufferString, o_ATT, remove);
+                } else if (boost::regex_search(bufferString, match, o_EQU)) {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::EQUAL);
 
                     tokens.push_back(tokenTemp);
 
-                    bufferCharVec = boost::regex_replace(bufferCharVec, o_EQU,
-                            remove, boost::regex_constants::format_first_only); //
-                } else if (boost::regex_search(bufferCharVec, match, o_COM)) {
+                    bufferString = boost::regex_replace(bufferString, o_EQU, remove);
+                } else if (boost::regex_search(bufferString, match, o_COM)) {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::COMMA);
 
                     tokens.push_back(tokenTemp);
 
-                    bufferCharVec = boost::regex_replace(bufferCharVec, o_COM,
-                            remove, boost::regex_constants::format_first_only); //
-                } else if (boost::regex_search(bufferCharVec, match, o_DOP)) {
+                    bufferString = boost::regex_replace(bufferString, o_COM, remove);
+                } else if (boost::regex_search(bufferString, match, o_DOP)) {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::DOUBLE_POINT);
 
                     tokens.push_back(tokenTemp);
 
-                    bufferCharVec = boost::regex_replace(bufferCharVec, o_DOP,
-                            remove, boost::regex_constants::format_first_only); //
-                } else if (boost::regex_search(bufferCharVec, match, o_SMA)) {
+                    bufferString = boost::regex_replace(bufferString, o_DOP, remove);
+                } else if (boost::regex_search(bufferString, match, o_SMA)) {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::SMALLER_THAN);
 
                     tokens.push_back(tokenTemp);
 
-                    bufferCharVec = boost::regex_replace(bufferCharVec, o_SMA,
-                            remove, boost::regex_constants::format_first_only); //
-                } else if (boost::regex_search(bufferCharVec, match, o_BIG)) {
+                    bufferString = boost::regex_replace(bufferString, o_SMA, remove);
+                } else if (boost::regex_search(bufferString, match, o_BIG)) {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::BIGGER_THAN);
 
                     tokens.push_back(tokenTemp);
 
-                    bufferCharVec = boost::regex_replace(bufferCharVec, o_BIG,
-                            remove, boost::regex_constants::format_first_only); //
-                } else if (boost::regex_search(bufferCharVec, match, o_OPA)) {
+                    bufferString = boost::regex_replace(bufferString, o_BIG, remove);
+                } else if (boost::regex_search(bufferString, match, o_OPA)) {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::OPEN);
 
                     tokens.push_back(tokenTemp);
 
-                    bufferCharVec = boost::regex_replace(bufferCharVec, o_OPA,
-                            remove, boost::regex_constants::format_first_only); //
-                } else if (boost::regex_search(bufferCharVec, match, o_CPA)) {
+                    bufferString = boost::regex_replace(bufferString, o_OPA, remove);
+                } else if (boost::regex_search(bufferString, match, o_CPA)) {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::CLOSE);
 
                     tokens.push_back(tokenTemp);
 
-                    bufferCharVec = boost::regex_replace(bufferCharVec, o_CPA,
-                            remove, boost::regex_constants::format_first_only); //
-                } else if (boost::regex_search(bufferCharVec, match, k_IF)) {
+                    bufferString = boost::regex_replace(bufferString, o_CPA, remove);
+                } else if (boost::regex_search(bufferString, match, k_IF)) {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::IF);
 
                     tokens.push_back(tokenTemp);
 
-                    bufferCharVec = boost::regex_replace(bufferCharVec, k_IF,
-                            remove, boost::regex_constants::format_first_only); //
-                } else if (boost::regex_search(bufferCharVec, match, k_TH)) {
+                    bufferString = boost::regex_replace(bufferString, k_IF, remove);
+                } else if (boost::regex_search(bufferString, match, k_TH)) {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::THEN);
 
                     tokens.push_back(tokenTemp);
 
-                    bufferCharVec = boost::regex_replace(bufferCharVec, k_TH,
-                            remove, boost::regex_constants::format_first_only); //
-                } else if (boost::regex_search(bufferCharVec, match, k_OT)) {
+                    bufferString = boost::regex_replace(bufferString, k_TH, remove);
+                } else if (boost::regex_search(bufferString, match, k_OT)) {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::OTHERWISE);
 
                     tokens.push_back(tokenTemp);
 
-                    bufferCharVec = boost::regex_replace(bufferCharVec, k_OT,
-                            remove, boost::regex_constants::format_first_only); //
-                } else if (boost::regex_search(bufferCharVec, match, k_RP)) {
+                    bufferString = boost::regex_replace(bufferString, k_OT, remove);
+                } else if (boost::regex_search(bufferString, match, k_RP)) {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::REPEAT);
 
                     tokens.push_back(tokenTemp);
 
-                    bufferCharVec = boost::regex_replace(bufferCharVec, k_RP,
-                            remove, boost::regex_constants::format_first_only); //
-                } else if (boost::regex_search(bufferCharVec, match, k_FL)) {
+                    bufferString = boost::regex_replace(bufferString, k_RP, remove);
+                } else if (boost::regex_search(bufferString, match, k_FL)) {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::FLOAT);
 
                     tokens.push_back(tokenTemp);
 
-                    bufferCharVec = boost::regex_replace(bufferCharVec, k_FL,
-                            remove, boost::regex_constants::format_first_only); //
-                } else if (boost::regex_search(bufferCharVec, match, k_VO)) {
+                    bufferString = boost::regex_replace(bufferString, k_FL, remove);
+                } else if (boost::regex_search(bufferString, match, k_VO)) {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::VOID);
 
                     tokens.push_back(tokenTemp);
 
-                    bufferCharVec = boost::regex_replace(bufferCharVec, k_VO,
-                            remove, boost::regex_constants::format_first_only); //
-                } else if (boost::regex_search(bufferCharVec, match, k_TL)) {
+                    bufferString = boost::regex_replace(bufferString, k_VO, remove);
+                } else if (boost::regex_search(bufferString, match, k_TL)) {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::UNTIL);
 
                     tokens.push_back(tokenTemp);
 
-                    bufferCharVec = boost::regex_replace(bufferCharVec, k_TL,
-                            remove, boost::regex_constants::format_first_only); //
-                } else if (boost::regex_search(bufferCharVec, match, k_RE)) {
+                    bufferString = boost::regex_replace(bufferString, k_TL, remove);
+                } else if (boost::regex_search(bufferString, match, k_RE)) {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::READ);
 
                     tokens.push_back(tokenTemp);
 
-                    bufferCharVec = boost::regex_replace(bufferCharVec, k_RE,
-                            remove, boost::regex_constants::format_first_only); //
-                } else if (boost::regex_search(bufferCharVec, match, k_WR)) {
+                    bufferString = boost::regex_replace(bufferString, k_RE, remove);
+                } else if (boost::regex_search(bufferString, match, k_WR)) {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::WRITE);
 
                     tokens.push_back(tokenTemp);
 
-                    bufferCharVec = boost::regex_replace(bufferCharVec, k_WR,
-                            remove, boost::regex_constants::format_first_only); //
-                } else if (boost::regex_search(bufferCharVec, match, k_IN)) {
+                    bufferString = boost::regex_replace(bufferString, k_WR, remove);
+                } else if (boost::regex_search(bufferString, match, k_IN)) {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::INTEGER);
 
                     tokens.push_back(tokenTemp);
 
-                    bufferCharVec = boost::regex_replace(bufferCharVec, k_IN,
-                            remove, boost::regex_constants::format_first_only); //
-                } else if (boost::regex_search(bufferCharVec, match, k_RT)) {
+                    bufferString = boost::regex_replace(bufferString, k_IN, remove);
+                } else if (boost::regex_search(bufferString, match, k_RT)) {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::RETURN);
 
                     tokens.push_back(tokenTemp);
 
-                    bufferCharVec = boost::regex_replace(bufferCharVec, k_RT,
-                            remove, boost::regex_constants::format_first_only);
-                } else if (boost::regex_search(bufferCharVec, match, k_EN)) {
+                    bufferString = boost::regex_replace(bufferString, k_RT, remove);
+                } else if (boost::regex_search(bufferString, match, k_EN)) {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::END);
 
                     tokens.push_back(tokenTemp);
 
-                    bufferCharVec = boost::regex_replace(bufferCharVec, k_EN,
-                            remove, boost::regex_constants::format_first_only);
-                } else if (boost::regex_search(bufferCharVec, match, n_SF)) {
+                    bufferString = boost::regex_replace(bufferString, k_EN, remove);
+                } else if (boost::regex_search(bufferString, match, n_SF)) {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::SCIENTIFIC_FLOAT);
 
                     tokens.push_back(tokenTemp);
 
-                    bufferCharVec = boost::regex_replace(bufferCharVec, n_SF,
-                            remove, boost::regex_constants::format_first_only);
-                } else if (boost::regex_search(bufferCharVec, match, n_FL)) {
+                    bufferString = boost::regex_replace(bufferString, n_SF, remove);
+                } else if (boost::regex_search(bufferString, match, n_FL)) {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::FLOAT);
 
                     tokens.push_back(tokenTemp);
 
-                    bufferCharVec = boost::regex_replace(bufferCharVec, n_FL,
-                            remove, boost::regex_constants::format_first_only);
-                } else if (boost::regex_search(bufferCharVec, match, n_SI)) {
+                    bufferString = boost::regex_replace(bufferString, n_FL, remove);
+                } else if (boost::regex_search(bufferString, match, n_SI)) {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::SCIENTIFIC_INTEGER);
 
                     tokens.push_back(tokenTemp);
 
-                    bufferCharVec = boost::regex_replace(bufferCharVec, n_SI,
-                            remove, boost::regex_constants::format_first_only);
-                } else if (boost::regex_search(bufferCharVec, match, n_IN)) {
+                    bufferString = boost::regex_replace(bufferString, n_SI, remove);
+                } else if (boost::regex_search(bufferString, match, n_IN)) {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::INTEGER);
 
                     tokens.push_back(tokenTemp);
 
-                    bufferCharVec = boost::regex_replace(bufferCharVec, n_IN,
-                            remove, boost::regex_constants::format_first_only);
-                } else if (boost::regex_search(bufferCharVec, match, i_ID)) {
+                    bufferString = boost::regex_replace(bufferString, n_IN, remove);
+                } else if (boost::regex_search(bufferString, match, i_ID)) {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::IDENTIFIER);
 
                     tokens.push_back(tokenTemp);
 
-                    bufferCharVec = boost::regex_replace(bufferCharVec, i_ID,
-                            remove, boost::regex_constants::format_first_only);
+                    bufferString = boost::regex_replace(bufferString, i_ID, remove);
                 }
             }
         }
@@ -427,5 +390,3 @@ namespace Lex {
         return (tokens.empty()) ? true : false;
     }
 }
-
-
