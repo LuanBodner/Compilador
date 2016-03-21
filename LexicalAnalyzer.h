@@ -29,16 +29,16 @@ namespace Lex {
 
         //Constructor & destructor
         LexicalAnalyzer();
+        LexicalAnalyzer(std::string);
         virtual ~LexicalAnalyzer();
 
         //Other methods
-        // std::string readFile(std::string); //Leitura do arquivo
-        void tokenFinder(std::string);
         bool emptyTokenList();
         Token::Token getNextToken();
 
     private:
         static std::vector<Token::Token> tokens;
+        void tokenFinder(std::string);
     };
 
 }

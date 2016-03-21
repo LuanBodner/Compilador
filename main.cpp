@@ -20,9 +20,7 @@
 
 int main(int argc, char** argv) {
 
-    Lex::LexicalAnalyzer lex;
-
-    lex.tokenFinder("tiny.txt");
+    Lex::LexicalAnalyzer lex("tiny.txt");
 
     Token::Token tokenTemp;
 

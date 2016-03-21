@@ -14,11 +14,11 @@
 #include "LexicalAnalyzer.h"
 
 namespace Lex {
-    //Regular Expressions
-    //Operations
 
     std::vector<Token::Token> LexicalAnalyzer::tokens;
 
+    //Regular Expressions
+    //Operations
     boost::regex
     o_SUM("^\\+"),
     o_SUB("^\\-"),
@@ -71,26 +71,13 @@ namespace Lex {
     LexicalAnalyzer::LexicalAnalyzer() {
     }
 
-    LexicalAnalyzer::~LexicalAnalyzer() {
+    LexicalAnalyzer::LexicalAnalyzer(std::string fileName) {
+
+        tokenFinder(fileName);
     }
 
-    /*std::string LexicalAnalyzer::readFile(std::string fileName) {
-
-         std::ifstream tinyFile;
-
-         tinyFile.open(fileName);
-
-         std::string bufferCharVec((std::istreambuf_iterator<char>(tinyFile)),
-                 std::istreambuf_iterator<char>());
-
-         tinyFile.close();
-
-         for (unsigned int i = 0; i < bufferCharVec.size(); i++)
-             if (bufferCharVec[i] == '\n')
-                 bufferCharVec[i] = ' ';
-
-         return bufferCharVec;
-     }*/
+    LexicalAnalyzer::~LexicalAnalyzer() {
+    }
 
     void LexicalAnalyzer::tokenFinder(std::string fileName) {
 
