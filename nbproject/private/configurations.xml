@@ -7,6 +7,8 @@
       <in>Token.cpp</in>
       <in>Token.h</in>
       <in>main.cpp</in>
+      <in>newClass.cpp</in>
+      <in>newClass.h</in>
     </df>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
@@ -34,8 +36,6 @@
         <gdb_interceptlist>
           <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
         </gdb_interceptlist>
-        <gdb_signals>
-        </gdb_signals>
         <gdb_options>
           <DebugOptions>
           </DebugOptions>
