@@ -9,6 +9,7 @@
 #include <iostream>
 #include <vector>
 #include <string.h>
+#include <boost/preprocessor.hpp>
 #include "Token.h"
 #include "LexicalAnalyzer.h"
 
@@ -25,7 +26,10 @@ int main(int argc, char** argv) {
     do {
 
         tokenTemp = lex.getNextToken();
-        output << "<" << tokenTemp.getTokenName() << "," << tokenTemp.getTokenType() << ">\n";
+        output << "\"" << tokenTemp.getTokenName() << "\"" << " == "
+                << tokenTemp.tokenTypeToString() << "\n\tLINE : "
+                << tokenTemp.getTokenLine() << "\n\tCOLUMN : " 
+                << tokenTemp.getTokenColumn() << "\n";
     } while (!lex.emptyTokenList());
 
     return 0;

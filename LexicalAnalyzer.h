@@ -13,7 +13,6 @@
 #include <fstream>
 #include <string>
 #include <boost/regex.hpp>
-
 #include "Token.h"
 
 namespace Lex {
@@ -24,7 +23,7 @@ namespace Lex {
         //Constructor & destructor
         LexicalAnalyzer();
         //Constructor that receives the name of the tpp file
-        LexicalAnalyzer(std::string); 
+        LexicalAnalyzer(std::string);
         virtual ~LexicalAnalyzer();
 
         //Other methods

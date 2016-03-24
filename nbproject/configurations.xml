@@ -7,8 +7,6 @@
       <in>Token.cpp</in>
       <in>Token.h</in>
       <in>main.cpp</in>
-      <in>newClass.cpp</in>
-      <in>newClass.h</in>
     </df>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -53,10 +51,6 @@
       <item path="Token.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="newClass.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="newClass.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>

@@ -85,6 +85,8 @@ namespace Lex {
 
         Token::Token tokenTemp;
 
+        int line = 0, column = 0;
+
         while (!file.eof()) {
 
             std::string bufferString;
@@ -103,6 +105,8 @@ namespace Lex {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::SUM);
+                    tokenTemp.setTokenColumn(column++);
+                    tokenTemp.setTokenLine(line);
 
                     tokens.push_back(tokenTemp);
 
@@ -111,6 +115,8 @@ namespace Lex {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::SUM);
+                    tokenTemp.setTokenColumn(column++);
+                    tokenTemp.setTokenLine(line);
 
                     tokens.push_back(tokenTemp);
 
@@ -119,6 +125,8 @@ namespace Lex {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::SUBTRACTION);
+                    tokenTemp.setTokenColumn(column++);
+                    tokenTemp.setTokenLine(line);
 
                     tokens.push_back(tokenTemp);
 
@@ -127,6 +135,8 @@ namespace Lex {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::MULTIPLICATION);
+                    tokenTemp.setTokenColumn(column++);
+                    tokenTemp.setTokenLine(line);
 
                     tokens.push_back(tokenTemp);
 
@@ -135,6 +145,8 @@ namespace Lex {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::DIVISION);
+                    tokenTemp.setTokenColumn(column++);
+                    tokenTemp.setTokenLine(line);
 
                     tokens.push_back(tokenTemp);
 
@@ -143,6 +155,8 @@ namespace Lex {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::COMMA);
+                    tokenTemp.setTokenColumn(column++);
+                    tokenTemp.setTokenLine(line);
 
                     tokens.push_back(tokenTemp);
 
@@ -151,6 +165,8 @@ namespace Lex {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::SMALL_EQUAL);
+                    tokenTemp.setTokenColumn(column++);
+                    tokenTemp.setTokenLine(line);
 
                     tokens.push_back(tokenTemp);
 
@@ -159,6 +175,8 @@ namespace Lex {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::BIGGER_EQUAL);
+                    tokenTemp.setTokenColumn(column++);
+                    tokenTemp.setTokenLine(line);
 
                     tokens.push_back(tokenTemp);
 
@@ -167,6 +185,8 @@ namespace Lex {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::ATTRIBUTION);
+                    tokenTemp.setTokenColumn(column++);
+                    tokenTemp.setTokenLine(line);
 
                     tokens.push_back(tokenTemp);
 
@@ -175,6 +195,8 @@ namespace Lex {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::EQUAL);
+                    tokenTemp.setTokenColumn(column++);
+                    tokenTemp.setTokenLine(line);
 
                     tokens.push_back(tokenTemp);
 
@@ -183,6 +205,8 @@ namespace Lex {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::COMMA);
+                    tokenTemp.setTokenColumn(column++);
+                    tokenTemp.setTokenLine(line);
 
                     tokens.push_back(tokenTemp);
 
@@ -191,6 +215,8 @@ namespace Lex {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::DOUBLE_POINT);
+                    tokenTemp.setTokenColumn(column++);
+                    tokenTemp.setTokenLine(line);
 
                     tokens.push_back(tokenTemp);
 
@@ -199,6 +225,8 @@ namespace Lex {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::SMALLER_THAN);
+                    tokenTemp.setTokenColumn(column++);
+                    tokenTemp.setTokenLine(line);
 
                     tokens.push_back(tokenTemp);
 
@@ -207,6 +235,8 @@ namespace Lex {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::BIGGER_THAN);
+                    tokenTemp.setTokenColumn(column++);
+                    tokenTemp.setTokenLine(line);
 
                     tokens.push_back(tokenTemp);
 
@@ -215,6 +245,8 @@ namespace Lex {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::OPEN);
+                    tokenTemp.setTokenColumn(column++);
+                    tokenTemp.setTokenLine(line);
 
                     tokens.push_back(tokenTemp);
 
@@ -223,6 +255,8 @@ namespace Lex {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::CLOSE);
+                    tokenTemp.setTokenColumn(column++);
+                    tokenTemp.setTokenLine(line);
 
                     tokens.push_back(tokenTemp);
 
@@ -231,6 +265,8 @@ namespace Lex {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::IF);
+                    tokenTemp.setTokenColumn(column++);
+                    tokenTemp.setTokenLine(line);
 
                     tokens.push_back(tokenTemp);
 
@@ -239,6 +275,8 @@ namespace Lex {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::THEN);
+                    tokenTemp.setTokenColumn(column++);
+                    tokenTemp.setTokenLine(line);
 
                     tokens.push_back(tokenTemp);
 
@@ -247,6 +285,8 @@ namespace Lex {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::OTHERWISE);
+                    tokenTemp.setTokenColumn(column++);
+                    tokenTemp.setTokenLine(line);
 
                     tokens.push_back(tokenTemp);
 
@@ -255,6 +295,8 @@ namespace Lex {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::REPEAT);
+                    tokenTemp.setTokenColumn(column++);
+                    tokenTemp.setTokenLine(line);
 
                     tokens.push_back(tokenTemp);
 
@@ -263,6 +305,8 @@ namespace Lex {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::FLOAT);
+                    tokenTemp.setTokenColumn(column++);
+                    tokenTemp.setTokenLine(line);
 
                     tokens.push_back(tokenTemp);
 
@@ -271,6 +315,8 @@ namespace Lex {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::VOID);
+                    tokenTemp.setTokenColumn(column++);
+                    tokenTemp.setTokenLine(line);
 
                     tokens.push_back(tokenTemp);
 
@@ -279,6 +325,8 @@ namespace Lex {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::UNTIL);
+                    tokenTemp.setTokenColumn(column++);
+                    tokenTemp.setTokenLine(line);
 
                     tokens.push_back(tokenTemp);
 
@@ -287,6 +335,8 @@ namespace Lex {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::READ);
+                    tokenTemp.setTokenColumn(column++);
+                    tokenTemp.setTokenLine(line);
 
                     tokens.push_back(tokenTemp);
 
@@ -295,6 +345,8 @@ namespace Lex {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::WRITE);
+                    tokenTemp.setTokenColumn(column++);
+                    tokenTemp.setTokenLine(line);
 
                     tokens.push_back(tokenTemp);
 
@@ -303,6 +355,8 @@ namespace Lex {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::INTEGER);
+                    tokenTemp.setTokenColumn(column++);
+                    tokenTemp.setTokenLine(line);
 
                     tokens.push_back(tokenTemp);
 
@@ -311,6 +365,8 @@ namespace Lex {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::RETURN);
+                    tokenTemp.setTokenColumn(column++);
+                    tokenTemp.setTokenLine(line);
 
                     tokens.push_back(tokenTemp);
 
@@ -319,6 +375,8 @@ namespace Lex {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::END);
+                    tokenTemp.setTokenColumn(column++);
+                    tokenTemp.setTokenLine(line);
 
                     tokens.push_back(tokenTemp);
 
@@ -326,7 +384,9 @@ namespace Lex {
                 } else if (boost::regex_search(bufferString, match, n_SF)) {
 
                     tokenTemp.setTokenName(match.str());
-                    tokenTemp.setTokenType(Token::SCIENTIFIC_FLOAT);
+                    tokenTemp.setTokenType(Token::FLOAT);
+                    tokenTemp.setTokenColumn(column++);
+                    tokenTemp.setTokenLine(line);
 
                     tokens.push_back(tokenTemp);
 
@@ -335,6 +395,8 @@ namespace Lex {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::FLOAT);
+                    tokenTemp.setTokenColumn(column++);
+                    tokenTemp.setTokenLine(line);
 
                     tokens.push_back(tokenTemp);
 
@@ -342,7 +404,9 @@ namespace Lex {
                 } else if (boost::regex_search(bufferString, match, n_SI)) {
 
                     tokenTemp.setTokenName(match.str());
-                    tokenTemp.setTokenType(Token::SCIENTIFIC_INTEGER);
+                    tokenTemp.setTokenType(Token::FLOAT);
+                    tokenTemp.setTokenColumn(column++);
+                    tokenTemp.setTokenLine(line);
 
                     tokens.push_back(tokenTemp);
 
@@ -351,6 +415,8 @@ namespace Lex {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::INTEGER);
+                    tokenTemp.setTokenColumn(column++);
+                    tokenTemp.setTokenLine(line);
 
                     tokens.push_back(tokenTemp);
 
@@ -359,12 +425,17 @@ namespace Lex {
 
                     tokenTemp.setTokenName(match.str());
                     tokenTemp.setTokenType(Token::IDENTIFIER);
+                    tokenTemp.setTokenColumn(column++);
+                    tokenTemp.setTokenLine(line);
 
                     tokens.push_back(tokenTemp);
 
                     bufferString = boost::regex_replace(bufferString, i_ID, remove);
                 }
             }
+            
+            line++;
+            column = 0;
         }
     }
 
