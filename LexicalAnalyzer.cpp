@@ -381,40 +381,42 @@ namespace Lex {
                     tokens.push_back(tokenTemp);
 
                     bufferString = boost::regex_replace(bufferString, k_EN, remove);
-                } else if (boost::regex_search(bufferString, match, n_SF)) {
+                } else if (boost::regex_search(bufferString, match, n_SF) ||
+                        boost::regex_search(bufferString, match, n_FL) ||
+                        boost::regex_search(bufferString, match, n_SI)) {
 
                     tokenTemp.setTokenName(match.str());
-                    tokenTemp.setTokenType(Token::FLOAT);
+                    tokenTemp.setTokenType(Token::NUMBER_FLOAT);
                     tokenTemp.setTokenColumn(column++);
                     tokenTemp.setTokenLine(line);
 
                     tokens.push_back(tokenTemp);
 
                     bufferString = boost::regex_replace(bufferString, n_SF, remove);
-                } else if (boost::regex_search(bufferString, match, n_FL)) {
+                    /*} else if (boost::regex_search(bufferString, match, n_FL)) {
 
-                    tokenTemp.setTokenName(match.str());
-                    tokenTemp.setTokenType(Token::FLOAT);
-                    tokenTemp.setTokenColumn(column++);
-                    tokenTemp.setTokenLine(line);
+                        tokenTemp.setTokenName(match.str());
+                        tokenTemp.setTokenType(Token::NUMBER_FLOAT);
+                        tokenTemp.setTokenColumn(column++);
+                        tokenTemp.setTokenLine(line);
 
-                    tokens.push_back(tokenTemp);
+                        tokens.push_back(tokenTemp);
 
-                    bufferString = boost::regex_replace(bufferString, n_FL, remove);
-                } else if (boost::regex_search(bufferString, match, n_SI)) {
+                        bufferString = boost::regex_replace(bufferString, n_FL, remove);
+                    } else if (boost::regex_search(bufferString, match, n_SI)) {
 
-                    tokenTemp.setTokenName(match.str());
-                    tokenTemp.setTokenType(Token::FLOAT);
-                    tokenTemp.setTokenColumn(column++);
-                    tokenTemp.setTokenLine(line);
+                        tokenTemp.setTokenName(match.str());
+                        tokenTemp.setTokenType(Token::NUMBER_FLOAT);
+                        tokenTemp.setTokenColumn(column++);
+                        tokenTemp.setTokenLine(line);
 
-                    tokens.push_back(tokenTemp);
+                        tokens.push_back(tokenTemp);
 
-                    bufferString = boost::regex_replace(bufferString, n_SI, remove);
+                        bufferString = boost::regex_replace(bufferString, n_SI, remove);*/
                 } else if (boost::regex_search(bufferString, match, n_IN)) {
 
                     tokenTemp.setTokenName(match.str());
-                    tokenTemp.setTokenType(Token::INTEGER);
+                    tokenTemp.setTokenType(Token::NUMBER_INTEGER);
                     tokenTemp.setTokenColumn(column++);
                     tokenTemp.setTokenLine(line);
 
@@ -433,7 +435,7 @@ namespace Lex {
                     bufferString = boost::regex_replace(bufferString, i_ID, remove);
                 }
             }
-            
+
             line++;
             column = 0;
         }

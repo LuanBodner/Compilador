@@ -46,7 +46,7 @@
 ">" == BIGGER THAN
 	LINE : 3
 	COLUMN : 2
-"0" == INTEGER
+"0" == INTEGER NUMBER
 	LINE : 3
 	COLUMN : 3
 "então" == THEN
@@ -58,7 +58,7 @@
 ":=" == ATTRIBUTION
 	LINE : 4
 	COLUMN : 1
-"1" == INTEGER
+"1" == INTEGER NUMBER
 	LINE : 4
 	COLUMN : 2
 "repita" == REPEAT
@@ -91,7 +91,7 @@
 "-" == SUBTRACTION
 	LINE : 7
 	COLUMN : 3
-"1" == INTEGER
+"1" == INTEGER NUMBER
 	LINE : 7
 	COLUMN : 4
 "ate" == UNTIL
@@ -103,7 +103,7 @@
 "=" == EQUAL
 	LINE : 8
 	COLUMN : 2
-"0" == INTEGER
+"0" == INTEGER NUMBER
 	LINE : 8
 	COLUMN : 3
 "retorna" == RETURN
@@ -127,7 +127,7 @@
 "(" == OPEN PAIR
 	LINE : 10
 	COLUMN : 2
-"0" == INTEGER
+"0" == INTEGER NUMBER
 	LINE : 10
 	COLUMN : 3
 ")" == CLOSE PAIR

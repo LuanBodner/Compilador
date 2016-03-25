@@ -63,13 +63,14 @@ namespace Token {
             case 19: return "ATTRIBUTION";
             case 20: return "SMALLER THAN";
             case 21: return "BIGGER THAN";
-            case 22: return "SMALL EQUAL";
-            case 23: return "BIGGER EQUAL";
+            case 22: return "SMALL OR EQUAL";
+            case 23: return "BIGGER OR EQUAL";
             case 24: return "OPEN PAIR";
             case 25: return "CLOSE PAIR";
-            case 26: return "NUMBER";
-            case 27: return "DOUBLE POINT";
-            case 28: return "IDENTIFIER";
+            case 26: return "INTEGER NUMBER";
+            case 27: return "FLOAT NUMBER";
+            case 28: return "DOUBLE POINT";
+            case 29: return "IDENTIFIER";
             default: return "UNKNOWN";
         }
     }
