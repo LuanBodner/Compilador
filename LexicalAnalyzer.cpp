@@ -393,26 +393,6 @@ namespace Lex {
                     tokens.push_back(tokenTemp);
 
                     bufferString = boost::regex_replace(bufferString, n_SF, remove);
-                    /*} else if (boost::regex_search(bufferString, match, n_FL)) {
-
-                        tokenTemp.setTokenName(match.str());
-                        tokenTemp.setTokenType(Token::NUMBER_FLOAT);
-                        tokenTemp.setTokenColumn(column++);
-                        tokenTemp.setTokenLine(line);
-
-                        tokens.push_back(tokenTemp);
-
-                        bufferString = boost::regex_replace(bufferString, n_FL, remove);
-                    } else if (boost::regex_search(bufferString, match, n_SI)) {
-
-                        tokenTemp.setTokenName(match.str());
-                        tokenTemp.setTokenType(Token::NUMBER_FLOAT);
-                        tokenTemp.setTokenColumn(column++);
-                        tokenTemp.setTokenLine(line);
-
-                        tokens.push_back(tokenTemp);
-
-                        bufferString = boost::regex_replace(bufferString, n_SI, remove);*/
                 } else if (boost::regex_search(bufferString, match, n_IN)) {
 
                     tokenTemp.setTokenName(match.str());
