@@ -50,7 +50,6 @@ namespace Lex {
 
     LexicalAnalyzer::LexicalAnalyzer(std::string fileName) {
 
-
         tokenCollector(fileName);
     }
 
