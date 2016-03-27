@@ -39,14 +39,11 @@ namespace Lex {
     //Numbers
     boost::regex
     n_IN("^\\b[0-9]+\\b"), n_SI("^\\b[0-9]+e[+|-]?[0-9]+\\b"),
-    n_FL("^\\b[0-9]+\\.[0-9]+\\b"),
+    n_FL("^\\b[0-9]+.[0-9]+\\b"),
     n_SF("^\\b[0-9]+.[0-9]+e[+|-]?[0-9]+\\b");
 
     //Identifier
     boost::regex i_ID("^\\b[A-Za-zÀ-ú_][A-Za-zÀ-ú0-9_]*");
-
-    LexicalAnalyzer::LexicalAnalyzer() {
-    }
 
     LexicalAnalyzer::LexicalAnalyzer(std::string fileName) {
 
@@ -73,7 +70,6 @@ namespace Lex {
 
             std::string bufferString;
             std::getline(file, bufferString);
-
             while (bufferString.size() > 0) {
 
                 if (boost::regex_search(bufferString, match, c_CM)) {
@@ -83,16 +79,6 @@ namespace Lex {
                 } else if (boost::regex_search(bufferString, match, b_SP)) {
 
                     bufferString = boost::regex_replace(bufferString, b_SP, remove);
-                } else if (boost::regex_search(bufferString, match, o_SUM)) {
-
-                    tokenTemp.setTokenName(match.str());
-                    tokenTemp.setTokenType(Token::SUM);
-                    tokenTemp.setTokenColumn(column++);
-                    tokenTemp.setTokenLine(line);
-
-                    tokens.push_back(tokenTemp);
-
-                    bufferString = boost::regex_replace(bufferString, o_SUM, remove);
                 } else if (boost::regex_search(bufferString, match, o_SUM)) {
 
                     tokenTemp.setTokenName(match.str());
@@ -183,16 +169,6 @@ namespace Lex {
                     tokens.push_back(tokenTemp);
 
                     bufferString = boost::regex_replace(bufferString, o_EQU, remove);
-                } else if (boost::regex_search(bufferString, match, o_COM)) {
-
-                    tokenTemp.setTokenName(match.str());
-                    tokenTemp.setTokenType(Token::COMMA);
-                    tokenTemp.setTokenColumn(column++);
-                    tokenTemp.setTokenLine(line);
-
-                    tokens.push_back(tokenTemp);
-
-                    bufferString = boost::regex_replace(bufferString, o_COM, remove);
                 } else if (boost::regex_search(bufferString, match, o_DOP)) {
 
                     tokenTemp.setTokenName(match.str());
@@ -373,8 +349,12 @@ namespace Lex {
                     tokenTemp.setTokenLine(line);
 
                     tokens.push_back(tokenTemp);
-
-                    bufferString = boost::regex_replace(bufferString, n_SF, remove);
+                    if (boost::regex_search(bufferString, match, n_SF))
+                        bufferString = boost::regex_replace(bufferString, n_SF, remove);
+                    else if (boost::regex_search(bufferString, match, n_FL))
+                        bufferString = boost::regex_replace(bufferString, n_FL, remove);
+                    else
+                        bufferString = boost::regex_replace(bufferString, n_SI, remove);
                 } else if (boost::regex_search(bufferString, match, n_IN)) {
 
                     tokenTemp.setTokenName(match.str());

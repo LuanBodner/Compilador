@@ -21,7 +21,6 @@ namespace Lex {
     public:
 
         //Constructor & destructor
-        LexicalAnalyzer();
         //Constructor that receives the name of the tpp file
         LexicalAnalyzer(std::string);
         virtual ~LexicalAnalyzer();
