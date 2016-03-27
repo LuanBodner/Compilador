@@ -36,9 +36,8 @@ namespace Lex {
         static std::vector<Token::Token> tokens;
         //Collects and stores the tokens
         void tokenCollector(std::string);
+        void tokenInserter(std::string &, std::string, Token::TokenType, boost::regex, int, int);
     };
-
 }
-
 #endif /* LEXICALANALYZER_H */
 

@@ -53,12 +53,25 @@ namespace Lex {
     LexicalAnalyzer::~LexicalAnalyzer() {
     }
 
+    void LexicalAnalyzer::tokenInserter(std::string &buffer, std::string string,
+            Token::TokenType type, boost::regex operation, int column, int line) {
+
+        Token::Token tokenTemp;
+
+        tokenTemp.setTokenName(string);
+        tokenTemp.setTokenType(type);
+        tokenTemp.setTokenColumn(column);
+        tokenTemp.setTokenLine(line);
+
+        tokens.push_back(tokenTemp);
+
+        buffer = boost::regex_replace(buffer, operation, "");
+    }
+
     void LexicalAnalyzer::tokenCollector(std::string fileName) {
 
         std::ifstream file;
         file.open(fileName);
-
-        std::string remove = "";
 
         boost::smatch match;
 
@@ -74,308 +87,103 @@ namespace Lex {
 
                 if (boost::regex_search(bufferString, match, c_CM)) {
 
-                    bufferString = boost::regex_replace(bufferString, c_CM, remove);
-                    bufferString = boost::regex_replace(bufferString, c_CC, remove);
-                } else if (boost::regex_search(bufferString, match, b_SP)) {
+                    bufferString = boost::regex_replace(bufferString, c_CM, "");
+                    bufferString = boost::regex_replace(bufferString, c_CC, "");
+                } else if (boost::regex_search(bufferString, match, b_SP))
+                    bufferString = boost::regex_replace(bufferString, b_SP, "");
 
-                    bufferString = boost::regex_replace(bufferString, b_SP, remove);
-                } else if (boost::regex_search(bufferString, match, o_SUM)) {
+                else if (boost::regex_search(bufferString, match, o_SUM))
+                    tokenInserter(bufferString, match.str(), Token::SUM, o_SUM, column++, line);
 
-                    tokenTemp.setTokenName(match.str());
-                    tokenTemp.setTokenType(Token::SUM);
-                    tokenTemp.setTokenColumn(column++);
-                    tokenTemp.setTokenLine(line);
+                else if (boost::regex_search(bufferString, match, o_SUB))
+                    tokenInserter(bufferString, match.str(), Token::SUBTRACTION, o_SUB, column++, line);
 
-                    tokens.push_back(tokenTemp);
+                else if (boost::regex_search(bufferString, match, o_MUL))
+                    tokenInserter(bufferString, match.str(), Token::MULTIPLICATION, o_MUL, column++, line);
 
-                    bufferString = boost::regex_replace(bufferString, o_SUM, remove);
-                } else if (boost::regex_search(bufferString, match, o_SUB)) {
+                else if (boost::regex_search(bufferString, match, o_DIV))
+                    tokenInserter(bufferString, match.str(), Token::DIVISION, o_DIV, column++, line);
 
-                    tokenTemp.setTokenName(match.str());
-                    tokenTemp.setTokenType(Token::SUBTRACTION);
-                    tokenTemp.setTokenColumn(column++);
-                    tokenTemp.setTokenLine(line);
+                else if (boost::regex_search(bufferString, match, o_COM))
+                    tokenInserter(bufferString, match.str(), Token::COMMA, o_COM, column++, line);
 
-                    tokens.push_back(tokenTemp);
+                else if (boost::regex_search(bufferString, match, o_SME))
+                    tokenInserter(bufferString, match.str(), Token::SMALL_EQUAL, o_SME, column++, line);
 
-                    bufferString = boost::regex_replace(bufferString, o_SUB, remove);
-                } else if (boost::regex_search(bufferString, match, o_MUL)) {
+                else if (boost::regex_search(bufferString, match, o_BGE))
+                    tokenInserter(bufferString, match.str(), Token::BIGGER_EQUAL, o_BGE, column++, line);
 
-                    tokenTemp.setTokenName(match.str());
-                    tokenTemp.setTokenType(Token::MULTIPLICATION);
-                    tokenTemp.setTokenColumn(column++);
-                    tokenTemp.setTokenLine(line);
+                else if (boost::regex_search(bufferString, match, o_ATT))
+                    tokenInserter(bufferString, match.str(), Token::ATTRIBUTION, o_ATT, column++, line);
 
-                    tokens.push_back(tokenTemp);
+                else if (boost::regex_search(bufferString, match, o_EQU))
+                    tokenInserter(bufferString, match.str(), Token::EQUAL, o_EQU, column++, line);
 
-                    bufferString = boost::regex_replace(bufferString, o_MUL, remove);
-                } else if (boost::regex_search(bufferString, match, o_DIV)) {
+                else if (boost::regex_search(bufferString, match, o_DOP))
+                    tokenInserter(bufferString, match.str(), Token::DOUBLE_POINT, o_DOP, column++, line);
 
-                    tokenTemp.setTokenName(match.str());
-                    tokenTemp.setTokenType(Token::DIVISION);
-                    tokenTemp.setTokenColumn(column++);
-                    tokenTemp.setTokenLine(line);
+                else if (boost::regex_search(bufferString, match, o_SMA))
+                    tokenInserter(bufferString, match.str(), Token::SMALLER_THAN, o_SMA, column++, line);
 
-                    tokens.push_back(tokenTemp);
+                else if (boost::regex_search(bufferString, match, o_BIG))
+                    tokenInserter(bufferString, match.str(), Token::BIGGER_THAN, o_BIG, column++, line);
 
-                    bufferString = boost::regex_replace(bufferString, o_DIV, remove);
-                } else if (boost::regex_search(bufferString, match, o_COM)) {
+                else if (boost::regex_search(bufferString, match, o_OPA))
+                    tokenInserter(bufferString, match.str(), Token::OPEN, o_OPA, column++, line);
 
-                    tokenTemp.setTokenName(match.str());
-                    tokenTemp.setTokenType(Token::COMMA);
-                    tokenTemp.setTokenColumn(column++);
-                    tokenTemp.setTokenLine(line);
+                else if (boost::regex_search(bufferString, match, o_CPA))
+                    tokenInserter(bufferString, match.str(), Token::CLOSE, o_CPA, column++, line);
 
-                    tokens.push_back(tokenTemp);
+                else if (boost::regex_search(bufferString, match, k_IF))
+                    tokenInserter(bufferString, match.str(), Token::IF, k_IF, column++, line);
 
-                    bufferString = boost::regex_replace(bufferString, o_COM, remove);
-                } else if (boost::regex_search(bufferString, match, o_SME)) {
+                else if (boost::regex_search(bufferString, match, k_TH))
+                    tokenInserter(bufferString, match.str(), Token::THEN, k_TH, column++, line);
 
-                    tokenTemp.setTokenName(match.str());
-                    tokenTemp.setTokenType(Token::SMALL_EQUAL);
-                    tokenTemp.setTokenColumn(column++);
-                    tokenTemp.setTokenLine(line);
+                else if (boost::regex_search(bufferString, match, k_OT))
+                    tokenInserter(bufferString, match.str(), Token::OTHERWISE, k_OT, column++, line);
 
-                    tokens.push_back(tokenTemp);
+                else if (boost::regex_search(bufferString, match, k_RP))
+                    tokenInserter(bufferString, match.str(), Token::REPEAT, k_RP, column++, line);
 
-                    bufferString = boost::regex_replace(bufferString, o_SME, remove);
-                } else if (boost::regex_search(bufferString, match, o_BGE)) {
+                else if (boost::regex_search(bufferString, match, k_FL))
+                    tokenInserter(bufferString, match.str(), Token::FLOAT, k_FL, column++, line);
 
-                    tokenTemp.setTokenName(match.str());
-                    tokenTemp.setTokenType(Token::BIGGER_EQUAL);
-                    tokenTemp.setTokenColumn(column++);
-                    tokenTemp.setTokenLine(line);
+                else if (boost::regex_search(bufferString, match, k_VO))
+                    tokenInserter(bufferString, match.str(), Token::VOID, k_VO, column++, line);
 
-                    tokens.push_back(tokenTemp);
+                else if (boost::regex_search(bufferString, match, k_TL))
+                    tokenInserter(bufferString, match.str(), Token::UNTIL, k_TL, column++, line);
 
-                    bufferString = boost::regex_replace(bufferString, o_BGE, remove);
-                } else if (boost::regex_search(bufferString, match, o_ATT)) {
+                else if (boost::regex_search(bufferString, match, k_RE))
+                    tokenInserter(bufferString, match.str(), Token::READ, k_RE, column++, line);
 
-                    tokenTemp.setTokenName(match.str());
-                    tokenTemp.setTokenType(Token::ATTRIBUTION);
-                    tokenTemp.setTokenColumn(column++);
-                    tokenTemp.setTokenLine(line);
+                else if (boost::regex_search(bufferString, match, k_WR))
+                    tokenInserter(bufferString, match.str(), Token::WRITE, k_WR, column++, line);
 
-                    tokens.push_back(tokenTemp);
+                else if (boost::regex_search(bufferString, match, k_IN))
+                    tokenInserter(bufferString, match.str(), Token::INTEGER, k_IN, column++, line);
 
-                    bufferString = boost::regex_replace(bufferString, o_ATT, remove);
-                } else if (boost::regex_search(bufferString, match, o_EQU)) {
+                else if (boost::regex_search(bufferString, match, k_RT))
+                    tokenInserter(bufferString, match.str(), Token::RETURN, k_RT, column++, line);
 
-                    tokenTemp.setTokenName(match.str());
-                    tokenTemp.setTokenType(Token::EQUAL);
-                    tokenTemp.setTokenColumn(column++);
-                    tokenTemp.setTokenLine(line);
+                else if (boost::regex_search(bufferString, match, k_EN))
+                    tokenInserter(bufferString, match.str(), Token::END, k_EN, column++, line);
 
-                    tokens.push_back(tokenTemp);
+                else if (boost::regex_search(bufferString, match, n_SF))
+                    tokenInserter(bufferString, match.str(), Token::NUMBER_FLOAT, n_SF, column++, line);
 
-                    bufferString = boost::regex_replace(bufferString, o_EQU, remove);
-                } else if (boost::regex_search(bufferString, match, o_DOP)) {
+                else if (boost::regex_search(bufferString, match, n_FL))
+                    tokenInserter(bufferString, match.str(), Token::NUMBER_FLOAT, n_FL, column++, line);
 
-                    tokenTemp.setTokenName(match.str());
-                    tokenTemp.setTokenType(Token::DOUBLE_POINT);
-                    tokenTemp.setTokenColumn(column++);
-                    tokenTemp.setTokenLine(line);
+                else if (boost::regex_search(bufferString, match, n_SI))
+                    tokenInserter(bufferString, match.str(), Token::NUMBER_FLOAT, n_SI, column++, line);
 
-                    tokens.push_back(tokenTemp);
+                else if (boost::regex_search(bufferString, match, n_IN))
+                    tokenInserter(bufferString, match.str(), Token::NUMBER_INTEGER, n_IN, column++, line);
 
-                    bufferString = boost::regex_replace(bufferString, o_DOP, remove);
-                } else if (boost::regex_search(bufferString, match, o_SMA)) {
-
-                    tokenTemp.setTokenName(match.str());
-                    tokenTemp.setTokenType(Token::SMALLER_THAN);
-                    tokenTemp.setTokenColumn(column++);
-                    tokenTemp.setTokenLine(line);
-
-                    tokens.push_back(tokenTemp);
-
-                    bufferString = boost::regex_replace(bufferString, o_SMA, remove);
-                } else if (boost::regex_search(bufferString, match, o_BIG)) {
-
-                    tokenTemp.setTokenName(match.str());
-                    tokenTemp.setTokenType(Token::BIGGER_THAN);
-                    tokenTemp.setTokenColumn(column++);
-                    tokenTemp.setTokenLine(line);
-
-                    tokens.push_back(tokenTemp);
-
-                    bufferString = boost::regex_replace(bufferString, o_BIG, remove);
-                } else if (boost::regex_search(bufferString, match, o_OPA)) {
-
-                    tokenTemp.setTokenName(match.str());
-                    tokenTemp.setTokenType(Token::OPEN);
-                    tokenTemp.setTokenColumn(column++);
-                    tokenTemp.setTokenLine(line);
-
-                    tokens.push_back(tokenTemp);
-
-                    bufferString = boost::regex_replace(bufferString, o_OPA, remove);
-                } else if (boost::regex_search(bufferString, match, o_CPA)) {
-
-                    tokenTemp.setTokenName(match.str());
-                    tokenTemp.setTokenType(Token::CLOSE);
-                    tokenTemp.setTokenColumn(column++);
-                    tokenTemp.setTokenLine(line);
-
-                    tokens.push_back(tokenTemp);
-
-                    bufferString = boost::regex_replace(bufferString, o_CPA, remove);
-                } else if (boost::regex_search(bufferString, match, k_IF)) {
-
-                    tokenTemp.setTokenName(match.str());
-                    tokenTemp.setTokenType(Token::IF);
-                    tokenTemp.setTokenColumn(column++);
-                    tokenTemp.setTokenLine(line);
-
-                    tokens.push_back(tokenTemp);
-
-                    bufferString = boost::regex_replace(bufferString, k_IF, remove);
-                } else if (boost::regex_search(bufferString, match, k_TH)) {
-
-                    tokenTemp.setTokenName(match.str());
-                    tokenTemp.setTokenType(Token::THEN);
-                    tokenTemp.setTokenColumn(column++);
-                    tokenTemp.setTokenLine(line);
-
-                    tokens.push_back(tokenTemp);
-
-                    bufferString = boost::regex_replace(bufferString, k_TH, remove);
-                } else if (boost::regex_search(bufferString, match, k_OT)) {
-
-                    tokenTemp.setTokenName(match.str());
-                    tokenTemp.setTokenType(Token::OTHERWISE);
-                    tokenTemp.setTokenColumn(column++);
-                    tokenTemp.setTokenLine(line);
-
-                    tokens.push_back(tokenTemp);
-
-                    bufferString = boost::regex_replace(bufferString, k_OT, remove);
-                } else if (boost::regex_search(bufferString, match, k_RP)) {
-
-                    tokenTemp.setTokenName(match.str());
-                    tokenTemp.setTokenType(Token::REPEAT);
-                    tokenTemp.setTokenColumn(column++);
-                    tokenTemp.setTokenLine(line);
-
-                    tokens.push_back(tokenTemp);
-
-                    bufferString = boost::regex_replace(bufferString, k_RP, remove);
-                } else if (boost::regex_search(bufferString, match, k_FL)) {
-
-                    tokenTemp.setTokenName(match.str());
-                    tokenTemp.setTokenType(Token::FLOAT);
-                    tokenTemp.setTokenColumn(column++);
-                    tokenTemp.setTokenLine(line);
-
-                    tokens.push_back(tokenTemp);
-
-                    bufferString = boost::regex_replace(bufferString, k_FL, remove);
-                } else if (boost::regex_search(bufferString, match, k_VO)) {
-
-                    tokenTemp.setTokenName(match.str());
-                    tokenTemp.setTokenType(Token::VOID);
-                    tokenTemp.setTokenColumn(column++);
-                    tokenTemp.setTokenLine(line);
-
-                    tokens.push_back(tokenTemp);
-
-                    bufferString = boost::regex_replace(bufferString, k_VO, remove);
-                } else if (boost::regex_search(bufferString, match, k_TL)) {
-
-                    tokenTemp.setTokenName(match.str());
-                    tokenTemp.setTokenType(Token::UNTIL);
-                    tokenTemp.setTokenColumn(column++);
-                    tokenTemp.setTokenLine(line);
-
-                    tokens.push_back(tokenTemp);
-
-                    bufferString = boost::regex_replace(bufferString, k_TL, remove);
-                } else if (boost::regex_search(bufferString, match, k_RE)) {
-
-                    tokenTemp.setTokenName(match.str());
-                    tokenTemp.setTokenType(Token::READ);
-                    tokenTemp.setTokenColumn(column++);
-                    tokenTemp.setTokenLine(line);
-
-                    tokens.push_back(tokenTemp);
-
-                    bufferString = boost::regex_replace(bufferString, k_RE, remove);
-                } else if (boost::regex_search(bufferString, match, k_WR)) {
-
-                    tokenTemp.setTokenName(match.str());
-                    tokenTemp.setTokenType(Token::WRITE);
-                    tokenTemp.setTokenColumn(column++);
-                    tokenTemp.setTokenLine(line);
-
-                    tokens.push_back(tokenTemp);
-
-                    bufferString = boost::regex_replace(bufferString, k_WR, remove);
-                } else if (boost::regex_search(bufferString, match, k_IN)) {
-
-                    tokenTemp.setTokenName(match.str());
-                    tokenTemp.setTokenType(Token::INTEGER);
-                    tokenTemp.setTokenColumn(column++);
-                    tokenTemp.setTokenLine(line);
-
-                    tokens.push_back(tokenTemp);
-
-                    bufferString = boost::regex_replace(bufferString, k_IN, remove);
-                } else if (boost::regex_search(bufferString, match, k_RT)) {
-
-                    tokenTemp.setTokenName(match.str());
-                    tokenTemp.setTokenType(Token::RETURN);
-                    tokenTemp.setTokenColumn(column++);
-                    tokenTemp.setTokenLine(line);
-
-                    tokens.push_back(tokenTemp);
-
-                    bufferString = boost::regex_replace(bufferString, k_RT, remove);
-                } else if (boost::regex_search(bufferString, match, k_EN)) {
-
-                    tokenTemp.setTokenName(match.str());
-                    tokenTemp.setTokenType(Token::END);
-                    tokenTemp.setTokenColumn(column++);
-                    tokenTemp.setTokenLine(line);
-
-                    tokens.push_back(tokenTemp);
-
-                    bufferString = boost::regex_replace(bufferString, k_EN, remove);
-                } else if (boost::regex_search(bufferString, match, n_SF) ||
-                        boost::regex_search(bufferString, match, n_FL) ||
-                        boost::regex_search(bufferString, match, n_SI)) {
-
-                    tokenTemp.setTokenName(match.str());
-                    tokenTemp.setTokenType(Token::NUMBER_FLOAT);
-                    tokenTemp.setTokenColumn(column++);
-                    tokenTemp.setTokenLine(line);
-
-                    tokens.push_back(tokenTemp);
-                    if (boost::regex_search(bufferString, match, n_SF))
-                        bufferString = boost::regex_replace(bufferString, n_SF, remove);
-                    else if (boost::regex_search(bufferString, match, n_FL))
-                        bufferString = boost::regex_replace(bufferString, n_FL, remove);
-                    else
-                        bufferString = boost::regex_replace(bufferString, n_SI, remove);
-                } else if (boost::regex_search(bufferString, match, n_IN)) {
-
-                    tokenTemp.setTokenName(match.str());
-                    tokenTemp.setTokenType(Token::NUMBER_INTEGER);
-                    tokenTemp.setTokenColumn(column++);
-                    tokenTemp.setTokenLine(line);
-
-                    tokens.push_back(tokenTemp);
-
-                    bufferString = boost::regex_replace(bufferString, n_IN, remove);
-                } else if (boost::regex_search(bufferString, match, i_ID)) {
-
-                    tokenTemp.setTokenName(match.str());
-                    tokenTemp.setTokenType(Token::IDENTIFIER);
-                    tokenTemp.setTokenColumn(column++);
-                    tokenTemp.setTokenLine(line);
-
-                    tokens.push_back(tokenTemp);
-
-                    bufferString = boost::regex_replace(bufferString, i_ID, remove);
-                }
+                else if (boost::regex_search(bufferString, match, i_ID))
+                    tokenInserter(bufferString, match.str(), Token::IDENTIFIER, i_ID, column++, line);
             }
 
             line++;
