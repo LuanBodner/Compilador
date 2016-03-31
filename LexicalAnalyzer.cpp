@@ -16,20 +16,15 @@ namespace Lex {
     //Regular Expressions
     //Operations
     boost::regex
-    o_SUM("^\\+"), o_SUB("^\\-"), o_MUL("^\\*"),
-    o_DIV("^\\/"), o_SME("^<="), o_BGE("^>="),
-    o_ATT("^\\:="), o_EQU("^\\="), o_COM("^\\,"),
-    o_DOP("^\\:"), o_SMA("^<"), o_BIG("^>"),
+    o_SUM("^\\+"), o_SUB("^\\-"), o_MUL("^\\*"), o_DIV("^\\/"), o_SME("^<="), o_BGE("^>="),
+    o_ATT("^\\:="), o_EQU("^\\="), o_COM("^\\,"), o_DOP("^\\:"), o_SMA("^<"), o_BIG("^>"),
     o_OPA("^\\("), o_CPA("^\\)");
 
     //Keywords
     boost::regex
-    k_IF("^\\bse\\b"), k_TH("^\\bentão\\b"),
-    k_OT("^\\bsenão\\b"), k_EN("^\\bfim\\b"),
-    k_RP("^\\brepita\\b"), k_FL("^\\bflutuante\\b"),
-    k_VO("^\\bvazio\\b"), k_TL("^\\bate\\b"),
-    k_RE("^\\bleia\\b"), k_WR("^\\bescreve\\b"),
-    k_IN("^\\binteiro\\b"), k_RT("^\\bretorna\\b");
+    k_IF("^\\bse\\b"), k_TH("^\\bentão\\b"), k_OT("^\\bsenão\\b"), k_EN("^\\bfim\\b"),
+    k_RP("^\\brepita\\b"), k_FL("^\\bflutuante\\b"), k_VO("^\\bvazio\\b"), k_TL("^\\bate\\b"),
+    k_RE("^\\bleia\\b"), k_WR("^\\bescreve\\b"), k_IN("^\\binteiro\\b"), k_RT("^\\bretorna\\b");
 
     //Comments
     boost::regex
@@ -41,8 +36,7 @@ namespace Lex {
     //Numbers
     boost::regex
     n_IN("^\\b[0-9]+\\b"), n_SI("^\\b[0-9]+e[+|-]?[0-9]+\\b"),
-    n_FL("^\\b[0-9]+.[0-9]+\\b"),
-    n_SF("^\\b[0-9]+.[0-9]+e[+|-]?[0-9]+\\b");
+    n_FL("^\\b[0-9]+.[0-9]+\\b"), n_SF("^\\b[0-9]+.[0-9]+e[+|-]?[0-9]+\\b");
 
     //Identifier
     boost::regex i_ID("^\\b[A-Za-zÀ-ú_][A-Za-zÀ-ú0-9_]*");
