@@ -9,6 +9,8 @@
 
 namespace Lex {
 
+    unsigned int index = 0;
+
     std::vector<Token::Token> LexicalAnalyzer::tokens;
 
     //Regular Expressions
@@ -193,16 +195,9 @@ namespace Lex {
 
     Token::Token LexicalAnalyzer::getNextToken() {
 
-        Token::Token tokenTemp;
-        tokenTemp = tokens.front();
+        if (index == tokens.size())
+            throw "End\n";
 
-        tokens.erase(tokens.begin());
-
-        return tokenTemp;
-    }
-
-    bool LexicalAnalyzer::emptyTokenList() {
-
-        return (tokens.empty()) ? true : false;
+        return tokens[index++];
     }
 }

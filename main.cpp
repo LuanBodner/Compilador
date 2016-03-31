@@ -25,12 +25,21 @@ int main(int argc, char** argv) {
 
     do {
 
-        tokenTemp = lex.getNextToken();
-        output << "\"" << tokenTemp.getTokenName() << "\"" << " == "
-                << tokenTemp.tokenTypeToString() << "\n\tLINE : "
-                << tokenTemp.getTokenLine() << "\n\tCOLUMN : " 
-                << tokenTemp.getTokenColumn() << "\n";
-    } while (!lex.emptyTokenList());
+        try {
+
+            tokenTemp = lex.getNextToken();
+
+            output << "\"" << tokenTemp.getTokenName() << "\"" << " == "
+                    << tokenTemp.tokenTypeToString() << "\n\tLINE : "
+                    << tokenTemp.getTokenLine() << "\n\tCOLUMN : "
+                    << tokenTemp.getTokenColumn() << "\n";
+        } catch (const char * error) {
+
+            output << "End of Vector\n";
+
+            break;
+        }
+    } while (true);
 
     return 0;
 }

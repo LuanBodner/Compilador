@@ -26,8 +26,6 @@ namespace Lex {
         virtual ~LexicalAnalyzer();
 
         //Other methods
-        //Checks if the list is empty 
-        bool emptyTokenList();
         //Returns the token found first and removes it from the vector
         Token::Token getNextToken();
 
