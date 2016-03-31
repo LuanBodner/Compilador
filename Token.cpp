@@ -1,6 +1,6 @@
 /* 
  * File:   Token.cpp
- * Author: LuanB
+ * Author: Luan Bodner do Rosário <luan.rosario.bodner@gmail.com>
  * 
  * Created on 17 de Março de 2016, 00:23
  */
@@ -51,7 +51,7 @@ namespace Token {
             case 7: return "UNTIL";
             case 8: return "READ";
             case 9: return "WRITE";
-            case 10:return "INTEGER";
+            case 10: return "INTEGER";
             case 11: return "COMMENTS";
             case 12: return "RETURN";
             case 13: return "SUM";

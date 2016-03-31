@@ -4,6 +4,8 @@
     <df root="." name="0">
       <in>LexicalAnalyzer.cpp</in>
       <in>LexicalAnalyzer.h</in>
+      <in>SyntaxAnalyzer.cpp</in>
+      <in>SyntaxAnalyzer.h</in>
       <in>Token.cpp</in>
       <in>Token.h</in>
       <in>main.cpp</in>

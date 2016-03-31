@@ -1,6 +1,6 @@
 /* 
  * File:   main.cpp
- * Author: LuanB
+ * Author: Luan Bodner do Rosário <luan.rosario.bodner@gmail.com>
  *
  * Created on 16 de Março de 2016, 02:40
  */

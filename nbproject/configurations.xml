@@ -4,6 +4,8 @@
     <df root="." name="0">
       <in>LexicalAnalyzer.cpp</in>
       <in>LexicalAnalyzer.h</in>
+      <in>SyntaxAnalyzer.cpp</in>
+      <in>SyntaxAnalyzer.h</in>
       <in>Token.cpp</in>
       <in>Token.h</in>
       <in>main.cpp</in>
@@ -45,6 +47,10 @@
       <item path="LexicalAnalyzer.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="LexicalAnalyzer.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="SyntaxAnalyzer.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="SyntaxAnalyzer.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Token.cpp" ex="false" tool="1" flavor2="0">
       </item>

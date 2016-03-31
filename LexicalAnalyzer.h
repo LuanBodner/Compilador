@@ -1,6 +1,6 @@
 /* 
  * File:   LexicalAnalyzer.h
- * Author: LuanB
+ * Author: Luan Bodner do Rosário <luan.rosario.bodner@gmail.com>
  *
  * Created on 17 de Março de 2016, 00:56
  */
