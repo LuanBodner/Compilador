@@ -6,6 +6,7 @@
  */
 
 #include "LexicalAnalyzer.h"
+#include "CompilerErrors.h"
 
 namespace Lex {
 
@@ -180,8 +181,8 @@ namespace Lex {
 
                 else if (boost::regex_search(bufferString, match, i_ID))
                     tokenInserter(bufferString, match.str(), Token::IDENTIFIER, i_ID, column++, line);
-            }
 
+            }
             line++;
             column = 0;
         }
@@ -193,5 +194,10 @@ namespace Lex {
             throw "End\n";
 
         return tokens[index++];
+    }
+
+    void LexicalAnalyzer::returnToPreviousToken(int pos) {
+
+        index = pos;
     }
 }

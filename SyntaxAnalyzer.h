@@ -13,6 +13,8 @@ public:
     SyntaxAnalyzer();
     virtual ~SyntaxAnalyzer();
 private:
+    void parser();
+
 
 };
 

@@ -2,6 +2,8 @@
 <configurationDescriptor version="97">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <df root="." name="0">
+      <in>CompilerErrors.cpp</in>
+      <in>CompilerErrors.h</in>
       <in>LexicalAnalyzer.cpp</in>
       <in>LexicalAnalyzer.h</in>
       <in>SyntaxAnalyzer.cpp</in>
@@ -44,6 +46,10 @@
           <preBuildCommand></preBuildCommand>
         </preBuild>
       </makefileType>
+      <item path="CompilerErrors.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="CompilerErrors.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="LexicalAnalyzer.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="LexicalAnalyzer.h" ex="false" tool="3" flavor2="0">

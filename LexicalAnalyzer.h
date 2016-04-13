@@ -14,6 +14,7 @@
 #include <string>
 #include <boost/regex.hpp>
 #include "Token.h"
+#include "CompilerErrors.h"
 
 namespace Lex {
 
@@ -35,6 +36,7 @@ namespace Lex {
         //Collects and stores the tokens
         void tokenCollector(std::string);
         void tokenInserter(std::string &, std::string, Token::TokenType, boost::regex, int, int);
+        void returnToPreviousToken(int);
     };
 }
 #endif /* LEXICALANALYZER_H */
