@@ -47,6 +47,9 @@ namespace Lex {
         tokenCollector(fileName);
     }
 
+    LexicalAnalyzer::LexicalAnalyzer() {
+    }
+
     LexicalAnalyzer::~LexicalAnalyzer() {
     }
 

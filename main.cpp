@@ -15,7 +15,8 @@
 
 int main(int argc, char** argv) {
 
-    Lex::LexicalAnalyzer lex("tiny.txt");
+    Lex::LexicalAnalyzer lex;
+    lex = Lex::LexicalAnalyzer("tiny.txt");
 
     Token::Token tokenTemp;
 

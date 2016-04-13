@@ -7,10 +7,48 @@
 
 #include "SyntaxAnalyzer.h"
 
-SyntaxAnalyzer::SyntaxAnalyzer() {
+namespace SyntaxAnalyzer {
+
+    SyntaxAnalyzer::SyntaxAnalyzer() {
+    }
+
+    void SyntaxAnalyzer::createLexer(std::string fileName) {
+
+        lexer = Lex::LexicalAnalyzer(fileName);
+    }
+
+    Token::Token SyntaxAnalyzer::targetAdvance() {
+
+        return lexer.getNextToken();
+    }
+
+    void SyntaxAnalyzer::mulExpr() {
+
+    }
+
+    void SyntaxAnalyzer::addExprT() {
+
+    }
+
+    void SyntaxAnalyzer::eat(Token::Token &token) {
+
+        token = targetAdvance();
+    }
+
+    void SyntaxAnalyzer::targetAnalyzer() {
+
+        Token::Token nextToken = targetAdvance();
+
+        switch (nextToken.getTokenType()) {
+
+            case Token::IDENTIFIER:
+                eat(nextToken);
+                break;
+            default:
+                break;
+        }
+    }
+
+    SyntaxAnalyzer::~SyntaxAnalyzer() {
+    }
 }
-
-
-SyntaxAnalyzer::~SyntaxAnalyzer() {
-}
-
