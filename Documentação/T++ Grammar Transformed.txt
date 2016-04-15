@@ -2,80 +2,78 @@ T++ Grammar transformed.
 
 Exemplo de eliminação
 
-E -> E + T
-	| T
+E -> E + T | T
 
 E -> T E'
 
-E' -> + T E'
-	|
+E' -> + T E' |
 
 Gramática atualizada
 
 <type> ::= 'vazio'
-		| 'inteiro'
-		| 'flutuante'
+	| 'inteiro'
+	| 'flutuante'
 
 <variableDec> ::= <type> ':' 'id' 
 
 <operationsExp> ::= <equalityExp>
-				| <relationalExp>
-				| <additiveExp>
-				| <multiplicativeExp>
+		| <relationalExp>
+		| <additiveExp>
+		| <multiplicativeExp>
 
 <equalityExp> ::= <relationalExp> <equalityExpTransformed>
 
 <equalityExpTransformed> ::= NULL
-							| '=' <relationalExp> <equalityExpTransformed>
+			| '=' <relationalExp> <equalityExpTransformed>
 
 <relationalExp> ::= <additiveExp> <relationalExpTransformed>
 
 <relationalExpTransformed> ::= NULL
-							| < <additiveExp> <relationalExpTransformed>
-							| > <additiveExp> <relationalExpTransformed>
-							| <= <additiveExp> <relationalExpTransformed>
-							| >= <additiveExp> <relationalExpTransformed>
+			| < <additiveExp> <relationalExpTransformed>
+			| > <additiveExp> <relationalExpTransformed>
+			| <= <additiveExp> <relationalExpTransformed>
+			| >= <additiveExp> <relationalExpTransformed>
 
 <additiveExp> ::= <multiplicativeExp> <additiveExpTransformed>
 
 <additiveExpTransformed> ::= NULL
-							| + <multiplicativeExp> <additiveExpTransformed>
-							| - <multiplicativeExp> <additiveExpTransformed> 		
+			| + <multiplicativeExp> <additiveExpTransformed>
+			| - <multiplicativeExp> <additiveExpTransformed> 		
 
 <multiplicativeExp> ::= <factor> <multiplicationExpTransformed>
 
 <multiplicationExpTransformed> ::= NULL
-					| * <factor> <multiplicationExpTransformed>
-					| / <factor> <multiplicationExpTransformed>
+				| * <factor> <multiplicationExpTransformed>
+				| / <factor> <multiplicationExpTransformed>
 
 <factor> ::= '(' <operationsExp> ')'
-			| 'numberFloat'
-			| 'numberInt'
-			| 'id'
+	| 'numberFloat'
+	| 'numberInt'
+	| 'id'
 
 <prototypeDef> ::= '(' <paramFunction> ')'
 
 <paramFunction> ::= NULL
-				| <variableDec> ',' <paramFunction>
-				| <variableDec>
+		| <variableDec> ',' <paramFunction>
+		| <variableDec>
 
 <functionDec> ::= <type> 'id' <prototypeDef> <compoundStmt> 'fim'
 
 <prototypeCall> ::= NULL
-				| <ioTypes> ',' <protypeCall>
-				| <ioType>
+		| <ioTypes> ',' <protypeCall>
+		| <ioType>
 
 <functionCall> ::= 'id' '(' <paramCall> ')' 
 
 <iterationExp> ::= 'repita' <compoundStmt> 'até' <boolExp> 'fim'
 
 <selectionExp> ::= 'se' <boolExp> 'então' <compoundStmt>
-				| 'se' <boolExp> 'então' <compoundStmt> 'senão' <compoundStmt> 'fim'
+		| 'se' <boolExp> 'então' <compoundStmt> 'senão' <compoundStmt> 'fim'
 
 <ioTypes> ::= 'id'
-			| 'numberInt'
-			| 'numberFloat'
-			| <functionCall>
+	| 'numberInt'
+	| 'numberFloat'
+	| <functionCall>
 
 <attributionExp> ::= 'id' ':=' <ioType>
 
@@ -86,13 +84,13 @@ Gramática atualizada
 <writeCom> ::= 'escreve' '(' <ioTypes> ')'
 
 <compoundStmt> ::= <expression> <compoundStmt>
-				| <expression>
+		| <expression>
 
 <expression> ::= <selectionExp>
-				| <iterationExp>
-				| <functionCall>
-				| <readCom>
-				| <writeCom>
-				| <returnCom>
-				| <variableDec>
-				| <attributionExp>
+		| <iterationExp>
+		| <functionCall>
+		| <readCom>
+		| <writeCom>
+		| <returnCom>
+		| <variableDec>
+		| <attributionExp>
