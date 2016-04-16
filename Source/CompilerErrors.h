@@ -12,7 +12,7 @@
 
 namespace CompilerErrors {
 
-    class CompilerErrors{
+    class CompilerErrors {
     public:
         CompilerErrors();
         virtual ~CompilerErrors();

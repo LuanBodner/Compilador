@@ -36,7 +36,10 @@ namespace SyntaxAnalyzer {
 
     void SyntaxAnalyzer::variableDec() {
 
+        targetAdvance();
         eat(Token::DOUBLE_POINT);
+
+        targetAdvance();
         eat(Token::IDENTIFIER);
     }
 
@@ -50,20 +53,28 @@ namespace SyntaxAnalyzer {
 
         switch (tokenTemp.getTokenType()) {
 
-            case(Token::INTEGER): case(Token::FLOAT): case(Token::VOID):
-                eat(Token::DOUBLE_POINT);
+            case(Token::INTEGER):
+                eat(Token::INTEGER);
+                variableDec();
+                paramFunction();
+                break;
+            case(Token::FLOAT):
+                eat(Token::FLOAT);
                 variableDec();
                 paramFunction();
                 break;
             case(Token::COMMA):
+                eat(Token::COMMA);
                 paramFunction();
                 break;
             case(Token::CLOSE):
+                eat(Token::CLOSE);
                 compoundStmt();
+                targetAdvance();
                 eat(Token::END);
                 break;
             default:
-                std::cout << "Error\nReceived " <<
+                std::cout << "ParamFunc Error\nReceived " <<
                         tokenTemp.tokenTypeToString() << std::endl;
                 exit(0);
         }
@@ -71,6 +82,7 @@ namespace SyntaxAnalyzer {
 
     void SyntaxAnalyzer::prototypeDef() {
 
+        targetAdvance();
         eat(Token::OPEN);
         paramFunction();
     }
@@ -81,9 +93,12 @@ namespace SyntaxAnalyzer {
 
         switch (tempToken.getTokenType()) {
             case(Token::IDENTIFIER):
+                eat(Token::IDENTIFIER);
                 prototypeDef();
                 break;
             default:
+                std::cout << "FunDec Error\nReceived " <<
+                        tempToken.tokenTypeToString() << std::endl;
                 break;
         }
 
@@ -107,6 +122,7 @@ namespace SyntaxAnalyzer {
                         variableDec();
                         break;
                     case(Token::IDENTIFIER):
+                        eat(Token::INTEGER);
                         functionDec();
                         break;
                     default:
@@ -125,6 +141,7 @@ namespace SyntaxAnalyzer {
                         variableDec();
                         break;
                     case(Token::IDENTIFIER):
+                        eat(Token::FLOAT);
                         functionDec();
                         break;
                     default:
@@ -135,6 +152,7 @@ namespace SyntaxAnalyzer {
                 break;
             case(Token::VOID):
                 //std::cout << "Declaração de função\n";
+                eat(Token::VOID);
                 functionDec();
                 break;
             default: std::cout << "Erro\nExpected TYPE, received "

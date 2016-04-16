@@ -1,1 +1,2 @@
-inteiro: func
+vazio principal(inteiro: n, flutuante: n)
+fim
