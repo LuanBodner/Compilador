@@ -12,10 +12,11 @@
 #include <boost/preprocessor.hpp>
 #include "Token.h"
 #include "LexicalAnalyzer.h"
+#include "SyntaxAnalyzer.h"
 
 int main(int argc, char** argv) {
 
-    Lex::LexicalAnalyzer lex;
+    /*Lex::LexicalAnalyzer lex;
     lex = Lex::LexicalAnalyzer("tiny.txt");
 
     Token::Token tokenTemp;
@@ -40,7 +41,11 @@ int main(int argc, char** argv) {
 
             break;
         }
-    } while (true);
+    } while (true);*/
+
+    SyntaxAnalyzer::SyntaxAnalyzer synx;
+
+    synx.initialTarget("tiny.txt");
 
     return 0;
 }

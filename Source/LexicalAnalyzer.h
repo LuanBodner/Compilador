@@ -30,6 +30,7 @@ namespace Lex {
         //Other methods
         //Returns the token found first and removes it from the vector
         Token::Token getNextToken();
+        Token::Token getTokenByPos(unsigned int);
 
     private:
         //Vector of tokens collected
@@ -37,7 +38,6 @@ namespace Lex {
         //Collects and stores the tokens
         void tokenCollector(std::string);
         void tokenInserter(std::string &, std::string, Token::TokenType, boost::regex, int, int);
-        void returnToPreviousToken(int);
     };
 }
 #endif /* LEXICALANALYZER_H */

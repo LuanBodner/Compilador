@@ -1,1 +1,1 @@
-3 + 5
+inteiro: func

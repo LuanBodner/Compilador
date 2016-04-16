@@ -18,17 +18,19 @@ namespace SyntaxAnalyzer {
     public:
         SyntaxAnalyzer();
         virtual ~SyntaxAnalyzer();
+
+        void initialTarget(std::string);
     private:
 
         Lex::LexicalAnalyzer lexer;
-
         Token::Token targetAdvance();
-        void createLexer(std::string fileName);
-        void targetAnalyzer();
-        void addExprT();
-        void mulExpr();
-        void eat(Token::Token&);
-
+        void createLexer(std::string);
+        void variableDec();
+        void functionDec();
+        void eat(int);
+        void prototypeDef();
+        void paramFunction();
+        void compoundStmt();
     };
 }
 #endif /* SYNTAXANALYZER_H */

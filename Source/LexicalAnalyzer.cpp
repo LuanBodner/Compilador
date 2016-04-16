@@ -199,8 +199,11 @@ namespace Lex {
         return tokens[index++];
     }
 
-    void LexicalAnalyzer::returnToPreviousToken(int pos) {
+    Token::Token LexicalAnalyzer::getTokenByPos(unsigned int pos) {
 
-        index = pos;
+        if (pos >= tokens.size())
+            throw "End\n";
+
+        return tokens[pos];
     }
 }
