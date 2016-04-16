@@ -43,8 +43,101 @@ namespace SyntaxAnalyzer {
         eat(Token::IDENTIFIER);
     }
 
+    void SyntaxAnalyzer::paramCall() {
+
+        Token::Token tokenTemp = targetAdvance();
+
+        switch (tokenTemp.getTokenType()) {
+
+            case(Token::IDENTIFIER):
+
+                tokenTemp = targetAdvance();
+
+                switch (tokenTemp.getTokenType()) {
+
+                    case(Token::OPEN):
+                        eat(Token::IDENTIFIER);
+                        lookAhead--;
+                        functionCall();
+                        paramCall();
+                        break;
+                    case(Token::COMMA):
+                        eat(Token::IDENTIFIER);
+                        paramCall();
+                        break;
+                    case(Token::CLOSE):
+                        eat(Token::IDENTIFIER);
+                        eat(Token::CLOSE);
+                        break;
+                    default:
+                        std::cout << "ParamCall Error\n" <<
+                                tokenTemp.tokenTypeToString() << std::endl;
+                        exit(0);
+                }
+                break;
+            case(Token::NUMBER_FLOAT):
+                eat(Token::NUMBER_FLOAT);
+                paramCall();
+                break;
+            case(Token::NUMBER_INTEGER):
+                eat(Token::NUMBER_INTEGER);
+                paramCall();
+                break;
+            case(Token::COMMA):
+                eat(Token::COMMA);
+                paramCall();
+                break;
+            case(Token::CLOSE):
+                eat(Token::CLOSE);
+                break;
+            default:
+                std::cout << "ParamCall Error\n" <<
+                        tokenTemp.tokenTypeToString() << std::endl;
+                exit(0);
+        }
+    }
+
+    void SyntaxAnalyzer::functionCall() {
+
+        targetAdvance();
+        eat(Token::OPEN);
+
+        paramCall();
+    }
+
+    void SyntaxAnalyzer::expression() {
+
+        Token::Token tokenTemp = targetAdvance();
+
+        switch (tokenTemp.getTokenType()) {
+
+            case(Token::IDENTIFIER):
+                eat(Token::IDENTIFIER);
+                functionCall();
+                break;
+            default:
+                std::cout << "Exp Error\nReceived" << tokenTemp.getTokenType()
+                        << std::endl;
+                break;
+        }
+
+        eat(Token::END);
+    }
+
     void SyntaxAnalyzer::compoundStmt() {
 
+        Token::Token tokenTemp = targetAdvance();
+
+        switch (tokenTemp.getTokenType()) {
+
+            case(Token::END):
+                eat(Token::END);
+                break;
+            default:
+                lookAhead--;
+                expression();
+                break;
+        }
     }
 
     void SyntaxAnalyzer::paramFunction() {
@@ -65,13 +158,25 @@ namespace SyntaxAnalyzer {
                 break;
             case(Token::COMMA):
                 eat(Token::COMMA);
+
+                switch (targetAdvance().getTokenType()) {
+                    case (Token::INTEGER):
+                        eat(Token::INTEGER);
+                        break;
+                    case(Token::FLOAT):
+                        eat(Token::FLOAT);
+                        break;
+                    default:
+                        std::cout << "ParamFunc Error\nExpected VARTYPE\n";
+                        exit(0);
+                }
+
+                variableDec();
                 paramFunction();
                 break;
             case(Token::CLOSE):
                 eat(Token::CLOSE);
                 compoundStmt();
-                targetAdvance();
-                eat(Token::END);
                 break;
             default:
                 std::cout << "ParamFunc Error\nReceived " <<
@@ -151,7 +256,6 @@ namespace SyntaxAnalyzer {
                 }
                 break;
             case(Token::VOID):
-                //std::cout << "Declaração de função\n";
                 eat(Token::VOID);
                 functionDec();
                 break;

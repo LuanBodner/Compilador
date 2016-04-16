@@ -28,9 +28,12 @@ namespace SyntaxAnalyzer {
         void variableDec();
         void functionDec();
         void eat(int);
+        void functionCall();
         void prototypeDef();
         void paramFunction();
+        void expression();
         void compoundStmt();
+        void paramCall();
     };
 }
 #endif /* SYNTAXANALYZER_H */
