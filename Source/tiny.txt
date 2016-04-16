@@ -1,2 +1,10 @@
 vazio a(inteiro: n, flutuante: k, vazio: t)
+
+    inteiro: a
+    flutuante: b
+    vazio: c
+
+    leia(a)
+
+    retorna(a)
 fim

@@ -18,10 +18,8 @@ namespace SyntaxAnalyzer {
     public:
         SyntaxAnalyzer();
         virtual ~SyntaxAnalyzer();
-
         void initialTarget(std::string);
     private:
-
         Lex::LexicalAnalyzer lexer;
         Token::Token targetAdvance();
         void createLexer(std::string);
@@ -31,6 +29,25 @@ namespace SyntaxAnalyzer {
         void functionCall();
         void prototypeDef();
         void ioTypes();
+        void read();
+
+        void equalityExp();
+        void equalityExpAux();
+
+        void relationalExp();
+        void relationalExpAux();
+
+        void additiveExp();
+        void additiveExpAux();
+
+        void multiplicativeExp();
+        void multiplicativeExpAux();
+
+        void factor();
+
+        void operationsExp();
+
+        void returnValue();
         void type();
         void paramFunction();
         void expression();

@@ -50,7 +50,7 @@ Gramática atualizada
 				| * <factor> <multiplicationExpTransformed>
 				| / <factor> <multiplicationExpTransformed>
 
-<factor> ::= '(' <expression> ')'
+<factor> ::= '(' <operationsExp> ')'
 	| 'numberFloat'
 	| 'numberInt'
 	| 'id'
@@ -81,7 +81,7 @@ Gramática atualizada
 
 <returnCom> ::= 'retorna' '(' <ioTypes> ')'
 
-<readCom> ::= 'leia' '(' <ioTypes> ')'
+<readCom> ::= 'leia' '(' 'id' ')'
 
 <writeCom> ::= 'escreve' '(' <ioTypes> ')'
 

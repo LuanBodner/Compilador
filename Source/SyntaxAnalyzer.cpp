@@ -75,11 +75,233 @@ namespace SyntaxAnalyzer {
 
     /* Gramática para chamada de uma função */
 
+    /* Leitura e escrita */
+    void SyntaxAnalyzer::read() {
+
+        targetAdvance();
+        eat(Token::READ);
+
+        targetAdvance();
+        eat(Token::OPEN);
+
+        targetAdvance();
+        eat(Token::IDENTIFIER);
+
+        targetAdvance();
+        eat(Token::CLOSE);
+    }
+
+    /* Expressões das operações
+
+<factor> ::= '(' <operationsExp> ')'
+        | 'numberFloat'
+        | 'numberInt'
+        | 'id'
+     *  */
+    void SyntaxAnalyzer::equalityExp() {
+
+        relationalExp();
+        equalityExpAux();
+    }
+
+    void SyntaxAnalyzer::equalityExpAux() {
+
+        Token::Token tokenTemp = targetAdvance();
+
+        switch (tokenTemp.getTokenType()) {
+
+            case(Token::EQUAL):
+                eat(Token::EQUAL);
+                relationalExp();
+                equalityExpAux();
+                break;
+            default:
+                std::cout << "Equality Error\n";
+                exit(0);
+        }
+    }
+
+    void SyntaxAnalyzer::relationalExp() {
+
+        additiveExp();
+        relationalExpAux();
+    }
+
+    void SyntaxAnalyzer::relationalExpAux() {
+
+        Token::Token tokenTemp = targetAdvance();
+
+        switch (tokenTemp.getTokenType()) {
+
+            case(Token::SMALLER_THAN):
+                eat(Token::SMALLER_THAN);
+                additiveExp();
+                relationalExpAux();
+                break;
+            case(Token::BIGGER_THAN):
+                eat(Token::BIGGER_THAN);
+                additiveExp();
+                relationalExpAux();
+                break;
+            case(Token::BIGGER_EQUAL):
+                eat(Token::BIGGER_EQUAL);
+                additiveExp();
+                relationalExpAux();
+                break;
+            case(Token::SMALL_EQUAL):
+                eat(Token::SMALL_EQUAL);
+                additiveExp();
+                relationalExpAux();
+                break;
+            default:
+                std::cout << "Relational Error\n";
+                exit(0);
+
+        }
+    }
+
+    void SyntaxAnalyzer::additiveExp() {
+
+        multiplicativeExp();
+        additiveExpAux();
+    }
+
+    void SyntaxAnalyzer::additiveExpAux() {
+
+        Token::Token tokenTemp = targetAdvance();
+
+        switch (tokenTemp.getTokenType()) {
+
+            case(Token::SUM):
+                eat(Token::SUM);
+                multiplicativeExp();
+                additiveExpAux();
+                break;
+            case(Token::SUBTRACTION):
+                eat(Token::SUBTRACTION);
+                multiplicativeExp();
+                additiveExpAux();
+                break;
+            default:
+                std::cout << "Addition Error\n";
+                exit(0);
+        }
+
+    }
+
+    void SyntaxAnalyzer::multiplicativeExp() {
+
+        factor();
+        multiplicativeExpAux();
+    }
+
+    void SyntaxAnalyzer::multiplicativeExpAux() {
+
+        Token::Token tokenTemp = targetAdvance();
+
+        switch (tokenTemp.getTokenType()) {
+
+            case(Token::MULTIPLICATION):
+                eat(Token::MULTIPLICATION);
+                factor();
+                multiplicativeExpAux();
+                break;
+            case(Token::DIVISION):
+                eat(Token::DIVISION);
+                factor();
+                multiplicativeExpAux();
+                break;
+            default:
+                std::cout << "Multiplication Error\n";
+                exit(0);
+        }
+    }
+
+    void SyntaxAnalyzer::operationsExp() {
+
+
+    }
+
+    void SyntaxAnalyzer::factor() {
+
+        Token::Token tokenTemp = targetAdvance();
+
+        switch (tokenTemp.getTokenType()) {
+
+            case(Token::IDENTIFIER):
+                eat(Token::IDENTIFIER);
+                break;
+            case(Token::NUMBER_FLOAT):
+                eat(Token::NUMBER_FLOAT);
+                break;
+            case(Token::NUMBER_INTEGER):
+                eat(Token::NUMBER_INTEGER);
+                break;
+            case(Token::OPEN):
+                eat(Token::OPEN);
+
+                operationsExp();
+
+                targetAdvance();
+                eat(Token::CLOSE);
+                break;
+            default:
+                std::cout << "Factor Error\n";
+                exit(0);
+        }
+    }
+
+    /* Retorno de funções */
+    void SyntaxAnalyzer::returnValue() {
+
+        targetAdvance();
+        eat(Token::RETURN);
+
+        targetAdvance();
+        eat(Token::OPEN);
+
+        operationsExp();
+
+        targetAdvance();
+        eat(Token::CLOSE);
+    }
+
     /* Conjunto de expressões possíveis dentro dos escopos */
     void SyntaxAnalyzer::expression() {
+
+        Token::Token tokenTemp = targetAdvance();
+
+        switch (tokenTemp.getTokenType()) {
+
+            case(Token::INTEGER): case(Token::FLOAT): case(Token::VOID):
+                lookAhead--;
+                variableDec();
+                break;
+            case(Token::READ):
+                lookAhead--;
+                read();
+                break;
+            case(Token::RETURN):
+                lookAhead--;
+                returnValue();
+                break;
+            default:
+                std::cout << "Expression Error\nReceived : "
+                        << tokenTemp.tokenTypeToString();
+                exit(0);
+        }
     }
 
     void SyntaxAnalyzer::compoundStmt() {
+
+        Token::Token tokenTemp = targetAdvance();
+        lookAhead--;
+
+        if (tokenTemp.getTokenType() != Token::END) {
+
+            expression();
+            compoundStmt();
+        }
     }
 
     /* Gramática para declaração de uma função */
@@ -132,6 +354,7 @@ namespace SyntaxAnalyzer {
                 eat(Token::IDENTIFIER);
 
                 prototypeDef();
+                lookAhead--;
                 compoundStmt();
 
                 targetAdvance();
