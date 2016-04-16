@@ -10,20 +10,25 @@
 namespace SyntaxAnalyzer {
 
     unsigned int lookAhead = 0;
-
+    /* Funções básicas da classe SyntaxAnalyzer*/
     SyntaxAnalyzer::SyntaxAnalyzer() {
+    }
+
+    SyntaxAnalyzer::~SyntaxAnalyzer() {
     }
 
     void SyntaxAnalyzer::createLexer(std::string fileName) {
 
         lexer = Lex::LexicalAnalyzer(fileName);
     }
-
+    
+    /* Percorre pela lista de tokens na frente do eat */
     Token::Token SyntaxAnalyzer::targetAdvance() {
 
         return lexer.getTokenByPos(lookAhead++);
     }
-
+    
+    /* Faz a mudança de token para o próximo */
     void SyntaxAnalyzer::eat(int Token) {
 
         Token::Token tokenTemp = lexer.getNextToken();
@@ -34,6 +39,7 @@ namespace SyntaxAnalyzer {
         }
     }
 
+    /* Gramática para declaração de variável */
     void SyntaxAnalyzer::variableDec() {
 
         targetAdvance();
@@ -43,6 +49,7 @@ namespace SyntaxAnalyzer {
         eat(Token::IDENTIFIER);
     }
 
+    /* Gramática para chamada de uma função */
     void SyntaxAnalyzer::paramCall() {
 
         Token::Token tokenTemp = targetAdvance();
@@ -104,7 +111,8 @@ namespace SyntaxAnalyzer {
 
         paramCall();
     }
-
+    
+    /* Conjunto de expressões possíveis dentro dos escopos */
     void SyntaxAnalyzer::expression() {
 
         Token::Token tokenTemp = targetAdvance();
@@ -139,7 +147,8 @@ namespace SyntaxAnalyzer {
                 break;
         }
     }
-
+    
+    /* Gramática para declaração de uma função */
     void SyntaxAnalyzer::paramFunction() {
 
         Token::Token tokenTemp = targetAdvance();
@@ -209,6 +218,7 @@ namespace SyntaxAnalyzer {
 
     }
 
+    /* Faz a primeira chamada para passar pela gramática */
     void SyntaxAnalyzer::initialTarget(std::string fileName) {
 
         SyntaxAnalyzer::createLexer(fileName);
@@ -267,6 +277,4 @@ namespace SyntaxAnalyzer {
 
     }
 
-    SyntaxAnalyzer::~SyntaxAnalyzer() {
-    }
 }
