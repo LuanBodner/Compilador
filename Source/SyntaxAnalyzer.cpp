@@ -10,6 +10,7 @@
 namespace SyntaxAnalyzer {
 
     unsigned int lookAhead = 0;
+
     /* Funções básicas da classe SyntaxAnalyzer*/
     SyntaxAnalyzer::SyntaxAnalyzer() {
     }
@@ -21,13 +22,13 @@ namespace SyntaxAnalyzer {
 
         lexer = Lex::LexicalAnalyzer(fileName);
     }
-    
+
     /* Percorre pela lista de tokens na frente do eat */
     Token::Token SyntaxAnalyzer::targetAdvance() {
 
         return lexer.getTokenByPos(lookAhead++);
     }
-    
+
     /* Faz a mudança de token para o próximo */
     void SyntaxAnalyzer::eat(int Token) {
 
@@ -40,7 +41,30 @@ namespace SyntaxAnalyzer {
     }
 
     /* Gramática para declaração de variável */
+    void SyntaxAnalyzer::type() {
+
+        Token::Token tokenTemp = targetAdvance();
+
+        switch (tokenTemp.getTokenType()) {
+
+            case(Token::FLOAT):
+                eat(Token::FLOAT);
+                break;
+            case(Token::INTEGER):
+                eat(Token::INTEGER);
+                break;
+            case(Token::VOID):
+                eat(Token::VOID);
+                break;
+            default:
+                std::cout << "Type Error\nReceived " << tokenTemp.tokenTypeToString();
+                exit(0);
+        }
+    }
+
     void SyntaxAnalyzer::variableDec() {
+
+        type();
 
         targetAdvance();
         eat(Token::DOUBLE_POINT);
@@ -50,104 +74,14 @@ namespace SyntaxAnalyzer {
     }
 
     /* Gramática para chamada de uma função */
-    void SyntaxAnalyzer::paramCall() {
 
-        Token::Token tokenTemp = targetAdvance();
-
-        switch (tokenTemp.getTokenType()) {
-
-            case(Token::IDENTIFIER):
-
-                tokenTemp = targetAdvance();
-
-                switch (tokenTemp.getTokenType()) {
-
-                    case(Token::OPEN):
-                        eat(Token::IDENTIFIER);
-                        lookAhead--;
-                        functionCall();
-                        paramCall();
-                        break;
-                    case(Token::COMMA):
-                        eat(Token::IDENTIFIER);
-                        paramCall();
-                        break;
-                    case(Token::CLOSE):
-                        eat(Token::IDENTIFIER);
-                        eat(Token::CLOSE);
-                        break;
-                    default:
-                        std::cout << "ParamCall Error\n" <<
-                                tokenTemp.tokenTypeToString() << std::endl;
-                        exit(0);
-                }
-                break;
-            case(Token::NUMBER_FLOAT):
-                eat(Token::NUMBER_FLOAT);
-                paramCall();
-                break;
-            case(Token::NUMBER_INTEGER):
-                eat(Token::NUMBER_INTEGER);
-                paramCall();
-                break;
-            case(Token::COMMA):
-                eat(Token::COMMA);
-                paramCall();
-                break;
-            case(Token::CLOSE):
-                eat(Token::CLOSE);
-                break;
-            default:
-                std::cout << "ParamCall Error\n" <<
-                        tokenTemp.tokenTypeToString() << std::endl;
-                exit(0);
-        }
-    }
-
-    void SyntaxAnalyzer::functionCall() {
-
-        targetAdvance();
-        eat(Token::OPEN);
-
-        paramCall();
-    }
-    
     /* Conjunto de expressões possíveis dentro dos escopos */
     void SyntaxAnalyzer::expression() {
-
-        Token::Token tokenTemp = targetAdvance();
-
-        switch (tokenTemp.getTokenType()) {
-
-            case(Token::IDENTIFIER):
-                eat(Token::IDENTIFIER);
-                functionCall();
-                break;
-            default:
-                std::cout << "Exp Error\nReceived" << tokenTemp.getTokenType()
-                        << std::endl;
-                break;
-        }
-
-        eat(Token::END);
     }
 
     void SyntaxAnalyzer::compoundStmt() {
-
-        Token::Token tokenTemp = targetAdvance();
-
-        switch (tokenTemp.getTokenType()) {
-
-            case(Token::END):
-                eat(Token::END);
-                break;
-            default:
-                lookAhead--;
-                expression();
-                break;
-        }
     }
-    
+
     /* Gramática para declaração de uma função */
     void SyntaxAnalyzer::paramFunction() {
 
@@ -155,37 +89,17 @@ namespace SyntaxAnalyzer {
 
         switch (tokenTemp.getTokenType()) {
 
-            case(Token::INTEGER):
-                eat(Token::INTEGER);
-                variableDec();
-                paramFunction();
-                break;
-            case(Token::FLOAT):
-                eat(Token::FLOAT);
+            case(Token::INTEGER): case(Token::FLOAT): case(Token::VOID):
+                lookAhead--;
                 variableDec();
                 paramFunction();
                 break;
             case(Token::COMMA):
                 eat(Token::COMMA);
-
-                switch (targetAdvance().getTokenType()) {
-                    case (Token::INTEGER):
-                        eat(Token::INTEGER);
-                        break;
-                    case(Token::FLOAT):
-                        eat(Token::FLOAT);
-                        break;
-                    default:
-                        std::cout << "ParamFunc Error\nExpected VARTYPE\n";
-                        exit(0);
-                }
-
                 variableDec();
                 paramFunction();
                 break;
             case(Token::CLOSE):
-                eat(Token::CLOSE);
-                compoundStmt();
                 break;
             default:
                 std::cout << "ParamFunc Error\nReceived " <<
@@ -198,19 +112,34 @@ namespace SyntaxAnalyzer {
 
         targetAdvance();
         eat(Token::OPEN);
+
         paramFunction();
+
+        targetAdvance();
+        eat(Token::CLOSE);
     }
 
     void SyntaxAnalyzer::functionDec() {
 
+        type();
+
         Token::Token tempToken = targetAdvance();
 
         switch (tempToken.getTokenType()) {
+
             case(Token::IDENTIFIER):
+
                 eat(Token::IDENTIFIER);
+
                 prototypeDef();
+                compoundStmt();
+
+                targetAdvance();
+                eat(Token::END);
+
                 break;
             default:
+
                 std::cout << "FunDec Error\nReceived " <<
                         tempToken.tokenTypeToString() << std::endl;
                 break;
@@ -227,17 +156,17 @@ namespace SyntaxAnalyzer {
 
         switch (token.getTokenType()) {
 
-            case(Token::INTEGER):
+            case(Token::INTEGER): case(Token::FLOAT): case(Token::VOID):
                 token = targetAdvance();
 
                 switch (token.getTokenType()) {
 
                     case(Token::DOUBLE_POINT):
-                        eat(Token::INTEGER);
+                        lookAhead -= 2;
                         variableDec();
                         break;
                     case(Token::IDENTIFIER):
-                        eat(Token::INTEGER);
+                        lookAhead -= 2;
                         functionDec();
                         break;
                     default:
@@ -245,29 +174,6 @@ namespace SyntaxAnalyzer {
                                 << token.tokenTypeToString() << std::endl;
                         exit(0);
                 }
-                break;
-            case(Token::FLOAT):
-                token = targetAdvance();
-
-                switch (token.getTokenType()) {
-
-                    case(Token::DOUBLE_POINT):
-                        eat(Token::FLOAT);
-                        variableDec();
-                        break;
-                    case(Token::IDENTIFIER):
-                        eat(Token::FLOAT);
-                        functionDec();
-                        break;
-                    default:
-                        std::cout << "Erro\nExpected TYPE, received "
-                                << token.tokenTypeToString() << std::endl;
-                        exit(0);
-                }
-                break;
-            case(Token::VOID):
-                eat(Token::VOID);
-                functionDec();
                 break;
             default: std::cout << "Erro\nExpected TYPE, received "
                         << token.tokenTypeToString() << std::endl;

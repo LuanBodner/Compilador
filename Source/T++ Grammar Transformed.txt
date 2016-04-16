@@ -14,7 +14,11 @@ Gramática atualizada
 	| 'inteiro'
 	| 'flutuante'
 
-<variableDec> ::= <type> ':' 'id' 
+<variableDec> ::= <type> ':' 'id'
+                | <variableDec> <variableDecTranformed>
+
+<variableDecTranformed> ::= ',' 'id' <variableDecTranformed>
+                        | NULL
 
 <operationsExp> ::= <equalityExp>
 		| <relationalExp>
@@ -46,7 +50,7 @@ Gramática atualizada
 				| * <factor> <multiplicationExpTransformed>
 				| / <factor> <multiplicationExpTransformed>
 
-<factor> ::= '(' <operationsExp> ')'
+<factor> ::= '(' <expression> ')'
 	| 'numberFloat'
 	| 'numberInt'
 	| 'id'
@@ -54,14 +58,14 @@ Gramática atualizada
 <prototypeDef> ::= '(' <paramFunction> ')'
 
 <paramFunction> ::= NULL
-		| <variableDec> ',' <paramFunction>
+		| <variableDec> ',' <variableDec> <paramFunction>
 		| <variableDec>
 
 <functionDec> ::= <type> 'id' <prototypeDef> <compoundStmt> 'fim'
 
-<prototypeCall> ::= NULL
-		| <ioTypes> ',' <protypeCall>
-		| <ioType>
+<paramCall> ::= NULL
+		| <ioTypes> ',' <paramCall>
+		| <ioType> <paramCall>
 
 <functionCall> ::= 'id' '(' <paramCall> ')' 
 
@@ -70,9 +74,7 @@ Gramática atualizada
 <selectionExp> ::= 'se' <boolExp> 'então' <compoundStmt>
 		| 'se' <boolExp> 'então' <compoundStmt> 'senão' <compoundStmt> 'fim'
 
-<ioTypes> ::= 'id'
-	| 'numberInt'
-	| 'numberFloat'
+<ioTypes> ::= <factor>
 	| <functionCall>
 
 <attributionExp> ::= 'id' ':=' <ioType>

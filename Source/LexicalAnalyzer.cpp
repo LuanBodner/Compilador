@@ -202,7 +202,7 @@ namespace Lex {
     Token::Token LexicalAnalyzer::getTokenByPos(unsigned int pos) {
 
         if (pos >= tokens.size())
-            throw "End\n";
+            pos = tokens.size() - 1;
 
         return tokens[pos];
     }

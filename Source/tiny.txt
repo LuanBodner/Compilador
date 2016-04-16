@@ -1,3 +1,2 @@
-vazio principal(inteiro: n, flutuante: n, flutuante: n3)
-    func(12,4,as)
+vazio a(inteiro: n, flutuante: k, vazio: t)
 fim

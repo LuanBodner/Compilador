@@ -30,6 +30,8 @@ namespace SyntaxAnalyzer {
         void eat(int);
         void functionCall();
         void prototypeDef();
+        void ioTypes();
+        void type();
         void paramFunction();
         void expression();
         void compoundStmt();
