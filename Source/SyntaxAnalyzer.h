@@ -26,13 +26,14 @@ namespace SyntaxAnalyzer {
         void variableDec();
         void functionDec();
         void eat(int);
-        void functionCall();
+        void functionCallExp();
         void prototypeDef();
         void ioTypes();
         void read();
         void equalityExp();
         void equalityExpL();
         void relationalExp();
+        void attributionExp();
         void relationalExpL();
         void additiveExp();
         void additiveExpL();
@@ -44,8 +45,9 @@ namespace SyntaxAnalyzer {
         void type();
         void paramFunction();
         void expression();
+        void ifStmt();
         void compoundStmt();
-        void paramCall();
+        void paramCallExp();
     };
 }
 #endif /* SYNTAXANALYZER_H */

@@ -1,4 +1,6 @@
 vazio a(inteiro: n, flutuante: k, vazio: t)
 
-    retorna(0-a*(b>= (c*2)))
+    n := (k>(1+2))
+   
+    retorna(0-2)
 fim

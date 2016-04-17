@@ -96,7 +96,6 @@ namespace SyntaxAnalyzer {
     }
 
     /* Caminho da recursividade das operações */
-
     void SyntaxAnalyzer::relationalExp() {
 
         additiveExp();
@@ -270,6 +269,39 @@ namespace SyntaxAnalyzer {
         eat(Token::CLOSE);
     }
 
+    /* Expressão IF*/
+
+    /* Expressão de atribuição */
+    void SyntaxAnalyzer::attributionExp() {
+
+        targetAdvance();
+        eat(Token::IDENTIFIER);
+
+        targetAdvance();
+        eat(Token::ATTRIBUTION);
+
+        operationsExp();
+    }
+
+    /* Expressão de chamada de função*/
+    void SyntaxAnalyzer::paramCallExp() {
+
+    }
+
+    void SyntaxAnalyzer::functionCallExp() {
+
+        targetAdvance();
+        eat(Token::IDENTIFIER);
+
+        targetAdvance();
+        eat(Token::OPEN);
+
+        paramCallExp();
+
+        targetAdvance();
+        eat(Token::CLOSE);
+    }
+
     /* Conjunto de expressões possíveis dentro dos escopos */
     void SyntaxAnalyzer::expression() {
 
@@ -290,6 +322,27 @@ namespace SyntaxAnalyzer {
             case(Token::RETURN):
                 lookAhead--;
                 returnValue();
+                break;
+
+            case(Token::IDENTIFIER):
+                tokenTemp = targetAdvance();
+                switch (tokenTemp.getTokenType()) {
+
+                    case(Token::ATTRIBUTION):
+                        lookAhead -= 2;
+                        attributionExp();
+                        break;
+
+                    case(Token::OPEN):
+                        lookAhead -= 2;
+                        functionCallExp();
+                        break;
+                    default:
+                        std::cout << "Expression Error\nReceived: "
+                                << tokenTemp.tokenTypeToString()
+                                << std::endl;
+                        break;
+                }
                 break;
 
             default:
