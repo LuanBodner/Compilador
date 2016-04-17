@@ -186,6 +186,7 @@ namespace Lex {
                     tokenInserter(bufferString, match.str(), Token::IDENTIFIER, i_ID, column++, line);
 
             }
+
             line++;
             column = 0;
         }

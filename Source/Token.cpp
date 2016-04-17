@@ -16,26 +16,32 @@ namespace Token {
     }
 
     std::string Token::getTokenName() {
+
         return this->tokenName;
     }
 
     TokenType Token::getTokenType() {
+
         return this->token;
     }
 
     void Token::setTokenName(std::string name) {
+
         this->tokenName = name;
     }
 
     void Token::setTokenType(TokenType token) {
+
         this->token = token;
     }
 
     void Token::setTokenLine(int line) {
+
         this->tokenLine = line;
     }
 
     void Token::setTokenColumn(int column) {
+
         this->tokenColumn = column;
     }
 
@@ -76,10 +82,12 @@ namespace Token {
     }
 
     int Token::getTokenLine() {
+
         return this->tokenLine;
     }
 
     int Token::getTokenColumn() {
+
         return this->tokenColumn;
     }
 
