@@ -35,6 +35,7 @@ namespace SyntaxAnalyzer {
         Token::Token tokenTemp = lexer.getNextToken();
 
         if (tokenTemp.getTokenType() != Token) {
+
             std::cout << "Eat Error " << tokenTemp.tokenTypeToString() << std::endl;
             exit(0);
         }
@@ -50,12 +51,15 @@ namespace SyntaxAnalyzer {
             case(Token::FLOAT):
                 eat(Token::FLOAT);
                 break;
+
             case(Token::INTEGER):
                 eat(Token::INTEGER);
                 break;
+
             case(Token::VOID):
                 eat(Token::VOID);
                 break;
+
             default:
                 std::cout << "Type Error\nReceived " << tokenTemp.tokenTypeToString();
                 exit(0);
@@ -104,26 +108,31 @@ namespace SyntaxAnalyzer {
         Token::Token tokenTemp = targetAdvance();
 
         switch (tokenTemp.getTokenType()) {
+
             case(Token::SMALLER_THAN):
                 eat(Token::SMALLER_THAN);
                 additiveExp();
                 relationalExpL();
                 break;
+
             case(Token::BIGGER_THAN):
                 eat(Token::BIGGER_THAN);
                 additiveExp();
                 relationalExpL();
                 break;
+
             case(Token::SMALL_EQUAL):
                 eat(Token::SMALL_EQUAL);
                 additiveExp();
                 relationalExpL();
                 break;
+
             case(Token::BIGGER_EQUAL):
                 eat(Token::BIGGER_EQUAL);
                 additiveExp();
                 relationalExpL();
                 break;
+
             default:
                 lookAhead--;
                 break;
@@ -141,10 +150,12 @@ namespace SyntaxAnalyzer {
         Token::Token tokenTemp = targetAdvance();
 
         if (tokenTemp.getTokenType() == Token::EQUAL) {
+
             eat(Token::EQUAL);
             relationalExp();
             equalityExpL();
-        } else lookAhead--;
+        } else
+            lookAhead--;
     }
 
     void SyntaxAnalyzer::additiveExp() {
@@ -164,11 +175,13 @@ namespace SyntaxAnalyzer {
                 multiplicativeExp();
                 additiveExpL();
                 break;
+
             case(Token::SUBTRACTION):
                 eat(Token::SUBTRACTION);
                 multiplicativeExp();
                 additiveExpL();
                 break;
+
             default:
                 lookAhead--;
                 break;
@@ -193,12 +206,15 @@ namespace SyntaxAnalyzer {
                 factor();
                 multiplicativeExpL();
                 break;
+
             case(Token::DIVISION):
                 eat(Token::DIVISION);
                 factor();
                 multiplicativeExpL();
                 break;
-            default: lookAhead--;
+
+            default:
+                lookAhead--;
                 break;
         }
     }
@@ -217,20 +233,22 @@ namespace SyntaxAnalyzer {
             case(Token::IDENTIFIER):
                 eat(Token::IDENTIFIER);
                 break;
+
             case(Token::NUMBER_FLOAT):
                 eat(Token::NUMBER_FLOAT);
                 break;
+
             case(Token::NUMBER_INTEGER):
                 eat(Token::NUMBER_INTEGER);
                 break;
+
             case(Token::OPEN):
                 eat(Token::OPEN);
-
                 operationsExp();
-
                 targetAdvance();
                 eat(Token::CLOSE);
                 break;
+
             default:
                 std::cout << "Factor Error\n";
                 exit(0);
@@ -263,14 +281,17 @@ namespace SyntaxAnalyzer {
                 lookAhead--;
                 variableDec();
                 break;
+
             case(Token::READ):
                 lookAhead--;
                 read();
                 break;
+
             case(Token::RETURN):
                 lookAhead--;
                 returnValue();
                 break;
+
             default:
                 std::cout << "Expression Error\nReceived : "
                         << tokenTemp.tokenTypeToString();
@@ -302,13 +323,16 @@ namespace SyntaxAnalyzer {
                 variableDec();
                 paramFunction();
                 break;
+
             case(Token::COMMA):
                 eat(Token::COMMA);
                 variableDec();
                 paramFunction();
                 break;
+
             case(Token::CLOSE):
                 break;
+
             default:
                 std::cout << "ParamFunc Error\nReceived " <<
                         tokenTemp.tokenTypeToString() << std::endl;
@@ -336,19 +360,15 @@ namespace SyntaxAnalyzer {
         switch (tempToken.getTokenType()) {
 
             case(Token::IDENTIFIER):
-
                 eat(Token::IDENTIFIER);
-
                 prototypeDef();
                 lookAhead--;
                 compoundStmt();
-
                 targetAdvance();
                 eat(Token::END);
-
                 break;
-            default:
 
+            default:
                 std::cout << "FunDec Error\nReceived " <<
                         tempToken.tokenTypeToString() << std::endl;
                 break;
@@ -374,16 +394,19 @@ namespace SyntaxAnalyzer {
                         lookAhead -= 2;
                         variableDec();
                         break;
+
                     case(Token::IDENTIFIER):
                         lookAhead -= 2;
                         functionDec();
                         break;
+
                     default:
                         std::cout << "Erro\nExpected TYPE, received "
                                 << token.tokenTypeToString() << std::endl;
                         exit(0);
                 }
                 break;
+
             default: std::cout << "Erro\nExpected TYPE, received "
                         << token.tokenTypeToString() << std::endl;
                 exit(0);
