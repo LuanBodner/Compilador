@@ -91,82 +91,69 @@ namespace SyntaxAnalyzer {
         eat(Token::CLOSE);
     }
 
-    /* Expressões das operações
-
-<factor> ::= '(' <operationsExp> ')'
-        | 'numberFloat'
-        | 'numberInt'
-        | 'id'
-     *  */
-    void SyntaxAnalyzer::equalityExp() {
-
-        relationalExp();
-        equalityExpAux();
-    }
-
-    void SyntaxAnalyzer::equalityExpAux() {
-
-        Token::Token tokenTemp = targetAdvance();
-
-        switch (tokenTemp.getTokenType()) {
-
-            case(Token::EQUAL):
-                eat(Token::EQUAL);
-                relationalExp();
-                equalityExpAux();
-                break;
-            default:
-                std::cout << "Equality Error\n";
-                exit(0);
-        }
-    }
+    /* Caminho da recursividade das operações */
 
     void SyntaxAnalyzer::relationalExp() {
 
         additiveExp();
-        relationalExpAux();
+        relationalExpL();
     }
 
-    void SyntaxAnalyzer::relationalExpAux() {
+    void SyntaxAnalyzer::relationalExpL() {
 
         Token::Token tokenTemp = targetAdvance();
 
         switch (tokenTemp.getTokenType()) {
-
             case(Token::SMALLER_THAN):
                 eat(Token::SMALLER_THAN);
                 additiveExp();
-                relationalExpAux();
+                relationalExpL();
                 break;
             case(Token::BIGGER_THAN):
                 eat(Token::BIGGER_THAN);
                 additiveExp();
-                relationalExpAux();
-                break;
-            case(Token::BIGGER_EQUAL):
-                eat(Token::BIGGER_EQUAL);
-                additiveExp();
-                relationalExpAux();
+                relationalExpL();
                 break;
             case(Token::SMALL_EQUAL):
                 eat(Token::SMALL_EQUAL);
                 additiveExp();
-                relationalExpAux();
+                relationalExpL();
+                break;
+            case(Token::BIGGER_EQUAL):
+                eat(Token::BIGGER_EQUAL);
+                additiveExp();
+                relationalExpL();
                 break;
             default:
-                std::cout << "Relational Error\n";
-                exit(0);
-
+                lookAhead--;
+                break;
         }
+    }
+
+    void SyntaxAnalyzer::equalityExp() {
+
+        relationalExp();
+        equalityExpL();
+    }
+
+    void SyntaxAnalyzer::equalityExpL() {
+
+        Token::Token tokenTemp = targetAdvance();
+
+        if (tokenTemp.getTokenType() == Token::EQUAL) {
+            eat(Token::EQUAL);
+            relationalExp();
+            equalityExpL();
+        } else lookAhead--;
     }
 
     void SyntaxAnalyzer::additiveExp() {
 
         multiplicativeExp();
-        additiveExpAux();
+        additiveExpL();
     }
 
-    void SyntaxAnalyzer::additiveExpAux() {
+    void SyntaxAnalyzer::additiveExpL() {
 
         Token::Token tokenTemp = targetAdvance();
 
@@ -175,16 +162,16 @@ namespace SyntaxAnalyzer {
             case(Token::SUM):
                 eat(Token::SUM);
                 multiplicativeExp();
-                additiveExpAux();
+                additiveExpL();
                 break;
             case(Token::SUBTRACTION):
                 eat(Token::SUBTRACTION);
                 multiplicativeExp();
-                additiveExpAux();
+                additiveExpL();
                 break;
             default:
-                std::cout << "Addition Error\n";
-                exit(0);
+                lookAhead--;
+                break;
         }
 
     }
@@ -192,10 +179,10 @@ namespace SyntaxAnalyzer {
     void SyntaxAnalyzer::multiplicativeExp() {
 
         factor();
-        multiplicativeExpAux();
+        multiplicativeExpL();
     }
 
-    void SyntaxAnalyzer::multiplicativeExpAux() {
+    void SyntaxAnalyzer::multiplicativeExpL() {
 
         Token::Token tokenTemp = targetAdvance();
 
@@ -204,22 +191,21 @@ namespace SyntaxAnalyzer {
             case(Token::MULTIPLICATION):
                 eat(Token::MULTIPLICATION);
                 factor();
-                multiplicativeExpAux();
+                multiplicativeExpL();
                 break;
             case(Token::DIVISION):
                 eat(Token::DIVISION);
                 factor();
-                multiplicativeExpAux();
+                multiplicativeExpL();
                 break;
-            default:
-                std::cout << "Multiplication Error\n";
-                exit(0);
+            default: lookAhead--;
+                break;
         }
     }
 
     void SyntaxAnalyzer::operationsExp() {
 
-
+        relationalExp();
     }
 
     void SyntaxAnalyzer::factor() {

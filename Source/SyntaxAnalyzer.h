@@ -30,23 +30,16 @@ namespace SyntaxAnalyzer {
         void prototypeDef();
         void ioTypes();
         void read();
-
         void equalityExp();
-        void equalityExpAux();
-
+        void equalityExpL();
         void relationalExp();
-        void relationalExpAux();
-
+        void relationalExpL();
         void additiveExp();
-        void additiveExpAux();
-
+        void additiveExpL();
         void multiplicativeExp();
-        void multiplicativeExpAux();
-
+        void multiplicativeExpL();
         void factor();
-
         void operationsExp();
-
         void returnValue();
         void type();
         void paramFunction();

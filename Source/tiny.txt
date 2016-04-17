@@ -1,10 +1,4 @@
 vazio a(inteiro: n, flutuante: k, vazio: t)
 
-    inteiro: a
-    flutuante: b
-    vazio: c
-
-    leia(a)
-
-    retorna(a)
+    retorna(0-a*(b>= (c*2)))
 fim
