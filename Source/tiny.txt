@@ -1,6 +1,10 @@
-vazio a(inteiro: n, flutuante: k, vazio: t)
-
-    n := (k>(1+2))
-   
-    retorna(0-2)
+inteiro fatorial(inteiro: n)
+  
+  inteiro: fat
+    
+    se n > 0 então
+        fat := 1
+    senão
+        as := 4
+    fim
 fim

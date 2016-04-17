@@ -1,0 +1,74 @@
+T++ Grammar
+
+<type> ::= 'vazio'
+		| 'inteiro'
+		| 'flutuante'
+
+<variableDec> ::= <type> ':' 'id' 
+
+<equalityExp> ::= <relationalExp>
+                | <equalityExp> '=' <relationalExp>
+
+<relationalExp> ::= <additiveExp>
+		| <relationalExp> < <additiveExp>
+		| <relationalExp> > <additiveExp>
+		| <relationalExp> <= <additiveExp>
+		| <relationalExp> >= <additiveExp>
+
+<additiveExp> ::= <multiplicativeExp>
+		| <additiveExp> + <multiplicativeExp>
+		| <additiveExp> - <multiplicativeExp>
+
+<multiplicativeExp> ::= <factor>
+                    | <multiplicationExp> * <factor>
+                    | <multiplicationExp> / <factor>
+
+<factor> ::= '(' <expression> ')'
+	| 'numberFloat'
+	| 'numberInt'
+	| 'id'
+
+<prototypeDef> ::= '(' <paramFunction> ')'
+
+<paramFunction> ::= 
+				| <variableDec> ',' <paramFunction>
+				| <variableDec>
+
+<functionDec> ::= <type> 'id' <prototypeDef> <compoundStmt> 'fim'
+
+<prototypeCall> ::= 
+				| <ioTypes> ',' <protypeCall>
+				| <ioType>
+
+<functionCall> ::= 'id' '(' <paramCall> ')' 
+
+<iterationExp> ::= 'repita' <compoundStmt> 'até' <boolExp> 'fim'
+
+<selectionExp> ::= 'se' <boolExp> 'então' <compoundStmt>
+				| 'se' <boolExp> 'então' <compoundStmt> 'senão' <compoundStmt> 'fim'
+
+<ioTypes> ::= 'id'
+			| 'numberInt'
+			| 'numberFloat'
+			| <functionCall>
+
+<attributionExp> ::= 'id' ':=' <ioType>
+
+<returnCom> ::= 'retorna' '(' <ioTypes> ')'
+
+<readCom> ::= 'leia' '(' <ioTypes> ')'
+
+<writeCom> ::= 'escreve' '(' <ioTypes> ')'
+
+<compoundStmt> ::= <expression> <compoundStmt>
+				| <expression>
+
+<expression> ::= <selectionExp>
+				| <iterationExp>
+				| <functionCall>
+				| <readCom>
+				| <writeCom>
+				| <returnCom>
+				| <variableDec>
+				| <attributionExp>
+				| 

@@ -11,6 +11,42 @@ namespace SyntaxAnalyzer {
 
     unsigned int lookAhead = 0;
 
+    std::string SyntaxAnalyzer::intToString(int i) {
+        switch (i) {
+            case 0: return "IF";
+            case 1: return "THEN";
+            case 2: return "OTHERWISE";
+            case 3: return "END";
+            case 4: return "REPEAT";
+            case 5: return "FLOAT";
+            case 6: return "VOID";
+            case 7: return "UNTIL";
+            case 8: return "READ";
+            case 9: return "WRITE";
+            case 10: return "INTEGER";
+            case 11: return "COMMENTS";
+            case 12: return "RETURN";
+            case 13: return "SUM";
+            case 14: return "SUBTRACTION";
+            case 15: return "MULTIPLICATION";
+            case 16: return "DIVISION";
+            case 17: return "EQUAL";
+            case 18: return "COMMA";
+            case 19: return "ATTRIBUTION";
+            case 20: return "SMALLER THAN";
+            case 21: return "BIGGER THAN";
+            case 22: return "SMALL OR EQUAL";
+            case 23: return "BIGGER OR EQUAL";
+            case 24: return "OPEN PAIR";
+            case 25: return "CLOSE PAIR";
+            case 26: return "INTEGER NUMBER";
+            case 27: return "FLOAT NUMBER";
+            case 28: return "DOUBLE POINT";
+            case 29: return "IDENTIFIER";
+            default: return "UNKNOWN";
+        }
+    }
+
     /* Funções básicas da classe SyntaxAnalyzer*/
     SyntaxAnalyzer::SyntaxAnalyzer() {
     }
@@ -36,7 +72,9 @@ namespace SyntaxAnalyzer {
 
         if (tokenTemp.getTokenType() != Token) {
 
-            std::cout << "Eat Error " << tokenTemp.tokenTypeToString() << std::endl;
+            std::cout << "Eat Error\n"
+                    << "Received : " << intToString(Token) << "\nExpected : "
+                    << tokenTemp.tokenTypeToString() << std::endl;
             exit(0);
         }
     }
@@ -190,7 +228,7 @@ namespace SyntaxAnalyzer {
 
     void SyntaxAnalyzer::multiplicativeExp() {
 
-        factor();
+        factorExp();
         multiplicativeExpL();
     }
 
@@ -202,13 +240,13 @@ namespace SyntaxAnalyzer {
 
             case(Token::MULTIPLICATION):
                 eat(Token::MULTIPLICATION);
-                factor();
+                factorExp();
                 multiplicativeExpL();
                 break;
 
             case(Token::DIVISION):
                 eat(Token::DIVISION);
-                factor();
+                factorExp();
                 multiplicativeExpL();
                 break;
 
@@ -223,14 +261,22 @@ namespace SyntaxAnalyzer {
         relationalExp();
     }
 
-    void SyntaxAnalyzer::factor() {
+    void SyntaxAnalyzer::factorExp() {
 
         Token::Token tokenTemp = targetAdvance();
 
         switch (tokenTemp.getTokenType()) {
 
             case(Token::IDENTIFIER):
-                eat(Token::IDENTIFIER);
+
+                tokenTemp = targetAdvance();
+                lookAhead--;
+                if (tokenTemp.getTokenType() == Token::OPEN) {
+
+                    lookAhead--;
+                    functionCallExp();
+                } else
+                    eat(Token::IDENTIFIER);
                 break;
 
             case(Token::NUMBER_FLOAT):
@@ -249,7 +295,9 @@ namespace SyntaxAnalyzer {
                 break;
 
             default:
-                std::cout << "Factor Error\n";
+                std::cout << "Factor Error\nReceived : "
+                        << tokenTemp.tokenTypeToString()
+                        << std::endl;
                 exit(0);
         }
     }
@@ -270,6 +318,26 @@ namespace SyntaxAnalyzer {
     }
 
     /* Expressão IF*/
+    void SyntaxAnalyzer::ifStmt() {
+
+        targetAdvance();
+        eat(Token::IF);
+
+        operationsExp();
+
+        targetAdvance();
+        eat(Token::THEN);
+
+        compoundStmt();
+
+        Token::Token tokenTemp = targetAdvance();
+
+        if (tokenTemp.getTokenType() == Token::OTHERWISE) {
+
+            eat(Token::OTHERWISE);
+            compoundStmt();
+        } else eat(Token::END);
+    }
 
     /* Expressão de atribuição */
     void SyntaxAnalyzer::attributionExp() {
@@ -286,6 +354,31 @@ namespace SyntaxAnalyzer {
     /* Expressão de chamada de função*/
     void SyntaxAnalyzer::paramCallExp() {
 
+        Token::Token tokenTemp = targetAdvance();
+        lookAhead--;
+        //std::cout << "Token F Ad " << tokenTemp.getTokenName() << std::endl;
+
+        if (tokenTemp.getTokenType() != Token::CLOSE) {
+
+            operationsExp();
+
+            tokenTemp = targetAdvance();
+            //std::cout << "Token S Ad " << tokenTemp.getTokenName() << std::endl;
+
+            if (tokenTemp.getTokenType() == Token::COMMA) {
+
+                if (targetAdvance().getTokenType() == Token::CLOSE) {
+
+                    std::cout << "Arguments Error\n";
+                    exit(0);
+                }
+
+                lookAhead--;
+                eat(Token::COMMA);
+                paramCallExp();
+            } else
+                lookAhead--;
+        }
     }
 
     void SyntaxAnalyzer::functionCallExp() {
@@ -343,6 +436,11 @@ namespace SyntaxAnalyzer {
                                 << std::endl;
                         break;
                 }
+                break;
+
+            case(Token::IF):
+                lookAhead--;
+                ifStmt();
                 break;
 
             default:

@@ -22,6 +22,7 @@ namespace SyntaxAnalyzer {
     private:
         Lex::LexicalAnalyzer lexer;
         Token::Token targetAdvance();
+        std::string intToString(int);
         void createLexer(std::string);
         void variableDec();
         void functionDec();
@@ -39,7 +40,7 @@ namespace SyntaxAnalyzer {
         void additiveExpL();
         void multiplicativeExp();
         void multiplicativeExpL();
-        void factor();
+        void factorExp();
         void operationsExp();
         void returnValue();
         void type();

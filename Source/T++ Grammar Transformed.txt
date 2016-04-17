@@ -1,4 +1,4 @@
-T++ Grammar transformed.
+T++ Grammar Transformed.
 
 Exemplo de eliminação
 
@@ -14,16 +14,9 @@ Gramática atualizada
 	| 'inteiro'
 	| 'flutuante'
 
-<variableDec> ::= <type> ':' 'id'
-                | <variableDec> <variableDecTranformed>
-
-<variableDecTranformed> ::= ',' 'id' <variableDecTranformed>
-                        | NULL
+<variableDec> ::= <type> ':' 'id' 
 
 <operationsExp> ::= <equalityExp>
-		| <relationalExp>
-		| <additiveExp>
-		| <multiplicativeExp>
 
 <equalityExp> ::= <relationalExp> <equalityExpTransformed>
 
@@ -58,14 +51,14 @@ Gramática atualizada
 <prototypeDef> ::= '(' <paramFunction> ')'
 
 <paramFunction> ::= NULL
-		| <variableDec> ',' <variableDec> <paramFunction>
+		| <variableDec> ',' <paramFunction>
 		| <variableDec>
 
 <functionDec> ::= <type> 'id' <prototypeDef> <compoundStmt> 'fim'
 
-<paramCall> ::= NULL
-		| <ioTypes> ',' <paramCall>
-		| <ioType> <paramCall>
+<prototypeCall> ::= NULL
+		| <operationsExp> ',' <protypeCall>
+		| <operationsExp>
 
 <functionCall> ::= 'id' '(' <paramCall> ')' 
 
@@ -74,14 +67,16 @@ Gramática atualizada
 <selectionExp> ::= 'se' <boolExp> 'então' <compoundStmt>
 		| 'se' <boolExp> 'então' <compoundStmt> 'senão' <compoundStmt> 'fim'
 
-<ioTypes> ::= <factor>
+<ioTypes> ::= 'id'
+	| 'numberInt'
+	| 'numberFloat'
 	| <functionCall>
 
 <attributionExp> ::= 'id' ':=' <ioType>
 
 <returnCom> ::= 'retorna' '(' <ioTypes> ')'
 
-<readCom> ::= 'leia' '(' 'id' ')'
+<readCom> ::= 'leia' '(' <ioTypes> ')'
 
 <writeCom> ::= 'escreve' '(' <ioTypes> ')'
 
