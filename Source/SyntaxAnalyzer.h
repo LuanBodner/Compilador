@@ -25,6 +25,8 @@ namespace SyntaxAnalyzer {
         void initialTarget(std::string);
     private:
 
+        Lex::LexicalAnalyzer lexer;
+
         // Creates an instance of the Lexer
         void createLexer(std::string);
 
@@ -79,6 +81,7 @@ namespace SyntaxAnalyzer {
         void prototypeDef();
         void functionDec();
 
-    }
+    };
+}
 #endif /* SYNTAXANALYZER_H */
 
