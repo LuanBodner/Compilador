@@ -185,6 +185,8 @@ namespace Lex {
                 else if (boost::regex_search(bufferString, match, i_ID))
                     tokenInserter(bufferString, match.str(), Token::IDENTIFIER, i_ID, column++, line);
 
+                else
+                    this->unknownCaracterStringError(line, column);
             }
 
             line++;
@@ -200,7 +202,7 @@ namespace Lex {
     Token::Token LexicalAnalyzer::getNextToken() {
 
         if (index == tokens.size())
-            throw "End\n";
+            this->vectorSizeError();
 
         return tokens[index++];
     }

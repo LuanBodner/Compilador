@@ -10,11 +10,12 @@
 
 #include "Token.h"
 #include "LexicalAnalyzer.h"
+#include "CompilerErrors.h"
 #include <string>
 
 namespace SyntaxAnalyzer {
 
-    class SyntaxAnalyzer {
+    class SyntaxAnalyzer: public CompilerErrors::CompilerErrors {
     public:
         SyntaxAnalyzer();
         virtual ~SyntaxAnalyzer();

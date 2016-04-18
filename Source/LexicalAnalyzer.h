@@ -18,7 +18,7 @@
 
 namespace Lex {
 
-    class LexicalAnalyzer {
+    class LexicalAnalyzer: public CompilerErrors::CompilerErrors {
     public:
 
         //Constructor & destructor

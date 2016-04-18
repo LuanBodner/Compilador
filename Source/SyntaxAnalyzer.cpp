@@ -11,42 +11,6 @@ namespace SyntaxAnalyzer {
 
     unsigned int lookAhead = 0;
 
-    std::string SyntaxAnalyzer::intToString(int i) {
-        switch (i) {
-            case 0: return "IF";
-            case 1: return "THEN";
-            case 2: return "OTHERWISE";
-            case 3: return "END";
-            case 4: return "REPEAT";
-            case 5: return "FLOAT";
-            case 6: return "VOID";
-            case 7: return "UNTIL";
-            case 8: return "READ";
-            case 9: return "WRITE";
-            case 10: return "INTEGER";
-            case 11: return "COMMENTS";
-            case 12: return "RETURN";
-            case 13: return "SUM";
-            case 14: return "SUBTRACTION";
-            case 15: return "MULTIPLICATION";
-            case 16: return "DIVISION";
-            case 17: return "EQUAL";
-            case 18: return "COMMA";
-            case 19: return "ATTRIBUTION";
-            case 20: return "SMALLER THAN";
-            case 21: return "BIGGER THAN";
-            case 22: return "SMALL OR EQUAL";
-            case 23: return "BIGGER OR EQUAL";
-            case 24: return "OPEN PAIR";
-            case 25: return "CLOSE PAIR";
-            case 26: return "INTEGER NUMBER";
-            case 27: return "FLOAT NUMBER";
-            case 28: return "DOUBLE POINT";
-            case 29: return "IDENTIFIER";
-            default: return "UNKNOWN";
-        }
-    }
-
     /* Funções básicas da classe SyntaxAnalyzer*/
     SyntaxAnalyzer::SyntaxAnalyzer() {
     }
@@ -70,17 +34,8 @@ namespace SyntaxAnalyzer {
 
         Token::Token tokenTemp = lexer.getNextToken();
 
-        if (tokenTemp.getTokenType() != Token) {
-
-            std::cout << "Eat Error\n"
-                    << "Received : "
-                    << intToString(Token)
-                    << "\nExpected : "
-                    << tokenTemp.tokenTypeToString()
-                    << " Name : " << tokenTemp.getTokenName()
-                    << std::endl;
-            exit(0);
-        }
+        if (tokenTemp.getTokenType() != Token)
+            this->unidentifiedTokenError(Token, tokenTemp);
     }
 
     /* Gramática para declaração de variável */
@@ -102,9 +57,7 @@ namespace SyntaxAnalyzer {
                 eat(Token::VOID);
                 break;
 
-            default:
-                std::cout << "Type Error\nReceived " << tokenTemp.tokenTypeToString();
-                exit(0);
+            default: this->typeError(tokenTemp);
         }
     }
 
@@ -310,11 +263,7 @@ namespace SyntaxAnalyzer {
                 eat(Token::CLOSE);
                 break;
 
-            default:
-                std::cout << "Factor Error\nReceived : "
-                        << tokenTemp.tokenTypeToString()
-                        << std::endl;
-                exit(0);
+            default: this->factorError(tokenTemp);
         }
     }
 
@@ -396,11 +345,8 @@ namespace SyntaxAnalyzer {
 
             if (tokenTemp.getTokenType() == Token::COMMA) {
 
-                if (targetAdvance().getTokenType() == Token::CLOSE) {
-
-                    std::cout << "Arguments Error\n";
-                    exit(0);
-                }
+                if (targetAdvance().getTokenType() == Token::CLOSE)
+                    this->numberOfArgumentsError(tokenTemp);
 
                 lookAhead--;
                 eat(Token::COMMA);
@@ -464,11 +410,8 @@ namespace SyntaxAnalyzer {
                         lookAhead -= 2;
                         functionCallExp();
                         break;
-                    default:
-                        std::cout << "Expression Error\nReceived: "
-                                << tokenTemp.tokenTypeToString()
-                                << std::endl;
-                        break;
+
+                    default: this->expressionError(tokenTemp);
                 }
                 break;
 
@@ -482,10 +425,7 @@ namespace SyntaxAnalyzer {
                 whileStmt();
                 break;
 
-            default:
-                std::cout << "Expression Error\nReceived : "
-                        << tokenTemp.tokenTypeToString();
-                exit(0);
+            default:this->expressionError(tokenTemp);
         }
     }
 
@@ -525,10 +465,7 @@ namespace SyntaxAnalyzer {
             case(Token::CLOSE):
                 break;
 
-            default:
-                std::cout << "ParamFunc Error\nReceived " <<
-                        tokenTemp.tokenTypeToString() << std::endl;
-                exit(0);
+            default: this->parameterDeclarationError(tokenTemp);
         }
     }
 
@@ -560,10 +497,7 @@ namespace SyntaxAnalyzer {
                 eat(Token::END);
                 break;
 
-            default:
-                std::cout << "FunDec Error\nReceived " <<
-                        tempToken.tokenTypeToString() << std::endl;
-                break;
+            default: this->functionDeclarationError(tempToken);
         }
 
     }
@@ -573,9 +507,8 @@ namespace SyntaxAnalyzer {
 
         SyntaxAnalyzer::createLexer(fileName);
 
-        //Token::Token token = targetAdvance();
-
         while (lookAhead < lexer.tokenVectorSize()) {
+
             Token::Token token = targetAdvance();
             switch (token.getTokenType()) {
 
@@ -594,16 +527,12 @@ namespace SyntaxAnalyzer {
                             functionDec();
                             break;
 
-                        default:
-                            std::cout << "Erro\nExpected TYPE, received "
-                                    << token.tokenTypeToString() << std::endl;
-                            exit(0);
+                        default: this->variableDeclarationError(token);
+
                     }
                     break;
 
-                default: std::cout << "Erro\nExpected TYPE, received "
-                            << token.tokenTypeToString() << std::endl;
-                    exit(0);
+                default: this->variableDeclarationError(token);
             }
         }
 

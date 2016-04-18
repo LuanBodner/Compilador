@@ -10,13 +10,31 @@
 
 #include <string>
 
+#include "Token.h"
+
 namespace CompilerErrors {
 
     class CompilerErrors {
     public:
         CompilerErrors();
         virtual ~CompilerErrors();
+
+        //Erros de sintaxe
+        void variableDeclarationError(Token::Token);
+        void functionDeclarationError(Token::Token);
+        void parameterDeclarationError(Token::Token);
+        void expressionError(Token::Token);
+        void numberOfArgumentsError(Token::Token);
+        void factorError(Token::Token);
+        void typeError(Token::Token);
+        void unidentifiedTokenError(int, Token::Token);
+
+        //Erros lexicos
+        void unknownCaracterStringError(int, int);
+        void vectorSizeError();
     private:
+
+        void printError(Token::Token);
     };
 }
 
