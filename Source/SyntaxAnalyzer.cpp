@@ -115,10 +115,8 @@ namespace SyntaxAnalyzer {
         eat(Token::IDENTIFIER);
     }
 
-    /* Gramática para chamada de uma função */
-
     /* Leitura e escrita */
-    void SyntaxAnalyzer::read() {
+    void SyntaxAnalyzer::readExp() {
 
         targetAdvance();
         eat(Token::READ);
@@ -128,6 +126,20 @@ namespace SyntaxAnalyzer {
 
         targetAdvance();
         eat(Token::IDENTIFIER);
+
+        targetAdvance();
+        eat(Token::CLOSE);
+    }
+
+    void SyntaxAnalyzer::writeExp() {
+
+        targetAdvance();
+        eat(Token::WRITE);
+
+        targetAdvance();
+        eat(Token::OPEN);
+
+        operationsExp();
 
         targetAdvance();
         eat(Token::CLOSE);
@@ -336,7 +348,9 @@ namespace SyntaxAnalyzer {
 
             eat(Token::OTHERWISE);
             compoundStmt();
-        } else eat(Token::END);
+        }
+
+        eat(Token::END);
     }
 
     /* Expressão de atribuição */
@@ -356,14 +370,12 @@ namespace SyntaxAnalyzer {
 
         Token::Token tokenTemp = targetAdvance();
         lookAhead--;
-        //std::cout << "Token F Ad " << tokenTemp.getTokenName() << std::endl;
 
         if (tokenTemp.getTokenType() != Token::CLOSE) {
 
             operationsExp();
 
             tokenTemp = targetAdvance();
-            //std::cout << "Token S Ad " << tokenTemp.getTokenName() << std::endl;
 
             if (tokenTemp.getTokenType() == Token::COMMA) {
 
@@ -409,7 +421,12 @@ namespace SyntaxAnalyzer {
 
             case(Token::READ):
                 lookAhead--;
-                read();
+                readExp();
+                break;
+
+            case(Token::WRITE):
+                lookAhead--;
+                writeExp();
                 break;
 
             case(Token::RETURN):
@@ -455,7 +472,7 @@ namespace SyntaxAnalyzer {
         Token::Token tokenTemp = targetAdvance();
         lookAhead--;
 
-        if (tokenTemp.getTokenType() != Token::END) {
+        if (tokenTemp.getTokenType() != Token::END && tokenTemp.getTokenType() != Token::OTHERWISE) {
 
             expression();
             compoundStmt();

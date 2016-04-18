@@ -3,8 +3,9 @@ inteiro fatorial(inteiro: n)
   inteiro: fat
     
     se n > 0 então
-        fat := 1
+        fat := f()
     senão
-        as := 4
+        as()
+        teste := a+b
     fim
 fim

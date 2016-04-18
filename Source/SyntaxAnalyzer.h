@@ -30,7 +30,8 @@ namespace SyntaxAnalyzer {
         void functionCallExp();
         void prototypeDef();
         void ioTypes();
-        void read();
+        void readExp();
+        void writeExp();
         void equalityExp();
         void equalityExpL();
         void relationalExp();

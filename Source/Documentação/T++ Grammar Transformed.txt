@@ -1,13 +1,5 @@
 T++ Grammar Transformed.
 
-Exemplo de eliminação
-
-E -> E + T | T
-
-E -> T E'
-
-E' -> + T E' |
-
 Gramática atualizada
 
 <type> ::= 'vazio'
@@ -62,23 +54,23 @@ Gramática atualizada
 
 <functionCall> ::= 'id' '(' <paramCall> ')' 
 
-<iterationExp> ::= 'repita' <compoundStmt> 'até' <boolExp> 'fim'
+<iterationExp> ::= 'repita' <compoundStmt> 'até' <operationsExp> 'fim'
 
-<selectionExp> ::= 'se' <boolExp> 'então' <compoundStmt>
-		| 'se' <boolExp> 'então' <compoundStmt> 'senão' <compoundStmt> 'fim'
+<selectionExp> ::= 'se' <operationsExp> 'então' <compoundStmt> 'fim'
+		| 'se' <operationsExp> 'então' <compoundStmt> 'senão' <compoundStmt> 'fim'
 
 <ioTypes> ::= 'id'
 	| 'numberInt'
 	| 'numberFloat'
 	| <functionCall>
 
-<attributionExp> ::= 'id' ':=' <ioType>
+<attributionExp> ::= 'id' ':=' <operationsExp>
 
-<returnCom> ::= 'retorna' '(' <ioTypes> ')'
+<returnCom> ::= 'retorna' '(' <operationsExp> ')'
 
-<readCom> ::= 'leia' '(' <ioTypes> ')'
+<readCom> ::= 'leia' '(' 'id' ')'
 
-<writeCom> ::= 'escreve' '(' <ioTypes> ')'
+<writeCom> ::= 'escreve' '(' <operationsExp> ')'
 
 <compoundStmt> ::= <expression> <compoundStmt>
 		| <expression>
