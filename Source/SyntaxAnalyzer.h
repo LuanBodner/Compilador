@@ -15,44 +15,70 @@
 
 namespace SyntaxAnalyzer {
 
-    class SyntaxAnalyzer: public CompilerErrors::CompilerErrors {
+    class SyntaxAnalyzer : public CompilerErrors::CompilerErrors {
     public:
+
         SyntaxAnalyzer();
         virtual ~SyntaxAnalyzer();
+
+        // Kicks of the analysis
         void initialTarget(std::string);
     private:
-        Lex::LexicalAnalyzer lexer;
-        Token::Token targetAdvance();
-        std::string intToString(int);
+
+        // Creates an instance of the Lexer
         void createLexer(std::string);
+
+        // Navigates on the token vector
+        Token::Token targetAdvance();
+
+        // Consumes the next token in the vector
+        void eat(int Token);
+
+        // Variable declaration
+        void type();
         void variableDec();
-        void functionDec();
-        void whileStmt();
-        void eat(int);
-        void functionCallExp();
-        void prototypeDef();
-        void ioTypes();
+
+        // IO operations
         void readExp();
         void writeExp();
+
+        // Definition for the basic operations
+        void relationalExp();
+        void relationalExpL();
         void equalityExp();
         void equalityExpL();
-        void relationalExp();
-        void attributionExp();
-        void relationalExpL();
         void additiveExp();
         void additiveExpL();
         void multiplicativeExp();
         void multiplicativeExpL();
-        void factorExp();
         void operationsExp();
+        void factorExp();
+
+        // Return
         void returnValue();
-        void type();
-        void paramFunction();
-        void expression();
+
+        // If statement
         void ifStmt();
-        void compoundStmt();
+
+        // While statement
+        void whileStmt();
+
+        // Attribution Expression
+        void attributionExp();
+
+        // Definition of function call and the possible parameters
         void paramCallExp();
-    };
-}
+        void functionCallExp();
+
+        // Compound statement
+        void expression();
+        void compoundStmt();
+
+        // Function declaration
+        void paramFunction();
+        void prototypeDef();
+        void functionDec();
+
+    }
 #endif /* SYNTAXANALYZER_H */
 

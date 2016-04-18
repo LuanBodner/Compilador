@@ -19,7 +19,7 @@ namespace CompilerErrors {
         CompilerErrors();
         virtual ~CompilerErrors();
 
-        //Erros de sintaxe
+        //Syntax errors
         void variableDeclarationError(Token::Token);
         void functionDeclarationError(Token::Token);
         void parameterDeclarationError(Token::Token);
@@ -29,7 +29,7 @@ namespace CompilerErrors {
         void typeError(Token::Token);
         void unidentifiedTokenError(int, Token::Token);
 
-        //Erros lexicos
+        //Lexical errors
         void unknownCaracterStringError(int, int);
         void vectorSizeError();
     private:
