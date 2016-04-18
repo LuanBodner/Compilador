@@ -31,6 +31,7 @@ namespace Lex {
         //Returns the token found first and removes it from the vector
         Token::Token getNextToken();
         Token::Token getTokenByPos(unsigned int);
+        unsigned int tokenVectorSize();
 
     private:
         //Vector of tokens collected

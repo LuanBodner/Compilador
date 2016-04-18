@@ -192,6 +192,11 @@ namespace Lex {
         }
     }
 
+    unsigned int LexicalAnalyzer::tokenVectorSize() {
+
+        return tokens.size();
+    }
+
     Token::Token LexicalAnalyzer::getNextToken() {
 
         if (index == tokens.size())

@@ -2,10 +2,11 @@ inteiro fatorial(inteiro: n)
   
     inteiro: fat
     
-    se n > 0 então
-        fat := 10
+    se (n > 0) então
+        repita
+            a := 15
+        ate 1 < 2
     senão
-        fat := 15
     fim
 
     fun()
@@ -20,4 +21,15 @@ inteiro fatorial(inteiro: n)
 
     leia(a)
 
+fim
+
+inteiro abc()
+
+    se (n > 0) então
+    repita
+        a := 15
+    ate 1 < n
+    senão
+    fim
+    
 fim

@@ -353,6 +353,7 @@ namespace SyntaxAnalyzer {
         }
 
         eat(Token::END);
+        targetAdvance();
     }
 
     /* Expressão While*/
@@ -572,36 +573,38 @@ namespace SyntaxAnalyzer {
 
         SyntaxAnalyzer::createLexer(fileName);
 
-        Token::Token token = targetAdvance();
+        //Token::Token token = targetAdvance();
 
-        switch (token.getTokenType()) {
+        while (lookAhead < lexer.tokenVectorSize()) {
+            Token::Token token = targetAdvance();
+            switch (token.getTokenType()) {
 
-            case(Token::INTEGER): case(Token::FLOAT): case(Token::VOID):
-                token = targetAdvance();
+                case(Token::INTEGER): case(Token::FLOAT): case(Token::VOID):
+                    token = targetAdvance();
 
-                switch (token.getTokenType()) {
+                    switch (token.getTokenType()) {
 
-                    case(Token::DOUBLE_POINT):
-                        lookAhead -= 2;
-                        variableDec();
-                        break;
+                        case(Token::DOUBLE_POINT):
+                            lookAhead -= 2;
+                            variableDec();
+                            break;
 
-                    case(Token::IDENTIFIER):
-                        lookAhead -= 2;
-                        functionDec();
-                        break;
+                        case(Token::IDENTIFIER):
+                            lookAhead -= 2;
+                            functionDec();
+                            break;
 
-                    default:
-                        std::cout << "Erro\nExpected TYPE, received "
-                                << token.tokenTypeToString() << std::endl;
-                        exit(0);
-                }
-                break;
+                        default:
+                            std::cout << "Erro\nExpected TYPE, received "
+                                    << token.tokenTypeToString() << std::endl;
+                            exit(0);
+                    }
+                    break;
 
-            default: std::cout << "Erro\nExpected TYPE, received "
-                        << token.tokenTypeToString() << std::endl;
-                exit(0);
-
+                default: std::cout << "Erro\nExpected TYPE, received "
+                            << token.tokenTypeToString() << std::endl;
+                    exit(0);
+            }
         }
 
     }
