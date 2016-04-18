@@ -1,11 +1,23 @@
 inteiro fatorial(inteiro: n)
   
-  inteiro: fat
+    inteiro: fat
     
     se n > 0 então
-        fat := f()
+        fat := 10
     senão
-        as()
-        teste := a+b
+        fat := 15
     fim
+
+    fun()
+
+    a := 10
+
+    repita
+        a()
+    ate n > 0
+    
+    escreva(a)
+
+    leia(a)
+
 fim

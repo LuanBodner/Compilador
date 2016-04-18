@@ -26,6 +26,7 @@ namespace SyntaxAnalyzer {
         void createLexer(std::string);
         void variableDec();
         void functionDec();
+        void whileStmt();
         void eat(int);
         void functionCallExp();
         void prototypeDef();

@@ -73,8 +73,12 @@ namespace SyntaxAnalyzer {
         if (tokenTemp.getTokenType() != Token) {
 
             std::cout << "Eat Error\n"
-                    << "Received : " << intToString(Token) << "\nExpected : "
-                    << tokenTemp.tokenTypeToString() << std::endl;
+                    << "Received : "
+                    << intToString(Token)
+                    << "\nExpected : "
+                    << tokenTemp.tokenTypeToString()
+                    << " Name : " << tokenTemp.getTokenName()
+                    << std::endl;
             exit(0);
         }
     }
@@ -342,15 +346,27 @@ namespace SyntaxAnalyzer {
 
         compoundStmt();
 
-        Token::Token tokenTemp = targetAdvance();
-
-        if (tokenTemp.getTokenType() == Token::OTHERWISE) {
+        if (targetAdvance().getTokenType() == Token::OTHERWISE) {
 
             eat(Token::OTHERWISE);
             compoundStmt();
         }
 
         eat(Token::END);
+    }
+
+    /* Expressão While*/
+    void SyntaxAnalyzer::whileStmt() {
+
+        targetAdvance();
+        eat(Token::REPEAT);
+
+        compoundStmt();
+
+        targetAdvance();
+        eat(Token::UNTIL);
+
+        operationsExp();
     }
 
     /* Expressão de atribuição */
@@ -460,6 +476,11 @@ namespace SyntaxAnalyzer {
                 ifStmt();
                 break;
 
+            case(Token::REPEAT):
+                lookAhead--;
+                whileStmt();
+                break;
+
             default:
                 std::cout << "Expression Error\nReceived : "
                         << tokenTemp.tokenTypeToString();
@@ -472,7 +493,9 @@ namespace SyntaxAnalyzer {
         Token::Token tokenTemp = targetAdvance();
         lookAhead--;
 
-        if (tokenTemp.getTokenType() != Token::END && tokenTemp.getTokenType() != Token::OTHERWISE) {
+        if (tokenTemp.getTokenType() != Token::END
+                && tokenTemp.getTokenType() != Token::OTHERWISE
+                && tokenTemp.getTokenType() != Token::UNTIL) {
 
             expression();
             compoundStmt();
