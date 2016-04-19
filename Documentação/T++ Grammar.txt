@@ -7,26 +7,26 @@ T++ Grammar
 <variableDec> ::= <type> ':' 'id' 
 
 <equalityExp> ::= <relationalExp>
-				| <equalityExp> '=' <relationalExp>
+                | <equalityExp> '=' <relationalExp>
 
 <relationalExp> ::= <additiveExp>
-				| <relationalExp> < <additiveExp>
-				| <relationalExp> > <additiveExp>
-				| <relationalExp> <= <additiveExp>
-				| <relationalExp> >= <additiveExp>
+		| <relationalExp> < <additiveExp>
+		| <relationalExp> > <additiveExp>
+		| <relationalExp> <= <additiveExp>
+		| <relationalExp> >= <additiveExp>
 
 <additiveExp> ::= <multiplicativeExp>
-				| <additiveExp> + <multiplicativeExp>
-				| <additiveExp> - <multiplicativeExp>
+		| <additiveExp> + <multiplicativeExp>
+		| <additiveExp> - <multiplicativeExp>
 
 <multiplicativeExp> ::= <factor>
-					| <multiplicationExp> * <factor>
-					| <multiplicationExp> / <factor>
+                    | <multiplicationExp> * <factor>
+                    | <multiplicationExp> / <factor>
 
 <factor> ::= '(' <expression> ')'
-			| 'numberFloat'
-			| 'numberInt'
-			| 'id'
+	| 'numberFloat'
+	| 'numberInt'
+	| 'id'
 
 <prototypeDef> ::= '(' <paramFunction> ')'
 
