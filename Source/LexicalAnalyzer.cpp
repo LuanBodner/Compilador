@@ -29,7 +29,7 @@ namespace Lex {
 
     //Comments
     boost::regex
-    c_CM("^\\{\\w.[^}]+"), c_CC("^\\}");
+    c_CM("\\{.[^}]+\\}");
 
     //Blank space
     boost::regex b_SP("^ ");
@@ -37,7 +37,7 @@ namespace Lex {
     //Numbers
     boost::regex
     n_IN("^\\b[0-9]+\\b"), n_SI("^\\b[0-9]+e[+|-]?[0-9]+\\b"),
-    n_FL("^\\b[0-9]+.[0-9]+\\b"), n_SF("^\\b[0-9]+.[0-9]+e[+|-]?[0-9]+\\b");
+    n_FL("^\\b[0-9]+\\.[0-9]+\\b"), n_SF("^\\b[0-9]+.[0-9]+e[+|-]?[0-9]+\\b");
 
     //Identifier
     boost::regex i_ID("^\\b[A-Za-zÀ-ú_][A-Za-zÀ-ú0-9_]*");
@@ -85,11 +85,10 @@ namespace Lex {
             std::getline(file, bufferString);
             while (bufferString.size() > 0) {
 
-                if (boost::regex_search(bufferString, match, c_CM)) {
-
+                if (boost::regex_search(bufferString, match, c_CM))
                     bufferString = boost::regex_replace(bufferString, c_CM, "");
-                    bufferString = boost::regex_replace(bufferString, c_CC, "");
-                } else if (boost::regex_search(bufferString, match, b_SP))
+
+                else if (boost::regex_search(bufferString, match, b_SP))
                     bufferString = boost::regex_replace(bufferString, b_SP, "");
 
                 else if (boost::regex_search(bufferString, match, o_SUM))

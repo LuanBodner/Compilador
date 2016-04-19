@@ -10,6 +10,8 @@
       <in>SyntaxAnalyzer.h</in>
       <in>Token.cpp</in>
       <in>Token.h</in>
+      <in>Tree.cpp</in>
+      <in>Tree.h</in>
       <in>main.cpp</in>
     </df>
     <logicalFolder name="ExternalFiles"
@@ -61,6 +63,10 @@
       <item path="Token.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Token.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Tree.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Tree.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>

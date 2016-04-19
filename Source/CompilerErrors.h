@@ -16,6 +16,7 @@ namespace CompilerErrors {
 
     class CompilerErrors {
     public:
+        //Constructor & Destructor
         CompilerErrors();
         virtual ~CompilerErrors();
 

@@ -21,13 +21,11 @@ namespace Lex {
     class LexicalAnalyzer : public CompilerErrors::CompilerErrors {
     public:
 
-        //Constructor & destructor
         //Constructor that receives the name of the tpp file
         LexicalAnalyzer(std::string);
         LexicalAnalyzer();
         virtual ~LexicalAnalyzer();
 
-        //Other methods
         //Returns the token found first and removes it from the vector
         Token::Token getNextToken();
         Token::Token getTokenByPos(unsigned int);

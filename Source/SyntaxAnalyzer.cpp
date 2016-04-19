@@ -227,7 +227,7 @@ namespace SyntaxAnalyzer {
 
     void SyntaxAnalyzer::operationsExp() {
 
-        relationalExp();
+        equalityExp();
     }
 
     void SyntaxAnalyzer::factorExp() {
@@ -299,10 +299,10 @@ namespace SyntaxAnalyzer {
 
             eat(Token::OTHERWISE);
             compoundStmt();
-        }
-
-        eat(Token::END);
-        targetAdvance();
+            targetAdvance();
+            eat(Token::END);
+        } else
+            eat(Token::END);
     }
 
     /* Expressão While*/

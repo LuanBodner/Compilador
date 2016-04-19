@@ -12,6 +12,8 @@
       <in>SyntaxAnalyzer.h</in>
       <in>Token.cpp</in>
       <in>Token.h</in>
+      <in>Tree.cpp</in>
+      <in>Tree.h</in>
       <in>main.cpp</in>
     </df>
   </logicalFolder>

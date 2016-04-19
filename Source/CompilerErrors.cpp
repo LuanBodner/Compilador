@@ -56,7 +56,7 @@ namespace CompilerErrors {
     void CompilerErrors::printError(Token::Token token) {
 
         std::cout << "Line: " << token.getTokenLine() << "; ";
-        std::cout << "Column: " << token.getTokenColumn() << ";\n";
+        std::cout << "Column: " << token.getTokenColumn() << "; ";
         std::cout << "Received '" << token.getTokenName() << "';";
 
         exit(EXIT_FAILURE);
@@ -106,13 +106,12 @@ namespace CompilerErrors {
 
     void CompilerErrors::unidentifiedTokenError(int Token, Token::Token token) {
 
-        std::cout << "Eat Error; "
+        std::cout << "Unidentified Token Error; "
                 << "Received : "
                 << intToString(Token)
-                << "\nExpected : "
+                << "; Expected : "
                 << token.tokenTypeToString()
-                << " Name : " << token.getTokenName()
-                << std::endl;
+                << "; Name : " << token.getTokenName();
 
         exit(EXIT_FAILURE);
     }
@@ -120,14 +119,14 @@ namespace CompilerErrors {
     void CompilerErrors::unknownCaracterStringError(int line, int column) {
 
         std::cout << "Token Not Recognized; ";
-        std::cout << "Line: " << line << "Column: " << column << std::endl;
+        std::cout << "Line: " << line << ";Column: " << column;
 
         exit(EXIT_FAILURE);
     }
 
     void CompilerErrors::vectorSizeError() {
 
-        std::cout << "No Token Left\n";
+        std::cout << "No Expression Defined\n";
 
         exit(EXIT_FAILURE);
     }

@@ -1,35 +1,34 @@
-inteiro fatorial(inteiro: n)
-  
-    inteiro: fat
+inteiro: n
+flutuante foo(vazio: a, inteiro: b)
     
-    se (n > 0) então
+    inteiro: var
+
+    {var := a >= 4}
+
+    se var = (0 + 4) - 3 então {Comentario}
+        var := 4 > 5
+        se var > 1 então
+            var := 0
+        senão
+            integers()
+            se integers() então
+                var := 15
+            senão
+               repita
+                    var := 12
+                ate 4 > 5
+            fim
+        fim
+    fim
+    
+    repita
+        var := 4+1
+        se var + 5 então
+            foo()
+        fim
         repita
-            a := 15
-        ate 1 < 2
-    senão
-    fim
-
-    fun()
-
-    a := 10
-
-    repita
-        a()
-    ate n > 0
-    
-    escreva(a)
-
-    leia(a)
-
-fim
-
-inteiro abc()
-
-    se (n > 0) então
-    repita
-        a := 15
-    ate 1 < n
-    senão
-    fim
+            foo()
+        ate 1 < 0
+    ate 1 < 0
     
 fim
