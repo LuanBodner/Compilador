@@ -11,6 +11,8 @@ namespace SyntaxAnalyzer {
 
     unsigned int lookAhead = 0;
 
+    Tree::Tree * subTree = NULL;
+
     /* Funções básicas da classe SyntaxAnalyzer*/
     SyntaxAnalyzer::SyntaxAnalyzer() {
     }
@@ -42,7 +44,7 @@ namespace SyntaxAnalyzer {
     void SyntaxAnalyzer::type() {
 
         Token::Token tokenTemp = targetAdvance();
-
+                
         switch (tokenTemp.getTokenType()) {
 
             case(Token::FLOAT):
@@ -64,12 +66,17 @@ namespace SyntaxAnalyzer {
     void SyntaxAnalyzer::variableDec() {
 
         type();
+        
+        lookAhead--;
+        subTree->insertChild(targetAdvance(),0);
 
-        targetAdvance();
+        subTree->insertToken(targetAdvance());
         eat(Token::DOUBLE_POINT);
 
-        targetAdvance();
+        subTree->insertChild(targetAdvance(),1);
         eat(Token::IDENTIFIER);
+    
+        subTree = subTree->newSubTree();
     }
 
     /* Leitura e escrita */
@@ -506,6 +513,8 @@ namespace SyntaxAnalyzer {
     void SyntaxAnalyzer::initialTarget(std::string fileName) {
 
         SyntaxAnalyzer::createLexer(fileName);
+        
+        subTree = &(this->syntaxTree);
 
         while (lookAhead < lexer.tokenVectorSize()) {
 
@@ -536,6 +545,11 @@ namespace SyntaxAnalyzer {
             }
         }
 
+    }
+
+    Tree::Tree SyntaxAnalyzer::getTree() {
+
+        return syntaxTree;
     }
 
 }

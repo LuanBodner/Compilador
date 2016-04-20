@@ -11,6 +11,7 @@
 #include "Token.h"
 #include "LexicalAnalyzer.h"
 #include "CompilerErrors.h"
+#include "Tree.h"
 #include <string>
 
 namespace SyntaxAnalyzer {
@@ -23,11 +24,15 @@ namespace SyntaxAnalyzer {
 
         // Kicks of the analysis
         void initialTarget(std::string);
+
+        Tree::Tree getTree();
     private:
 
         Lex::LexicalAnalyzer lexer;
 
-        // Creates an instance of the Lexer
+        Tree::Tree syntaxTree;
+
+        // Creates an instance of the Lexer from the file std::string
         void createLexer(std::string);
 
         // Navigates on the token vector

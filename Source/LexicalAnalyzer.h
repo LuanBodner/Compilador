@@ -21,7 +21,6 @@ namespace Lex {
     class LexicalAnalyzer : public CompilerErrors::CompilerErrors {
     public:
 
-        //Constructor that receives the name of the tpp file
         LexicalAnalyzer(std::string);
         LexicalAnalyzer();
         virtual ~LexicalAnalyzer();

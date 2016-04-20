@@ -12,6 +12,14 @@ namespace Token {
     Token::Token() {
     }
 
+    Token::Token(std::string str, TokenType type, int li, int col) {
+
+        token = type;
+        tokenName = str;
+        tokenColumn = col;
+        tokenLine = li;
+    }
+
     Token::~Token() {
     }
 

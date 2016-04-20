@@ -8,13 +8,25 @@
 #ifndef TREE_H
 #define TREE_H
 
-class Tree {
-public:
-    Tree();
-    virtual ~Tree();
-private:
+#include "Token.h"
+#include <vector>
 
-};
+namespace Tree {
+
+    class Tree {
+    public:
+        Tree();
+        virtual ~Tree();
+
+        Token::Token getToken();
+        void printTree(std::ofstream&);
+        void insertToken(Token::Token);
+        void insertChild(Token::Token, int);
+        Tree * newSubTree();
+        Token::Token token;
+        std::vector<Tree*> children;
+    };
+}
 
 #endif /* TREE_H */
 

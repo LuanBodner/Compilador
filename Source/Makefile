@@ -11,13 +11,14 @@ lib:
 	$(CC) LexicalAnalyzer.cpp -c $(OPT) $(CFLAGS) $(DEBUG)
 	$(CC) SyntaxAnalyzer.cpp -c $(OPT) $(CFLAGS) $(DEBUG)
 	$(CC) CompilerErrors.cpp -c $(OPT) $(CFLAGS) $(DEBUG)
+	$(CC) Tree.cpp -c $(OPT) $(CFLAGS) $(DEBUG)
 	
 
 main:
 	$(CC) main.cpp -c $(OPT) $(CFLAGS) $(DEBUG)
 
 link_main:
-	$(CC) main.o Token.o LexicalAnalyzer.o SyntaxAnalyzer.o CompilerErrors.o $(LDFLAGS)
+	$(CC) main.o Token.o LexicalAnalyzer.o SyntaxAnalyzer.o CompilerErrors.o Tree.o $(LDFLAGS)
 	
 clean:
 	rm -f *.out
