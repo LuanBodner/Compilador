@@ -1,1 +1,1 @@
-:[inteiro[],i[],:[flutuante[],f[],[]]]
+Declaration[FunctionDec[inteiro[],função[],ParamFunction[],CompoundStmt[Expression[AttributionExp[]],CompoundStmt[]]]]

@@ -44,7 +44,9 @@ namespace SyntaxAnalyzer {
     void SyntaxAnalyzer::type() {
 
         Token::Token tokenTemp = targetAdvance();
-                
+
+        subTree->setChild(tokenTemp);
+
         switch (tokenTemp.getTokenType()) {
 
             case(Token::FLOAT):
@@ -65,18 +67,20 @@ namespace SyntaxAnalyzer {
 
     void SyntaxAnalyzer::variableDec() {
 
-        type();
-        
-        lookAhead--;
-        subTree->insertChild(targetAdvance(),0);
+        Tree::Tree * tempTree = subTree;
+        subTree->setChild("VariableDec");
 
-        subTree->insertToken(targetAdvance());
+        subTree = subTree->children[subTree->children.size() - 1];
+
+        type();
+
+        targetAdvance();
         eat(Token::DOUBLE_POINT);
 
-        subTree->insertChild(targetAdvance(),1);
+        subTree->setChild(targetAdvance());
         eat(Token::IDENTIFIER);
-    
-        subTree = subTree->newSubTree();
+
+        subTree = tempTree;
     }
 
     /* Leitura e escrita */
@@ -234,7 +238,13 @@ namespace SyntaxAnalyzer {
 
     void SyntaxAnalyzer::operationsExp() {
 
+        Tree::Tree * tempTree = subTree;
+        subTree->setChild("OperationExp");
+
+        subTree = subTree->children[subTree->children.size() - 1];
+
         equalityExp();
+        subTree = tempTree;
     }
 
     void SyntaxAnalyzer::factorExp() {
@@ -329,6 +339,11 @@ namespace SyntaxAnalyzer {
     /* Expressão de atribuição */
     void SyntaxAnalyzer::attributionExp() {
 
+        Tree::Tree * tempTree = subTree;
+        subTree->setChild("AttributionExp");
+
+        subTree = subTree->children[subTree->children.size() - 1];
+
         targetAdvance();
         eat(Token::IDENTIFIER);
 
@@ -336,6 +351,8 @@ namespace SyntaxAnalyzer {
         eat(Token::ATTRIBUTION);
 
         operationsExp();
+
+        subTree = tempTree;
     }
 
     /* Expressão de chamada de função*/
@@ -381,6 +398,11 @@ namespace SyntaxAnalyzer {
     void SyntaxAnalyzer::expression() {
 
         Token::Token tokenTemp = targetAdvance();
+
+        Tree::Tree * tempTree = subTree;
+        subTree->setChild("Expression");
+
+        subTree = subTree->children[subTree->children.size() - 1];
 
         switch (tokenTemp.getTokenType()) {
 
@@ -434,12 +456,20 @@ namespace SyntaxAnalyzer {
 
             default:this->expressionError(tokenTemp);
         }
+
+        subTree = tempTree;
     }
 
     void SyntaxAnalyzer::compoundStmt() {
 
         Token::Token tokenTemp = targetAdvance();
         lookAhead--;
+
+        Tree::Tree * tempTree = subTree;
+
+        subTree->setChild("CompoundStmt");
+
+        subTree = subTree->children[subTree->children.size() - 1];
 
         if (tokenTemp.getTokenType() != Token::END
                 && tokenTemp.getTokenType() != Token::OTHERWISE
@@ -448,6 +478,8 @@ namespace SyntaxAnalyzer {
             expression();
             compoundStmt();
         }
+
+        subTree = tempTree;
     }
 
     /* Gramática para declaração de uma função */
@@ -481,17 +513,31 @@ namespace SyntaxAnalyzer {
         targetAdvance();
         eat(Token::OPEN);
 
+        Tree::Tree * tempTree = subTree;
+        subTree->setChild("ParamFunction");
+
+        subTree = subTree->children[subTree->children.size() - 1];
+
         paramFunction();
 
         targetAdvance();
         eat(Token::CLOSE);
+
+        subTree = tempTree;
     }
 
     void SyntaxAnalyzer::functionDec() {
 
+        Tree::Tree * tempTree = subTree;
+        subTree->setChild("FunctionDec");
+
+        subTree = subTree->children[subTree->children.size() - 1];
+
         type();
 
         Token::Token tempToken = targetAdvance();
+
+        subTree->setChild(tempToken);
 
         switch (tempToken.getTokenType()) {
 
@@ -507,18 +553,23 @@ namespace SyntaxAnalyzer {
             default: this->functionDeclarationError(tempToken);
         }
 
+        subTree = tempTree;
+
     }
 
     /* Faz a primeira chamada para passar pela gramática */
     void SyntaxAnalyzer::initialTarget(std::string fileName) {
 
         SyntaxAnalyzer::createLexer(fileName);
-        
+
         subTree = &(this->syntaxTree);
 
         while (lookAhead < lexer.tokenVectorSize()) {
 
+            subTree->setExp("Declaration");
+
             Token::Token token = targetAdvance();
+
             switch (token.getTokenType()) {
 
                 case(Token::INTEGER): case(Token::FLOAT): case(Token::VOID):
@@ -544,12 +595,10 @@ namespace SyntaxAnalyzer {
                 default: this->variableDeclarationError(token);
             }
         }
-
     }
 
     Tree::Tree SyntaxAnalyzer::getTree() {
 
         return syntaxTree;
     }
-
 }

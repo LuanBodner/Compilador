@@ -1,2 +1,3 @@
-inteiro: i
-flutuante: f
+inteiro função()
+    a := 10
+fim

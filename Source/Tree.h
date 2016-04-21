@@ -9,6 +9,7 @@
 #define TREE_H
 
 #include "Token.h"
+#include <string>
 #include <vector>
 
 namespace Tree {
@@ -19,11 +20,18 @@ namespace Tree {
         virtual ~Tree();
 
         Token::Token getToken();
+        std::string getExp();
+        int getActive();
+        void setChild(Token::Token);
+        void setChild(std::string);
+        void setExp(std::string);
+        void setToken(Token::Token);
         void printTree(std::ofstream&);
-        void insertToken(Token::Token);
-        void insertChild(Token::Token, int);
-        Tree * newSubTree();
+        Tree * subTree();
+        std::string exp;
         Token::Token token;
+
+        int active;
         std::vector<Tree*> children;
     };
 }

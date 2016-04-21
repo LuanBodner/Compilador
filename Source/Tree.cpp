@@ -6,6 +6,7 @@
  */
 
 #include <fstream>
+#include <vector>
 #include "Tree.h"
 
 namespace Tree {
@@ -20,31 +21,59 @@ namespace Tree {
 
     Token::Token Tree::getToken() {
 
-        return this->token;
+        return token;
     }
 
-    void Tree::insertToken(Token::Token token) {
+    std::string Tree::getExp() {
+
+        return exp;
+    }
+
+    int Tree::getActive() {
+
+        return active;
+    }
+
+    void Tree::setChild(Token::Token token) {
+
+        children.push_back(new Tree());
+        children[children.size() - 1]->token = token;
+
+        children[children.size() - 1]->active = 1;
+    }
+
+    void Tree::setChild(std::string exp) {
+
+        children.push_back(new Tree());
+        children[children.size() - 1]->exp = exp;
+
+        children[children.size() - 1]->active = 0;
+    }
+
+    void Tree::setExp(std::string expression) {
+
+        exp = expression;
+        active = 0;
+    }
+
+    void Tree::setToken(Token::Token token) {
 
         this->token = token;
+        active = 1;
     }
 
-    void Tree::insertChild(Token::Token token, int index) {
+    Tree * Tree::subTree() {
 
         children.push_back(new Tree());
-        children[index]->token = token;
+        return children[children.size() - 1];
     }
 
-    Tree * Tree::newSubTree() {
-        
-        children.push_back(new Tree());
-        
-        
-        return children[children.size()-1];
-    }
+    void Tree::printTree(std::ofstream & output) {
 
-    void Tree::printTree(std::ofstream& output) {
-
-        output << token.getTokenName() << "[";
+        if (active == 0)
+            output << exp << "[";
+        else
+            output << token.getTokenName() << "[";
 
         for (unsigned int index = 0; index != children.size(); index++) {
 
@@ -53,7 +82,6 @@ namespace Tree {
             if (index + 1 != children.size())
                 output << ",";
         }
-
         output << "]";
     }
 }
