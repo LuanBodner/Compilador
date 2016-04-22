@@ -5,5 +5,9 @@ Este programa analisa um arquivo escrito na linguagem T++. A execução gera doi
 #Linha de comando
 
 ```sh
+$ make all
+```
+
+```sh
 $ ./compiler TINY_FILE_NAME OUTPUT_TOKEN_FILENAME OUTPUT_TREE_FILENAME 
 ```
