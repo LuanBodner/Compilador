@@ -86,20 +86,32 @@ namespace SyntaxAnalyzer {
     /* Leitura e escrita */
     void SyntaxAnalyzer::readExp() {
 
+        Tree::Tree * tempTree = subTree;
+        subTree->setChild("ReadOp");
+
+        subTree = subTree->children[subTree->children.size() - 1];
+
         targetAdvance();
         eat(Token::READ);
 
         targetAdvance();
         eat(Token::OPEN);
 
-        targetAdvance();
+        subTree->setChild(targetAdvance());
         eat(Token::IDENTIFIER);
 
         targetAdvance();
         eat(Token::CLOSE);
+
+        subTree = tempTree;
     }
 
     void SyntaxAnalyzer::writeExp() {
+
+        Tree::Tree * tempTree = subTree;
+        subTree->setChild("WriteOP");
+
+        subTree = subTree->children[subTree->children.size() - 1];
 
         targetAdvance();
         eat(Token::WRITE);
@@ -111,6 +123,8 @@ namespace SyntaxAnalyzer {
 
         targetAdvance();
         eat(Token::CLOSE);
+
+        subTree = tempTree;
     }
 
     /* Caminho da recursividade das operações */
@@ -123,31 +137,44 @@ namespace SyntaxAnalyzer {
     void SyntaxAnalyzer::relationalExpL() {
 
         Token::Token tokenTemp = targetAdvance();
+        Tree::Tree * tempTree = subTree;
 
         switch (tokenTemp.getTokenType()) {
 
-            case(Token::SMALLER_THAN):
-                eat(Token::SMALLER_THAN);
+            case(Token::LESS_THAN):
+                subTree->setChild("LessThanOP");
+                subTree = subTree->children[subTree->children.size() - 1];
+                eat(Token::LESS_THAN);
                 additiveExp();
                 relationalExpL();
+                subTree = tempTree;
                 break;
 
             case(Token::BIGGER_THAN):
+                subTree->setChild("BiggerThanOP");
+                subTree = subTree->children[subTree->children.size() - 1];
                 eat(Token::BIGGER_THAN);
                 additiveExp();
                 relationalExpL();
+                subTree = tempTree;
                 break;
 
-            case(Token::SMALL_EQUAL):
-                eat(Token::SMALL_EQUAL);
+            case(Token::LESS_EQUAL):
+                subTree->setChild("LessEqualOP");
+                subTree = subTree->children[subTree->children.size() - 1];
+                eat(Token::LESS_EQUAL);
                 additiveExp();
                 relationalExpL();
+                subTree = tempTree;
                 break;
 
             case(Token::BIGGER_EQUAL):
+                subTree->setChild("BiggerEqualOP");
+                subTree = subTree->children[subTree->children.size() - 1];
                 eat(Token::BIGGER_EQUAL);
                 additiveExp();
                 relationalExpL();
+                subTree = tempTree;
                 break;
 
             default:
@@ -165,12 +192,16 @@ namespace SyntaxAnalyzer {
     void SyntaxAnalyzer::equalityExpL() {
 
         Token::Token tokenTemp = targetAdvance();
+        Tree::Tree * tempTree = subTree;
 
         if (tokenTemp.getTokenType() == Token::EQUAL) {
 
+            subTree->setChild("EqualityOP");
+            subTree = subTree->children[subTree->children.size() - 1];
             eat(Token::EQUAL);
             relationalExp();
             equalityExpL();
+            subTree = tempTree;
         } else
             lookAhead--;
     }
@@ -184,19 +215,26 @@ namespace SyntaxAnalyzer {
     void SyntaxAnalyzer::additiveExpL() {
 
         Token::Token tokenTemp = targetAdvance();
+        Tree::Tree * tempTree = subTree;
 
         switch (tokenTemp.getTokenType()) {
 
             case(Token::SUM):
+                subTree->setChild("SumOP");
+                subTree = subTree->children[subTree->children.size() - 1];
                 eat(Token::SUM);
                 multiplicativeExp();
                 additiveExpL();
+                subTree = tempTree;
                 break;
 
             case(Token::SUBTRACTION):
+                subTree->setChild("SubtractionOP");
+                subTree = subTree->children[subTree->children.size() - 1];
                 eat(Token::SUBTRACTION);
                 multiplicativeExp();
                 additiveExpL();
+                subTree = tempTree;
                 break;
 
             default:
@@ -215,19 +253,26 @@ namespace SyntaxAnalyzer {
     void SyntaxAnalyzer::multiplicativeExpL() {
 
         Token::Token tokenTemp = targetAdvance();
+        Tree::Tree * tempTree = subTree;
 
         switch (tokenTemp.getTokenType()) {
 
             case(Token::MULTIPLICATION):
+                subTree->setChild("MultiplicationOP");
+                subTree = subTree->children[subTree->children.size() - 1];
                 eat(Token::MULTIPLICATION);
                 factorExp();
                 multiplicativeExpL();
+                subTree = tempTree;
                 break;
 
             case(Token::DIVISION):
+                subTree->setChild("DivisionOP");
+                subTree = subTree->children[subTree->children.size() - 1];
                 eat(Token::DIVISION);
                 factorExp();
                 multiplicativeExpL();
+                subTree = tempTree;
                 break;
 
             default:
@@ -261,15 +306,20 @@ namespace SyntaxAnalyzer {
 
                     lookAhead--;
                     functionCallExp();
-                } else
+                } else {
+                    lookAhead--;
+                    subTree->setChild(targetAdvance());
                     eat(Token::IDENTIFIER);
+                }
                 break;
 
             case(Token::NUMBER_FLOAT):
+                subTree->setChild(tokenTemp);
                 eat(Token::NUMBER_FLOAT);
                 break;
 
             case(Token::NUMBER_INTEGER):
+                subTree->setChild(tokenTemp);
                 eat(Token::NUMBER_INTEGER);
                 break;
 
@@ -287,6 +337,11 @@ namespace SyntaxAnalyzer {
     /* Retorno de funções */
     void SyntaxAnalyzer::returnValue() {
 
+        Tree::Tree * tempTree = subTree;
+        subTree->setChild("ReturnExp");
+
+        subTree = subTree->children[subTree->children.size() - 1];
+
         targetAdvance();
         eat(Token::RETURN);
 
@@ -297,10 +352,17 @@ namespace SyntaxAnalyzer {
 
         targetAdvance();
         eat(Token::CLOSE);
+
+        subTree = tempTree;
     }
 
     /* Expressão IF*/
     void SyntaxAnalyzer::ifStmt() {
+
+        Tree::Tree * tempTree = subTree;
+        subTree->setChild("IfStmt");
+
+        subTree = subTree->children[subTree->children.size() - 1];
 
         targetAdvance();
         eat(Token::IF);
@@ -314,12 +376,18 @@ namespace SyntaxAnalyzer {
 
         if (targetAdvance().getTokenType() == Token::OTHERWISE) {
 
+            Tree::Tree * newTempTree = subTree;
             eat(Token::OTHERWISE);
+            subTree->setChild("OtherwiseStmt");
+            subTree = subTree->children[subTree->children.size() - 1];
             compoundStmt();
             targetAdvance();
             eat(Token::END);
+            subTree = newTempTree;
         } else
             eat(Token::END);
+
+        subTree = tempTree;
     }
 
     /* Expressão While*/
@@ -344,7 +412,7 @@ namespace SyntaxAnalyzer {
 
         subTree = subTree->children[subTree->children.size() - 1];
 
-        targetAdvance();
+        subTree->setChild(targetAdvance());
         eat(Token::IDENTIFIER);
 
         targetAdvance();
@@ -382,7 +450,12 @@ namespace SyntaxAnalyzer {
 
     void SyntaxAnalyzer::functionCallExp() {
 
-        targetAdvance();
+        Tree::Tree * tempTree = subTree;
+        subTree->setChild("FunctionCall");
+
+        subTree = subTree->children[subTree->children.size() - 1];
+
+        subTree->setChild(targetAdvance());
         eat(Token::IDENTIFIER);
 
         targetAdvance();
@@ -392,6 +465,8 @@ namespace SyntaxAnalyzer {
 
         targetAdvance();
         eat(Token::CLOSE);
+
+        subTree = tempTree;
     }
 
     /* Conjunto de expressões possíveis dentro dos escopos */

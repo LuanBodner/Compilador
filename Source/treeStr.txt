@@ -1,1 +1,7 @@
-Declaration[FunctionDec[inteiro[],função[],ParamFunction[],CompoundStmt[Expression[AttributionExp[]],CompoundStmt[]]]]
+Declaration
+    [FunctionDec
+        [inteiro[],
+        função[],
+        ParamFunction[],
+        CompoundStmt
+            [Expression[IfStmt[OperationExp[a[]],CompoundStmt[Expression[AttributionExp[var[],OperationExp[10[]]]],CompoundStmt[]]]],CompoundStmt[]]]]

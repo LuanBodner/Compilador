@@ -1,3 +1,7 @@
 inteiro função()
-    a := 10
+    
+    se a então
+        var := 10
+    fim
+
 fim

@@ -107,7 +107,7 @@ namespace Lex {
                     tokenInserter(bufferString, match.str(), Token::COMMA, o_COM, column++, line);
 
                 else if (boost::regex_search(bufferString, match, o_SME))
-                    tokenInserter(bufferString, match.str(), Token::SMALL_EQUAL, o_SME, column++, line);
+                    tokenInserter(bufferString, match.str(), Token::LESS_EQUAL, o_SME, column++, line);
 
                 else if (boost::regex_search(bufferString, match, o_BGE))
                     tokenInserter(bufferString, match.str(), Token::BIGGER_EQUAL, o_BGE, column++, line);
@@ -122,7 +122,7 @@ namespace Lex {
                     tokenInserter(bufferString, match.str(), Token::DOUBLE_POINT, o_DOP, column++, line);
 
                 else if (boost::regex_search(bufferString, match, o_SMA))
-                    tokenInserter(bufferString, match.str(), Token::SMALLER_THAN, o_SMA, column++, line);
+                    tokenInserter(bufferString, match.str(), Token::LESS_THAN, o_SMA, column++, line);
 
                 else if (boost::regex_search(bufferString, match, o_BIG))
                     tokenInserter(bufferString, match.str(), Token::BIGGER_THAN, o_BIG, column++, line);
