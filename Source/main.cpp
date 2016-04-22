@@ -15,20 +15,20 @@
 #include "SyntaxAnalyzer.h"
 
 int main(int argc, char** argv) {
-    
-    if(argc < 3){
-        
+
+    if (argc < 4) {
+
         std::cout << "Wrong number of arguments\n";
         return EXIT_FAILURE;
     }
 
     std::ofstream output;
 
-    output.open(argv[2], std::ofstream::out);
+    output.open(argv[3], std::ofstream::out);
 
     SyntaxAnalyzer::SyntaxAnalyzer synx;
 
-    synx.initialTarget(argv[1]);
+    synx.initialTarget(argv[1], argv[2]);
 
     synx.getTree().printTree(output, 0);
 

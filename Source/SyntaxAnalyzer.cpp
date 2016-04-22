@@ -20,9 +20,10 @@ namespace SyntaxAnalyzer {
     SyntaxAnalyzer::~SyntaxAnalyzer() {
     }
 
-    void SyntaxAnalyzer::createLexer(std::string fileName) {
+    void SyntaxAnalyzer::createLexer(std::string in, std::string out) {
 
-        lexer = Lex::LexicalAnalyzer(fileName);
+        lexer = Lex::LexicalAnalyzer(in);
+        printTokens(out);
     }
 
     /* Percorre pela lista de tokens na frente do eat */
@@ -618,9 +619,9 @@ namespace SyntaxAnalyzer {
     }
 
     /* Faz a primeira chamada para passar pela gramática */
-    void SyntaxAnalyzer::initialTarget(std::string fileName) {
+    void SyntaxAnalyzer::initialTarget(std::string in, std::string out) {
 
-        SyntaxAnalyzer::createLexer(fileName);
+        SyntaxAnalyzer::createLexer(in, out);
 
         subTree = &(this->syntaxTree);
 
@@ -666,5 +667,26 @@ namespace SyntaxAnalyzer {
 
         subTree->setChild(exp);
         subTree = subTree->children[subTree->children.size() - 1];
+    }
+
+    void SyntaxAnalyzer::printTokens(std::string str) {
+
+        Token::Token tokenTemp;
+
+        std::ofstream output;
+
+        output.open(str, std::ofstream::out);
+
+        do {
+
+            tokenTemp = targetAdvance();
+
+            output << "\"" << tokenTemp.getTokenName() << "\"" << " == "
+                    << tokenTemp.tokenTypeToString() << "\n\tLINE : "
+                    << tokenTemp.getTokenLine() << "\n\tCOLUMN : "
+                    << tokenTemp.getTokenColumn() << "\n";
+        } while (lookAhead < lexer.tokenVectorSize());
+
+        lookAhead = 0;
     }
 }

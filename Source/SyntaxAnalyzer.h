@@ -49,7 +49,7 @@ namespace SyntaxAnalyzer {
         virtual ~SyntaxAnalyzer();
 
         // Kicks of the analysis
-        void initialTarget(std::string);
+        void initialTarget(std::string, std::string);
 
         Tree::Tree getTree();
     private:
@@ -59,7 +59,8 @@ namespace SyntaxAnalyzer {
         Tree::Tree syntaxTree;
 
         // Creates an instance of the Lexer from the file std::string
-        void createLexer(std::string);
+        void createLexer(std::string, std::string);
+        void printTokens(std::string);
 
         // Navigates on the token vector
         Token::Token targetAdvance();

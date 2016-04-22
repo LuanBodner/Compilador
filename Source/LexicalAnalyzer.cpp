@@ -191,6 +191,8 @@ namespace Lex {
             line++;
             column = 0;
         }
+
+        file.close();
     }
 
     unsigned int LexicalAnalyzer::tokenVectorSize() {
