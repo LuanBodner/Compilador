@@ -65,12 +65,11 @@ namespace SyntaxAnalyzer {
         }
     }
 
-    void SyntaxAnalyzer::variableDec() {
+    void SyntaxAnalyzer::variableDecStmt() {
 
         Tree::Tree * tempTree = subTree;
-        subTree->setChild("VariableDec");
 
-        subTree = subTree->children[subTree->children.size() - 1];
+        setAndAdvance(VARDECSTRING);
 
         type();
 
@@ -84,12 +83,11 @@ namespace SyntaxAnalyzer {
     }
 
     /* Leitura e escrita */
-    void SyntaxAnalyzer::readExp() {
+    void SyntaxAnalyzer::readStmt() {
 
         Tree::Tree * tempTree = subTree;
-        subTree->setChild("ReadOp");
 
-        subTree = subTree->children[subTree->children.size() - 1];
+        setAndAdvance(READSTRING);
 
         targetAdvance();
         eat(Token::READ);
@@ -106,12 +104,10 @@ namespace SyntaxAnalyzer {
         subTree = tempTree;
     }
 
-    void SyntaxAnalyzer::writeExp() {
+    void SyntaxAnalyzer::writeStmt() {
 
         Tree::Tree * tempTree = subTree;
-        subTree->setChild("WriteOP");
-
-        subTree = subTree->children[subTree->children.size() - 1];
+        setAndAdvance(WRITESTRING);
 
         targetAdvance();
         eat(Token::WRITE);
@@ -142,8 +138,7 @@ namespace SyntaxAnalyzer {
         switch (tokenTemp.getTokenType()) {
 
             case(Token::LESS_THAN):
-                subTree->setChild("LessThanOP");
-                subTree = subTree->children[subTree->children.size() - 1];
+                setAndAdvance(LESSTSTRING);
                 eat(Token::LESS_THAN);
                 additiveExp();
                 relationalExpL();
@@ -151,8 +146,7 @@ namespace SyntaxAnalyzer {
                 break;
 
             case(Token::BIGGER_THAN):
-                subTree->setChild("BiggerThanOP");
-                subTree = subTree->children[subTree->children.size() - 1];
+                setAndAdvance(BIGGERTSTRING);
                 eat(Token::BIGGER_THAN);
                 additiveExp();
                 relationalExpL();
@@ -160,8 +154,7 @@ namespace SyntaxAnalyzer {
                 break;
 
             case(Token::LESS_EQUAL):
-                subTree->setChild("LessEqualOP");
-                subTree = subTree->children[subTree->children.size() - 1];
+                setAndAdvance(LESSESTRING);
                 eat(Token::LESS_EQUAL);
                 additiveExp();
                 relationalExpL();
@@ -169,8 +162,7 @@ namespace SyntaxAnalyzer {
                 break;
 
             case(Token::BIGGER_EQUAL):
-                subTree->setChild("BiggerEqualOP");
-                subTree = subTree->children[subTree->children.size() - 1];
+                setAndAdvance(BIGGERESTRING);
                 eat(Token::BIGGER_EQUAL);
                 additiveExp();
                 relationalExpL();
@@ -196,8 +188,7 @@ namespace SyntaxAnalyzer {
 
         if (tokenTemp.getTokenType() == Token::EQUAL) {
 
-            subTree->setChild("EqualityOP");
-            subTree = subTree->children[subTree->children.size() - 1];
+            setAndAdvance(EQUALSTRING);
             eat(Token::EQUAL);
             relationalExp();
             equalityExpL();
@@ -220,8 +211,7 @@ namespace SyntaxAnalyzer {
         switch (tokenTemp.getTokenType()) {
 
             case(Token::SUM):
-                subTree->setChild("SumOP");
-                subTree = subTree->children[subTree->children.size() - 1];
+                setAndAdvance(SUMEXPSTRING);
                 eat(Token::SUM);
                 multiplicativeExp();
                 additiveExpL();
@@ -229,8 +219,7 @@ namespace SyntaxAnalyzer {
                 break;
 
             case(Token::SUBTRACTION):
-                subTree->setChild("SubtractionOP");
-                subTree = subTree->children[subTree->children.size() - 1];
+                setAndAdvance(SUBEXPSTRING);
                 eat(Token::SUBTRACTION);
                 multiplicativeExp();
                 additiveExpL();
@@ -258,8 +247,7 @@ namespace SyntaxAnalyzer {
         switch (tokenTemp.getTokenType()) {
 
             case(Token::MULTIPLICATION):
-                subTree->setChild("MultiplicationOP");
-                subTree = subTree->children[subTree->children.size() - 1];
+                setAndAdvance(MULTEXPSTRING);
                 eat(Token::MULTIPLICATION);
                 factorExp();
                 multiplicativeExpL();
@@ -267,8 +255,7 @@ namespace SyntaxAnalyzer {
                 break;
 
             case(Token::DIVISION):
-                subTree->setChild("DivisionOP");
-                subTree = subTree->children[subTree->children.size() - 1];
+                setAndAdvance(DIVEXPSTRING);
                 eat(Token::DIVISION);
                 factorExp();
                 multiplicativeExpL();
@@ -284,9 +271,8 @@ namespace SyntaxAnalyzer {
     void SyntaxAnalyzer::operationsExp() {
 
         Tree::Tree * tempTree = subTree;
-        subTree->setChild("OperationExp");
 
-        subTree = subTree->children[subTree->children.size() - 1];
+        setAndAdvance(OPEXPSTRING);
 
         equalityExp();
         subTree = tempTree;
@@ -302,11 +288,13 @@ namespace SyntaxAnalyzer {
 
                 tokenTemp = targetAdvance();
                 lookAhead--;
+
                 if (tokenTemp.getTokenType() == Token::OPEN) {
 
                     lookAhead--;
-                    functionCallExp();
+                    functionCallStmt();
                 } else {
+
                     lookAhead--;
                     subTree->setChild(targetAdvance());
                     eat(Token::IDENTIFIER);
@@ -338,9 +326,8 @@ namespace SyntaxAnalyzer {
     void SyntaxAnalyzer::returnValue() {
 
         Tree::Tree * tempTree = subTree;
-        subTree->setChild("ReturnExp");
 
-        subTree = subTree->children[subTree->children.size() - 1];
+        setAndAdvance(RETURNSTRING);
 
         targetAdvance();
         eat(Token::RETURN);
@@ -360,9 +347,8 @@ namespace SyntaxAnalyzer {
     void SyntaxAnalyzer::ifStmt() {
 
         Tree::Tree * tempTree = subTree;
-        subTree->setChild("IfStmt");
 
-        subTree = subTree->children[subTree->children.size() - 1];
+        setAndAdvance(IFSTRING);
 
         targetAdvance();
         eat(Token::IF);
@@ -378,11 +364,14 @@ namespace SyntaxAnalyzer {
 
             Tree::Tree * newTempTree = subTree;
             eat(Token::OTHERWISE);
-            subTree->setChild("OtherwiseStmt");
-            subTree = subTree->children[subTree->children.size() - 1];
+
+            setAndAdvance(OTHERSTRING);
+
             compoundStmt();
+
             targetAdvance();
             eat(Token::END);
+
             subTree = newTempTree;
         } else
             eat(Token::END);
@@ -394,9 +383,7 @@ namespace SyntaxAnalyzer {
     void SyntaxAnalyzer::whileStmt() {
 
         Tree::Tree * tempTree = subTree;
-        subTree->setChild("WhileStmt");
-
-        subTree = subTree->children[subTree->children.size() - 1];
+        setAndAdvance(WHILESTRING);
 
         targetAdvance();
         eat(Token::REPEAT);
@@ -412,12 +399,11 @@ namespace SyntaxAnalyzer {
     }
 
     /* Expressão de atribuição */
-    void SyntaxAnalyzer::attributionExp() {
+    void SyntaxAnalyzer::attributionStmt() {
 
         Tree::Tree * tempTree = subTree;
-        subTree->setChild("AttributionExp");
 
-        subTree = subTree->children[subTree->children.size() - 1];
+        setAndAdvance(ATTSTRING);
 
         subTree->setChild(targetAdvance());
         eat(Token::IDENTIFIER);
@@ -431,7 +417,7 @@ namespace SyntaxAnalyzer {
     }
 
     /* Expressão de chamada de função*/
-    void SyntaxAnalyzer::paramCallExp() {
+    void SyntaxAnalyzer::paramCallStmt() {
 
         Token::Token tokenTemp = targetAdvance();
         lookAhead--;
@@ -449,18 +435,18 @@ namespace SyntaxAnalyzer {
 
                 lookAhead--;
                 eat(Token::COMMA);
-                paramCallExp();
+
+                paramCallStmt();
             } else
                 lookAhead--;
         }
     }
 
-    void SyntaxAnalyzer::functionCallExp() {
+    void SyntaxAnalyzer::functionCallStmt() {
 
         Tree::Tree * tempTree = subTree;
-        subTree->setChild("FunctionCall");
 
-        subTree = subTree->children[subTree->children.size() - 1];
+        setAndAdvance(FUNCCALLSTRING);
 
         subTree->setChild(targetAdvance());
         eat(Token::IDENTIFIER);
@@ -468,7 +454,7 @@ namespace SyntaxAnalyzer {
         targetAdvance();
         eat(Token::OPEN);
 
-        paramCallExp();
+        paramCallStmt();
 
         targetAdvance();
         eat(Token::CLOSE);
@@ -482,25 +468,24 @@ namespace SyntaxAnalyzer {
         Token::Token tokenTemp = targetAdvance();
 
         Tree::Tree * tempTree = subTree;
-        subTree->setChild("Expression");
 
-        subTree = subTree->children[subTree->children.size() - 1];
+        setAndAdvance(EXPSTRING);
 
         switch (tokenTemp.getTokenType()) {
 
             case(Token::INTEGER): case(Token::FLOAT): case(Token::VOID):
                 lookAhead--;
-                variableDec();
+                variableDecStmt();
                 break;
 
             case(Token::READ):
                 lookAhead--;
-                readExp();
+                readStmt();
                 break;
 
             case(Token::WRITE):
                 lookAhead--;
-                writeExp();
+                writeStmt();
                 break;
 
             case(Token::RETURN):
@@ -514,12 +499,12 @@ namespace SyntaxAnalyzer {
 
                     case(Token::ATTRIBUTION):
                         lookAhead -= 2;
-                        attributionExp();
+                        attributionStmt();
                         break;
 
                     case(Token::OPEN):
                         lookAhead -= 2;
-                        functionCallExp();
+                        functionCallStmt();
                         break;
 
                     default: this->expressionError(tokenTemp);
@@ -549,9 +534,7 @@ namespace SyntaxAnalyzer {
 
         Tree::Tree * tempTree = subTree;
 
-        subTree->setChild("CompoundStmt");
-
-        subTree = subTree->children[subTree->children.size() - 1];
+        setAndAdvance(COMPSTMTSTRING);
 
         if (tokenTemp.getTokenType() != Token::END
                 && tokenTemp.getTokenType() != Token::OTHERWISE
@@ -565,7 +548,7 @@ namespace SyntaxAnalyzer {
     }
 
     /* Gramática para declaração de uma função */
-    void SyntaxAnalyzer::paramFunction() {
+    void SyntaxAnalyzer::paramFunctionStmt() {
 
         Token::Token tokenTemp = targetAdvance();
 
@@ -573,14 +556,14 @@ namespace SyntaxAnalyzer {
 
             case(Token::INTEGER): case(Token::FLOAT): case(Token::VOID):
                 lookAhead--;
-                variableDec();
-                paramFunction();
+                variableDecStmt();
+                paramFunctionStmt();
                 break;
 
             case(Token::COMMA):
                 eat(Token::COMMA);
-                variableDec();
-                paramFunction();
+                variableDecStmt();
+                paramFunctionStmt();
                 break;
 
             case(Token::CLOSE):
@@ -590,17 +573,15 @@ namespace SyntaxAnalyzer {
         }
     }
 
-    void SyntaxAnalyzer::prototypeDef() {
+    void SyntaxAnalyzer::prototypeDefStmt() {
 
         targetAdvance();
         eat(Token::OPEN);
 
         Tree::Tree * tempTree = subTree;
-        subTree->setChild("ParamFunction");
+        setAndAdvance(PARAMDECSTRING);
 
-        subTree = subTree->children[subTree->children.size() - 1];
-
-        paramFunction();
+        paramFunctionStmt();
 
         targetAdvance();
         eat(Token::CLOSE);
@@ -608,12 +589,10 @@ namespace SyntaxAnalyzer {
         subTree = tempTree;
     }
 
-    void SyntaxAnalyzer::functionDec() {
+    void SyntaxAnalyzer::functionDecStmt() {
 
         Tree::Tree * tempTree = subTree;
-        subTree->setChild("FunctionDec");
-
-        subTree = subTree->children[subTree->children.size() - 1];
+        setAndAdvance(FUNCDECSTRING);
 
         type();
 
@@ -625,7 +604,7 @@ namespace SyntaxAnalyzer {
 
             case(Token::IDENTIFIER):
                 eat(Token::IDENTIFIER);
-                prototypeDef();
+                prototypeDefStmt();
                 lookAhead--;
                 compoundStmt();
                 targetAdvance();
@@ -636,7 +615,6 @@ namespace SyntaxAnalyzer {
         }
 
         subTree = tempTree;
-
     }
 
     /* Faz a primeira chamada para passar pela gramática */
@@ -648,29 +626,29 @@ namespace SyntaxAnalyzer {
 
         while (lookAhead < lexer.tokenVectorSize()) {
 
-            subTree->setExp("Declaration");
+            subTree->setExp(DECSTRING);
 
             Token::Token token = targetAdvance();
 
             switch (token.getTokenType()) {
 
                 case(Token::INTEGER): case(Token::FLOAT): case(Token::VOID):
+
                     token = targetAdvance();
 
                     switch (token.getTokenType()) {
 
                         case(Token::DOUBLE_POINT):
                             lookAhead -= 2;
-                            variableDec();
+                            variableDecStmt();
                             break;
 
                         case(Token::IDENTIFIER):
                             lookAhead -= 2;
-                            functionDec();
+                            functionDecStmt();
                             break;
 
                         default: this->variableDeclarationError(token);
-
                     }
                     break;
 
@@ -682,5 +660,11 @@ namespace SyntaxAnalyzer {
     Tree::Tree SyntaxAnalyzer::getTree() {
 
         return syntaxTree;
+    }
+
+    void SyntaxAnalyzer::setAndAdvance(std::string exp) {
+
+        subTree->setChild(exp);
+        subTree = subTree->children[subTree->children.size() - 1];
     }
 }

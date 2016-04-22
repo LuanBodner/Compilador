@@ -8,7 +8,6 @@
 #ifndef TOKEN_H
 #define TOKEN_H
 #include <string>
-#include <boost/preprocessor.hpp>
 #include <iostream>
 
 namespace Token {

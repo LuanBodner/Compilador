@@ -1,0 +1,20 @@
+Declaration
+    FunctionDecStatement
+        inteiro
+        função
+        ParametersDecStatement
+        CompoundStatement
+            ExpressionStatement
+                WhileStatement
+                    CompoundStatement
+                        ExpressionStatement
+                            AttributionStatement
+                                var
+                                OperationExpression
+                                    10
+                        CompoundStatement
+                    OperationExpression
+                        n
+                        BiggerThanExpression
+                            0
+            CompoundStatement

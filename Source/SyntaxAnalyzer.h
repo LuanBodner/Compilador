@@ -14,6 +14,32 @@
 #include "Tree.h"
 #include <string>
 
+#define DECSTRING "Declaration"
+#define OPSTRING "Operation"
+#define IFSTRING "IfStatement"
+#define WHILESTRING "WhileStatement"
+#define FUNCDECSTRING "FunctionDecStatement"
+#define PARAMDECSTRING "ParametersDecStatement"
+#define COMPSTMTSTRING "CompoundStatement"
+#define EXPSTRING "ExpressionStatement"
+#define FUNCCALLSTRING "FunctionCallStatement"
+#define ATTSTRING "AttributionStatement"
+#define OTHERSTRING "OtherwiseStement"
+#define RETURNSTRING "ReturnStatement"
+#define OPEXPSTRING "OperationExpression"
+#define MULTEXPSTRING "MultiplicationExpression"
+#define DIVEXPSTRING "DivisionExpression"
+#define SUMEXPSTRING "SumExpression"
+#define SUBEXPSTRING "SubtractionExpression"
+#define EQUALSTRING "EqualExpression"
+#define LESSTSTRING "LessThanExpression"
+#define BIGGERTSTRING "BiggerThanExpression"
+#define BIGGERESTRING "BiggerEqualExpression"
+#define LESSESTRING "SmallerEqualExpression"
+#define WRITESTRING "WriteStatement"
+#define READSTRING "ReadStatement"
+#define VARDECSTRING "VariableDecStatement"
+
 namespace SyntaxAnalyzer {
 
     class SyntaxAnalyzer : public CompilerErrors::CompilerErrors {
@@ -43,11 +69,11 @@ namespace SyntaxAnalyzer {
 
         // Variable declaration
         void type();
-        void variableDec();
+        void variableDecStmt();
 
         // IO operations
-        void readExp();
-        void writeExp();
+        void readStmt();
+        void writeStmt();
 
         // Definition for the basic operations
         void relationalExp();
@@ -71,21 +97,23 @@ namespace SyntaxAnalyzer {
         void whileStmt();
 
         // Attribution Expression
-        void attributionExp();
+        void attributionStmt();
 
         // Definition of function call and the possible parameters
-        void paramCallExp();
-        void functionCallExp();
+        void paramCallStmt();
+        void functionCallStmt();
 
         // Compound statement
         void expression();
         void compoundStmt();
 
         // Function declaration
-        void paramFunction();
-        void prototypeDef();
-        void functionDec();
+        void paramFunctionStmt();
+        void prototypeDefStmt();
+        void functionDecStmt();
 
+        // Sets the father and advances the pointer
+        void setAndAdvance(std::string);
     };
 }
 #endif /* SYNTAXANALYZER_H */
