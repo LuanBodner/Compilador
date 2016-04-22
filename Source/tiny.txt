@@ -1,7 +1,7 @@
 inteiro função()
     
-    se a então
+    repita
         var := 10
-    fim
+    ate n>0
 
 fim

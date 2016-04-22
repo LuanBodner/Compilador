@@ -393,6 +393,11 @@ namespace SyntaxAnalyzer {
     /* Expressão While*/
     void SyntaxAnalyzer::whileStmt() {
 
+        Tree::Tree * tempTree = subTree;
+        subTree->setChild("WhileStmt");
+
+        subTree = subTree->children[subTree->children.size() - 1];
+
         targetAdvance();
         eat(Token::REPEAT);
 
@@ -402,6 +407,8 @@ namespace SyntaxAnalyzer {
         eat(Token::UNTIL);
 
         operationsExp();
+
+        subTree = tempTree;
     }
 
     /* Expressão de atribuição */

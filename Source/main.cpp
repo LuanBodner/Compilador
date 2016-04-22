@@ -72,7 +72,7 @@ int main(int argc, char** argv) {
 
     newTree.printTree(output);*/
 
-    synx.getTree().printTree(output);
+    synx.getTree().printTree(output,0);
 
     return 0;
 }

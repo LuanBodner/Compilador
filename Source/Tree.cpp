@@ -68,20 +68,17 @@ namespace Tree {
         return children[children.size() - 1];
     }
 
-    void Tree::printTree(std::ofstream & output) {
+    void Tree::printTree(std::ofstream & output, int level = 0) {
+
+        if (level > 0)
+            output << std::setw(level) << ' ';
 
         if (active == 0)
-            output << exp << "[";
+            output << exp << "\n";
         else
-            output << token.getTokenName() << "[";
+            output << token.getTokenName() << "\n";
 
-        for (unsigned int index = 0; index != children.size(); index++) {
-
-            children[index]->printTree(output);
-
-            if (index + 1 != children.size())
-                output << ",";
-        }
-        output << "]";
+        for (unsigned int index = 0; index != children.size(); index++)
+            children[index]->printTree(output, level + 4);
     }
 }

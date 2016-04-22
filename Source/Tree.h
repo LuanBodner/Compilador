@@ -27,7 +27,7 @@ namespace Tree {
         void setChild(std::string);
         void setExp(std::string);
         void setToken(Token::Token);
-        void printTree(std::ofstream&);
+        void printTree(std::ofstream&, int);
         Tree * subTree();
         std::string exp;
         Token::Token token;
