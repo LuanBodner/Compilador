@@ -54,6 +54,7 @@ namespace Token {
     }
 
     std::string Token::tokenTypeToString() {
+       
         switch (this->token) {
             case 0: return "IF";
             case 1: return "THEN";

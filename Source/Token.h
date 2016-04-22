@@ -29,7 +29,7 @@ namespace Token {
         Token();
         Token(std::string, TokenType, int, int);
         virtual ~Token();
-
+        
         std::string getTokenName();
         TokenType getTokenType();
         int getTokenLine();
