@@ -60,6 +60,8 @@ namespace SyntaxAnalyzer {
 
         // Creates an instance of the Lexer from the file std::string
         void createLexer(std::string, std::string);
+        
+        // Prints the tokens in the file
         void printTokens(std::string);
 
         // Navigates on the token vector
