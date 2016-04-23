@@ -1,20 +1,116 @@
 Declaration
     FunctionDecStatement
         inteiro
-        função
+        foo
         ParametersDecStatement
+            VariableDecStatement
+                inteiro
+                a
         CompoundStatement
             ExpressionStatement
-                WhileStatement
+                IfStatement
+                    OperationExpression
+                        a
                     CompoundStatement
                         ExpressionStatement
                             AttributionStatement
-                                var
+                                car
                                 OperationExpression
                                     10
                         CompoundStatement
-                    OperationExpression
-                        n
-                        BiggerThanExpression
-                            0
+                            ExpressionStatement
+                                IfStatement
+                                    OperationExpression
+                                        a
+                                        BiggerEqualExpression
+                                            b
+                                    CompoundStatement
+                                        ExpressionStatement
+                                            AttributionStatement
+                                                variavel
+                                                OperationExpression
+                                                    OperationExpression
+                                                        a
+                                                        SumExpression
+                                                            b
+                                        CompoundStatement
+                                    OtherwiseStement
+                                        CompoundStatement
+                                            ExpressionStatement
+                                                AttributionStatement
+                                                    variavel
+                                                    OperationExpression
+                                                        1
+                                                        MultiplicationExpression
+                                                            OperationExpression
+                                                                a
+                                                                SumExpression
+                                                                    b
+                                            CompoundStatement
+                                                ExpressionStatement
+                                                    WhileStatement
+                                                        CompoundStatement
+                                                            ExpressionStatement
+                                                                AttributionStatement
+                                                                    var
+                                                                    OperationExpression
+                                                                        var
+                                                                        SumExpression
+                                                                            1
+                                                            CompoundStatement
+                                                        OperationExpression
+                                                            n
+                                                            LessThanExpression
+                                                                0
+                                                CompoundStatement
+                            CompoundStatement
             CompoundStatement
+                ExpressionStatement
+                    WhileStatement
+                        CompoundStatement
+                            ExpressionStatement
+                                AttributionStatement
+                                    var
+                                    OperationExpression
+                                        var
+                                        SumExpression
+                                            1
+                            CompoundStatement
+                                ExpressionStatement
+                                    WhileStatement
+                                        CompoundStatement
+                                            ExpressionStatement
+                                                AttributionStatement
+                                                    var
+                                                    OperationExpression
+                                                        15
+                                            CompoundStatement
+                                        OperationExpression
+                                            1
+                                CompoundStatement
+                        OperationExpression
+                            n
+                            LessThanExpression
+                                0
+                CompoundStatement
+                    ExpressionStatement
+                        ReadStatement
+                            abc
+                    CompoundStatement
+                        ExpressionStatement
+                            WriteStatement
+                                OperationExpression
+                                    FunctionCallStatement
+                                        foo
+                                        OperationExpression
+                                            a
+                                        OperationExpression
+                                            b
+                        CompoundStatement
+                            ExpressionStatement
+                                ReturnStatement
+                                    OperationExpression
+                                        2
+                                        MultiplicationExpression
+                                            5
+                            CompoundStatement
