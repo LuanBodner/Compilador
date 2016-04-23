@@ -38,7 +38,6 @@ namespace Tree {
 
         children.push_back(new Tree());
         children[children.size() - 1]->token = token;
-
         children[children.size() - 1]->active = 1;
     }
 
@@ -46,7 +45,6 @@ namespace Tree {
 
         children.push_back(new Tree());
         children[children.size() - 1]->exp = exp;
-
         children[children.size() - 1]->active = 0;
     }
 

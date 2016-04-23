@@ -18,6 +18,7 @@ namespace CompilerErrors {
     }
 
     static std::string intToString(int i) {
+        
         switch (i) {
             case 0: return "IF";
             case 1: return "THEN";
@@ -39,9 +40,9 @@ namespace CompilerErrors {
             case 17: return "EQUAL";
             case 18: return "COMMA";
             case 19: return "ATTRIBUTION";
-            case 20: return "SMALLER THAN";
+            case 20: return "LESS THAN";
             case 21: return "BIGGER THAN";
-            case 22: return "SMALL OR EQUAL";
+            case 22: return "LESS THAN OR EQUAL";
             case 23: return "BIGGER OR EQUAL";
             case 24: return "OPEN PAIR";
             case 25: return "CLOSE PAIR";
@@ -130,5 +131,4 @@ namespace CompilerErrors {
 
         exit(EXIT_FAILURE);
     }
-
 }

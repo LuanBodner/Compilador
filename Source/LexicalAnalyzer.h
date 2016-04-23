@@ -19,8 +19,8 @@
 namespace Lex {
 
     class LexicalAnalyzer : public CompilerErrors::CompilerErrors {
+  
     public:
-
         LexicalAnalyzer(std::string);
         LexicalAnalyzer();
         virtual ~LexicalAnalyzer();

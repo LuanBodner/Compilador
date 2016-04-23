@@ -13,7 +13,6 @@
 namespace Token {
 
     //Codes for the possible tokens 
-
     typedef enum {
         IF, THEN, OTHERWISE, END, REPEAT,
         FLOAT, VOID, UNTIL, READ, WRITE,
@@ -24,8 +23,8 @@ namespace Token {
     } TokenType;
 
     class Token {
+    
     public:
-
         Token();
         Token(std::string, TokenType, int, int);
         virtual ~Token();

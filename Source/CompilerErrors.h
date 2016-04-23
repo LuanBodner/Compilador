@@ -15,6 +15,7 @@
 namespace CompilerErrors {
 
     class CompilerErrors {
+    
     public:
         CompilerErrors();
         virtual ~CompilerErrors();
@@ -32,8 +33,8 @@ namespace CompilerErrors {
         //Lexical errors
         void unknownCaracterStringError(int, int);
         void vectorSizeError();
+    
     private:
-
         void printError(Token::Token);
     };
 }

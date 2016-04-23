@@ -54,7 +54,7 @@ namespace Token {
     }
 
     std::string Token::tokenTypeToString() {
-       
+
         switch (this->token) {
             case 0: return "IF";
             case 1: return "THEN";
@@ -76,10 +76,10 @@ namespace Token {
             case 17: return "EQUAL";
             case 18: return "COMMA";
             case 19: return "ATTRIBUTION";
-            case 20: return "SMALLER THAN";
+            case 20: return "LESS THAN";
             case 21: return "BIGGER THAN";
             case 22: return "SMALL OR EQUAL";
-            case 23: return "BIGGER OR EQUAL";
+            case 23: return "LESS THAN OR EQUAL";
             case 24: return "OPEN PAIR";
             case 25: return "CLOSE PAIR";
             case 26: return "INTEGER NUMBER";

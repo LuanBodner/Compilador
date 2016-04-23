@@ -83,6 +83,7 @@ namespace Lex {
 
             std::string bufferString;
             std::getline(file, bufferString);
+           
             while (bufferString.size() > 0) {
 
                 if (boost::regex_search(bufferString, match, c_CM))

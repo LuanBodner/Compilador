@@ -43,8 +43,8 @@
 namespace SyntaxAnalyzer {
 
     class SyntaxAnalyzer : public CompilerErrors::CompilerErrors {
+  
     public:
-
         SyntaxAnalyzer();
         virtual ~SyntaxAnalyzer();
 
@@ -52,8 +52,8 @@ namespace SyntaxAnalyzer {
         void initialTarget(std::string, std::string);
 
         Tree::Tree getTree();
+   
     private:
-
         Lex::LexicalAnalyzer lexer;
 
         Tree::Tree syntaxTree;

@@ -69,7 +69,6 @@ namespace SyntaxAnalyzer {
     void SyntaxAnalyzer::variableDecStmt() {
 
         Tree::Tree * tempTree = subTree;
-
         setAndAdvance(VARDECSTRING);
 
         type();
@@ -87,7 +86,6 @@ namespace SyntaxAnalyzer {
     void SyntaxAnalyzer::readStmt() {
 
         Tree::Tree * tempTree = subTree;
-
         setAndAdvance(READSTRING);
 
         targetAdvance();
@@ -134,6 +132,7 @@ namespace SyntaxAnalyzer {
     void SyntaxAnalyzer::relationalExpL() {
 
         Token::Token tokenTemp = targetAdvance();
+
         Tree::Tree * tempTree = subTree;
 
         switch (tokenTemp.getTokenType()) {
@@ -185,6 +184,7 @@ namespace SyntaxAnalyzer {
     void SyntaxAnalyzer::equalityExpL() {
 
         Token::Token tokenTemp = targetAdvance();
+
         Tree::Tree * tempTree = subTree;
 
         if (tokenTemp.getTokenType() == Token::EQUAL) {
@@ -207,6 +207,7 @@ namespace SyntaxAnalyzer {
     void SyntaxAnalyzer::additiveExpL() {
 
         Token::Token tokenTemp = targetAdvance();
+
         Tree::Tree * tempTree = subTree;
 
         switch (tokenTemp.getTokenType()) {
@@ -243,6 +244,7 @@ namespace SyntaxAnalyzer {
     void SyntaxAnalyzer::multiplicativeExpL() {
 
         Token::Token tokenTemp = targetAdvance();
+
         Tree::Tree * tempTree = subTree;
 
         switch (tokenTemp.getTokenType()) {
@@ -272,7 +274,6 @@ namespace SyntaxAnalyzer {
     void SyntaxAnalyzer::operationsExp() {
 
         Tree::Tree * tempTree = subTree;
-
         setAndAdvance(OPEXPSTRING);
 
         equalityExp();
@@ -327,7 +328,6 @@ namespace SyntaxAnalyzer {
     void SyntaxAnalyzer::returnValue() {
 
         Tree::Tree * tempTree = subTree;
-
         setAndAdvance(RETURNSTRING);
 
         targetAdvance();
@@ -348,7 +348,6 @@ namespace SyntaxAnalyzer {
     void SyntaxAnalyzer::ifStmt() {
 
         Tree::Tree * tempTree = subTree;
-
         setAndAdvance(IFSTRING);
 
         targetAdvance();
@@ -365,7 +364,6 @@ namespace SyntaxAnalyzer {
 
             Tree::Tree * newTempTree = subTree;
             eat(Token::OTHERWISE);
-
             setAndAdvance(OTHERSTRING);
 
             compoundStmt();
@@ -403,7 +401,6 @@ namespace SyntaxAnalyzer {
     void SyntaxAnalyzer::attributionStmt() {
 
         Tree::Tree * tempTree = subTree;
-
         setAndAdvance(ATTSTRING);
 
         subTree->setChild(targetAdvance());
@@ -446,7 +443,6 @@ namespace SyntaxAnalyzer {
     void SyntaxAnalyzer::functionCallStmt() {
 
         Tree::Tree * tempTree = subTree;
-
         setAndAdvance(FUNCCALLSTRING);
 
         subTree->setChild(targetAdvance());
@@ -469,7 +465,6 @@ namespace SyntaxAnalyzer {
         Token::Token tokenTemp = targetAdvance();
 
         Tree::Tree * tempTree = subTree;
-
         setAndAdvance(EXPSTRING);
 
         switch (tokenTemp.getTokenType()) {
@@ -534,7 +529,6 @@ namespace SyntaxAnalyzer {
         lookAhead--;
 
         Tree::Tree * tempTree = subTree;
-
         setAndAdvance(COMPSTMTSTRING);
 
         if (tokenTemp.getTokenType() != Token::END
@@ -674,7 +668,6 @@ namespace SyntaxAnalyzer {
         Token::Token tokenTemp;
 
         std::ofstream output;
-
         output.open(str, std::ofstream::out);
 
         do {
