@@ -1,14 +1,104 @@
 \documentclass[12pt,a4paper,final]{report}
-\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{graphicx}
+\usepackage[brazil]{minitoc}\usepackage[a4paper,left=2cm,right=2cm,top=4cm,bottom=4cm]{geometry}
 \usepackage[portuguese]{babel}
+\usepackage[utf8]{inputenc}
+
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+
 \author{Luan Bodner do Rosário}
-\title{Documentação - Compiladores}
+\title{Relatório - Compiladores}
 \begin{document}
 \maketitle
 \section*{Introdução}
-\section*{Horas de Trabalho}
+
+\newpage
+\section*{Gramática}
+
+<type> ::= 'vazio'\\
+\tab\tab | 'inteiro'\\
+\tab\tab | 'flutuante'\\
+\\
+<variableDec> ::= <type> ':' 'id' \\
+\\
+<operationsExp> ::= <equalityExp>\\
+\\
+<equalityExp> ::= <relationalExp> <equalityExpTransformed>\\
+\\
+<equalityExpTransformed> ::= NULL\\
+\tab\tab\tab\tab\tab | '=' <relationalExp> <equalityExpTransformed>\\
+\\
+<relationalExp> ::= <additiveExp> <relationalExpTransformed>\\
+\\
+<relationalExpTransformed> ::= NULL\\
+\tab \tab \tab \tab \tab| < <additiveExp> <relationalExpTransformed>\\
+\tab \tab \tab \tab \tab| > <additiveExp> <relationalExpTransformed>\\
+\tab \tab \tab \tab \tab| <= <additiveExp> <relationalExpTransformed>\\
+\tab \tab \tab \tab \tab| >= <additiveExp> <relationalExpTransformed>\\
+\\
+<additiveExp> ::= <multiplicativeExp> <additiveExpTransformed>\\
+\\
+<additiveExpTransformed> ::= NULL\\
+\tab \tab \tab \tab \tab| + <multiplicativeExp> <additiveExpTransformed>\\
+\tab \tab \tab \tab \tab| - <multiplicativeExp> <additiveExpTransformed> \\		
+\\
+<multiplicativeExp> ::= <factor> <multiplicationExpTransformed>\\
+\\
+<multiplicationExpTransformed> ::= NULL\\
+\tab \tab \tab \tab \tab \tab| * <factor> <multiplicationExpTransformed>\\
+\tab \tab \tab \tab \tab \tab| / <factor> <multiplicationExpTransformed>\\
+\\
+<factor> ::= '(' <operationsExp> ')'\\
+\tab \tab | 'numberFloat'\\
+\tab \tab | 'numberInt'\\
+\tab \tab | 'id'\\
+\\
+<prototypeDef> ::= '(' <paramFunction> ')'\\
+\\
+<paramFunction> ::= NULL\\
+\tab \tab \tab | <variableDec> ',' <paramFunction>\\
+\tab \tab \tab | <variableDec>\\
+\\
+<functionDec> ::= <type> 'id' <prototypeDef> <compoundStmt> 'fim'\\
+\\
+<prototypeCall> ::= NULL\\
+\tab \tab \tab | <operationsExp> ',' <protypeCall>\\
+\tab \tab \tab | <operationsExp>\\
+\\
+<functionCall> ::= 'id' '(' <paramCall> ')' \\
+\\
+<iterationExp> ::= 'repita' <compoundStmt> 'até' <operationsExp> 'fim'\\
+\\
+<selectionExp> ::= 'se' <operationsExp> 'então' <compoundStmt> 'fim'\\
+\tab \tab \tab | 'se' <operationsExp> 'então' <compoundStmt> 'senão'\\ <compoundStmt> 'fim'\\
+\\
+<ioTypes> ::= 'id'\\
+\tab \tab | 'numberInt'\\
+\tab \tab | 'numberFloat'\\
+\tab \tab | <functionCall>\\
+\\
+<attributionExp> ::= 'id' ':=' <operationsExp>\\
+\\
+<returnCom> ::= 'retorna' '(' <operationsExp> ')'\\
+\\
+<readCom> ::= 'leia' '(' 'id' ')'\\
+\\
+<writeCom> ::= 'escreve' '(' <operationsExp> ')'\\
+\\
+<compoundStmt> ::= <expression> <compoundStmt>\\
+\tab \tab \tab \tab | <expression>\\
+\\
+<expression> ::= <selectionExp>\\
+\tab \tab \tab | <iterationExp>\\
+\tab \tab \tab | <functionCall>\\
+\tab \tab \tab | <readCom>\\
+\tab \tab \tab | <writeCom>\\
+\tab \tab \tab | <returnCom>\\
+\tab \tab \tab | <variableDec>\\
+\tab \tab \tab | <attributionExp>\\
+\\
 \end{document}
