@@ -1,4 +1,4 @@
-\documentclass[12pt,a4paper,final]{report}
+\documentclass[12pt,a4paper,final]{article}
 \usepackage[T1]{fontenc}
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -7,6 +7,13 @@
 \usepackage[brazil]{minitoc}\usepackage[a4paper,left=2cm,right=2cm,top=4cm,bottom=4cm]{geometry}
 \usepackage[portuguese]{babel}
 \usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{xcolor}
+\lstset { %
+    language=C++,
+    backgroundcolor=\color{black!5}, % set backgroundcolor
+    basicstyle=\footnotesize,% basic font setting
+}
 
 \newcommand\tab[1][1cm]{\hspace*{#1}}
 
@@ -15,8 +22,93 @@
 \begin{document}
 \maketitle
 \section*{Introdução}
+Este documento tem como objetivo especificar o processo de implementação da primeira parte de um compilador(análise léxica e análise sintática) para a disciplina de Compiladores.
+Para a implementação do programa, foi utilizada a linguagem de programação C++ e a biblioteca \textit{boost} para auxíliar na varredura do arquivo.\\
+As saídas e entradas desse programa estão armazenadas em arquivos dados prévia à execução do compilador.
+O restante deste documento está organizado da seguinte forma:
+\begin{itemize}
+\item Análise Léxica : Funcionamento da varredura do arquivo e descrição das bibliotecas utilizadas e criadas para a captura das marcas do arquivo T++.
+\item Análise Sintática: Descrição do método utilizado para criação da AST ,análise da estrutura dos \textit{tokens} e métodos de tratamento de erros.
+\item Gramática : Definição da gramática BNF utilizada para a criação da análise sintática e descrição da classe de tratamento de erros do compilador.
+\end{itemize}
 
-\newpage
+\section*{Análise Léxica}
+Para o processo de varredura, não foi utilizada nenhuma ferramenta auxiliar para a construção da lista de \textit{tokens}. Para que as marcas fossem reconhecidas no arquivo, foi utilizada a biblioteca \textit{boost/regex}.\\
+
+Os tipos de marcas foram armazenadas em um \textit{enum} na biblioteca \textit{Token.h}. Essa lista de marcas são definidas dessa forma:
+\\
+
+\begin{lstlisting}
+    typedef enum {
+    
+        IF, THEN, OTHERWISE, END, REPEAT,
+        FLOAT, VOID, UNTIL, READ, WRITE,
+        INTEGER, COMMENTS, RETURN, SUM, SUBTRACTION,
+        MULTIPLICATION, DIVISION, EQUAL, COMMA, ATTRIBUTION,
+        LESS_THAN, BIGGER_THAN, LESS_EQUAL, BIGGER_EQUAL, OPEN,
+        CLOSE, NUMBER_INTEGER, NUMBER_FLOAT, DOUBLE_POINT, IDENTIFIER
+    } TokenType;
+\end{lstlisting}
+
+Quando dado \textit{token} é analisado, o seu conteúdo é armazenado em um vetor de estruturas \textit{tokens}
+
+\begin{lstlisting}
+	static std::vector<Token::Token> tokens;
+\end{lstlisting}
+
+A classe \textit{Token.h} é dada pela seguinte estrutura:
+
+\begin{lstlisting}
+	std::string tokenName;
+	TokenType token;
+	int tokenColumn;
+	int tokenLine;
+\end{lstlisting}
+
+O arquivo em que o código fonte é armazenado é lido linha por linha até que todos os caracteres sejam analisados e aceitos pela varredura, caso algum erro aconteça, a execução é finalizada.
+A varredura do arquivo é feita pela classe \textit{LexicalAnalyzer}.
+
+\section*{Análise Sintática}
+A análise sintática deste projeto foi feita utilizando algoritmos \textit{top-down} de análise recursiva descendente sem auxílio de ferramentas para a verificação da estrutura do programa.\\
+A gramática BNF foi transformada para se adequar à analise descendente (retirada da recursão à esquerda).\\
+Utilizando o algoritmo de descida recursiva, a gramática e a estrutura do programa ficaram bastante semelhantes, já que cada não terminal da gramática se tornou um método dentro do programa que avançava na lista de \textit{tokens} conforme a leitura avançava.\\
+
+A biblioteca responsável pela criação da árvore e análise é chamada de \textit{SyntaxAnalyzer.h} e  conta com apenas dois atributos:
+
+\begin{lstlisting}
+	Lex::LexicalAnalyzer lexer;
+	Tree::Tree syntaxTree;
+\end{lstlisting}
+
+A análise léxica está portanto diretamente ligada a análise sintática e não exitirá sem uma instância da análise sintática, assim como a classe \textit{Tree.h}, que é definida pela seguinte estrutura:
+
+\begin{lstlisting}
+	std::string exp;
+	Token::Token token;
+	int active;
+	std::vector<Tree*> children;
+\end{lstlisting}
+
+Conforme os \textit{tokens} são analisados e se encaixam na gramática, eles também são inseridos na árvore de acordo com a sua colocação dentro do programa e sua necessidade. Desta forma, montamos uma árvore abstrata onde apenas as folhas representam valores diretamente do programa.\\
+
+Os erros gerados durante a execução do programa foram especificados na classe \textit{CompilerErrors.h} (tanto erros léxicos quanto erros sintáticos), onde cada método mostra uma mensagem adequada quanto a coluna e a linha do programa onde determinado erro aconteceu. Como por exemplo:
+
+\begin{lstlisting}
+void CompilerErrors::unidentifiedTokenError(int Token, Token::Token token) {
+
+	std::cout << "Unidentified Token Error; "
+				<< "Received : "
+                << intToString(Token)
+                << "; Expected : "
+                << token.tokenTypeToString()
+                << "; Name : " << token.getTokenName();
+                
+	exit(EXIT_FAILURE);
+}
+\end{lstlisting}
+
+Portanto, a cada erro encontrado, o programa mostra a mensagem de erro e é finalizado, o que gera o problema de não conseguir mostrar mais de um erro por compilação.
+
 \section*{Gramática}
 
 <type> ::= 'vazio'\\
@@ -100,5 +192,4 @@
 \tab \tab \tab | <returnCom>\\
 \tab \tab \tab | <variableDec>\\
 \tab \tab \tab | <attributionExp>\\
-\\
 \end{document}
