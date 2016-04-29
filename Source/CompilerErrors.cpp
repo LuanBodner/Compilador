@@ -108,11 +108,10 @@ namespace CompilerErrors {
     void CompilerErrors::unidentifiedTokenError(int Token, Token::Token token) {
 
         std::cout << "Unidentified Token Error; "
-                << "Received : "
+                << "Expected : "
                 << intToString(Token)
-                << "; Expected : "
+                << "; Received : "
                 << token.tokenTypeToString()
-                << "; Name : " << token.getTokenName()
                 << std::endl;
 
         exit(EXIT_FAILURE);
