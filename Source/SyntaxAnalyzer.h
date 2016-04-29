@@ -42,8 +42,7 @@
 
 namespace SyntaxAnalyzer {
 
-    class SyntaxAnalyzer : public CompilerErrors::CompilerErrors {
-  
+    class SyntaxAnalyzer {
     public:
         SyntaxAnalyzer();
         virtual ~SyntaxAnalyzer();
@@ -52,15 +51,17 @@ namespace SyntaxAnalyzer {
         void initialTarget(std::string, std::string);
 
         Tree::Tree getTree();
-   
+
     private:
         Lex::LexicalAnalyzer lexer;
 
         Tree::Tree syntaxTree;
 
+        CompilerErrors::CompilerErrors error;
+
         // Creates an instance of the Lexer from the file std::string
         void createLexer(std::string, std::string);
-        
+
         // Prints the tokens in the file
         void printTokens(std::string);
 

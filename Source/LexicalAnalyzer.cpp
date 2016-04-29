@@ -83,7 +83,7 @@ namespace Lex {
 
             std::string bufferString;
             std::getline(file, bufferString);
-           
+
             while (bufferString.size() > 0) {
 
                 if (boost::regex_search(bufferString, match, c_CM))
@@ -186,7 +186,7 @@ namespace Lex {
                     tokenInserter(bufferString, match.str(), Token::IDENTIFIER, i_ID, column++, line);
 
                 else
-                    this->unknownCaracterStringError(line, column);
+                    this->error.unknownCaracterStringError(line, column);
             }
 
             line++;
@@ -204,7 +204,7 @@ namespace Lex {
     Token::Token LexicalAnalyzer::getNextToken() {
 
         if (index == tokens.size())
-            this->vectorSizeError();
+            this->error.vectorSizeError();
 
         return tokens[index++];
     }

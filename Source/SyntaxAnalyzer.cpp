@@ -38,7 +38,7 @@ namespace SyntaxAnalyzer {
         Token::Token tokenTemp = lexer.getNextToken();
 
         if (tokenTemp.getTokenType() != Token)
-            this->unidentifiedTokenError(Token, tokenTemp);
+            this->error.unidentifiedTokenError(Token, tokenTemp);
     }
 
     /* Gramática para declaração de variável */
@@ -62,7 +62,7 @@ namespace SyntaxAnalyzer {
                 eat(Token::VOID);
                 break;
 
-            default: this->typeError(tokenTemp);
+            default: this->error.typeError(tokenTemp);
         }
     }
 
@@ -320,7 +320,7 @@ namespace SyntaxAnalyzer {
                 eat(Token::CLOSE);
                 break;
 
-            default: this->factorError(tokenTemp);
+            default: this->error.factorError(tokenTemp);
         }
     }
 
@@ -429,7 +429,7 @@ namespace SyntaxAnalyzer {
             if (tokenTemp.getTokenType() == Token::COMMA) {
 
                 if (targetAdvance().getTokenType() == Token::CLOSE)
-                    this->numberOfArgumentsError(tokenTemp);
+                    this->error.numberOfArgumentsError(tokenTemp);
 
                 lookAhead--;
                 eat(Token::COMMA);
@@ -503,7 +503,7 @@ namespace SyntaxAnalyzer {
                         functionCallStmt();
                         break;
 
-                    default: this->expressionError(tokenTemp);
+                    default: this->error.expressionError(tokenTemp);
                 }
                 break;
 
@@ -517,7 +517,7 @@ namespace SyntaxAnalyzer {
                 whileStmt();
                 break;
 
-            default:this->expressionError(tokenTemp);
+            default: this->error.expressionError(tokenTemp);
         }
 
         subTree = tempTree;
@@ -564,7 +564,7 @@ namespace SyntaxAnalyzer {
             case(Token::CLOSE):
                 break;
 
-            default: this->parameterDeclarationError(tokenTemp);
+            default: this->error.parameterDeclarationError(tokenTemp);
         }
     }
 
@@ -606,7 +606,7 @@ namespace SyntaxAnalyzer {
                 eat(Token::END);
                 break;
 
-            default: this->functionDeclarationError(tempToken);
+            default: this->error.functionDeclarationError(tempToken);
         }
 
         subTree = tempTree;
@@ -643,11 +643,11 @@ namespace SyntaxAnalyzer {
                             functionDecStmt();
                             break;
 
-                        default: this->variableDeclarationError(token);
+                        default: this->error.variableDeclarationError(token);
                     }
                     break;
 
-                default: this->variableDeclarationError(token);
+                default: this->error.variableDeclarationError(token);
             }
         }
     }

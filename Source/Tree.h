@@ -16,7 +16,6 @@
 namespace Tree {
 
     class Tree {
-    
     public:
         Tree();
         virtual ~Tree();

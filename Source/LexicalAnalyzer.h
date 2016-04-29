@@ -18,8 +18,7 @@
 
 namespace Lex {
 
-    class LexicalAnalyzer : public CompilerErrors::CompilerErrors {
-  
+    class LexicalAnalyzer {
     public:
         LexicalAnalyzer(std::string);
         LexicalAnalyzer();
@@ -33,6 +32,7 @@ namespace Lex {
     private:
         //Vector of tokens collected
         static std::vector<Token::Token> tokens;
+        CompilerErrors::CompilerErrors error;
         //Collects and stores the tokens
         void tokenCollector(std::string);
         void tokenInserter(std::string &, std::string, Token::TokenType, boost::regex, int, int);
