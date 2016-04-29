@@ -18,7 +18,7 @@ namespace CompilerErrors {
     }
 
     static std::string intToString(int i) {
-        
+
         switch (i) {
             case 0: return "IF";
             case 1: return "THEN";
@@ -58,7 +58,7 @@ namespace CompilerErrors {
 
         std::cout << "Line: " << token.getTokenLine() << "; ";
         std::cout << "Column: " << token.getTokenColumn() << "; ";
-        std::cout << "Received '" << token.getTokenName() << "';";
+        std::cout << "Received '" << token.getTokenName() << "';\n";
 
         exit(EXIT_FAILURE);
     }
@@ -112,7 +112,8 @@ namespace CompilerErrors {
                 << intToString(Token)
                 << "; Expected : "
                 << token.tokenTypeToString()
-                << "; Name : " << token.getTokenName();
+                << "; Name : " << token.getTokenName()
+                << std::endl;
 
         exit(EXIT_FAILURE);
     }
@@ -120,7 +121,7 @@ namespace CompilerErrors {
     void CompilerErrors::unknownCaracterStringError(int line, int column) {
 
         std::cout << "Token Not Recognized; ";
-        std::cout << "Line: " << line << ";Column: " << column;
+        std::cout << "Line: " << line << ";Column: " << column << std::endl;
 
         exit(EXIT_FAILURE);
     }

@@ -1,4 +1,4 @@
-CC=g++ -std=c++11 -o compiler
+CC=g++ -std=c++11
 DEBUG=-ggdb
 CFLAGS=-Wall
 LDFLAGS= -lboost_regex
@@ -18,7 +18,7 @@ main:
 	$(CC) main.cpp -c  $(OPT) $(CFLAGS) $(DEBUG)
 
 link_main:
-	$(CC) main.o Token.o LexicalAnalyzer.o SyntaxAnalyzer.o CompilerErrors.o Tree.o $(LDFLAGS)
+	$(CC) main.o Token.o LexicalAnalyzer.o SyntaxAnalyzer.o CompilerErrors.o Tree.o -o compiler $(LDFLAGS)
 	
 clean:
 	rm -f *.out

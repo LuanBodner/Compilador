@@ -26,3 +26,20 @@ inteiro foo(inteiro: a)
     retorna(2*5)
 
 fim
+
+vazio teste()
+    
+    var := 10
+    
+    se a então
+        car := 10
+        se a >= b então
+            variavel := (a+b)
+        senão   
+            variavel := 1*(a+b)
+            repita
+                var := var + 1
+            ate n < 0
+        fim
+    fim
+fim
