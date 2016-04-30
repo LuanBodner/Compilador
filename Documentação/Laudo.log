@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2016.3.22)  27 APR 2016 18:40
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2016.3.22)  27 APR 2016 23:24
 entering extended mode
 **./Laudo.tex
 (Laudo.tex
@@ -651,14 +651,123 @@ Underfull \hbox (badness 10000) in paragraph at lines 38--40
 [1
 
 {C:/Users/LuanB/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 72--75
+
+! Package inputenc Error: Unicode char �\expandafter (U+4F1)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.60 	^\\b[A-Za-zÀ-
+                    ú_][A-Za-zÀ-ú0-9_]*
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! Package inputenc Error: Keyboard character used is undefined
+(inputenc)                in inputencoding `utf8'.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.60 	^\\b[A-Za-zÀ-
+                    ú_][A-Za-zÀ-ú0-9_]*
+You need to provide a definition with \DeclareInputText 
+or \DeclareInputMath before using this key.
+
+
+! Package inputenc Error: Unicode char �\lst@FillFixed@ (U+5A9)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.60 	^\\b[A-Za-zÀ-ú_]
+                        [A-Za-zÀ-ú0-9_]*
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! Package inputenc Error: Keyboard character used is undefined
+(inputenc)                in inputencoding `utf8'.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.60 	^\\b[A-Za-zÀ-ú_]
+                        [A-Za-zÀ-ú0-9_]*
+You need to provide a definition with \DeclareInputText 
+or \DeclareInputMath before using this key.
+
+
+! Package inputenc Error: Unicode char �\expandafter (U+4F1)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.60 	^\\b[A-Za-zÀ-ú_][A-Za-zÀ-
+                                  ú0-9_]*
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! Package inputenc Error: Keyboard character used is undefined
+(inputenc)                in inputencoding `utf8'.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.60 	^\\b[A-Za-zÀ-ú_][A-Za-zÀ-
+                                  ú0-9_]*
+You need to provide a definition with \DeclareInputText 
+or \DeclareInputMath before using this key.
+
+
+! Package inputenc Error: Unicode char �\lst@FillFixed@ (U+5A9)
+(inputenc)                not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.60 	^\\b[A-Za-zÀ-ú_][A-Za-zÀ-ú0-
+                                      9_]*
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! Package inputenc Error: Keyboard character used is undefined
+(inputenc)                in inputencoding `utf8'.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.60 	^\\b[A-Za-zÀ-ú_][A-Za-zÀ-ú0-
+                                      9_]*
+You need to provide a definition with \DeclareInputText 
+or \DeclareInputMath before using this key.
+
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 60.
+
+Underfull \hbox (badness 10000) in paragraph at lines 82--85
 
  []
 
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 89.
 
-Underfull \hbox (badness 10000) in paragraph at lines 92--93
+Underfull \hbox (badness 10000) in paragraph at lines 102--103
 
  []
 
@@ -672,142 +781,142 @@ Package minitoc(hints) Info: I0019
 (minitoc(hints))             No hints have been written 
 (minitoc(hints))             in the Laudo.log file..
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--195
+Underfull \hbox (badness 10000) in paragraph at lines 124--205
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--195
+Underfull \hbox (badness 10000) in paragraph at lines 124--205
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--195
+Underfull \hbox (badness 10000) in paragraph at lines 124--205
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--195
+Underfull \hbox (badness 10000) in paragraph at lines 124--205
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--195
+Underfull \hbox (badness 10000) in paragraph at lines 124--205
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--195
+Underfull \hbox (badness 10000) in paragraph at lines 124--205
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--195
+Underfull \hbox (badness 10000) in paragraph at lines 124--205
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--195
+Underfull \hbox (badness 10000) in paragraph at lines 124--205
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--195
+Underfull \hbox (badness 10000) in paragraph at lines 124--205
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--195
+Underfull \hbox (badness 10000) in paragraph at lines 124--205
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--195
+Underfull \hbox (badness 10000) in paragraph at lines 124--205
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--195
+Underfull \hbox (badness 10000) in paragraph at lines 124--205
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--195
+Underfull \hbox (badness 10000) in paragraph at lines 124--205
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--195
+Underfull \hbox (badness 10000) in paragraph at lines 124--205
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--195
+Underfull \hbox (badness 10000) in paragraph at lines 124--205
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--195
+Underfull \hbox (badness 10000) in paragraph at lines 124--205
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--195
+Underfull \hbox (badness 10000) in paragraph at lines 124--205
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--195
+Underfull \hbox (badness 10000) in paragraph at lines 124--205
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--195
+Underfull \hbox (badness 10000) in paragraph at lines 124--205
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--195
+Underfull \hbox (badness 10000) in paragraph at lines 124--205
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--195
+Underfull \hbox (badness 10000) in paragraph at lines 124--205
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--195
+Underfull \hbox (badness 10000) in paragraph at lines 124--205
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--195
+Underfull \hbox (badness 10000) in paragraph at lines 124--205
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--195
+Underfull \hbox (badness 10000) in paragraph at lines 124--205
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--195
+Underfull \hbox (badness 10000) in paragraph at lines 124--205
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--195
+Underfull \hbox (badness 10000) in paragraph at lines 124--205
 
  []
 
 [3] [4] [5] (Laudo.aux) ) 
 Here is how much of TeX's memory you used:
- 7337 strings out of 493634
- 95033 string characters out of 3135239
- 214031 words of memory out of 3000000
- 10430 multiletter control sequences out of 15000+200000
- 12866 words of font info for 35 fonts, out of 3000000 for 9000
+ 7358 strings out of 493634
+ 95212 string characters out of 3135239
+ 215031 words of memory out of 3000000
+ 10449 multiletter control sequences out of 15000+200000
+ 13511 words of font info for 38 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
  33i,6n,58p,322b,1702s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\LuanB\AppData\Local\MiKTeX\2.9\fonts\pk\ljf
@@ -820,9 +929,9 @@ nB\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1728.pk> <C:
 40.pk> <C:\Users\LuanB\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi
 600\ecrm2074.pk><C:/Users/LuanB/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/p
 ublic/amsfonts/cm/cmsy10.pfb>
-Output written on Laudo.pdf (5 pages, 101915 bytes).
+Output written on Laudo.pdf (5 pages, 105034 bytes).
 PDF statistics:
- 283 PDF objects out of 1000 (max. 8388607)
+ 292 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

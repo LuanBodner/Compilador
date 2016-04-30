@@ -52,6 +52,16 @@ Os tipos de marcas foram armazenadas em um \textit{enum} na biblioteca \textit{T
 
 Quando dado \textit{token} é analisado, o seu conteúdo é armazenado em um vetor de estruturas \textit{tokens}
 
+Os \textit{tokens} são analisados de acordo com expressões regulares. As mais importantes listadas a seguir:
+
+\begin{itemize}
+\item 
+\begin{lstlisting}
+	^\\b[A-Za-zÀ-ú_][A-Za-zÀ-ú0-9_]*
+\end{lstlisting}
+
+\end{itemize}
+
 \begin{lstlisting}
 	static std::vector<Token::Token> tokens;
 \end{lstlisting}
