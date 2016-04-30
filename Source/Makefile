@@ -23,3 +23,4 @@ link_main:
 clean:
 	rm -f *.out
 	rm -f *.o
+	rm -f compiler
