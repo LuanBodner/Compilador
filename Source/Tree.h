@@ -35,7 +35,7 @@ namespace Tree {
         void setToken(Token::Token);
 
         // Prints tree
-        void printTree(std::ofstream&, int);
+        void printTree(std::ofstream&, int a = 0);
 
         // Creates a subtree
         Tree * subTree();

@@ -66,7 +66,7 @@ namespace Tree {
         return children[children.size() - 1];
     }
 
-    void Tree::printTree(std::ofstream & output, int level = 0) {
+    void Tree::printTree(std::ofstream & output, int level) {
 
         if (level > 0)
             output << std::setw(level) << ' ';

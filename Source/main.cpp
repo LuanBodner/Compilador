@@ -30,7 +30,7 @@ int main(int argc, char** argv) {
 
     synx.initialTarget(argv[1], argv[2]);
 
-    synx.getTree().printTree(output, 0);
+    synx.getTree().printTree(output);
 
     output.close();
 
