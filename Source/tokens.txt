@@ -16,9 +16,21 @@
 "a" == IDENTIFIER
 	LINE : 0
 	COLUMN : 5
-")" == CLOSE PAIR
+"," == COMMA
 	LINE : 0
 	COLUMN : 6
+"inteiro" == INTEGER
+	LINE : 0
+	COLUMN : 7
+":" == DOUBLE POINT
+	LINE : 0
+	COLUMN : 8
+"b" == IDENTIFIER
+	LINE : 0
+	COLUMN : 9
+")" == CLOSE PAIR
+	LINE : 0
+	COLUMN : 10
 "se" == IF
 	LINE : 2
 	COLUMN : 0

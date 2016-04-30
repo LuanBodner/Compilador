@@ -6,6 +6,9 @@ Declaration
             VariableDecStatement
                 inteiro
                 a
+            VariableDecStatement
+                inteiro
+                b
         CompoundStatement
             ExpressionStatement
                 IfStatement
@@ -33,7 +36,6 @@ Declaration
                                                         a
                                                         SumExpression
                                                             b
-                                        CompoundStatement
                                     OtherwiseStement
                                         CompoundStatement
                                             ExpressionStatement
@@ -57,13 +59,10 @@ Declaration
                                                                         var
                                                                         SumExpression
                                                                             1
-                                                            CompoundStatement
                                                         OperationExpression
                                                             n
                                                             LessThanExpression
                                                                 0
-                                                CompoundStatement
-                            CompoundStatement
             CompoundStatement
                 ExpressionStatement
                     WhileStatement
@@ -84,10 +83,8 @@ Declaration
                                                     var
                                                     OperationExpression
                                                         15
-                                            CompoundStatement
                                         OperationExpression
                                             1
-                                CompoundStatement
                         OperationExpression
                             n
                             LessThanExpression
@@ -113,7 +110,6 @@ Declaration
                                         2
                                         MultiplicationExpression
                                             5
-                            CompoundStatement
     FunctionDecStatement
         vazio
         teste
@@ -151,7 +147,6 @@ Declaration
                                                             a
                                                             SumExpression
                                                                 b
-                                            CompoundStatement
                                         OtherwiseStement
                                             CompoundStatement
                                                 ExpressionStatement
@@ -175,11 +170,7 @@ Declaration
                                                                             var
                                                                             SumExpression
                                                                                 1
-                                                                CompoundStatement
                                                             OperationExpression
                                                                 n
                                                                 LessThanExpression
                                                                     0
-                                                    CompoundStatement
-                                CompoundStatement
-                CompoundStatement

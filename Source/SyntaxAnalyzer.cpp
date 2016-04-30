@@ -289,15 +289,12 @@ namespace SyntaxAnalyzer {
             case(Token::IDENTIFIER):
 
                 tokenTemp = targetAdvance();
-                lookAhead--;
+                lookAhead -= 2;
 
-                if (tokenTemp.getTokenType() == Token::OPEN) {
-
-                    lookAhead--;
+                if (tokenTemp.getTokenType() == Token::OPEN)
                     functionCallStmt();
-                } else {
+                else {
 
-                    lookAhead--;
                     subTree->setChild(targetAdvance());
                     eat(Token::IDENTIFIER);
                 }
@@ -425,18 +422,17 @@ namespace SyntaxAnalyzer {
             operationsExp();
 
             tokenTemp = targetAdvance();
+            lookAhead--;
 
             if (tokenTemp.getTokenType() == Token::COMMA) {
 
                 if (targetAdvance().getTokenType() == Token::CLOSE)
                     this->error.numberOfArgumentsError(tokenTemp);
 
-                lookAhead--;
                 eat(Token::COMMA);
 
                 paramCallStmt();
-            } else
-                lookAhead--;
+            }
         }
     }
 
@@ -463,6 +459,7 @@ namespace SyntaxAnalyzer {
     void SyntaxAnalyzer::expression() {
 
         Token::Token tokenTemp = targetAdvance();
+        lookAhead--;
 
         Tree::Tree * tempTree = subTree;
         setAndAdvance(EXPSTRING);
@@ -470,36 +467,32 @@ namespace SyntaxAnalyzer {
         switch (tokenTemp.getTokenType()) {
 
             case(Token::INTEGER): case(Token::FLOAT): case(Token::VOID):
-                lookAhead--;
                 variableDecStmt();
                 break;
 
             case(Token::READ):
-                lookAhead--;
                 readStmt();
                 break;
 
             case(Token::WRITE):
-                lookAhead--;
                 writeStmt();
                 break;
 
             case(Token::RETURN):
-                lookAhead--;
                 returnValue();
                 break;
 
             case(Token::IDENTIFIER):
+                lookAhead++;
                 tokenTemp = targetAdvance();
+                lookAhead -= 2;
                 switch (tokenTemp.getTokenType()) {
 
                     case(Token::ATTRIBUTION):
-                        lookAhead -= 2;
                         attributionStmt();
                         break;
 
                     case(Token::OPEN):
-                        lookAhead -= 2;
                         functionCallStmt();
                         break;
 
@@ -508,12 +501,10 @@ namespace SyntaxAnalyzer {
                 break;
 
             case(Token::IF):
-                lookAhead--;
                 ifStmt();
                 break;
 
             case(Token::REPEAT):
-                lookAhead--;
                 whileStmt();
                 break;
 
@@ -529,11 +520,12 @@ namespace SyntaxAnalyzer {
         lookAhead--;
 
         Tree::Tree * tempTree = subTree;
-        setAndAdvance(COMPSTMTSTRING);
 
         if (tokenTemp.getTokenType() != Token::END
                 && tokenTemp.getTokenType() != Token::OTHERWISE
                 && tokenTemp.getTokenType() != Token::UNTIL) {
+
+            setAndAdvance(COMPSTMTSTRING);
 
             expression();
             compoundStmt();
@@ -630,16 +622,15 @@ namespace SyntaxAnalyzer {
                 case(Token::INTEGER): case(Token::FLOAT): case(Token::VOID):
 
                     token = targetAdvance();
+                    lookAhead -= 2;
 
                     switch (token.getTokenType()) {
 
                         case(Token::DOUBLE_POINT):
-                            lookAhead -= 2;
                             variableDecStmt();
                             break;
 
                         case(Token::IDENTIFIER):
-                            lookAhead -= 2;
                             functionDecStmt();
                             break;
 

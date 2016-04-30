@@ -1,4 +1,4 @@
-inteiro foo(inteiro: a)
+inteiro foo(inteiro: a, inteiro: b)
     
     se a então
         car := 10
