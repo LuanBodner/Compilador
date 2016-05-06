@@ -16,7 +16,7 @@
 
 int main(int argc, char** argv) {
 
-    /*if (argc < 4) {
+    if (argc < 4) {
 
         std::cout << "Wrong number of arguments\n";
         return EXIT_FAILURE;
@@ -32,7 +32,7 @@ int main(int argc, char** argv) {
 
     synx.getTree().printTree(output);
 
-    output.close();*/
+    output.close();
 
     return EXIT_SUCCESS;
 }

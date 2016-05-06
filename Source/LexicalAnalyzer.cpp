@@ -75,7 +75,11 @@ namespace Lex {
 
         while (!bufferString.size()) {
 
-            std::getline(file, bufferString);
+            if (!std::getline(file, bufferString)) {
+
+                tokenTemp.setTokenName("@EOF");
+                return tokenTemp;
+            }
 
             line++;
             column = 0;

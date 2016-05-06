@@ -59,6 +59,8 @@ namespace SyntaxAnalyzer {
 
         CompilerErrors::CompilerErrors error;
 
+        std::vector<Token::Token> vecToken;
+
         // Creates an instance of the Lexer from the file std::string
         void createLexer(std::string, std::string);
 
@@ -66,7 +68,7 @@ namespace SyntaxAnalyzer {
         void printTokens(std::string);
 
         // Navigates on the token vector
-        Token::Token targetAdvance();
+        Token::Token targetAdvance(std::ifstream&);
 
         // Consumes the next token in the vector
         void eat(int Token);
