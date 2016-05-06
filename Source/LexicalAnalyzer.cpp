@@ -80,6 +80,12 @@ namespace Lex {
                 tokenTemp.setTokenName("@EOF");
                 return tokenTemp;
             }
+            
+            if (boost::regex_search(bufferString, match, c_CM))
+                bufferString = boost::regex_replace(bufferString, c_CM, "");
+
+            if (boost::regex_search(bufferString, match, b_SP))
+                bufferString = boost::regex_replace(bufferString, b_SP, "");
 
             line++;
             column = 0;

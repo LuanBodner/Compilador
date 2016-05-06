@@ -1,1 +1,3 @@
 inteiro : a
+inteiro foo(inteiro :b)
+fim

@@ -544,6 +544,7 @@ namespace SyntaxAnalyzer {
     void SyntaxAnalyzer::paramFunctionStmt() {
 
         Token::Token tokenTemp = targetAdvance(file);
+        tokenTemp.print();
 
         switch (tokenTemp.getTokenType()) {
 
@@ -568,7 +569,8 @@ namespace SyntaxAnalyzer {
 
     void SyntaxAnalyzer::prototypeDefStmt() {
 
-        targetAdvance(file);
+        Token::Token t = targetAdvance(file);
+        t.print();
         eat(Token::OPEN);
 
         Tree::Tree * tempTree = subTree;
@@ -576,7 +578,7 @@ namespace SyntaxAnalyzer {
 
         paramFunctionStmt();
 
-        targetAdvance(file);
+        //targetAdvance(file);
         eat(Token::CLOSE);
 
         subTree = tempTree;
@@ -589,7 +591,8 @@ namespace SyntaxAnalyzer {
 
         type();
 
-        Token::Token tempToken = targetAdvance(file);
+        Token::Token tempToken = vecToken[0];
+        tempToken.print();
 
         subTree->setChild(tempToken);
 
@@ -640,6 +643,7 @@ namespace SyntaxAnalyzer {
                             break;
 
                         case(Token::IDENTIFIER):
+                            token.print();
                             functionDecStmt();
                             break;
 

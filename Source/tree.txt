@@ -1,4 +1,0 @@
-Declaration
-    VariableDecStatement
-        inteiro
-        a
