@@ -1,3 +1,9 @@
 inteiro : a
-inteiro foo(inteiro :b)
+inteiro foo(inteiro :b, flutuante: a, vazio: b)
+    
+    inteiro: teste
+
+    leia(teste)
+    
+    teste := 10
 fim
