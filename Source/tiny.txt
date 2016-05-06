@@ -1,5 +1,5 @@
-inteiro foo(inteiro: a, inteiro: b)
-    
+inteiro foo()
+
     se a então
         car := 10
         se a >= b então
