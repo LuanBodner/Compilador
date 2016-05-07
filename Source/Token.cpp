@@ -102,6 +102,6 @@ namespace Token {
 
     void Token::print() {
 
-        std::cout << "<" << this->tokenName << "," << this->tokenTypeToString() << ">" << std::endl;
+        std::cout << "<" << this->tokenName << "," << this->token << ">" << std::endl;
     }
 }

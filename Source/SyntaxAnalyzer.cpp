@@ -13,8 +13,6 @@ namespace SyntaxAnalyzer {
 
     Tree::Tree * subTree = NULL;
 
-    std::ifstream file;
-
     /* Funções básicas da classe SyntaxAnalyzer*/
     SyntaxAnalyzer::SyntaxAnalyzer() {
     }
@@ -22,26 +20,22 @@ namespace SyntaxAnalyzer {
     SyntaxAnalyzer::~SyntaxAnalyzer() {
     }
 
-    /*void SyntaxAnalyzer::createLexer(std::string in, std::string out) {
+    void SyntaxAnalyzer::createLexer(std::string in, std::string out) {
 
         lexer = Lex::LexicalAnalyzer(in);
         printTokens(out);
-    }*/
+    }
 
     /* Percorre pela lista de tokens na frente do eat */
-    Token::Token SyntaxAnalyzer::targetAdvance(std::ifstream & file) {
+    Token::Token SyntaxAnalyzer::targetAdvance() {
 
-        this->vecToken.push_back(lexer.getNextToken(file));
-        lookAhead++;
-        return vecToken[vecToken.size() - 1];
+        return lexer.getTokenByPos(lookAhead++);
     }
 
     /* Faz a mudança de token para o próximo */
     void SyntaxAnalyzer::eat(int Token) {
 
-        Token::Token tokenTemp = vecToken[0];
-
-        vecToken.erase(vecToken.begin());
+        Token::Token tokenTemp = lexer.getNextToken();
 
         if (tokenTemp.getTokenType() != Token)
             this->error.unidentifiedTokenError(Token, tokenTemp);
@@ -50,7 +44,7 @@ namespace SyntaxAnalyzer {
     /* Gramática para declaração de variável */
     void SyntaxAnalyzer::type() {
 
-        Token::Token tokenTemp = vecToken[0];
+        Token::Token tokenTemp = targetAdvance();
 
         subTree->setChild(tokenTemp);
 
@@ -79,10 +73,10 @@ namespace SyntaxAnalyzer {
 
         type();
 
-        //targetAdvance(file);
+        targetAdvance();
         eat(Token::DOUBLE_POINT);
 
-        subTree->setChild(targetAdvance(file));
+        subTree->setChild(targetAdvance());
         eat(Token::IDENTIFIER);
 
         subTree = tempTree;
@@ -94,16 +88,16 @@ namespace SyntaxAnalyzer {
         Tree::Tree * tempTree = subTree;
         setAndAdvance(READSTRING);
 
-        //targetAdvance(file);
+        targetAdvance();
         eat(Token::READ);
 
-        targetAdvance(file);
+        targetAdvance();
         eat(Token::OPEN);
 
-        subTree->setChild(targetAdvance(file));
+        subTree->setChild(targetAdvance());
         eat(Token::IDENTIFIER);
 
-        targetAdvance(file);
+        targetAdvance();
         eat(Token::CLOSE);
 
         subTree = tempTree;
@@ -114,15 +108,15 @@ namespace SyntaxAnalyzer {
         Tree::Tree * tempTree = subTree;
         setAndAdvance(WRITESTRING);
 
-        targetAdvance(file);
+        targetAdvance();
         eat(Token::WRITE);
 
-        targetAdvance(file);
+        targetAdvance();
         eat(Token::OPEN);
 
         operationsExp();
 
-        targetAdvance(file);
+        targetAdvance();
         eat(Token::CLOSE);
 
         subTree = tempTree;
@@ -137,7 +131,7 @@ namespace SyntaxAnalyzer {
 
     void SyntaxAnalyzer::relationalExpL() {
 
-        Token::Token tokenTemp = targetAdvance(file);
+        Token::Token tokenTemp = targetAdvance();
 
         Tree::Tree * tempTree = subTree;
 
@@ -176,9 +170,7 @@ namespace SyntaxAnalyzer {
                 break;
 
             default:
-                std::cout << "\n\nrelationalExpL\n";
-                vecToken.pop_back();
-                vecToken[0].print();
+                lookAhead--;
                 break;
         }
     }
@@ -191,7 +183,7 @@ namespace SyntaxAnalyzer {
 
     void SyntaxAnalyzer::equalityExpL() {
 
-        Token::Token tokenTemp = targetAdvance(file);
+        Token::Token tokenTemp = targetAdvance();
 
         Tree::Tree * tempTree = subTree;
 
@@ -202,11 +194,8 @@ namespace SyntaxAnalyzer {
             relationalExp();
             equalityExpL();
             subTree = tempTree;
-        } else {
-            std::cout << "\n\nEqualityExpl\n";
-            vecToken.pop_back();
-            vecToken[0].print();
-        }
+        } else
+            lookAhead--;
     }
 
     void SyntaxAnalyzer::additiveExp() {
@@ -217,7 +206,7 @@ namespace SyntaxAnalyzer {
 
     void SyntaxAnalyzer::additiveExpL() {
 
-        Token::Token tokenTemp = targetAdvance(file);
+        Token::Token tokenTemp = targetAdvance();
 
         Tree::Tree * tempTree = subTree;
 
@@ -240,9 +229,7 @@ namespace SyntaxAnalyzer {
                 break;
 
             default:
-                std::cout << "\n\nAdditiveExpl\n";
-                vecToken.pop_back();
-                vecToken[0].print();
+                lookAhead--;
                 break;
         }
 
@@ -256,7 +243,7 @@ namespace SyntaxAnalyzer {
 
     void SyntaxAnalyzer::multiplicativeExpL() {
 
-        Token::Token tokenTemp = targetAdvance(file);
+        Token::Token tokenTemp = targetAdvance();
 
         Tree::Tree * tempTree = subTree;
 
@@ -279,45 +266,36 @@ namespace SyntaxAnalyzer {
                 break;
 
             default:
-                std::cout << "\n\nMultiplicativeExpL\n";
-                vecToken.pop_back();
-                vecToken[0].print();
+                lookAhead--;
                 break;
         }
     }
 
     void SyntaxAnalyzer::operationsExp() {
-        
-        vecToken.clear();
-        
+
         Tree::Tree * tempTree = subTree;
         setAndAdvance(OPEXPSTRING);
 
         equalityExp();
-
-        std::cout << "\n\nOperationsExp\n";
-        vecToken[0].print();
         subTree = tempTree;
     }
 
     void SyntaxAnalyzer::factorExp() {
 
-        Token::Token tokenTemp = targetAdvance(file);
-        std::cout << "\n\nFactorExp\n";
-        tokenTemp.print();
+        Token::Token tokenTemp = targetAdvance();
 
         switch (tokenTemp.getTokenType()) {
 
             case(Token::IDENTIFIER):
 
-                tokenTemp = targetAdvance(file);
+                tokenTemp = targetAdvance();
                 lookAhead -= 2;
 
                 if (tokenTemp.getTokenType() == Token::OPEN)
                     functionCallStmt();
                 else {
 
-                    subTree->setChild(targetAdvance(file));
+                    subTree->setChild(targetAdvance());
                     eat(Token::IDENTIFIER);
                 }
                 break;
@@ -335,7 +313,7 @@ namespace SyntaxAnalyzer {
             case(Token::OPEN):
                 eat(Token::OPEN);
                 operationsExp();
-                targetAdvance(file);
+                targetAdvance();
                 eat(Token::CLOSE);
                 break;
 
@@ -349,15 +327,15 @@ namespace SyntaxAnalyzer {
         Tree::Tree * tempTree = subTree;
         setAndAdvance(RETURNSTRING);
 
-        targetAdvance(file);
+        targetAdvance();
         eat(Token::RETURN);
 
-        targetAdvance(file);
+        targetAdvance();
         eat(Token::OPEN);
 
         operationsExp();
 
-        targetAdvance(file);
+        targetAdvance();
         eat(Token::CLOSE);
 
         subTree = tempTree;
@@ -369,17 +347,17 @@ namespace SyntaxAnalyzer {
         Tree::Tree * tempTree = subTree;
         setAndAdvance(IFSTRING);
 
-        targetAdvance(file);
+        targetAdvance();
         eat(Token::IF);
 
         operationsExp();
 
-        targetAdvance(file);
+        targetAdvance();
         eat(Token::THEN);
 
         compoundStmt();
 
-        if (targetAdvance(file).getTokenType() == Token::OTHERWISE) {
+        if (targetAdvance().getTokenType() == Token::OTHERWISE) {
 
             Tree::Tree * newTempTree = subTree;
             eat(Token::OTHERWISE);
@@ -387,7 +365,7 @@ namespace SyntaxAnalyzer {
 
             compoundStmt();
 
-            targetAdvance(file);
+            targetAdvance();
             eat(Token::END);
 
             subTree = newTempTree;
@@ -403,12 +381,12 @@ namespace SyntaxAnalyzer {
         Tree::Tree * tempTree = subTree;
         setAndAdvance(WHILESTRING);
 
-        targetAdvance(file);
+        targetAdvance();
         eat(Token::REPEAT);
 
         compoundStmt();
 
-        targetAdvance(file);
+        targetAdvance();
         eat(Token::UNTIL);
 
         operationsExp();
@@ -421,14 +399,11 @@ namespace SyntaxAnalyzer {
 
         Tree::Tree * tempTree = subTree;
         setAndAdvance(ATTSTRING);
-        std::cout << "\n\nAttStmt\n";
 
-        //subTree->setChild(targetAdvance(file));
-        vecToken[0].print();
+        subTree->setChild(targetAdvance());
         eat(Token::IDENTIFIER);
-        vecToken[0].print();
 
-        //targetAdvance(file);
+        targetAdvance();
         eat(Token::ATTRIBUTION);
 
         operationsExp();
@@ -439,19 +414,19 @@ namespace SyntaxAnalyzer {
     /* Expressão de chamada de função*/
     void SyntaxAnalyzer::paramCallStmt() {
 
-        Token::Token tokenTemp = targetAdvance(file);
+        Token::Token tokenTemp = targetAdvance();
         lookAhead--;
 
         if (tokenTemp.getTokenType() != Token::CLOSE) {
 
             operationsExp();
 
-            tokenTemp = targetAdvance(file);
+            tokenTemp = targetAdvance();
             lookAhead--;
 
             if (tokenTemp.getTokenType() == Token::COMMA) {
 
-                if (targetAdvance(file).getTokenType() == Token::CLOSE)
+                if (targetAdvance().getTokenType() == Token::CLOSE)
                     this->error.numberOfArgumentsError(tokenTemp);
 
                 eat(Token::COMMA);
@@ -466,15 +441,15 @@ namespace SyntaxAnalyzer {
         Tree::Tree * tempTree = subTree;
         setAndAdvance(FUNCCALLSTRING);
 
-        subTree->setChild(targetAdvance(file));
+        subTree->setChild(targetAdvance());
         eat(Token::IDENTIFIER);
 
-        targetAdvance(file);
+        targetAdvance();
         eat(Token::OPEN);
 
         paramCallStmt();
 
-        targetAdvance(file);
+        targetAdvance();
         eat(Token::CLOSE);
 
         subTree = tempTree;
@@ -483,7 +458,7 @@ namespace SyntaxAnalyzer {
     /* Conjunto de expressões possíveis dentro dos escopos */
     void SyntaxAnalyzer::expression() {
 
-        Token::Token tokenTemp = vecToken[0];
+        Token::Token tokenTemp = targetAdvance();
         lookAhead--;
 
         Tree::Tree * tempTree = subTree;
@@ -492,7 +467,6 @@ namespace SyntaxAnalyzer {
         switch (tokenTemp.getTokenType()) {
 
             case(Token::INTEGER): case(Token::FLOAT): case(Token::VOID):
-                targetAdvance(file);
                 variableDecStmt();
                 break;
 
@@ -510,9 +484,7 @@ namespace SyntaxAnalyzer {
 
             case(Token::IDENTIFIER):
                 lookAhead++;
-                tokenTemp = targetAdvance(file);
-                std::cout << "\n\nExpressionIdentifier\n";
-                tokenTemp.print();
+                tokenTemp = targetAdvance();
                 lookAhead -= 2;
                 switch (tokenTemp.getTokenType()) {
 
@@ -544,9 +516,7 @@ namespace SyntaxAnalyzer {
 
     void SyntaxAnalyzer::compoundStmt() {
 
-        Token::Token tokenTemp = targetAdvance(file);
-        std::cout << "\n\nCompStmt\n";
-        tokenTemp.print();
+        Token::Token tokenTemp = targetAdvance();
         lookAhead--;
 
         Tree::Tree * tempTree = subTree;
@@ -567,23 +537,18 @@ namespace SyntaxAnalyzer {
     /* Gramática para declaração de uma função */
     void SyntaxAnalyzer::paramFunctionStmt() {
 
-        Token::Token tokenTemp = targetAdvance(file);
-        std::cout << "\n\nParamFuncStmt\n";
-        tokenTemp.print();
+        Token::Token tokenTemp = targetAdvance();
 
         switch (tokenTemp.getTokenType()) {
 
             case(Token::INTEGER): case(Token::FLOAT): case(Token::VOID):
                 lookAhead--;
-                targetAdvance(file);
                 variableDecStmt();
                 paramFunctionStmt();
                 break;
 
             case(Token::COMMA):
                 eat(Token::COMMA);
-                targetAdvance(file);
-                targetAdvance(file);
                 variableDecStmt();
                 paramFunctionStmt();
                 break;
@@ -597,9 +562,7 @@ namespace SyntaxAnalyzer {
 
     void SyntaxAnalyzer::prototypeDefStmt() {
 
-        Token::Token t = targetAdvance(file);
-        std::cout << "\n\nPrototypeDef\n";
-        t.print();
+        targetAdvance();
         eat(Token::OPEN);
 
         Tree::Tree * tempTree = subTree;
@@ -607,7 +570,7 @@ namespace SyntaxAnalyzer {
 
         paramFunctionStmt();
 
-        //targetAdvance(file);
+        targetAdvance();
         eat(Token::CLOSE);
 
         subTree = tempTree;
@@ -620,9 +583,7 @@ namespace SyntaxAnalyzer {
 
         type();
 
-        Token::Token tempToken = vecToken[0];
-        std::cout << "\n\nFuncStmt\n";
-        tempToken.print();
+        Token::Token tempToken = targetAdvance();
 
         subTree->setChild(tempToken);
 
@@ -633,7 +594,7 @@ namespace SyntaxAnalyzer {
                 prototypeDefStmt();
                 lookAhead--;
                 compoundStmt();
-                targetAdvance(file);
+                targetAdvance();
                 eat(Token::END);
                 break;
 
@@ -644,37 +605,32 @@ namespace SyntaxAnalyzer {
     }
 
     /* Faz a primeira chamada para passar pela gramática */
-    void SyntaxAnalyzer::initialTarget(std::string lexIn, std::string lexOut) {
+    void SyntaxAnalyzer::initialTarget(std::string in, std::string out) {
 
-        //SyntaxAnalyzer::createLexer(in, out);
-        file.open(lexIn);
+        SyntaxAnalyzer::createLexer(in, out);
 
         subTree = &(this->syntaxTree);
 
-        while (!file.eof()) {
+        while (lookAhead < lexer.tokenVectorSize()) {
 
             subTree->setExp(DECSTRING);
 
-            Token::Token token = targetAdvance(file);
-            std::cout << "\n\nInitialTarget\n";
-            token.print();
+            Token::Token token = targetAdvance();
 
             switch (token.getTokenType()) {
 
                 case(Token::INTEGER): case(Token::FLOAT): case(Token::VOID):
 
-                    token = targetAdvance(file);
+                    token = targetAdvance();
                     lookAhead -= 2;
 
                     switch (token.getTokenType()) {
 
                         case(Token::DOUBLE_POINT):
-                            token.print();
                             variableDecStmt();
                             break;
 
                         case(Token::IDENTIFIER):
-                            token.print();
                             functionDecStmt();
                             break;
 
@@ -707,13 +663,13 @@ namespace SyntaxAnalyzer {
 
         do {
 
-            tokenTemp = targetAdvance(file);
+            tokenTemp = targetAdvance();
 
             output << "\"" << tokenTemp.getTokenName() << "\"" << " == "
                     << tokenTemp.tokenTypeToString() << "\n\tLINE : "
                     << tokenTemp.getTokenLine() << "\n\tCOLUMN : "
                     << tokenTemp.getTokenColumn() << "\n";
-        } while (!tokenTemp.getTokenName().compare("@EOF"));
+        } while (lookAhead < lexer.tokenVectorSize());
 
         lookAhead = 0;
     }

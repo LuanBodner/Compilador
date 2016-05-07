@@ -1,9 +1,45 @@
-inteiro : a
-inteiro foo(inteiro :b, flutuante: a, vazio: b)
+inteiro foo(inteiro: a, inteiro: b)
     
-    inteiro: teste
+    se a então
+        car := 10
+        se a >= b então
+            variavel := (a+b)
+        senão   
+            variavel := 1*(a+b)
+            repita
+                var := var + 1
+            ate n < 0
+        fim
+    fim
+    
+    repita
+        var := var + 1
+        repita
+            var := 15
+        ate 1
+    ate n < 0
 
-    leia(teste)
+    leia(abc)
+
+    escreve(foo(a,b))
+
+    retorna(2*5)
+
+fim
+
+vazio teste()
     
-    teste := 10
+    var := 10
+    
+    se a então
+        car := 10
+        se a >= b então
+            variavel := (a+b)
+        senão   
+            variavel := 1*(a+b)
+            repita
+                var := var + 1
+            ate n < 0
+        fim
+    fim
 fim

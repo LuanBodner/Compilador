@@ -13,7 +13,6 @@
 namespace Token {
 
     //Codes for the possible tokens 
-
     typedef enum {
         IF, THEN, OTHERWISE, END, REPEAT,
         FLOAT, VOID, UNTIL, READ, WRITE,
