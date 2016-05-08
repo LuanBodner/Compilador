@@ -8,7 +8,7 @@
 #include "LexicalAnalyzer.h"
 #include "CompilerErrors.h"
 
-namespace Lex {
+namespace Lexical {
 
     unsigned int index = 0;
 

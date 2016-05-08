@@ -12,7 +12,8 @@
 #include <boost/preprocessor.hpp>
 #include "Token.h"
 #include "LexicalAnalyzer.h"
-#include "SyntaxAnalyzer.h"
+#include "SyntaxAnalysis.h"
+#include "SemanticAnalysis.h"
 
 int main(int argc, char** argv) {
 
@@ -26,9 +27,13 @@ int main(int argc, char** argv) {
 
     output.open(argv[3], std::ofstream::out);
 
-    SyntaxAnalyzer::SyntaxAnalyzer synx;
+    Syntax::SyntaxAnalysis synx;
 
     synx.initialTarget(argv[1], argv[2]);
+    
+    Semantic::SemanticAnalysis semantic;
+    
+    semantic.treeAnalyzer(synx);
 
     synx.getTree().printTree(output);
 

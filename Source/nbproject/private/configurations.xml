@@ -6,8 +6,10 @@
       <in>CompilerErrors.h</in>
       <in>LexicalAnalyzer.cpp</in>
       <in>LexicalAnalyzer.h</in>
-      <in>SyntaxAnalyzer.cpp</in>
-      <in>SyntaxAnalyzer.h</in>
+      <in>SemanticAnalysis.cpp</in>
+      <in>SemanticAnalysis.h</in>
+      <in>SyntaxAnalysis.cpp</in>
+      <in>SyntaxAnalysis.h</in>
       <in>Token.cpp</in>
       <in>Token.h</in>
       <in>Tree.cpp</in>

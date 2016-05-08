@@ -5,35 +5,35 @@
  * Created on March 31, 2016, 9:33 AM
  */
 
-#include "SyntaxAnalyzer.h"
+#include "SyntaxAnalysis.h"
 
-namespace SyntaxAnalyzer {
+namespace Syntax {
 
     unsigned int lookAhead = 0;
 
     Tree::Tree * subTree = NULL;
 
     /* Funções básicas da classe SyntaxAnalyzer*/
-    SyntaxAnalyzer::SyntaxAnalyzer() {
+    SyntaxAnalysis::SyntaxAnalysis() {
     }
 
-    SyntaxAnalyzer::~SyntaxAnalyzer() {
+    SyntaxAnalysis::~SyntaxAnalysis() {
     }
 
-    void SyntaxAnalyzer::createLexer(std::string in, std::string out) {
+    void SyntaxAnalysis::createLexer(std::string in, std::string out) {
 
-        lexer = Lex::LexicalAnalyzer(in);
+        lexer = Lexical::LexicalAnalyzer(in);
         printTokens(out);
     }
 
     /* Percorre pela lista de tokens na frente do eat */
-    Token::Token SyntaxAnalyzer::targetAdvance() {
+    Token::Token SyntaxAnalysis::targetAdvance() {
 
         return lexer.getTokenByPos(lookAhead++);
     }
 
     /* Faz a mudança de token para o próximo */
-    void SyntaxAnalyzer::eat(int Token) {
+    void SyntaxAnalysis::eat(int Token) {
 
         Token::Token tokenTemp = lexer.getNextToken();
 
@@ -42,7 +42,7 @@ namespace SyntaxAnalyzer {
     }
 
     /* Gramática para declaração de variável */
-    void SyntaxAnalyzer::type() {
+    void SyntaxAnalysis::type() {
 
         Token::Token tokenTemp = targetAdvance();
 
@@ -66,7 +66,7 @@ namespace SyntaxAnalyzer {
         }
     }
 
-    void SyntaxAnalyzer::variableDecStmt() {
+    void SyntaxAnalysis::variableDecStmt() {
 
         Tree::Tree * tempTree = subTree;
         setAndAdvance(VARDECSTRING);
@@ -83,7 +83,7 @@ namespace SyntaxAnalyzer {
     }
 
     /* Leitura e escrita */
-    void SyntaxAnalyzer::readStmt() {
+    void SyntaxAnalysis::readStmt() {
 
         Tree::Tree * tempTree = subTree;
         setAndAdvance(READSTRING);
@@ -103,7 +103,7 @@ namespace SyntaxAnalyzer {
         subTree = tempTree;
     }
 
-    void SyntaxAnalyzer::writeStmt() {
+    void SyntaxAnalysis::writeStmt() {
 
         Tree::Tree * tempTree = subTree;
         setAndAdvance(WRITESTRING);
@@ -123,13 +123,13 @@ namespace SyntaxAnalyzer {
     }
 
     /* Caminho da recursividade das operações */
-    void SyntaxAnalyzer::relationalExp() {
+    void SyntaxAnalysis::relationalExp() {
 
         additiveExp();
         relationalExpL();
     }
 
-    void SyntaxAnalyzer::relationalExpL() {
+    void SyntaxAnalysis::relationalExpL() {
 
         Token::Token tokenTemp = targetAdvance();
 
@@ -175,13 +175,13 @@ namespace SyntaxAnalyzer {
         }
     }
 
-    void SyntaxAnalyzer::equalityExp() {
+    void SyntaxAnalysis::equalityExp() {
 
         relationalExp();
         equalityExpL();
     }
 
-    void SyntaxAnalyzer::equalityExpL() {
+    void SyntaxAnalysis::equalityExpL() {
 
         Token::Token tokenTemp = targetAdvance();
 
@@ -198,13 +198,13 @@ namespace SyntaxAnalyzer {
             lookAhead--;
     }
 
-    void SyntaxAnalyzer::additiveExp() {
+    void SyntaxAnalysis::additiveExp() {
 
         multiplicativeExp();
         additiveExpL();
     }
 
-    void SyntaxAnalyzer::additiveExpL() {
+    void SyntaxAnalysis::additiveExpL() {
 
         Token::Token tokenTemp = targetAdvance();
 
@@ -235,13 +235,13 @@ namespace SyntaxAnalyzer {
 
     }
 
-    void SyntaxAnalyzer::multiplicativeExp() {
+    void SyntaxAnalysis::multiplicativeExp() {
 
         factorExp();
         multiplicativeExpL();
     }
 
-    void SyntaxAnalyzer::multiplicativeExpL() {
+    void SyntaxAnalysis::multiplicativeExpL() {
 
         Token::Token tokenTemp = targetAdvance();
 
@@ -271,7 +271,7 @@ namespace SyntaxAnalyzer {
         }
     }
 
-    void SyntaxAnalyzer::operationsExp() {
+    void SyntaxAnalysis::operationsExp() {
 
         Tree::Tree * tempTree = subTree;
         setAndAdvance(OPEXPSTRING);
@@ -280,7 +280,7 @@ namespace SyntaxAnalyzer {
         subTree = tempTree;
     }
 
-    void SyntaxAnalyzer::factorExp() {
+    void SyntaxAnalysis::factorExp() {
 
         Token::Token tokenTemp = targetAdvance();
 
@@ -322,7 +322,7 @@ namespace SyntaxAnalyzer {
     }
 
     /* Retorno de funções */
-    void SyntaxAnalyzer::returnValue() {
+    void SyntaxAnalysis::returnValue() {
 
         Tree::Tree * tempTree = subTree;
         setAndAdvance(RETURNSTRING);
@@ -342,7 +342,7 @@ namespace SyntaxAnalyzer {
     }
 
     /* Expressão IF*/
-    void SyntaxAnalyzer::ifStmt() {
+    void SyntaxAnalysis::ifStmt() {
 
         Tree::Tree * tempTree = subTree;
         setAndAdvance(IFSTRING);
@@ -376,7 +376,7 @@ namespace SyntaxAnalyzer {
     }
 
     /* Expressão While*/
-    void SyntaxAnalyzer::whileStmt() {
+    void SyntaxAnalysis::whileStmt() {
 
         Tree::Tree * tempTree = subTree;
         setAndAdvance(WHILESTRING);
@@ -395,7 +395,7 @@ namespace SyntaxAnalyzer {
     }
 
     /* Expressão de atribuição */
-    void SyntaxAnalyzer::attributionStmt() {
+    void SyntaxAnalysis::attributionStmt() {
 
         Tree::Tree * tempTree = subTree;
         setAndAdvance(ATTSTRING);
@@ -412,7 +412,7 @@ namespace SyntaxAnalyzer {
     }
 
     /* Expressão de chamada de função*/
-    void SyntaxAnalyzer::paramCallStmt() {
+    void SyntaxAnalysis::paramCallStmt() {
 
         Token::Token tokenTemp = targetAdvance();
         lookAhead--;
@@ -436,7 +436,7 @@ namespace SyntaxAnalyzer {
         }
     }
 
-    void SyntaxAnalyzer::functionCallStmt() {
+    void SyntaxAnalysis::functionCallStmt() {
 
         Tree::Tree * tempTree = subTree;
         setAndAdvance(FUNCCALLSTRING);
@@ -456,7 +456,7 @@ namespace SyntaxAnalyzer {
     }
 
     /* Conjunto de expressões possíveis dentro dos escopos */
-    void SyntaxAnalyzer::expression() {
+    void SyntaxAnalysis::expression() {
 
         Token::Token tokenTemp = targetAdvance();
         lookAhead--;
@@ -514,7 +514,7 @@ namespace SyntaxAnalyzer {
         subTree = tempTree;
     }
 
-    void SyntaxAnalyzer::compoundStmt() {
+    void SyntaxAnalysis::compoundStmt() {
 
         Token::Token tokenTemp = targetAdvance();
         lookAhead--;
@@ -535,7 +535,7 @@ namespace SyntaxAnalyzer {
     }
 
     /* Gramática para declaração de uma função */
-    void SyntaxAnalyzer::paramFunctionStmt() {
+    void SyntaxAnalysis::paramFunctionStmt() {
 
         Token::Token tokenTemp = targetAdvance();
 
@@ -560,7 +560,7 @@ namespace SyntaxAnalyzer {
         }
     }
 
-    void SyntaxAnalyzer::prototypeDefStmt() {
+    void SyntaxAnalysis::prototypeDefStmt() {
 
         targetAdvance();
         eat(Token::OPEN);
@@ -576,7 +576,7 @@ namespace SyntaxAnalyzer {
         subTree = tempTree;
     }
 
-    void SyntaxAnalyzer::functionDecStmt() {
+    void SyntaxAnalysis::functionDecStmt() {
 
         Tree::Tree * tempTree = subTree;
         setAndAdvance(FUNCDECSTRING);
@@ -605,9 +605,9 @@ namespace SyntaxAnalyzer {
     }
 
     /* Faz a primeira chamada para passar pela gramática */
-    void SyntaxAnalyzer::initialTarget(std::string in, std::string out) {
+    void SyntaxAnalysis::initialTarget(std::string in, std::string out) {
 
-        SyntaxAnalyzer::createLexer(in, out);
+        SyntaxAnalysis::createLexer(in, out);
 
         subTree = &(this->syntaxTree);
 
@@ -643,18 +643,18 @@ namespace SyntaxAnalyzer {
         }
     }
 
-    Tree::Tree SyntaxAnalyzer::getTree() {
+    Tree::Tree SyntaxAnalysis::getTree() {
 
         return syntaxTree;
     }
 
-    void SyntaxAnalyzer::setAndAdvance(std::string exp) {
+    void SyntaxAnalysis::setAndAdvance(std::string exp) {
 
         subTree->setChild(exp);
         subTree = subTree->children[subTree->children.size() - 1];
     }
 
-    void SyntaxAnalyzer::printTokens(std::string str) {
+    void SyntaxAnalysis::printTokens(std::string str) {
 
         Token::Token tokenTemp;
 

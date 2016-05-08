@@ -16,7 +16,7 @@
 #include "Token.h"
 #include "CompilerErrors.h"
 
-namespace Lex {
+namespace Lexical {
 
     class LexicalAnalyzer {
     public:

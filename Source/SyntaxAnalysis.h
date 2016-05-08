@@ -40,12 +40,12 @@
 #define READSTRING "ReadStatement"
 #define VARDECSTRING "VariableDecStatement"
 
-namespace SyntaxAnalyzer {
+namespace Syntax {
 
-    class SyntaxAnalyzer {
+    class SyntaxAnalysis {
     public:
-        SyntaxAnalyzer();
-        virtual ~SyntaxAnalyzer();
+        SyntaxAnalysis();
+        virtual ~SyntaxAnalysis();
 
         // Kicks of the analysis
         void initialTarget(std::string, std::string);
@@ -53,7 +53,7 @@ namespace SyntaxAnalyzer {
         Tree::Tree getTree();
 
     private:
-        Lex::LexicalAnalyzer lexer;
+        Lexical::LexicalAnalyzer lexer;
 
         Tree::Tree syntaxTree;
 
