@@ -18,38 +18,34 @@ namespace Semantic {
     SemanticAnalysis::~SemanticAnalysis() {
     }
 
-    void SemanticAnalysis::variableDeclaration(Tree::Tree *tree) {
+    void SemanticAnalysis::variableDeclaration(Tree::Tree &tree) {
 
-        typeName t(tree->children[0]->token.getTokenName(),
-                tree->children[1]->token.getTokenName());
+        typeName t(tree.children[0]->token.getTokenName(),
+                tree.children[1]->token.getTokenName());
 
-        symbolTable.emplace(t, scope);
+        if (!t.first.compare("flutuante"))
+            symbolTable.emplace(t, valueScope("0.0", scope));
+        else if (!t.first.compare("vazio"))
+            symbolTable.emplace(t, valueScope("auto", scope));
+        else
+            symbolTable.emplace(t, valueScope("0", scope));
     }
 
-    void SemanticAnalysis::treeAnalyzer(Syntax::SyntaxAnalysis synx) {
+    void SemanticAnalysis::treeAnalyzer(Tree::Tree &tree) {
 
-        Tree::Tree tree = synx.getTree();
-        Tree::Tree * subTree;
+        if (!tree.exp.compare(VARDECSTRING))
+            variableDeclaration(tree);
 
-        subTree = tree.children[0];
-
-        for (unsigned int i = 1; i < tree.children.size(); i++) {
-
-            if (!subTree->exp.compare(VARDECSTRING))
-                variableDeclaration(subTree);
-
-            subTree = tree.children[i];
-        }
-
-        printTable();
-
+        for (unsigned int i = 0; i < tree.children.size(); i++)
+            treeAnalyzer(*(tree.children[i]));
     }
 
     void SemanticAnalysis::printTable() {
 
         for (const auto &p : symbolTable)
             std::cout << p.first.first << ","
-                << p.first.second << ";"
-                << p.second << std::endl;
+                << p.first.second << " / "
+                << p.second.first << ","
+                << p.second.second << std::endl;
     }
 }

@@ -1,4 +1,4 @@
-inteiro : a
+inteiro : c
 inteiro foo(inteiro: a, inteiro: b)
     
     se a então
@@ -22,11 +22,15 @@ inteiro foo(inteiro: a, inteiro: b)
 
     leia(abc)
 
+    flutuante: k
+
     escreve(foo(a,b))
 
     retorna(2*5)
 
 fim
+
+inteiro: j
 
 vazio teste()
     

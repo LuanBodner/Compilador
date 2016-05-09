@@ -13,6 +13,7 @@
 #include "SyntaxAnalysis.h"
 
 typedef std::pair<std::string, std::string> typeName;
+typedef std::pair<std::string, int> valueScope;
 
 namespace Semantic {
 
@@ -21,12 +22,12 @@ namespace Semantic {
         SemanticAnalysis();
         virtual ~SemanticAnalysis();
 
-        void treeAnalyzer(Syntax::SyntaxAnalysis);
+        void treeAnalyzer(Tree::Tree&);
         void printTable();
 
     private:
-        void variableDeclaration(Tree::Tree*);
-        boost::unordered_map<typeName, int> symbolTable;
+        void variableDeclaration(Tree::Tree&);
+        boost::unordered_map<typeName, valueScope> symbolTable;
     };
 }
 #endif /* SEMANTICANALYSIS_H */

@@ -1,7 +1,7 @@
 Declaration
     VariableDecStatement
         inteiro
-        a
+        c
     FunctionDecStatement
         inteiro
         foo
@@ -98,21 +98,29 @@ Declaration
                             abc
                     CompoundStatement
                         ExpressionStatement
-                            WriteStatement
-                                OperationExpression
-                                    FunctionCallStatement
-                                        foo
-                                        OperationExpression
-                                            a
-                                        OperationExpression
-                                            b
+                            VariableDecStatement
+                                flutuante
+                                k
                         CompoundStatement
                             ExpressionStatement
-                                ReturnStatement
+                                WriteStatement
                                     OperationExpression
-                                        2
-                                        MultiplicationExpression
-                                            5
+                                        FunctionCallStatement
+                                            foo
+                                            OperationExpression
+                                                a
+                                            OperationExpression
+                                                b
+                            CompoundStatement
+                                ExpressionStatement
+                                    ReturnStatement
+                                        OperationExpression
+                                            2
+                                            MultiplicationExpression
+                                                5
+    VariableDecStatement
+        inteiro
+        j
     FunctionDecStatement
         vazio
         teste

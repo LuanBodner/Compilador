@@ -30,10 +30,14 @@ int main(int argc, char** argv) {
     Syntax::SyntaxAnalysis synx;
 
     synx.initialTarget(argv[1], argv[2]);
-    
+
     Semantic::SemanticAnalysis semantic;
+
+    Tree::Tree subTree = synx.getTree();
     
-    semantic.treeAnalyzer(synx);
+    semantic.treeAnalyzer(subTree);
+    
+    semantic.printTable();
 
     synx.getTree().printTree(output);
 
