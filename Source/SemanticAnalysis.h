@@ -27,6 +27,7 @@ namespace Semantic {
 
     private:
         void variableDeclaration(Tree::Tree&);
+        void functionDeclaration(Tree::Tree&);
         boost::unordered_map<typeName, valueScope> symbolTable;
     };
 }

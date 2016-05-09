@@ -31,10 +31,17 @@ namespace Semantic {
             symbolTable.emplace(t, valueScope("0", scope));
     }
 
+    void SemanticAnalysis::functionDeclaration(Tree::Tree &tree) {
+
+    }
+
     void SemanticAnalysis::treeAnalyzer(Tree::Tree &tree) {
 
         if (!tree.exp.compare(VARDECSTRING))
             variableDeclaration(tree);
+
+        if (!tree.exp.compare(FUNCDECSTRING))
+            functionDeclaration(tree);
 
         for (unsigned int i = 0; i < tree.children.size(); i++)
             treeAnalyzer(*(tree.children[i]));
