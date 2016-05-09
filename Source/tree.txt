@@ -1,4 +1,7 @@
 Declaration
+    VariableDecStatement
+        inteiro
+        a
     FunctionDecStatement
         inteiro
         foo

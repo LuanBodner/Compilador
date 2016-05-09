@@ -8,9 +8,11 @@
 #ifndef SEMANTICANALYSIS_H
 #define SEMANTICANALYSIS_H
 #include <iostream>
-#include <unordered_map>
+#include <boost/unordered_map.hpp>
 
 #include "SyntaxAnalysis.h"
+
+typedef std::pair<std::string, std::string> typeName;
 
 namespace Semantic {
 
@@ -20,9 +22,11 @@ namespace Semantic {
         virtual ~SemanticAnalysis();
 
         void treeAnalyzer(Syntax::SyntaxAnalysis);
+        void printTable();
 
     private:
-        std::unordered_map<std::string, std::string> symbolTable;
+        void variableDeclaration(Tree::Tree*);
+        boost::unordered_map<typeName, int> symbolTable;
     };
 }
 #endif /* SEMANTICANALYSIS_H */
