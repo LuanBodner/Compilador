@@ -19,6 +19,9 @@ namespace CompilerErrors {
         CompilerErrors();
         virtual ~CompilerErrors();
 
+        //Semantic errors
+        void declarationScopeError(Token::Token);
+
         //Syntax errors
         void variableDeclarationError(Token::Token);
         void functionDeclarationError(Token::Token);

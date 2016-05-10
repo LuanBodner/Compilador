@@ -93,6 +93,12 @@ namespace CompilerErrors {
         printError(token);
     }
 
+    void CompilerErrors::declarationScopeError(Token::Token token) {
+
+        std::cout << "Variable Already Declared In This Scope; ";
+        printError(token);
+    }
+
     void CompilerErrors::factorError(Token::Token token) {
 
         std::cout << "Factor Error; ";

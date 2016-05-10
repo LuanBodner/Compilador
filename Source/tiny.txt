@@ -1,6 +1,7 @@
 inteiro : c
 inteiro foo(inteiro: a, inteiro: b)
     
+    {inteiro: b}
     se a então
         car := 10
         se a >= b então

@@ -77,7 +77,7 @@ namespace Lexical {
 
         Token::Token tokenTemp;
 
-        int line = 0, column = 0;
+        int line = 1, column = 0;
 
         while (!file.eof()) {
 

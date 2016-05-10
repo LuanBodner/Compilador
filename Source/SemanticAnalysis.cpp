@@ -6,7 +6,6 @@
  */
 
 #include "SemanticAnalysis.h"
-#include <unordered_map>
 
 namespace Semantic {
 
@@ -23,12 +22,26 @@ namespace Semantic {
         typeName t(tree.children[0]->token.getTokenName(),
                 tree.children[1]->token.getTokenName());
 
-        if (!t.first.compare("flutuante"))
-            symbolTable.emplace(t, valueScope("0.0", scope));
-        else if (!t.first.compare("vazio"))
-            symbolTable.emplace(t, valueScope("auto", scope));
-        else
-            symbolTable.emplace(t, valueScope("0", scope));
+        t.second.append("@");
+        t.second.append(std::to_string(scope));
+
+        if (symbolTable.find(t) != symbolTable.end())
+            error.declarationScopeError(tree.children[1]->token);
+
+        switch (t.first.size()) {
+            
+            case 9:
+                symbolTable.emplace(t, "0.0");
+                break;
+
+            case 5:
+                symbolTable.emplace(t, "auto");
+                break;
+
+            default:
+                symbolTable.emplace(t, "0");
+                break;
+        }
     }
 
     void SemanticAnalysis::functionDeclaration(Tree::Tree &tree) {
@@ -43,6 +56,9 @@ namespace Semantic {
         if (!tree.exp.compare(FUNCDECSTRING))
             functionDeclaration(tree);
 
+        if (!tree.exp.compare(ATTSTRING))
+            ;
+
         for (unsigned int i = 0; i < tree.children.size(); i++)
             treeAnalyzer(*(tree.children[i]));
     }
@@ -50,9 +66,8 @@ namespace Semantic {
     void SemanticAnalysis::printTable() {
 
         for (const auto &p : symbolTable)
-            std::cout << p.first.first << ","
+            std::cout << p.first.first << ", "
                 << p.first.second << " / "
-                << p.second.first << ","
-                << p.second.second << std::endl;
+                << p.second << std::endl;
     }
 }

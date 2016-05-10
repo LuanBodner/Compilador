@@ -1,4 +1,4 @@
-CC=g++ -std=c++0x
+CC=g++ -std=c++11
 DEBUG=-ggdb
 CFLAGS=-Wall
 LDFLAGS= -lboost_regex
