@@ -1,0 +1,9 @@
+2, testeSe / vazio
+0, teste / vazio / Function
+1, global2 / inteiro
+1, variavelFoo / inteiro
+1, param2 / inteiro
+1, param1 / flutuante
+2, testeSenão / flutuante
+0, foo / inteiro / Function
+0, global1 / inteiro

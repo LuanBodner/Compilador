@@ -4,7 +4,7 @@
 ":" == DOUBLE POINT
 	LINE : 1
 	COLUMN : 1
-"c" == IDENTIFIER
+"global1" == IDENTIFIER
 	LINE : 1
 	COLUMN : 2
 "inteiro" == INTEGER
@@ -16,13 +16,13 @@
 "(" == OPEN PAIR
 	LINE : 2
 	COLUMN : 2
-"inteiro" == INTEGER
+"flutuante" == FLOAT
 	LINE : 2
 	COLUMN : 3
 ":" == DOUBLE POINT
 	LINE : 2
 	COLUMN : 4
-"a" == IDENTIFIER
+"param1" == IDENTIFIER
 	LINE : 2
 	COLUMN : 5
 "," == COMMA
@@ -34,399 +34,96 @@
 ":" == DOUBLE POINT
 	LINE : 2
 	COLUMN : 8
-"b" == IDENTIFIER
+"param2" == IDENTIFIER
 	LINE : 2
 	COLUMN : 9
 ")" == CLOSE PAIR
 	LINE : 2
 	COLUMN : 10
-"se" == IF
-	LINE : 5
-	COLUMN : 0
-"a" == IDENTIFIER
-	LINE : 5
-	COLUMN : 1
-"então" == THEN
-	LINE : 5
-	COLUMN : 2
-"car" == IDENTIFIER
-	LINE : 6
-	COLUMN : 0
-":=" == ATTRIBUTION
-	LINE : 6
-	COLUMN : 1
-"10" == INTEGER NUMBER
-	LINE : 6
-	COLUMN : 2
-"se" == IF
-	LINE : 7
-	COLUMN : 0
-"a" == IDENTIFIER
-	LINE : 7
-	COLUMN : 1
-">=" == LESS THAN OR EQUAL
-	LINE : 7
-	COLUMN : 2
-"b" == IDENTIFIER
-	LINE : 7
-	COLUMN : 3
-"então" == THEN
-	LINE : 7
-	COLUMN : 4
-"variavel" == IDENTIFIER
-	LINE : 8
-	COLUMN : 0
-":=" == ATTRIBUTION
-	LINE : 8
-	COLUMN : 1
-"(" == OPEN PAIR
-	LINE : 8
-	COLUMN : 2
-"a" == IDENTIFIER
-	LINE : 8
-	COLUMN : 3
-"+" == SUM
-	LINE : 8
-	COLUMN : 4
-"b" == IDENTIFIER
-	LINE : 8
-	COLUMN : 5
-")" == CLOSE PAIR
-	LINE : 8
-	COLUMN : 6
-"senão" == OTHERWISE
-	LINE : 9
-	COLUMN : 0
-"variavel" == IDENTIFIER
-	LINE : 10
-	COLUMN : 0
-":=" == ATTRIBUTION
-	LINE : 10
-	COLUMN : 1
-"1" == INTEGER NUMBER
-	LINE : 10
-	COLUMN : 2
-"*" == MULTIPLICATION
-	LINE : 10
-	COLUMN : 3
-"(" == OPEN PAIR
-	LINE : 10
-	COLUMN : 4
-"a" == IDENTIFIER
-	LINE : 10
-	COLUMN : 5
-"+" == SUM
-	LINE : 10
-	COLUMN : 6
-"b" == IDENTIFIER
-	LINE : 10
-	COLUMN : 7
-")" == CLOSE PAIR
-	LINE : 10
-	COLUMN : 8
-"repita" == REPEAT
-	LINE : 11
-	COLUMN : 0
-"var" == IDENTIFIER
-	LINE : 12
-	COLUMN : 0
-":=" == ATTRIBUTION
-	LINE : 12
-	COLUMN : 1
-"var" == IDENTIFIER
-	LINE : 12
-	COLUMN : 2
-"+" == SUM
-	LINE : 12
-	COLUMN : 3
-"1" == INTEGER NUMBER
-	LINE : 12
-	COLUMN : 4
-"ate" == UNTIL
-	LINE : 13
-	COLUMN : 0
-"n" == IDENTIFIER
-	LINE : 13
-	COLUMN : 1
-"<" == LESS THAN
-	LINE : 13
-	COLUMN : 2
-"0" == INTEGER NUMBER
-	LINE : 13
-	COLUMN : 3
-"fim" == END
-	LINE : 14
-	COLUMN : 0
-"fim" == END
-	LINE : 15
-	COLUMN : 0
-"repita" == REPEAT
-	LINE : 17
-	COLUMN : 0
-"var" == IDENTIFIER
-	LINE : 18
-	COLUMN : 0
-":=" == ATTRIBUTION
-	LINE : 18
-	COLUMN : 1
-"var" == IDENTIFIER
-	LINE : 18
-	COLUMN : 2
-"+" == SUM
-	LINE : 18
-	COLUMN : 3
-"1" == INTEGER NUMBER
-	LINE : 18
-	COLUMN : 4
-"repita" == REPEAT
-	LINE : 19
-	COLUMN : 0
-"var" == IDENTIFIER
-	LINE : 20
-	COLUMN : 0
-":=" == ATTRIBUTION
-	LINE : 20
-	COLUMN : 1
-"15" == INTEGER NUMBER
-	LINE : 20
-	COLUMN : 2
-"ate" == UNTIL
-	LINE : 21
-	COLUMN : 0
-"1" == INTEGER NUMBER
-	LINE : 21
-	COLUMN : 1
-"ate" == UNTIL
-	LINE : 22
-	COLUMN : 0
-"n" == IDENTIFIER
-	LINE : 22
-	COLUMN : 1
-"<" == LESS THAN
-	LINE : 22
-	COLUMN : 2
-"0" == INTEGER NUMBER
-	LINE : 22
-	COLUMN : 3
-"leia" == READ
-	LINE : 24
-	COLUMN : 0
-"(" == OPEN PAIR
-	LINE : 24
-	COLUMN : 1
-"abc" == IDENTIFIER
-	LINE : 24
-	COLUMN : 2
-")" == CLOSE PAIR
-	LINE : 24
-	COLUMN : 3
-"flutuante" == FLOAT
-	LINE : 26
+"inteiro" == INTEGER
+	LINE : 4
 	COLUMN : 0
 ":" == DOUBLE POINT
-	LINE : 26
+	LINE : 4
 	COLUMN : 1
-"k" == IDENTIFIER
-	LINE : 26
+"variavelFoo" == IDENTIFIER
+	LINE : 4
 	COLUMN : 2
-"escreve" == WRITE
-	LINE : 28
-	COLUMN : 0
-"(" == OPEN PAIR
-	LINE : 28
-	COLUMN : 1
-"foo" == IDENTIFIER
-	LINE : 28
-	COLUMN : 2
-"(" == OPEN PAIR
-	LINE : 28
-	COLUMN : 3
-"a" == IDENTIFIER
-	LINE : 28
-	COLUMN : 4
-"," == COMMA
-	LINE : 28
-	COLUMN : 5
-"b" == IDENTIFIER
-	LINE : 28
-	COLUMN : 6
-")" == CLOSE PAIR
-	LINE : 28
-	COLUMN : 7
-")" == CLOSE PAIR
-	LINE : 28
-	COLUMN : 8
-"retorna" == RETURN
-	LINE : 30
-	COLUMN : 0
-"(" == OPEN PAIR
-	LINE : 30
-	COLUMN : 1
-"2" == INTEGER NUMBER
-	LINE : 30
-	COLUMN : 2
-"*" == MULTIPLICATION
-	LINE : 30
-	COLUMN : 3
-"5" == INTEGER NUMBER
-	LINE : 30
-	COLUMN : 4
-")" == CLOSE PAIR
-	LINE : 30
-	COLUMN : 5
 "fim" == END
-	LINE : 32
+	LINE : 6
 	COLUMN : 0
 "inteiro" == INTEGER
-	LINE : 34
+	LINE : 8
 	COLUMN : 0
 ":" == DOUBLE POINT
-	LINE : 34
+	LINE : 8
 	COLUMN : 1
-"j" == IDENTIFIER
-	LINE : 34
+"global2" == IDENTIFIER
+	LINE : 8
 	COLUMN : 2
 "vazio" == VOID
-	LINE : 36
+	LINE : 10
 	COLUMN : 0
 "teste" == IDENTIFIER
-	LINE : 36
+	LINE : 10
 	COLUMN : 1
 "(" == OPEN PAIR
-	LINE : 36
+	LINE : 10
 	COLUMN : 2
 ")" == CLOSE PAIR
-	LINE : 36
+	LINE : 10
 	COLUMN : 3
-"var" == IDENTIFIER
-	LINE : 38
-	COLUMN : 0
-":=" == ATTRIBUTION
-	LINE : 38
-	COLUMN : 1
-"10" == INTEGER NUMBER
-	LINE : 38
-	COLUMN : 2
 "se" == IF
-	LINE : 40
+	LINE : 12
 	COLUMN : 0
 "a" == IDENTIFIER
-	LINE : 40
+	LINE : 12
 	COLUMN : 1
 "então" == THEN
-	LINE : 40
-	COLUMN : 2
-"car" == IDENTIFIER
-	LINE : 41
-	COLUMN : 0
-":=" == ATTRIBUTION
-	LINE : 41
-	COLUMN : 1
-"10" == INTEGER NUMBER
-	LINE : 41
+	LINE : 12
 	COLUMN : 2
 "se" == IF
-	LINE : 42
+	LINE : 13
 	COLUMN : 0
 "a" == IDENTIFIER
-	LINE : 42
+	LINE : 13
 	COLUMN : 1
 ">=" == LESS THAN OR EQUAL
-	LINE : 42
+	LINE : 13
 	COLUMN : 2
 "b" == IDENTIFIER
-	LINE : 42
+	LINE : 13
 	COLUMN : 3
 "então" == THEN
-	LINE : 42
+	LINE : 13
 	COLUMN : 4
-"variavel" == IDENTIFIER
-	LINE : 43
+"vazio" == VOID
+	LINE : 14
 	COLUMN : 0
-":=" == ATTRIBUTION
-	LINE : 43
+":" == DOUBLE POINT
+	LINE : 14
 	COLUMN : 1
-"(" == OPEN PAIR
-	LINE : 43
+"testeSe" == IDENTIFIER
+	LINE : 14
 	COLUMN : 2
-"a" == IDENTIFIER
-	LINE : 43
-	COLUMN : 3
-"+" == SUM
-	LINE : 43
-	COLUMN : 4
-"b" == IDENTIFIER
-	LINE : 43
-	COLUMN : 5
-")" == CLOSE PAIR
-	LINE : 43
-	COLUMN : 6
 "senão" == OTHERWISE
-	LINE : 44
+	LINE : 15
 	COLUMN : 0
-"variavel" == IDENTIFIER
-	LINE : 45
+"flutuante" == FLOAT
+	LINE : 16
 	COLUMN : 0
-":=" == ATTRIBUTION
-	LINE : 45
+":" == DOUBLE POINT
+	LINE : 16
 	COLUMN : 1
-"1" == INTEGER NUMBER
-	LINE : 45
+"testeSenão" == IDENTIFIER
+	LINE : 16
 	COLUMN : 2
-"*" == MULTIPLICATION
-	LINE : 45
-	COLUMN : 3
-"(" == OPEN PAIR
-	LINE : 45
-	COLUMN : 4
-"a" == IDENTIFIER
-	LINE : 45
-	COLUMN : 5
-"+" == SUM
-	LINE : 45
-	COLUMN : 6
-"b" == IDENTIFIER
-	LINE : 45
-	COLUMN : 7
-")" == CLOSE PAIR
-	LINE : 45
-	COLUMN : 8
-"repita" == REPEAT
-	LINE : 46
-	COLUMN : 0
-"var" == IDENTIFIER
-	LINE : 47
-	COLUMN : 0
-":=" == ATTRIBUTION
-	LINE : 47
-	COLUMN : 1
-"var" == IDENTIFIER
-	LINE : 47
-	COLUMN : 2
-"+" == SUM
-	LINE : 47
-	COLUMN : 3
-"1" == INTEGER NUMBER
-	LINE : 47
-	COLUMN : 4
-"ate" == UNTIL
-	LINE : 48
-	COLUMN : 0
-"n" == IDENTIFIER
-	LINE : 48
-	COLUMN : 1
-"<" == LESS THAN
-	LINE : 48
-	COLUMN : 2
-"0" == INTEGER NUMBER
-	LINE : 48
-	COLUMN : 3
 "fim" == END
-	LINE : 49
+	LINE : 17
 	COLUMN : 0
 "fim" == END
-	LINE : 50
+	LINE : 18
 	COLUMN : 0
 "fim" == END
-	LINE : 51
+	LINE : 20
 	COLUMN : 0

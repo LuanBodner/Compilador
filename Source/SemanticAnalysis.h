@@ -12,8 +12,8 @@
 
 #include "SyntaxAnalysis.h"
 
-typedef std::pair<std::string, std::string> typeName;
-//typedef std::pair<std::string, int> valueScope;
+typedef std::pair<int, std::string> scopeName;
+typedef std::vector<std::string> vectorString;
 
 namespace Semantic {
 
@@ -29,7 +29,8 @@ namespace Semantic {
         CompilerErrors::CompilerErrors error;
         void variableDeclaration(Tree::Tree&);
         void functionDeclaration(Tree::Tree&);
-        boost::unordered_map<typeName, std::string> symbolTable;
+        void expressionStatement(Tree::Tree&);
+        boost::unordered_map<scopeName, vectorString> symbolTable;
     };
 }
 #endif /* SEMANTICANALYSIS_H */

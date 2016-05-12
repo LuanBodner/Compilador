@@ -1,51 +1,20 @@
-inteiro : c
-inteiro foo(inteiro: a, inteiro: b)
+inteiro : global1
+inteiro foo(flutuante: param1, inteiro: param2)
     
-    {inteiro: b}
-    se a então
-        car := 10
-        se a >= b então
-            variavel := (a+b)
-        senão   
-            variavel := 1*(a+b)
-            repita
-                var := var + 1
-            ate n < 0
-        fim
-    fim
-    
-    repita
-        var := var + 1
-        repita
-            var := 15
-        ate 1
-    ate n < 0
-
-    leia(abc)
-
-    flutuante: k
-
-    escreve(foo(a,b))
-
-    retorna(2*5)
+    inteiro: variavelFoo
 
 fim
 
-inteiro: j
+inteiro: global2
 
 vazio teste()
-    
-    var := 10
-    
+        
     se a então
-        car := 10
         se a >= b então
-            variavel := (a+b)
+            vazio: testeSe
         senão   
-            variavel := 1*(a+b)
-            repita
-                var := var + 1
-            ate n < 0
+            flutuante: testeSenão
         fim
     fim
+
 fim
