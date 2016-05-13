@@ -8,7 +8,6 @@
       <in>LexicalAnalyzer.h</in>
       <in>SemanticAnalysis.cpp</in>
       <in>SemanticAnalysis.h</in>
-      <in>SyntaxAnalysis.cpp</in>
       <in>SyntaxAnalysis.h</in>
       <in>Token.cpp</in>
       <in>Token.h</in>
@@ -61,8 +60,6 @@
       <item path="SemanticAnalysis.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="SemanticAnalysis.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="SyntaxAnalysis.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="SyntaxAnalysis.h" ex="false" tool="3" flavor2="0">
       </item>

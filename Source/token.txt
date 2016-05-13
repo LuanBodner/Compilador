@@ -76,27 +76,39 @@
 "se" == IF
 	LINE : 12
 	COLUMN : 0
-"a" == IDENTIFIER
+"(" == OPEN PAIR
 	LINE : 12
 	COLUMN : 1
-"então" == THEN
+"a" == IDENTIFIER
 	LINE : 12
 	COLUMN : 2
+")" == CLOSE PAIR
+	LINE : 12
+	COLUMN : 3
+"então" == THEN
+	LINE : 12
+	COLUMN : 4
 "se" == IF
 	LINE : 13
 	COLUMN : 0
-"a" == IDENTIFIER
+"(" == OPEN PAIR
 	LINE : 13
 	COLUMN : 1
-">=" == LESS THAN OR EQUAL
+"a" == IDENTIFIER
 	LINE : 13
 	COLUMN : 2
-"b" == IDENTIFIER
+">=" == LESS THAN OR EQUAL
 	LINE : 13
 	COLUMN : 3
-"então" == THEN
+"b" == IDENTIFIER
 	LINE : 13
 	COLUMN : 4
+")" == CLOSE PAIR
+	LINE : 13
+	COLUMN : 5
+"então" == THEN
+	LINE : 13
+	COLUMN : 6
 "vazio" == VOID
 	LINE : 14
 	COLUMN : 0
@@ -108,22 +120,4 @@
 	COLUMN : 2
 "senão" == OTHERWISE
 	LINE : 15
-	COLUMN : 0
-"flutuante" == FLOAT
-	LINE : 16
-	COLUMN : 0
-":" == DOUBLE POINT
-	LINE : 16
-	COLUMN : 1
-"testeSenão" == IDENTIFIER
-	LINE : 16
-	COLUMN : 2
-"fim" == END
-	LINE : 17
-	COLUMN : 0
-"fim" == END
-	LINE : 18
-	COLUMN : 0
-"fim" == END
-	LINE : 20
 	COLUMN : 0

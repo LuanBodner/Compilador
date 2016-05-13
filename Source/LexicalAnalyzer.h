@@ -25,17 +25,14 @@ namespace Lexical {
         virtual ~LexicalAnalyzer();
 
         //Returns the token found first and removes it from the vector
-        Token::Token getNextToken();
-        Token::Token getTokenByPos(unsigned int);
-        unsigned int tokenVectorSize();
+        Token::Token getNextToken(std::ifstream &);
 
     private:
-        //Vector of tokens collected
-        static std::vector<Token::Token> tokens;
+
         CompilerErrors::CompilerErrors error;
         //Collects and stores the tokens
-        void tokenCollector(std::string);
-        void tokenInserter(std::string &, std::string, Token::TokenType, boost::regex, int, int);
+        Token::Token tokenInserter(std::string &, std::string,
+                Token::TokenType, boost::regex, int, int);
     };
 }
 #endif /* LEXICALANALYZER_H */
