@@ -59,10 +59,8 @@ namespace Syntax {
 
         CompilerErrors::CompilerErrors error;
 
-        std::vector<Token::Token> vecToken;
-
         // Creates an instance of the Lexer from the file std::string
-        void createLexer(std::string);
+        void createLexer(std::string, std::string);
 
         // Prints the tokens in the file
         void printTokens(std::string);
@@ -71,10 +69,10 @@ namespace Syntax {
         Token::Token targetAdvance();
 
         // Consumes the next token in the vector
-        Token::Token eat(int Token);
+        void eat(int Token);
 
         // Variable declaration
-        void type(Token::Token);
+        void type();
         void variableDecStmt();
 
         // IO operations
@@ -120,8 +118,6 @@ namespace Syntax {
 
         // Sets the father and advances the pointer
         void setAndAdvance(std::string);
-
-        bool isOperator(Token::Token);
     };
 }
 #endif /* SYNTAXANALYZER_H */

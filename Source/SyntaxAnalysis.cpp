@@ -9,62 +9,129 @@
 
 namespace Syntax {
 
-    std::ifstream fileIn;
-    std::ofstream fileOut;
+    unsigned int lookAhead = 0;
 
     Tree::Tree * subTree = NULL;
 
-    std::vector<Token::Token> vecToken;
-
+    /* Funções básicas da classe SyntaxAnalyzer*/
     SyntaxAnalysis::SyntaxAnalysis() {
     }
 
     SyntaxAnalysis::~SyntaxAnalysis() {
     }
 
-    /*Operações com a árvore*/
-    Tree::Tree SyntaxAnalysis::getTree() {
+    void SyntaxAnalysis::createLexer(std::string in, std::string out) {
 
-        return syntaxTree;
+        lexer = Lexical::LexicalAnalyzer(in);
+        printTokens(out);
     }
 
-    void SyntaxAnalysis::setAndAdvance(std::string exp) {
-
-        subTree->setChild(exp);
-        subTree = subTree->children[subTree->children.size() - 1];
-    }
-
-    /*Operações com Tokens*/
+    /* Percorre pela lista de tokens na frente do eat */
     Token::Token SyntaxAnalysis::targetAdvance() {
 
-        vecToken.push_back(lexer.getNextToken(fileIn));
-
-        return vecToken.back();
+        return lexer.getTokenByPos(lookAhead++);
     }
 
-    Token::Token SyntaxAnalysis::eat(int Token) {
+    /* Faz a mudança de token para o próximo */
+    void SyntaxAnalysis::eat(int Token) {
 
-        if (!vecToken.size())
-            targetAdvance();
+        Token::Token tokenTemp = lexer.getNextToken();
 
-        Token::Token token = vecToken[0];
-        vecToken.erase(vecToken.begin());
-
-        if (token.getTokenType() != Token)
-            error.unidentifiedTokenError(Token, token);
-
-        fileOut << "\"" << token.getTokenName() << "\"" << " == "
-                << token.tokenTypeToString() << "\n\tLINE : "
-                << token.getTokenLine() << "\n\tCOLUMN : "
-                << token.getTokenColumn() << "\n";
-
-        return token;
+        if (tokenTemp.getTokenType() != Token)
+            this->error.unidentifiedTokenError(Token, tokenTemp);
     }
 
-    /*Conjunto de Operações*/
+    /* Gramática para declaração de variável */
+    void SyntaxAnalysis::type() {
+
+        Token::Token tokenTemp = targetAdvance();
+
+        subTree->setChild(tokenTemp);
+
+        switch (tokenTemp.getTokenType()) {
+
+            case(Token::FLOAT):
+                eat(Token::FLOAT);
+                break;
+
+            case(Token::INTEGER):
+                eat(Token::INTEGER);
+                break;
+
+            case(Token::VOID):
+                eat(Token::VOID);
+                break;
+
+            default: this->error.typeError(tokenTemp);
+        }
+    }
+
+    void SyntaxAnalysis::variableDecStmt() {
+
+        Tree::Tree * tempTree = subTree;
+        setAndAdvance(VARDECSTRING);
+
+        type();
+
+        targetAdvance();
+        eat(Token::DOUBLE_POINT);
+
+        subTree->setChild(targetAdvance());
+        eat(Token::IDENTIFIER);
+
+        subTree = tempTree;
+    }
+
+    /* Leitura e escrita */
+    void SyntaxAnalysis::readStmt() {
+
+        Tree::Tree * tempTree = subTree;
+        setAndAdvance(READSTRING);
+
+        targetAdvance();
+        eat(Token::READ);
+
+        targetAdvance();
+        eat(Token::OPEN);
+
+        subTree->setChild(targetAdvance());
+        eat(Token::IDENTIFIER);
+
+        targetAdvance();
+        eat(Token::CLOSE);
+
+        subTree = tempTree;
+    }
+
+    void SyntaxAnalysis::writeStmt() {
+
+        Tree::Tree * tempTree = subTree;
+        setAndAdvance(WRITESTRING);
+
+        targetAdvance();
+        eat(Token::WRITE);
+
+        targetAdvance();
+        eat(Token::OPEN);
+
+        operationsExp();
+
+        targetAdvance();
+        eat(Token::CLOSE);
+
+        subTree = tempTree;
+    }
+
+    /* Caminho da recursividade das operações */
+    void SyntaxAnalysis::relationalExp() {
+
+        additiveExp();
+        relationalExpL();
+    }
+
     void SyntaxAnalysis::relationalExpL() {
 
-        Token::Token tokenTemp = vecToken[0];
+        Token::Token tokenTemp = targetAdvance();
 
         Tree::Tree * tempTree = subTree;
 
@@ -103,13 +170,20 @@ namespace Syntax {
                 break;
 
             default:
+                lookAhead--;
                 break;
         }
     }
 
+    void SyntaxAnalysis::equalityExp() {
+
+        relationalExp();
+        equalityExpL();
+    }
+
     void SyntaxAnalysis::equalityExpL() {
 
-        Token::Token tokenTemp = vecToken[0];
+        Token::Token tokenTemp = targetAdvance();
 
         Tree::Tree * tempTree = subTree;
 
@@ -120,12 +194,19 @@ namespace Syntax {
             relationalExp();
             equalityExpL();
             subTree = tempTree;
-        }
+        } else
+            lookAhead--;
+    }
+
+    void SyntaxAnalysis::additiveExp() {
+
+        multiplicativeExp();
+        additiveExpL();
     }
 
     void SyntaxAnalysis::additiveExpL() {
 
-        Token::Token tokenTemp = vecToken[0];
+        Token::Token tokenTemp = targetAdvance();
 
         Tree::Tree * tempTree = subTree;
 
@@ -148,14 +229,21 @@ namespace Syntax {
                 break;
 
             default:
+                lookAhead--;
                 break;
         }
 
     }
 
+    void SyntaxAnalysis::multiplicativeExp() {
+
+        factorExp();
+        multiplicativeExpL();
+    }
+
     void SyntaxAnalysis::multiplicativeExpL() {
 
-        Token::Token tokenTemp = vecToken[0];
+        Token::Token tokenTemp = targetAdvance();
 
         Tree::Tree * tempTree = subTree;
 
@@ -178,8 +266,18 @@ namespace Syntax {
                 break;
 
             default:
+                lookAhead--;
                 break;
         }
+    }
+
+    void SyntaxAnalysis::operationsExp() {
+
+        Tree::Tree * tempTree = subTree;
+        setAndAdvance(OPEXPSTRING);
+
+        equalityExp();
+        subTree = tempTree;
     }
 
     void SyntaxAnalysis::factorExp() {
@@ -191,167 +289,83 @@ namespace Syntax {
             case(Token::IDENTIFIER):
 
                 tokenTemp = targetAdvance();
+                lookAhead -= 2;
 
                 if (tokenTemp.getTokenType() == Token::OPEN)
                     functionCallStmt();
-                else
-                    subTree->setChild(eat(Token::IDENTIFIER));
+                else {
 
+                    subTree->setChild(targetAdvance());
+                    eat(Token::IDENTIFIER);
+                }
                 break;
 
             case(Token::NUMBER_FLOAT):
-                subTree->setChild(eat(Token::NUMBER_FLOAT));
-                vecToken.clear();
-                targetAdvance();
+                subTree->setChild(tokenTemp);
+                eat(Token::NUMBER_FLOAT);
                 break;
 
             case(Token::NUMBER_INTEGER):
-                subTree->setChild(eat(Token::NUMBER_INTEGER));
-                vecToken.clear();
-                targetAdvance();
+                subTree->setChild(tokenTemp);
+                eat(Token::NUMBER_INTEGER);
                 break;
 
             case(Token::OPEN):
                 eat(Token::OPEN);
                 operationsExp();
-                eat(Token::CLOSE);
                 targetAdvance();
+                eat(Token::CLOSE);
                 break;
 
             default: this->error.factorError(tokenTemp);
         }
     }
 
-    void SyntaxAnalysis::additiveExp() {
-
-        multiplicativeExp();
-        additiveExpL();
-    }
-
-    void SyntaxAnalysis::relationalExp() {
-
-        additiveExp();
-        relationalExpL();
-    }
-
-    void SyntaxAnalysis::equalityExp() {
-
-        relationalExp();
-        equalityExpL();
-    }
-
-    void SyntaxAnalysis::multiplicativeExp() {
-
-        factorExp();
-        multiplicativeExpL();
-    }
-
-    void SyntaxAnalysis::operationsExp() {
-
-        Tree::Tree * tempTree = subTree;
-        setAndAdvance(OPEXPSTRING);
-
-        equalityExp();
-
-        subTree = tempTree;
-    }
-
-    /*Chamada de função de leitura/escrita*/
-    void SyntaxAnalysis::writeStmt() {
-
-        Tree::Tree * tempTree = subTree;
-        setAndAdvance(WRITESTRING);
-
-        eat(Token::WRITE);
-        eat(Token::OPEN);
-
-        operationsExp();
-
-        eat(Token::CLOSE);
-
-        vecToken.clear();
-
-        subTree = tempTree;
-    }
-
-    void SyntaxAnalysis::readStmt() {
-
-        Tree::Tree * tempTree = subTree;
-        setAndAdvance(READSTRING);
-
-        eat(Token::READ);
-        eat(Token::OPEN);
-
-        subTree->setChild(eat(Token::IDENTIFIER));
-
-        eat(Token::CLOSE);
-
-        subTree = tempTree;
-
-        vecToken.clear();
-    }
-
-    /*Chamada de Retorno*/
+    /* Retorno de funções */
     void SyntaxAnalysis::returnValue() {
 
         Tree::Tree * tempTree = subTree;
         setAndAdvance(RETURNSTRING);
 
+        targetAdvance();
         eat(Token::RETURN);
+
+        targetAdvance();
         eat(Token::OPEN);
 
         operationsExp();
 
+        targetAdvance();
         eat(Token::CLOSE);
 
         subTree = tempTree;
     }
 
-    /*Operação de atribuição*/
-    void SyntaxAnalysis::attributionStmt() {
-
-        Tree::Tree * tempTree = subTree;
-        setAndAdvance(ATTSTRING);
-
-        subTree->setChild(eat(Token::IDENTIFIER));
-
-        eat(Token::ATTRIBUTION);
-        eat(Token::OPEN);
-
-        operationsExp();
-
-        eat(Token::CLOSE);
-
-        subTree = tempTree;
-    }
-
-    /*If Statement*/
+    /* Expressão IF*/
     void SyntaxAnalysis::ifStmt() {
 
         Tree::Tree * tempTree = subTree;
         setAndAdvance(IFSTRING);
 
+        targetAdvance();
         eat(Token::IF);
-        eat(Token::OPEN);
 
         operationsExp();
 
-        eat(Token::CLOSE);
+        targetAdvance();
         eat(Token::THEN);
 
         compoundStmt();
 
-        vecToken[0];
-
-        if (vecToken[0].getTokenType() == Token::OTHERWISE) {
+        if (targetAdvance().getTokenType() == Token::OTHERWISE) {
 
             Tree::Tree * newTempTree = subTree;
-            setAndAdvance(OTHERSTRING);
-
             eat(Token::OTHERWISE);
+            setAndAdvance(OTHERSTRING);
 
             compoundStmt();
 
+            targetAdvance();
             eat(Token::END);
 
             subTree = newTempTree;
@@ -361,30 +375,91 @@ namespace Syntax {
         subTree = tempTree;
     }
 
-    /*Laço de Repetição*/
+    /* Expressão While*/
     void SyntaxAnalysis::whileStmt() {
 
         Tree::Tree * tempTree = subTree;
         setAndAdvance(WHILESTRING);
 
+        targetAdvance();
         eat(Token::REPEAT);
 
         compoundStmt();
 
+        targetAdvance();
         eat(Token::UNTIL);
-        eat(Token::OPEN);
-       
+
         operationsExp();
 
-        eat(Token::CLOSE);
-        
         subTree = tempTree;
     }
 
-    /*Conjunto de Construções*/
+    /* Expressão de atribuição */
+    void SyntaxAnalysis::attributionStmt() {
+
+        Tree::Tree * tempTree = subTree;
+        setAndAdvance(ATTSTRING);
+
+        subTree->setChild(targetAdvance());
+        eat(Token::IDENTIFIER);
+
+        targetAdvance();
+        eat(Token::ATTRIBUTION);
+
+        operationsExp();
+
+        subTree = tempTree;
+    }
+
+    /* Expressão de chamada de função*/
+    void SyntaxAnalysis::paramCallStmt() {
+
+        Token::Token tokenTemp = targetAdvance();
+        lookAhead--;
+
+        if (tokenTemp.getTokenType() != Token::CLOSE) {
+
+            operationsExp();
+
+            tokenTemp = targetAdvance();
+            lookAhead--;
+
+            if (tokenTemp.getTokenType() == Token::COMMA) {
+
+                if (targetAdvance().getTokenType() == Token::CLOSE)
+                    this->error.numberOfArgumentsError(tokenTemp);
+
+                eat(Token::COMMA);
+
+                paramCallStmt();
+            }
+        }
+    }
+
+    void SyntaxAnalysis::functionCallStmt() {
+
+        Tree::Tree * tempTree = subTree;
+        setAndAdvance(FUNCCALLSTRING);
+
+        subTree->setChild(targetAdvance());
+        eat(Token::IDENTIFIER);
+
+        targetAdvance();
+        eat(Token::OPEN);
+
+        paramCallStmt();
+
+        targetAdvance();
+        eat(Token::CLOSE);
+
+        subTree = tempTree;
+    }
+
+    /* Conjunto de expressões possíveis dentro dos escopos */
     void SyntaxAnalysis::expression() {
 
-        Token::Token tokenTemp = vecToken[0];
+        Token::Token tokenTemp = targetAdvance();
+        lookAhead--;
 
         Tree::Tree * tempTree = subTree;
         setAndAdvance(EXPSTRING);
@@ -392,16 +467,15 @@ namespace Syntax {
         switch (tokenTemp.getTokenType()) {
 
             case(Token::INTEGER): case(Token::FLOAT): case(Token::VOID):
-                targetAdvance();
                 variableDecStmt();
-                break;
-
-            case(Token::WRITE):
-                writeStmt();
                 break;
 
             case(Token::READ):
                 readStmt();
+                break;
+
+            case(Token::WRITE):
+                writeStmt();
                 break;
 
             case(Token::RETURN):
@@ -409,7 +483,9 @@ namespace Syntax {
                 break;
 
             case(Token::IDENTIFIER):
+                lookAhead++;
                 tokenTemp = targetAdvance();
+                lookAhead -= 2;
                 switch (tokenTemp.getTokenType()) {
 
                     case(Token::ATTRIBUTION):
@@ -441,6 +517,7 @@ namespace Syntax {
     void SyntaxAnalysis::compoundStmt() {
 
         Token::Token tokenTemp = targetAdvance();
+        lookAhead--;
 
         Tree::Tree * tempTree = subTree;
 
@@ -457,37 +534,7 @@ namespace Syntax {
         subTree = tempTree;
     }
 
-    /*Identificando Declaração de variáveis*/
-    void SyntaxAnalysis::type(Token::Token token) {
-
-        subTree->setChild(token);
-
-        switch (token.getTokenType()) {
-            case(Token::INTEGER): case(Token::FLOAT): case(Token::VOID):
-                eat(token.getTokenType());
-                break;
-            default:
-                error.typeError(token);
-        }
-    }
-
-    void SyntaxAnalysis::variableDecStmt() {
-
-        Tree::Tree * tempTree = subTree;
-        setAndAdvance(VARDECSTRING);
-
-        type(vecToken[0]);
-
-        eat(Token::DOUBLE_POINT);
-
-        subTree->setChild(eat(Token::IDENTIFIER));
-
-        subTree = tempTree;
-
-        vecToken.clear();
-    }
-
-    /*Identificando Definição de funções*/
+    /* Gramática para declaração de uma função */
     void SyntaxAnalysis::paramFunctionStmt() {
 
         Token::Token tokenTemp = targetAdvance();
@@ -495,13 +542,13 @@ namespace Syntax {
         switch (tokenTemp.getTokenType()) {
 
             case(Token::INTEGER): case(Token::FLOAT): case(Token::VOID):
+                lookAhead--;
                 variableDecStmt();
                 paramFunctionStmt();
                 break;
 
             case(Token::COMMA):
                 eat(Token::COMMA);
-                targetAdvance();
                 variableDecStmt();
                 paramFunctionStmt();
                 break;
@@ -515,6 +562,7 @@ namespace Syntax {
 
     void SyntaxAnalysis::prototypeDefStmt() {
 
+        targetAdvance();
         eat(Token::OPEN);
 
         Tree::Tree * tempTree = subTree;
@@ -522,9 +570,8 @@ namespace Syntax {
 
         paramFunctionStmt();
 
+        targetAdvance();
         eat(Token::CLOSE);
-
-        vecToken.clear();
 
         subTree = tempTree;
     }
@@ -534,79 +581,48 @@ namespace Syntax {
         Tree::Tree * tempTree = subTree;
         setAndAdvance(FUNCDECSTRING);
 
-        type(vecToken[0]);
+        type();
 
-        subTree->setChild(vecToken[0]);
+        Token::Token tempToken = targetAdvance();
 
-        switch (vecToken[0].getTokenType()) {
+        subTree->setChild(tempToken);
+
+        switch (tempToken.getTokenType()) {
+
             case(Token::IDENTIFIER):
                 eat(Token::IDENTIFIER);
                 prototypeDefStmt();
+                lookAhead--;
                 compoundStmt();
+                targetAdvance();
                 eat(Token::END);
                 break;
-            default:
-                error.functionDeclarationError(vecToken[0]);
+
+            default: this->error.functionDeclarationError(tempToken);
         }
 
         subTree = tempTree;
     }
 
-    /*Chamada de função*/
-    void SyntaxAnalysis::paramCallStmt() {
-
-        Token::Token tokenTemp;
-
-        operationsExp();
-
-        if (vecToken[0].getTokenType() != Token::CLOSE) {
-
-            tokenTemp = vecToken[0];
-
-            if (tokenTemp.getTokenType() == Token::COMMA) {
-
-                eat(Token::COMMA);
-
-                paramCallStmt();
-            } else
-                this->error.numberOfArgumentsError(tokenTemp);
-        }
-    }
-
-    void SyntaxAnalysis::functionCallStmt() {
-
-        Tree::Tree * tempTree = subTree;
-        setAndAdvance(FUNCCALLSTRING);
-
-        subTree->setChild(eat(Token::IDENTIFIER));
-
-        eat(Token::OPEN);
-
-        paramCallStmt();
-
-        eat(Token::CLOSE);
-
-        subTree = tempTree;
-    }
-
+    /* Faz a primeira chamada para passar pela gramática */
     void SyntaxAnalysis::initialTarget(std::string in, std::string out) {
 
-        fileIn.open(in);
-        fileOut.open(out, std::ofstream::out);
+        SyntaxAnalysis::createLexer(in, out);
 
         subTree = &(this->syntaxTree);
 
-        Token::Token token = targetAdvance();
-
-        while (token.getTokenName().compare("@EOF")) {
+        while (lookAhead < lexer.tokenVectorSize()) {
 
             subTree->setExp(DECSTRING);
+
+            Token::Token token = targetAdvance();
 
             switch (token.getTokenType()) {
 
                 case(Token::INTEGER): case(Token::FLOAT): case(Token::VOID):
 
                     token = targetAdvance();
+                    lookAhead -= 2;
 
                     switch (token.getTokenType()) {
 
@@ -624,8 +640,37 @@ namespace Syntax {
 
                 default: this->error.variableDeclarationError(token);
             }
-
-            token = targetAdvance();
         }
+    }
+
+    Tree::Tree SyntaxAnalysis::getTree() {
+
+        return syntaxTree;
+    }
+
+    void SyntaxAnalysis::setAndAdvance(std::string exp) {
+
+        subTree->setChild(exp);
+        subTree = subTree->children[subTree->children.size() - 1];
+    }
+
+    void SyntaxAnalysis::printTokens(std::string str) {
+
+        Token::Token tokenTemp;
+
+        std::ofstream output;
+        output.open(str, std::ofstream::out);
+
+        do {
+
+            tokenTemp = targetAdvance();
+
+            output << "\"" << tokenTemp.getTokenName() << "\"" << " == "
+                    << tokenTemp.tokenTypeToString() << "\n\tLINE : "
+                    << tokenTemp.getTokenLine() << "\n\tCOLUMN : "
+                    << tokenTemp.getTokenColumn() << "\n";
+        } while (lookAhead < lexer.tokenVectorSize());
+
+        lookAhead = 0;
     }
 }
