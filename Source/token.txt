@@ -122,20 +122,20 @@
 	LINE : 15
 	COLUMN : 0
 "flutuante" == FLOAT
+	LINE : 15
+	COLUMN : 1
+":" == DOUBLE POINT
+	LINE : 15
+	COLUMN : 2
+"testeSenão" == IDENTIFIER
+	LINE : 15
+	COLUMN : 3
+"fim" == END
 	LINE : 16
 	COLUMN : 0
-":" == DOUBLE POINT
-	LINE : 16
-	COLUMN : 1
-"testeSenão" == IDENTIFIER
-	LINE : 16
-	COLUMN : 2
 "fim" == END
 	LINE : 17
 	COLUMN : 0
 "fim" == END
-	LINE : 18
-	COLUMN : 0
-"fim" == END
-	LINE : 20
+	LINE : 19
 	COLUMN : 0

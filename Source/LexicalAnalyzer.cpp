@@ -28,7 +28,7 @@ namespace Lexical {
     c_CM("\\{.[^}]+\\}");
 
     //Blank space
-    boost::regex b_SP("^\\s*");
+    boost::regex b_SP("^\\s+");
 
     //Numbers
     boost::regex
@@ -92,6 +92,22 @@ namespace Lexical {
 
         if (boost::regex_search(bufferString, match, b_SP))
             bufferString = boost::regex_replace(bufferString, b_SP, "");
+
+        if (!bufferString.size()) {
+
+            if (!std::getline(file, bufferString)) {
+
+                tokenTemp.setTokenName("@EOF");
+                return tokenTemp;
+            }
+            
+            if (boost::regex_search(bufferString, match, c_CM))
+                bufferString = boost::regex_replace(bufferString, c_CM, "");
+
+            if (boost::regex_search(bufferString, match, b_SP))
+                bufferString = boost::regex_replace(bufferString, b_SP, "");
+
+        }
 
         if (boost::regex_search(bufferString, match, o_SUM))
             tokenTemp = tokenInserter(bufferString, match.str(), Token::SUM, o_SUM, column++, line);

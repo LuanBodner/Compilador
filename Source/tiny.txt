@@ -12,7 +12,7 @@ vazio teste()
     se (a) então
         se (a >= b) então
             vazio: testeSe
-        senão
+        senão   
             flutuante: testeSenão
         fim
     fim
