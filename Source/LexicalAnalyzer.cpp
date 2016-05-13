@@ -10,10 +10,6 @@
 
 namespace Lexical {
 
-    //unsigned int index = 0;
-
-    //std::vector<Token::Token> LexicalAnalyzer::tokens;
-
     //Regular Expressions
     //Operations
     boost::regex
