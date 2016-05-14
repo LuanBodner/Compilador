@@ -40,7 +40,7 @@ namespace Semantic {
             error.variableNotDeclared(tree.token);
     }
 
-    void SemanticAnalysis::variableDeclaration(Tree::Tree & tree, int level) {
+    void SemanticAnalysis::variableDeclaration(Tree::Tree& tree, int level) {
 
         scopeName t(scope, tree.children[1]->token.getTokenName());
 
@@ -54,7 +54,7 @@ namespace Semantic {
             symbolTable.at(t).push_back("Global");
     }
 
-    void SemanticAnalysis::functionDeclaration(Tree::Tree & tree) {
+    void SemanticAnalysis::functionDeclaration(Tree::Tree& tree) {
 
         int auxScope = scope;
         scope = 0;
@@ -67,7 +67,7 @@ namespace Semantic {
         scope = ++auxScope;
     }
 
-    void SemanticAnalysis::operationExpression(Tree::Tree & tree) {
+    void SemanticAnalysis::operationExpression(Tree::Tree& tree) {
 
         if (tree.children.size()) {
 
@@ -84,7 +84,12 @@ namespace Semantic {
         }
     }
 
-    void SemanticAnalysis::attributionExpression(Tree::Tree & tree) {
+    void SemanticAnalysis::functionCallStatement(Tree::Tree& tree) {
+        
+        
+    }
+
+    void SemanticAnalysis::attributionExpression(Tree::Tree& tree) {
 
         scopeName sn(scope, tree.children[0]->token.getTokenName());
 
@@ -117,7 +122,10 @@ namespace Semantic {
         if (!tree.exp.compare(EXPSTRING))
             expressionStatement(tree);
 
-        level++;
+        if (!tree.exp.compare(FUNCCALLSTRING))
+
+
+            level++;
 
         for (unsigned int i = 0; i < tree.children.size(); i++) {
 
