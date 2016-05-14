@@ -73,7 +73,7 @@
 "(" == OPEN PAIR
 	LINE : 8
 	COLUMN : 1
-"param2" == IDENTIFIER
+"abc" == IDENTIFIER
 	LINE : 8
 	COLUMN : 2
 ")" == CLOSE PAIR
@@ -163,7 +163,7 @@
 "(" == OPEN PAIR
 	LINE : 23
 	COLUMN : 1
-"a" == IDENTIFIER
+"global1" == IDENTIFIER
 	LINE : 23
 	COLUMN : 2
 ")" == CLOSE PAIR

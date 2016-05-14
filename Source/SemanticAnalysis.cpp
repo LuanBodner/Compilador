@@ -17,7 +17,30 @@ namespace Semantic {
     SemanticAnalysis::~SemanticAnalysis() {
     }
 
-    void SemanticAnalysis::variableDeclaration(Tree::Tree &tree) {
+    void SemanticAnalysis::verifyTable(scopeName key, Tree::Tree& tree) {
+
+        while (key.first >= 0) {
+
+            boost::unordered_map<scopeName, vectorString>::const_iterator entry;
+            entry = symbolTable.find(key);
+
+            if (entry != symbolTable.end()) {
+
+                if (key.first != scope && !entry->second[1].compare("Global"))
+                    break;
+
+                if (key.first == scope)
+                    break;
+            }
+
+            key.first--;
+        }
+
+        if (key.first == -1)
+            error.variableNotDeclared(tree.token);
+    }
+
+    void SemanticAnalysis::variableDeclaration(Tree::Tree & tree, int level) {
 
         scopeName t(scope, tree.children[1]->token.getTokenName());
 
@@ -26,9 +49,12 @@ namespace Semantic {
 
         symbolTable.emplace(t, std::vector<std::string>());
         symbolTable.at(t).push_back(tree.children[0]->token.getTokenName());
+
+        if (level == 1)
+            symbolTable.at(t).push_back("Global");
     }
 
-    void SemanticAnalysis::functionDeclaration(Tree::Tree &tree) {
+    void SemanticAnalysis::functionDeclaration(Tree::Tree & tree) {
 
         int auxScope = scope;
         scope = 0;
@@ -41,7 +67,7 @@ namespace Semantic {
         scope = ++auxScope;
     }
 
-    void SemanticAnalysis::operationExpression(Tree::Tree &tree) {
+    void SemanticAnalysis::operationExpression(Tree::Tree & tree) {
 
         if (tree.children.size()) {
 
@@ -49,8 +75,7 @@ namespace Semantic {
 
                 scopeName sn(scope, tree.children[0]->token.getTokenName());
 
-                if (symbolTable.find(sn) == symbolTable.end())
-                    error.variableNotDeclared(tree.children[0]->token);
+                verifyTable(sn, *tree.children[0]);
             }
 
             for (unsigned int i = 0; i < tree.children.size(); i++)
@@ -59,12 +84,11 @@ namespace Semantic {
         }
     }
 
-    void SemanticAnalysis::attributionExpression(Tree::Tree &tree) {
+    void SemanticAnalysis::attributionExpression(Tree::Tree & tree) {
 
         scopeName sn(scope, tree.children[0]->token.getTokenName());
 
-        if (symbolTable.find(sn) == symbolTable.end())
-            error.variableNotDeclared(tree.children[0]->token);
+        verifyTable(sn, *tree.children[0]);
 
         operationExpression(*tree.children[1]);
     }
@@ -82,10 +106,10 @@ namespace Semantic {
 
     }
 
-    void SemanticAnalysis::treeAnalyzer(Tree::Tree & tree) {
+    void SemanticAnalysis::treeAnalyzer(Tree::Tree & tree, int level) {
 
         if (!tree.exp.compare(VARDECSTRING))
-            variableDeclaration(tree);
+            variableDeclaration(tree, level);
 
         if (!tree.exp.compare(FUNCDECSTRING))
             functionDeclaration(tree);
@@ -93,10 +117,12 @@ namespace Semantic {
         if (!tree.exp.compare(EXPSTRING))
             expressionStatement(tree);
 
+        level++;
+
         for (unsigned int i = 0; i < tree.children.size(); i++) {
 
             if (!tree.active)
-                treeAnalyzer(*(tree.children[i]));
+                treeAnalyzer(*tree.children[i], level);
         }
     }
 

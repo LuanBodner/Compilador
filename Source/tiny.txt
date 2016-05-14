@@ -5,7 +5,7 @@ inteiro foo(flutuante: param1, inteiro: param2)
 
     repita
         param1 := (global1)
-    ate(param2)
+    ate(abc)
 
 fim
 
@@ -20,7 +20,7 @@ vazio teste()
     inteiro: k
     inteiro: l
     
-    se (a) então        
+    se (global1) então        
         se (c >= b * ((k - j) - l)) então
             vazio: testeSe              
         senão           

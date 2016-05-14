@@ -22,12 +22,13 @@ namespace Semantic {
         SemanticAnalysis();
         virtual ~SemanticAnalysis();
 
-        void treeAnalyzer(Tree::Tree&);
+        void treeAnalyzer(Tree::Tree&,int level = 0);
         void printTable();
 
     private:
         CompilerErrors::CompilerErrors error;
-        void variableDeclaration(Tree::Tree&);
+        void verifyTable(scopeName,Tree::Tree&);
+        void variableDeclaration(Tree::Tree&,int level = 0);
         void functionDeclaration(Tree::Tree&);
         void attributionExpression(Tree::Tree&);
         void operationExpression(Tree::Tree&);
