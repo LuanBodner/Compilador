@@ -131,6 +131,7 @@ namespace Semantic {
         std::ofstream file("symbols.txt");
 
         for (const auto &p : symbolTable) {
+
             file << p.first.first << ", "
                     << p.first.second;
 

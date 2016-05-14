@@ -19,15 +19,23 @@ Declaration
                     abc
             CompoundStatement
                 ExpressionStatement
-                    WhileStatement
-                        CompoundStatement
-                            ExpressionStatement
-                                AttributionStatement
-                                    param1
-                                    OperationExpression
-                                        global1
+                    FunctionCallStatement
+                        foo
                         OperationExpression
-                            abc
+                            a
+                        OperationExpression
+                            b
+                CompoundStatement
+                    ExpressionStatement
+                        WhileStatement
+                            CompoundStatement
+                                ExpressionStatement
+                                    AttributionStatement
+                                        param1
+                                        OperationExpression
+                                            global1
+                            OperationExpression
+                                abc
     VariableDecStatement
         inteiro
         global2

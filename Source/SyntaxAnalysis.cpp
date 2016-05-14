@@ -218,6 +218,7 @@ namespace Syntax {
                 targetAdvance();
                 break;
 
+            case(Token::CLOSE):break;
             default: this->error.factorError(tokenTemp);
         }
     }

@@ -3,6 +3,8 @@ inteiro foo(flutuante: param1, inteiro: param2)
     
     flutuante: abc
 
+    foo(a,b)
+
     repita
         param1 := (global1)
     ate(abc)
