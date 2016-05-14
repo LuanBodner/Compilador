@@ -131,6 +131,13 @@ namespace CompilerErrors {
         exit(EXIT_FAILURE);
     }
 
+    void CompilerErrors::variableNotDeclared(Token::Token token) {
+
+        std::cout << "Variable Not Declared In This Scope; ";
+
+        printError(token);
+    }
+
     void CompilerErrors::vectorSizeError() {
 
         std::cout << "No Expression Defined\n";

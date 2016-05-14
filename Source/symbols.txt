@@ -1,9 +1,15 @@
 2, testeSe / vazio
+2, l / inteiro
+2, k / inteiro
+2, c / inteiro
+2, b / inteiro
+2, a / inteiro
 0, teste / vazio / Function
 1, global2 / inteiro
-1, variavelFoo / inteiro
 1, param2 / inteiro
 1, param1 / flutuante
 2, testeSenão / flutuante
+2, j / inteiro
+1, abc / flutuante
 0, foo / inteiro / Function
 0, global1 / inteiro

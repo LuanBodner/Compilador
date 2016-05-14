@@ -341,8 +341,6 @@ namespace Syntax {
 
         compoundStmt();
 
-        vecToken[0];
-
         if (vecToken[0].getTokenType() == Token::OTHERWISE) {
 
             Tree::Tree * newTempTree = subTree;
@@ -373,11 +371,11 @@ namespace Syntax {
 
         eat(Token::UNTIL);
         eat(Token::OPEN);
-       
+
         operationsExp();
 
         eat(Token::CLOSE);
-        
+
         subTree = tempTree;
     }
 
@@ -591,8 +589,8 @@ namespace Syntax {
 
     void SyntaxAnalysis::initialTarget(std::string in, std::string out) {
 
-        fileIn.open(in);
-        fileOut.open(out, std::ofstream::out);
+        fileIn.open(in.c_str());
+        fileOut.open(out.c_str(), std::ofstream::out);
 
         subTree = &(this->syntaxTree);
 
@@ -627,5 +625,9 @@ namespace Syntax {
 
             token = targetAdvance();
         }
+
+
+        fileIn.close();
+        fileOut.close();
     }
 }

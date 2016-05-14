@@ -29,6 +29,8 @@ namespace Semantic {
         CompilerErrors::CompilerErrors error;
         void variableDeclaration(Tree::Tree&);
         void functionDeclaration(Tree::Tree&);
+        void attributionExpression(Tree::Tree&);
+        void operationExpression(Tree::Tree&);
         void expressionStatement(Tree::Tree&);
         boost::unordered_map<scopeName, vectorString> symbolTable;
     };
