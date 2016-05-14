@@ -19,12 +19,9 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/lbodner/Compilador/Source/SyntaxAnalysis.cpp</file>
-            <file>file:/home/lbodner/Compilador/Source/token.txt</file>
+            <file>file:/home/lbodner/Compilador/Source/SemanticAnalysis.cpp</file>
+            <file>file:/home/lbodner/Compilador/Source/SemanticAnalysis.h</file>
             <file>file:/home/lbodner/Compilador/Source/main.cpp</file>
-            <file>file:/home/lbodner/Compilador/Source/tree.txt</file>
-            <file>file:/home/lbodner/Compilador/Source/tiny.txt</file>
-            <file>file:/home/lbodner/Compilador/Source/LexicalAnalyzer.cpp</file>
         </group>
     </open-files>
 </project-private>

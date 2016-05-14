@@ -64,9 +64,15 @@
 "b" == IDENTIFIER
 	LINE : 6
 	COLUMN : 4
-")" == CLOSE PAIR
+"*" == MULTIPLICATION
 	LINE : 6
 	COLUMN : 5
+"10" == INTEGER NUMBER
+	LINE : 6
+	COLUMN : 6
+")" == CLOSE PAIR
+	LINE : 6
+	COLUMN : 7
 "repita" == REPEAT
 	LINE : 8
 	COLUMN : 0

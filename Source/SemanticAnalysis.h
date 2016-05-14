@@ -9,7 +9,6 @@
 #define SEMANTICANALYSIS_H
 #include <iostream>
 #include <boost/unordered_map.hpp>
-
 #include "SyntaxAnalysis.h"
 
 typedef std::pair<int, std::string> scopeName;

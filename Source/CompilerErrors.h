@@ -22,6 +22,7 @@ namespace CompilerErrors {
         //Semantic errors
         void declarationScopeError(Token::Token);
         void variableNotDeclared(Token::Token);
+        void functionCallError();
 
         //Syntax errors
         void variableDeclarationError(Token::Token);

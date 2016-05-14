@@ -48,10 +48,10 @@ namespace Semantic {
             error.declarationScopeError(tree.children[1]->token);
 
         symbolTable.emplace(t, std::vector<std::string>());
-        symbolTable.at(t).push_back(tree.children[0]->token.getTokenName());
+        symbolTable[t].push_back(tree.children[0]->token.getTokenName());
 
         if (level == 1)
-            symbolTable.at(t).push_back("Global");
+            symbolTable[t].push_back("Global");
     }
 
     void SemanticAnalysis::functionDeclaration(Tree::Tree& tree) {
@@ -62,7 +62,8 @@ namespace Semantic {
         variableDeclaration(tree);
         scopeName s(scope, tree.children[1]->token.getTokenName());
 
-        symbolTable.at(s).push_back("Function");
+        symbolTable[s].push_back("Function");
+        symbolTable[s].push_back(std::to_string(tree.children[2]->children.size()));
 
         scope = ++auxScope;
     }
@@ -85,8 +86,18 @@ namespace Semantic {
     }
 
     void SemanticAnalysis::functionCallStatement(Tree::Tree& tree) {
-        
-        
+
+        scopeName sn(scope, tree.children[0]->token.getTokenName());
+
+        verifyTable(sn, *tree.children[0]);
+
+        unsigned int callParam = tree.children.size();
+
+        if (!symbolTable[sn][2].compare(std::to_string(callParam - 1)))
+            for (unsigned int i = 1; i < tree.children.size(); i++)
+                operationExpression(*tree.children[i]);
+        else
+            error.functionCallError();
     }
 
     void SemanticAnalysis::attributionExpression(Tree::Tree& tree) {
@@ -109,6 +120,9 @@ namespace Semantic {
         else if (!tree.children[0]->exp.compare(ATTSTRING))
             attributionExpression(*tree.children[0]);
 
+        else if (!tree.children[0]->exp.compare(FUNCCALLSTRING))
+            functionCallStatement(*tree.children[0]);
+
     }
 
     void SemanticAnalysis::treeAnalyzer(Tree::Tree & tree, int level) {
@@ -122,10 +136,7 @@ namespace Semantic {
         if (!tree.exp.compare(EXPSTRING))
             expressionStatement(tree);
 
-        if (!tree.exp.compare(FUNCCALLSTRING))
-
-
-            level++;
+        level++;
 
         for (unsigned int i = 0; i < tree.children.size(); i++) {
 

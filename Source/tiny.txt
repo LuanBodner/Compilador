@@ -3,7 +3,7 @@ inteiro foo(flutuante: param1, inteiro: param2)
     
     flutuante: abc
 
-    foo(a,b)
+    foo(a,b*10)
 
     repita
         param1 := (global1)

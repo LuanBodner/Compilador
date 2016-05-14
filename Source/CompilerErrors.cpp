@@ -93,6 +93,13 @@ namespace CompilerErrors {
         printError(token);
     }
 
+    void CompilerErrors::functionCallError() {
+
+        std::cout << "Wrong Number Of Arguments In Function Call;\n";
+
+        exit(EXIT_FAILURE);
+    }
+
     void CompilerErrors::declarationScopeError(Token::Token token) {
 
         std::cout << "Variable Already Declared In This Scope; ";

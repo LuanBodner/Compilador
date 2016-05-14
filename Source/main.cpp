@@ -31,13 +31,13 @@ int main(int argc, char** argv) {
 
     synx.initialTarget(argv[1], argv[2]);
 
-    //Semantic::SemanticAnalysis semantic;
+    Semantic::SemanticAnalysis semantic;
 
     Tree::Tree subTree = synx.getTree();
     
-    //semantic.treeAnalyzer(subTree);
+    semantic.treeAnalyzer(subTree);
     
-    //semantic.printTable();
+    semantic.printTable();
 
     synx.getTree().printTree(output);
 
