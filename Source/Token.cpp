@@ -17,7 +17,7 @@ namespace Token {
         "LESS_THAN", "BIGGER_THAN", "LESS_EQUAL", "BIGGER_EQUAL", "OPEN",
         "CLOSE", "NUMBER_INTEGER", "NUMBER_FLOAT", "DOUBLE_POINT", "IDENTIFIER"
     };
-
+   
     Token::Token() {
     }
 

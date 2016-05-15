@@ -47,7 +47,7 @@ namespace Syntax {
         SyntaxAnalysis();
         virtual ~SyntaxAnalysis();
 
-        // Kicks of the analysis
+        /* Kicks of the analysis */
         void initialTarget(std::string, std::string);
 
         Tree::Tree getTree();
@@ -61,27 +61,27 @@ namespace Syntax {
 
         std::vector<Token::Token> vecToken;
 
-        // Creates an instance of the Lexer from the file std::string
+        /* Creates an instance of the Lexer from the file std::string */
         void createLexer(std::string);
 
-        // Prints the tokens in the file
+        /* Prints the tokens in the file */
         void printTokens(std::string);
 
-        // Navigates on the token vector
+        /* Navigates on the token vector */
         Token::Token targetAdvance();
 
-        // Consumes the next token in the vector
+        /* Consumes the next token in the vector */
         Token::Token eat(int Token);
 
-        // Variable declaration
+        /* Variable declaration */
         void type(Token::Token);
         void variableDecStmt();
 
-        // IO operations
+        /* IO operations */
         void readStmt();
         void writeStmt();
 
-        // Definition for the basic operations
+        /* Definition for the basic operations */
         void relationalExp();
         void relationalExpL();
         void equalityExp();
@@ -93,32 +93,32 @@ namespace Syntax {
         void operationsExp();
         void factorExp();
 
-        // Return
+        /* Return */
         void returnValue();
 
-        // If statement
+        /* If statement */
         void ifStmt();
 
-        // While statement
+        /* While statement */
         void whileStmt();
 
-        // Attribution Expression
+        /* Attribution Expression */
         void attributionStmt();
 
-        // Definition of function call and the possible parameters
+        /* Definition of function call and the possible parameters */
         void paramCallStmt();
         void functionCallStmt();
 
-        // Compound statement
+        /* Compound statement */
         void expression();
         void compoundStmt();
 
-        // Function declaration
+        /* Function declaration */
         void paramFunctionStmt();
         void prototypeDefStmt();
         void functionDecStmt();
 
-        // Sets the father and advances the pointer
+        /* Sets the father and advances the pointer */
         void setAndAdvance(std::string);
     };
 }

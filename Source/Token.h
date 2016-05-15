@@ -22,6 +22,8 @@ namespace Token {
         CLOSE, NUMBER_INTEGER, NUMBER_FLOAT, DOUBLE_POINT, IDENTIFIER
     } TokenType;
 
+    extern const char * enumString[];
+
     class Token {
     public:
         Token();

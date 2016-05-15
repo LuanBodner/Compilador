@@ -19,13 +19,13 @@ namespace CompilerErrors {
         CompilerErrors();
         virtual ~CompilerErrors();
 
-        //Semantic errors
+        /* Semantic errors */
         void declarationScopeError(Token::Token);
         void variableNotDeclared(Token::Token);
         void functionCallError(Token::Token);
         void functionCallScopeError(Token::Token);
 
-        //Syntax errors
+        /* Syntax errors */
         void variableDeclarationError(Token::Token);
         void functionDeclarationError(Token::Token);
         void parameterDeclarationError(Token::Token);
@@ -35,7 +35,7 @@ namespace CompilerErrors {
         void typeError(Token::Token);
         void unidentifiedTokenError(int, Token::Token);
 
-        //Lexical errors
+        /* Lexical errors */
         void unknownCaracterStringError(int, int);
         void vectorSizeError();
 

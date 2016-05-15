@@ -627,7 +627,6 @@ namespace Syntax {
             token = targetAdvance();
         }
 
-
         fileIn.close();
         fileOut.close();
     }

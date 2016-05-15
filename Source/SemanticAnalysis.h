@@ -20,13 +20,18 @@ namespace Semantic {
     public:
         SemanticAnalysis();
         virtual ~SemanticAnalysis();
-
+        
+        /* Kicks off the semantic analysis */
         void treeAnalyzer(Tree::Tree&, int level = 0);
         void printTable();
 
     private:
         CompilerErrors::CompilerErrors error;
+
+        /* Verifies if variables were already declared */
         void verifyTable(scopeName, Tree::Tree&);
+
+        /* Semantic verification of the language */
         void readStatement(Tree::Tree&);
         void variableDeclaration(Tree::Tree&, int level = 0);
         void functionDeclaration(Tree::Tree&);
@@ -34,6 +39,8 @@ namespace Semantic {
         void attributionExpression(Tree::Tree&);
         void operationExpression(Tree::Tree&);
         void expressionStatement(Tree::Tree&);
+
+        /* Table of Symbols */
         boost::unordered_map<scopeName, vectorString> symbolTable;
     };
 }

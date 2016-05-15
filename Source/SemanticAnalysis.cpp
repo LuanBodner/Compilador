@@ -19,7 +19,7 @@ namespace Semantic {
 
     void SemanticAnalysis::verifyTable(scopeName key, Tree::Tree& tree) {
 
-        while (key.first >= 0) {
+        for (; key.first >= 0; key.first--) {
 
             boost::unordered_map<scopeName, vectorString>::const_iterator entry;
             entry = symbolTable.find(key);
@@ -32,8 +32,6 @@ namespace Semantic {
                 if (key.first == scope)
                     break;
             }
-
-            key.first--;
         }
 
         if (key.first == -1)
