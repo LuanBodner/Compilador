@@ -1,7 +1,7 @@
 "inteiro" == INTEGER
 	LINE : 1
 	COLUMN : 0
-":" == DOUBLE POINT
+":" == COLON
 	LINE : 1
 	COLUMN : 1
 "global1" == IDENTIFIER
@@ -13,16 +13,16 @@
 "teste" == IDENTIFIER
 	LINE : 2
 	COLUMN : 1
-"(" == OPEN PAIR
+"(" == OPEN PARENTHESIS
 	LINE : 2
 	COLUMN : 2
-")" == CLOSE PAIR
+")" == CLOSE PARENTHESIS
 	LINE : 2
 	COLUMN : 3
 "inteiro" == INTEGER
 	LINE : 4
 	COLUMN : 0
-":" == DOUBLE POINT
+":" == COLON
 	LINE : 4
 	COLUMN : 1
 "testeA" == IDENTIFIER
@@ -31,7 +31,7 @@
 "inteiro" == INTEGER
 	LINE : 5
 	COLUMN : 0
-":" == DOUBLE POINT
+":" == COLON
 	LINE : 5
 	COLUMN : 1
 "a" == IDENTIFIER
@@ -40,7 +40,7 @@
 "inteiro" == INTEGER
 	LINE : 6
 	COLUMN : 0
-":" == DOUBLE POINT
+":" == COLON
 	LINE : 6
 	COLUMN : 1
 "b" == IDENTIFIER
@@ -49,7 +49,7 @@
 "inteiro" == INTEGER
 	LINE : 7
 	COLUMN : 0
-":" == DOUBLE POINT
+":" == COLON
 	LINE : 7
 	COLUMN : 1
 "c" == IDENTIFIER
@@ -58,7 +58,7 @@
 "inteiro" == INTEGER
 	LINE : 8
 	COLUMN : 0
-":" == DOUBLE POINT
+":" == COLON
 	LINE : 8
 	COLUMN : 1
 "j" == IDENTIFIER
@@ -67,7 +67,7 @@
 "inteiro" == INTEGER
 	LINE : 9
 	COLUMN : 0
-":" == DOUBLE POINT
+":" == COLON
 	LINE : 9
 	COLUMN : 1
 "k" == IDENTIFIER
@@ -76,7 +76,7 @@
 "inteiro" == INTEGER
 	LINE : 10
 	COLUMN : 0
-":" == DOUBLE POINT
+":" == COLON
 	LINE : 10
 	COLUMN : 1
 "l" == IDENTIFIER
@@ -85,22 +85,22 @@
 "teste" == IDENTIFIER
 	LINE : 12
 	COLUMN : 0
-"(" == OPEN PAIR
+"(" == OPEN PARENTHESIS
 	LINE : 12
 	COLUMN : 1
-")" == CLOSE PAIR
+")" == CLOSE PARENTHESIS
 	LINE : 12
 	COLUMN : 2
 "se" == IF
 	LINE : 14
 	COLUMN : 0
-"(" == OPEN PAIR
+"(" == OPEN PARENTHESIS
 	LINE : 14
 	COLUMN : 1
 "global1" == IDENTIFIER
 	LINE : 14
 	COLUMN : 2
-")" == CLOSE PAIR
+")" == CLOSE PARENTHESIS
 	LINE : 14
 	COLUMN : 3
 "então" == THEN
@@ -109,7 +109,7 @@
 "se" == IF
 	LINE : 14
 	COLUMN : 5
-"(" == OPEN PAIR
+"(" == OPEN PARENTHESIS
 	LINE : 14
 	COLUMN : 6
 "c" == IDENTIFIER
@@ -124,10 +124,10 @@
 "*" == MULTIPLICATION
 	LINE : 14
 	COLUMN : 10
-"(" == OPEN PAIR
+"(" == OPEN PARENTHESIS
 	LINE : 14
 	COLUMN : 11
-"(" == OPEN PAIR
+"(" == OPEN PARENTHESIS
 	LINE : 14
 	COLUMN : 12
 "k" == IDENTIFIER
@@ -139,7 +139,7 @@
 "j" == IDENTIFIER
 	LINE : 14
 	COLUMN : 15
-")" == CLOSE PAIR
+")" == CLOSE PARENTHESIS
 	LINE : 14
 	COLUMN : 16
 "-" == SUBTRACTION
@@ -148,10 +148,10 @@
 "l" == IDENTIFIER
 	LINE : 14
 	COLUMN : 18
-")" == CLOSE PAIR
+")" == CLOSE PARENTHESIS
 	LINE : 14
 	COLUMN : 19
-")" == CLOSE PAIR
+")" == CLOSE PARENTHESIS
 	LINE : 14
 	COLUMN : 20
 "então" == THEN
@@ -160,7 +160,7 @@
 "vazio" == VOID
 	LINE : 15
 	COLUMN : 0
-":" == DOUBLE POINT
+":" == COLON
 	LINE : 15
 	COLUMN : 1
 "testeSe" == IDENTIFIER
@@ -172,7 +172,7 @@
 "flutuante" == FLOAT
 	LINE : 15
 	COLUMN : 4
-":" == DOUBLE POINT
+":" == COLON
 	LINE : 15
 	COLUMN : 5
 "testeSenão" == IDENTIFIER
@@ -193,13 +193,13 @@
 "foo" == IDENTIFIER
 	LINE : 19
 	COLUMN : 1
-"(" == OPEN PAIR
+"(" == OPEN PARENTHESIS
 	LINE : 19
 	COLUMN : 2
 "flutuante" == FLOAT
 	LINE : 19
 	COLUMN : 3
-":" == DOUBLE POINT
+":" == COLON
 	LINE : 19
 	COLUMN : 4
 "param1" == IDENTIFIER
@@ -211,19 +211,19 @@
 "flutuante" == FLOAT
 	LINE : 19
 	COLUMN : 7
-":" == DOUBLE POINT
+":" == COLON
 	LINE : 19
 	COLUMN : 8
 "param2" == IDENTIFIER
 	LINE : 19
 	COLUMN : 9
-")" == CLOSE PAIR
+")" == CLOSE PARENTHESIS
 	LINE : 19
 	COLUMN : 10
 "flutuante" == FLOAT
 	LINE : 21
 	COLUMN : 0
-":" == DOUBLE POINT
+":" == COLON
 	LINE : 21
 	COLUMN : 1
 "abc" == IDENTIFIER
@@ -232,7 +232,7 @@
 "inteiro" == INTEGER
 	LINE : 22
 	COLUMN : 0
-":" == DOUBLE POINT
+":" == COLON
 	LINE : 22
 	COLUMN : 1
 "a" == IDENTIFIER
@@ -241,7 +241,7 @@
 "inteiro" == INTEGER
 	LINE : 23
 	COLUMN : 0
-":" == DOUBLE POINT
+":" == COLON
 	LINE : 23
 	COLUMN : 1
 "b" == IDENTIFIER
@@ -250,7 +250,7 @@
 "foo" == IDENTIFIER
 	LINE : 25
 	COLUMN : 0
-"(" == OPEN PAIR
+"(" == OPEN PARENTHESIS
 	LINE : 25
 	COLUMN : 1
 "a" == IDENTIFIER
@@ -262,16 +262,16 @@
 "b" == IDENTIFIER
 	LINE : 25
 	COLUMN : 4
-")" == CLOSE PAIR
+")" == CLOSE PARENTHESIS
 	LINE : 25
 	COLUMN : 5
 "teste" == IDENTIFIER
 	LINE : 27
 	COLUMN : 0
-"(" == OPEN PAIR
+"(" == OPEN PARENTHESIS
 	LINE : 27
 	COLUMN : 1
-")" == CLOSE PAIR
+")" == CLOSE PARENTHESIS
 	LINE : 27
 	COLUMN : 2
 "repita" == REPEAT
@@ -283,25 +283,25 @@
 ":=" == ATTRIBUTION
 	LINE : 30
 	COLUMN : 1
-"(" == OPEN PAIR
+"(" == OPEN PARENTHESIS
 	LINE : 30
 	COLUMN : 2
 "global1" == IDENTIFIER
 	LINE : 30
 	COLUMN : 3
-")" == CLOSE PAIR
+")" == CLOSE PARENTHESIS
 	LINE : 30
 	COLUMN : 4
 "ate" == UNTIL
 	LINE : 31
 	COLUMN : 0
-"(" == OPEN PAIR
+"(" == OPEN PARENTHESIS
 	LINE : 31
 	COLUMN : 1
 "abc" == IDENTIFIER
 	LINE : 31
 	COLUMN : 2
-")" == CLOSE PAIR
+")" == CLOSE PARENTHESIS
 	LINE : 31
 	COLUMN : 3
 "fim" == END
@@ -310,7 +310,7 @@
 "inteiro" == INTEGER
 	LINE : 35
 	COLUMN : 0
-":" == DOUBLE POINT
+":" == COLON
 	LINE : 35
 	COLUMN : 1
 "global2" == IDENTIFIER

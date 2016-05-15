@@ -14,7 +14,7 @@ namespace Lexical {
     //Operations
     boost::regex
     o_SUM("^\\+"), o_SUB("^\\-"), o_MUL("^\\*"), o_DIV("^\\/"), o_SME("^<="), o_BGE("^>="),
-    o_ATT("^\\:="), o_EQU("^\\="), o_COM("^\\,"), o_DOP("^\\:"), o_SMA("^<"), o_BIG("^>"),
+    o_ATT("^\\:="), o_EQU("^\\="), o_COM("^\\,"), o_COL("^\\:"), o_SMA("^<"), o_BIG("^>"),
     o_OPA("^\\("), o_CPA("^\\)");
 
     //Keywords
@@ -136,8 +136,8 @@ namespace Lexical {
         else if (boost::regex_search(bufferString, match, o_EQU))
             tokenTemp = tokenInserter(bufferString, match.str(), Token::EQUAL, o_EQU, column++, line);
 
-        else if (boost::regex_search(bufferString, match, o_DOP))
-            tokenTemp = tokenInserter(bufferString, match.str(), Token::DOUBLE_POINT, o_DOP, column++, line);
+        else if (boost::regex_search(bufferString, match, o_COL))
+            tokenTemp = tokenInserter(bufferString, match.str(), Token::DOUBLE_POINT, o_COL, column++, line);
 
         else if (boost::regex_search(bufferString, match, o_SMA))
             tokenTemp = tokenInserter(bufferString, match.str(), Token::LESS_THAN, o_SMA, column++, line);

@@ -80,11 +80,11 @@ namespace Token {
             case 21: return "BIGGER THAN";
             case 22: return "SMALL OR EQUAL";
             case 23: return "LESS THAN OR EQUAL";
-            case 24: return "OPEN PAIR";
-            case 25: return "CLOSE PAIR";
+            case 24: return "OPEN PARENTHESIS";
+            case 25: return "CLOSE PARENTHESIS";
             case 26: return "INTEGER NUMBER";
             case 27: return "FLOAT NUMBER";
-            case 28: return "DOUBLE POINT";
+            case 28: return "COLON";
             case 29: return "IDENTIFIER";
             default: return "UNKNOWN";
         }
