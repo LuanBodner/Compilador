@@ -87,17 +87,23 @@ namespace Semantic {
 
     void SemanticAnalysis::functionCallStatement(Tree::Tree& tree) {
 
-        scopeName sn(scope, tree.children[0]->token.getTokenName());
+        scopeName sn(0, tree.children[0]->token.getTokenName());
 
-        verifyTable(sn, *tree.children[0]);
+        boost::unordered_map<scopeName, vectorString>::const_iterator entry;
+        entry = symbolTable.find(sn);
 
-        unsigned int callParam = tree.children.size();
+        if (entry != symbolTable.end()) {
 
-        if (!symbolTable[sn][2].compare(std::to_string(callParam - 1)))
-            for (unsigned int i = 1; i < tree.children.size(); i++)
-                operationExpression(*tree.children[i]);
-        else
-            error.functionCallError();
+            unsigned int callParam = tree.children.size();
+
+            if (!symbolTable[sn][2].compare(std::to_string(callParam - 1)) ||
+                    (!tree.children[1]->children.size() && !symbolTable[sn][2].compare("0")))
+                for (unsigned int i = 1; i < tree.children.size(); i++)
+                    operationExpression(*tree.children[i]);
+            else
+                error.functionCallError(tree.children[0]->token);
+        } else
+            error.functionCallScopeError(tree.children[0]->token);
     }
 
     void SemanticAnalysis::attributionExpression(Tree::Tree& tree) {

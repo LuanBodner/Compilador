@@ -93,11 +93,16 @@ namespace CompilerErrors {
         printError(token);
     }
 
-    void CompilerErrors::functionCallError() {
+    void CompilerErrors::functionCallError(Token::Token token) {
 
-        std::cout << "Wrong Number Of Arguments In Function Call;\n";
+        std::cout << "Wrong Number Of Arguments In Function Call; ";
+        printError(token);
+    }
 
-        exit(EXIT_FAILURE);
+    void CompilerErrors::functionCallScopeError(Token::Token token) {
+
+        std::cout << "Function Not Previously Declared; ";
+        printError(token);
     }
 
     void CompilerErrors::declarationScopeError(Token::Token token) {
@@ -141,7 +146,6 @@ namespace CompilerErrors {
     void CompilerErrors::variableNotDeclared(Token::Token token) {
 
         std::cout << "Variable Not Declared In This Scope; ";
-
         printError(token);
     }
 

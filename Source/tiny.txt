@@ -1,26 +1,15 @@
 inteiro : global1
-inteiro foo(flutuante: param1, inteiro: param2)
-    
-    flutuante: abc
-
-    foo(a,b*10)
-
-    repita
-        param1 := (global1)
-    ate(abc)
-
-fim
-
-inteiro: global2
-
 vazio teste()
-
+    
+    inteiro: testeA
     inteiro: a
     inteiro: b
     inteiro: c
     inteiro: j
     inteiro: k
     inteiro: l
+
+    teste()
     
     se (global1) então        
         se (c >= b * ((k - j) - l)) então
@@ -30,3 +19,21 @@ vazio teste()
         fim
     fim
 fim
+
+inteiro foo(flutuante: param1, flutuante: param2)
+    
+    flutuante: abc
+    inteiro: a
+    inteiro: b
+
+    foo(a,b)
+    
+    teste()
+    
+    repita
+        param1 := (global1)
+    ate(abc)
+
+fim
+
+inteiro: global2
