@@ -115,6 +115,13 @@ namespace Semantic {
         operationExpression(*tree.children[1]);
     }
 
+    void SemanticAnalysis::readStatement(Tree::Tree& tree) {
+
+        scopeName sn(scope, tree.children[0]->token.getTokenName());
+
+        verifyTable(sn, *tree.children[0]);
+    }
+
     void SemanticAnalysis::expressionStatement(Tree::Tree & tree) {
 
         if (!tree.children[0]->exp.compare(IFSTRING))
@@ -129,6 +136,14 @@ namespace Semantic {
         else if (!tree.children[0]->exp.compare(FUNCCALLSTRING))
             functionCallStatement(*tree.children[0]);
 
+        else if (!tree.children[0]->exp.compare(READSTRING))
+            readStatement(*tree.children[0]);
+
+        else if (!tree.children[0]->exp.compare(WRITESTRING))
+            operationExpression(*tree.children[0]->children[0]);
+
+        else if (!tree.children[0]->exp.compare(RETURNSTRING))
+            operationExpression(*tree.children[0]->children[0]);
     }
 
     void SemanticAnalysis::treeAnalyzer(Tree::Tree & tree, int level) {

@@ -27,6 +27,7 @@ namespace Semantic {
     private:
         CompilerErrors::CompilerErrors error;
         void verifyTable(scopeName, Tree::Tree&);
+        void readStatement(Tree::Tree&);
         void variableDeclaration(Tree::Tree&, int level = 0);
         void functionDeclaration(Tree::Tree&);
         void functionCallStatement(Tree::Tree&);

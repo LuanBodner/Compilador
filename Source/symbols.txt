@@ -5,6 +5,7 @@
 1, l / inteiro
 1, k / inteiro
 1, testeSe / vazio
+1, global2 / inteiro / Global
 1, j / inteiro
 1, c / inteiro
 0, foo / inteiro / Function / 2
@@ -14,5 +15,4 @@
 1, testeA / inteiro
 0, teste / vazio / Function / 0
 1, a / inteiro
-2, global2 / inteiro / Global
 0, global1 / inteiro / Global

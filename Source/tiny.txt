@@ -9,6 +9,10 @@ vazio teste()
     inteiro: k
     inteiro: l
 
+    leia(a)
+
+    escreve(a)
+
     teste()
     
     se (global1) então        
@@ -18,7 +22,11 @@ vazio teste()
             flutuante: testeSenão   
         fim
     fim
+
+    retorna(0)
 fim
+
+inteiro: global2
 
 inteiro foo(flutuante: param1, flutuante: param2)
     
@@ -31,9 +39,7 @@ inteiro foo(flutuante: param1, flutuante: param2)
     teste()
     
     repita
-        param1 := (global1)
+        param1 := (global2)
     ate(abc)
 
 fim
-
-inteiro: global2

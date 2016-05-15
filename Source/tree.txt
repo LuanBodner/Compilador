@@ -43,40 +43,57 @@ Declaration
                                             l
                                     CompoundStatement
                                         ExpressionStatement
-                                            FunctionCallStatement
-                                                teste
-                                                OperationExpression
+                                            ReadStatement
+                                                a
                                         CompoundStatement
                                             ExpressionStatement
-                                                IfStatement
+                                                WriteStatement
                                                     OperationExpression
-                                                        global1
+                                                        a
+                                            CompoundStatement
+                                                ExpressionStatement
+                                                    FunctionCallStatement
+                                                        teste
+                                                        OperationExpression
+                                                CompoundStatement
+                                                    ExpressionStatement
+                                                        IfStatement
+                                                            OperationExpression
+                                                                global1
+                                                            CompoundStatement
+                                                                ExpressionStatement
+                                                                    IfStatement
+                                                                        OperationExpression
+                                                                            c
+                                                                            BiggerEqualExpression
+                                                                                b
+                                                                                MultiplicationExpression
+                                                                                    OperationExpression
+                                                                                        OperationExpression
+                                                                                            k
+                                                                                            SubtractionExpression
+                                                                                                j
+                                                                                        SubtractionExpression
+                                                                                            l
+                                                                        CompoundStatement
+                                                                            ExpressionStatement
+                                                                                VariableDecStatement
+                                                                                    vazio
+                                                                                    testeSe
+                                                                        OtherwiseStement
+                                                                            CompoundStatement
+                                                                                ExpressionStatement
+                                                                                    VariableDecStatement
+                                                                                        flutuante
+                                                                                        testeSenão
                                                     CompoundStatement
                                                         ExpressionStatement
-                                                            IfStatement
+                                                            ReturnStatement
                                                                 OperationExpression
-                                                                    c
-                                                                    BiggerEqualExpression
-                                                                        b
-                                                                        MultiplicationExpression
-                                                                            OperationExpression
-                                                                                OperationExpression
-                                                                                    k
-                                                                                    SubtractionExpression
-                                                                                        j
-                                                                                SubtractionExpression
-                                                                                    l
-                                                                CompoundStatement
-                                                                    ExpressionStatement
-                                                                        VariableDecStatement
-                                                                            vazio
-                                                                            testeSe
-                                                                OtherwiseStement
-                                                                    CompoundStatement
-                                                                        ExpressionStatement
-                                                                            VariableDecStatement
-                                                                                flutuante
-                                                                                testeSenão
+                                                                    0
+    VariableDecStatement
+        inteiro
+        global2
     FunctionDecStatement
         inteiro
         foo
@@ -123,9 +140,6 @@ Declaration
                                                 AttributionStatement
                                                     param1
                                                     OperationExpression
-                                                        global1
+                                                        global2
                                         OperationExpression
                                             abc
-    VariableDecStatement
-        inteiro
-        global2
