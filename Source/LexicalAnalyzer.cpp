@@ -46,19 +46,42 @@ namespace Lexical {
     Token::Token LexicalAnalyzer::tokenInserter(std::string &buffer, std::string string,
             Token::TokenType type, boost::regex operation, int column, int line) {
 
-        Token::Token tokenTemp;
-
-        tokenTemp.setTokenName(string);
-        tokenTemp.setTokenType(type);
-        tokenTemp.setTokenColumn(column);
-        tokenTemp.setTokenLine(line);
+        Token::Token tokenTemp(string, type, line, column);
 
         buffer = boost::regex_replace(buffer, operation, "");
 
         return tokenTemp;
     }
 
-    Token::Token LexicalAnalyzer::getNextToken(std::ifstream &file) {
+    void LexicalAnalyzer::removeBlankSpace(std::string& bufferString) {
+
+        if (boost::regex_search(bufferString, c_CM))
+            bufferString = boost::regex_replace(bufferString, c_CM, "");
+
+        if (boost::regex_search(bufferString, b_SP))
+            bufferString = boost::regex_replace(bufferString, b_SP, "");
+    }
+
+    bool LexicalAnalyzer::loadString(std::string& bufferString, std::ifstream& file,
+            int& line, int& column) {
+
+        while (!bufferString.size()) {
+
+            if (!std::getline(file, bufferString))
+                return false;
+            else {
+
+                line++;
+                column = 1;
+            }
+        }
+
+        removeBlankSpace(bufferString);
+
+        return true;
+    }
+
+    Token::Token LexicalAnalyzer::getNextToken(std::ifstream& file) {
 
         boost::smatch match;
 
@@ -68,44 +91,16 @@ namespace Lexical {
 
         static std::string bufferString = "";
 
-        while (!bufferString.size()) {
+        if (!loadString(bufferString, file, line, column)) {
 
-            if (!std::getline(file, bufferString)) {
-
-                tokenTemp.setTokenName("@EOF");
-                return tokenTemp;
-            }
-
-            if (boost::regex_search(bufferString, match, c_CM))
-                bufferString = boost::regex_replace(bufferString, c_CM, "");
-
-            if (boost::regex_search(bufferString, match, b_SP))
-                bufferString = boost::regex_replace(bufferString, b_SP, "");
-
-            line++;
-            column = 0;
+            tokenTemp.setTokenName("@EOF");
+            return tokenTemp;
         }
 
-        if (boost::regex_search(bufferString, match, c_CM))
-            bufferString = boost::regex_replace(bufferString, c_CM, "");
+        if (!loadString(bufferString, file, line, column)) {
 
-        if (boost::regex_search(bufferString, match, b_SP))
-            bufferString = boost::regex_replace(bufferString, b_SP, "");
-
-        if (!bufferString.size()) {
-
-            if (!std::getline(file, bufferString)) {
-
-                tokenTemp.setTokenName("@EOF");
-                return tokenTemp;
-            }
-
-            if (boost::regex_search(bufferString, match, c_CM))
-                bufferString = boost::regex_replace(bufferString, c_CM, "");
-
-            if (boost::regex_search(bufferString, match, b_SP))
-                bufferString = boost::regex_replace(bufferString, b_SP, "");
-
+            tokenTemp.setTokenName("@EOF");
+            return tokenTemp;
         }
 
         if (boost::regex_search(bufferString, match, o_SUM))

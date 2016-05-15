@@ -18,7 +18,7 @@ vazio teste()
     se (global1) então        
         se (c >= b * ((k - j) - l)) então
             vazio: testeSe              
-        senão           
+        senão               
             flutuante: testeSenão   
         fim
     fim
