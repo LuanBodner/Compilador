@@ -28,15 +28,11 @@ int main(int argc, char** argv) {
     output.open(argv[3], std::ofstream::out);
 
     Syntax::SyntaxAnalysis synx;
-
     synx.initialTarget(argv[1], argv[2]);
 
     Semantic::SemanticAnalysis semantic;
-
     Tree::Tree subTree = synx.getTree();
-    
     semantic.treeAnalyzer(subTree);
-    
     semantic.printTable();
 
     synx.getTree().printTree(output);

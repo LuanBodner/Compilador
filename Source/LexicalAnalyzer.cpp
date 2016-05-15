@@ -24,8 +24,7 @@ namespace Lexical {
     k_RE("^\\bleia\\b"), k_WR("^\\bescreve\\b"), k_IN("^\\binteiro\\b"), k_RT("^\\bretorna\\b");
 
     //Comments
-    boost::regex
-    c_CM("\\{.[^}]+\\}");
+    boost::regex c_CM("\\{.[^}]+\\}");
 
     //Blank space
     boost::regex b_SP("^\\s+");
@@ -100,7 +99,7 @@ namespace Lexical {
                 tokenTemp.setTokenName("@EOF");
                 return tokenTemp;
             }
-            
+
             if (boost::regex_search(bufferString, match, c_CM))
                 bufferString = boost::regex_replace(bufferString, c_CM, "");
 

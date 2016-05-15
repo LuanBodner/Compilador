@@ -7,16 +7,16 @@
 
 #include <fstream>
 #include <vector>
+#include <algorithm>
+#include <memory>
 #include "Tree.h"
 
 namespace Tree {
 
     Tree::Tree() {
-
     }
 
     Tree::~Tree() {
-
     }
 
     Token::Token Tree::getToken() {
@@ -68,15 +68,15 @@ namespace Tree {
 
     void Tree::printTree(std::ofstream & output, int level) {
 
-        if (level > 0)
+        if (level)
             output << std::setw(level) << ' ';
 
-        if (active == 0)
+        if (!active)
             output << exp << "\n";
         else
             output << token.getTokenName() << "\n";
 
-        for (unsigned int index = 0; index != children.size(); index++)
-            children[index]->printTree(output, level + 4);
+        for (const auto &t : children)
+            t->printTree(output, level + 4);
     }
 }

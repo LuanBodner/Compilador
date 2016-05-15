@@ -12,7 +12,7 @@
 
 namespace Token {
 
-    //Codes for the possible tokens 
+    /* Enum for the possible tokens in the language */
     typedef enum {
         IF, THEN, OTHERWISE, END, REPEAT,
         FLOAT, VOID, UNTIL, READ, WRITE,
@@ -40,6 +40,7 @@ namespace Token {
         void print();
 
     private:
+        /* Attributes */
         std::string tokenName;
         TokenType token;
         int tokenColumn;

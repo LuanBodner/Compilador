@@ -24,14 +24,13 @@ namespace Lexical {
         LexicalAnalyzer();
         virtual ~LexicalAnalyzer();
 
-        //Returns the token found first and removes it from the vector
+        /* Returns the token found first and removes it from the vector */
         Token::Token getNextToken(std::ifstream &);
 
     private:
-
         CompilerErrors::CompilerErrors error;
-        //Collects and stores the tokens
-        Token::Token tokenInserter(std::string &, std::string,
+        /* Collects and stores the tokens */
+        Token::Token tokenInserter(std::string&, std::string,
                 Token::TokenType, boost::regex, int, int);
     };
 }
