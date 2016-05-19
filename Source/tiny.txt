@@ -1,4 +1,12 @@
 inteiro : global1
+
+inteiro principal()
+
+    flutuante: b
+
+    b := (15)
+fim
+
 vazio teste()
     
     inteiro: testeA

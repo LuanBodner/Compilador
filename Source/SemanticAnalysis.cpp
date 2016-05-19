@@ -9,6 +9,7 @@
 
 namespace Semantic {
 
+    bool main = false;
     int scope = 0;
 
     SemanticAnalysis::SemanticAnalysis() {
@@ -59,6 +60,9 @@ namespace Semantic {
 
         variableDeclaration(tree);
         scopeName s(scope, tree.children[1]->token.getTokenName());
+
+        if (!s.second.compare("principal"))
+            main = true;
 
         symbolTable[s].push_back("Function");
         symbolTable[s].push_back(std::to_string(tree.children[2]->children.size()));
@@ -162,6 +166,11 @@ namespace Semantic {
             if (!tree.active)
                 treeAnalyzer(*tree.children[i], level);
         }
+
+        level--;
+
+        if (!main && !level)
+            error.mainDeclarationError();
     }
 
     void SemanticAnalysis::printTable() {

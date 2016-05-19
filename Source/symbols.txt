@@ -1,18 +1,20 @@
+3, a / inteiro
+3, abc / flutuante
+3, param2 / flutuante
+2, testeSe / vazio
+3, b / inteiro
+2, l / inteiro
+2, k / inteiro
 2, b / inteiro
 2, a / inteiro
-2, param1 / flutuante
-1, testeSenão / flutuante
-1, l / inteiro
-1, k / inteiro
-1, testeSe / vazio
-1, global2 / inteiro / Global
-1, j / inteiro
-1, c / inteiro
-0, foo / inteiro / Function / 2
-2, param2 / flutuante
-1, b / inteiro
-2, abc / flutuante
-1, testeA / inteiro
+2, testeA / inteiro
+3, param1 / flutuante
 0, teste / vazio / Function / 0
-1, a / inteiro
+1, b / flutuante
+2, c / inteiro
+2, j / inteiro
+0, foo / inteiro / Function / 2
+0, principal / inteiro / Function / 0
+2, testeSenão / flutuante
 0, global1 / inteiro / Global
+2, global2 / inteiro / Global

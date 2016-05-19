@@ -110,6 +110,14 @@ namespace CompilerErrors {
         exit(EXIT_FAILURE);
     }
 
+    void CompilerErrors::mainDeclarationError() {
+
+        std::cout << "No Main Declaration In File; "
+                << "Program Terminated;\n";
+
+        exit(EXIT_FAILURE);
+    }
+
     void CompilerErrors::variableNotDeclared(Token::Token token) {
 
         std::cout << "Variable Not Declared In This Scope; ";
