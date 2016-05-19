@@ -161,11 +161,9 @@ namespace Semantic {
 
         level++;
 
-        for (unsigned int i = 0; i < tree.children.size(); i++) {
-
+        for (unsigned int i = 0; i < tree.children.size(); i++)
             if (!tree.active)
                 treeAnalyzer(*tree.children[i], level);
-        }
 
         level--;
 
