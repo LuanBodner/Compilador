@@ -47,8 +47,6 @@ namespace Semantic {
 
         if (level == 1)
             symbolTable[t].push_back(GL);
-
-        symbolTable[t].push_back(NI);
     }
 
     void SemanticAnalysis::functionDeclaration(Tree::Tree& tree) {
@@ -114,8 +112,6 @@ namespace Semantic {
         scopeName sn(scope, tree.children[0]->token.getTokenName());
 
         verifyTable(sn, *tree.children[0]);
-
-        symbolTable[sn][symbolTable[sn].size() - 1] = IN;
 
         operationExpression(*tree.children[1]);
     }

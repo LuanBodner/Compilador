@@ -1,13 +1,6 @@
 inteiro : global1
-
 inteiro principal()
-
-    flutuante: b
-
-    b := (15)
     
-    leia(global1)
-
 fim
 
 vazio teste()
@@ -18,13 +11,6 @@ vazio teste()
     inteiro: j
     inteiro: k
     inteiro: l
-
-    leia(a)
-    leia(c)
-    leia(b)
-    leia(k)
-    leia(j)
-    leia(l)
 
     escreve(a)
 
@@ -42,7 +28,6 @@ vazio teste()
 fim
 
 inteiro: global2
-
 inteiro foo(flutuante: param1, flutuante: param2)
     
     flutuante: abc

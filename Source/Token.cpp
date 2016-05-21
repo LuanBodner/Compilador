@@ -17,16 +17,12 @@ namespace Token {
         "LESS_THAN", "BIGGER_THAN", "LESS_EQUAL", "BIGGER_EQUAL", "OPEN",
         "CLOSE", "NUMBER_INTEGER", "NUMBER_FLOAT", "DOUBLE_POINT", "IDENTIFIER"
     };
-   
+
     Token::Token() {
     }
 
-    Token::Token(std::string str, TokenType type, int li, int col) {
-
-        token = type;
-        tokenName = str;
-        tokenColumn = col;
-        tokenLine = li;
+    Token::Token(std::string str, TokenType type, int li, int col)
+    : tokenName(str), token(type), tokenColumn(col), tokenLine(li) {
     }
 
     Token::~Token() {
