@@ -25,14 +25,10 @@ namespace Semantic {
             boost::unordered_map<scopeName, vectorString>::const_iterator entry;
             entry = symbolTable.find(key);
 
-            if (entry != symbolTable.end()) {
-
-                if (key.first != scope && !entry->second[1].compare("Global"))
+            if (entry != symbolTable.end())
+                if ((key.first != scope && !entry->second[1].compare(GL)) ||
+                        key.first == scope)
                     break;
-
-                if (key.first == scope)
-                    break;
-            }
         }
 
         if (key.first == -1)
@@ -50,7 +46,9 @@ namespace Semantic {
         symbolTable[t].push_back(tree.children[0]->token.getTokenName());
 
         if (level == 1)
-            symbolTable[t].push_back("Global");
+            symbolTable[t].push_back(GL);
+
+        symbolTable[t].push_back(NI);
     }
 
     void SemanticAnalysis::functionDeclaration(Tree::Tree& tree) {
@@ -58,13 +56,18 @@ namespace Semantic {
         int auxScope = scope;
         scope = 0;
 
-        variableDeclaration(tree);
         scopeName s(scope, tree.children[1]->token.getTokenName());
+
+        if (symbolTable.find(s) != symbolTable.end())
+            error.declarationScopeError(tree.children[1]->token);
+
+        symbolTable.emplace(s, std::vector<std::string>());
+        symbolTable[s].push_back(tree.children[0]->token.getTokenName());
 
         if (!s.second.compare("principal"))
             main = true;
 
-        symbolTable[s].push_back("Function");
+        symbolTable[s].push_back(FU);
         symbolTable[s].push_back(std::to_string(tree.children[2]->children.size()));
 
         scope = ++auxScope;
@@ -74,12 +77,10 @@ namespace Semantic {
 
         if (tree.children.size()) {
 
-            if (tree.children[0]->token.getTokenType() == Token::IDENTIFIER) {
+            scopeName sn(scope, tree.children[0]->token.getTokenName());
 
-                scopeName sn(scope, tree.children[0]->token.getTokenName());
-
+            if (tree.children[0]->token.getTokenType() == Token::IDENTIFIER)
                 verifyTable(sn, *tree.children[0]);
-            }
 
             for (unsigned int i = 0; i < tree.children.size(); i++)
                 if (tree.children[i])
@@ -113,6 +114,8 @@ namespace Semantic {
         scopeName sn(scope, tree.children[0]->token.getTokenName());
 
         verifyTable(sn, *tree.children[0]);
+
+        symbolTable[sn][symbolTable[sn].size() - 1] = IN;
 
         operationExpression(*tree.children[1]);
     }

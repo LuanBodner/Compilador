@@ -90,6 +90,12 @@ namespace CompilerErrors {
         printError(token);
     }
 
+    void CompilerErrors::variableNotDefined(Token::Token token) {
+
+        std::cout << "Variable Used But Not Defined In This Scope; ";
+        printError(token);
+    }
+
     void CompilerErrors::unidentifiedTokenError(int Token, Token::Token token) {
 
         std::cout << "Unidentified Token Error; "

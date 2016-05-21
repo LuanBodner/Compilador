@@ -14,6 +14,11 @@
 typedef std::pair<int, std::string> scopeName;
 typedef std::vector<std::string> vectorString;
 
+#define GL "Global"
+#define NI "Not Initialized"
+#define IN "Initialized"
+#define FU "Function"
+
 namespace Semantic {
 
     class SemanticAnalysis {
