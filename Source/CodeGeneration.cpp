@@ -1,0 +1,15 @@
+/* 
+ * File:   CodeGeneration.cpp
+ * Author: Luan Bodner do Rosário <luan.rosario.bodner@gmail.com>
+ * 
+ * Created on May 22, 2016, 11:01 AM
+ */
+
+#include "CodeGeneration.h"
+
+CodeGeneration::CodeGeneration() {
+}
+
+CodeGeneration::~CodeGeneration() {
+}
+
