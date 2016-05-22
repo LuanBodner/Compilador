@@ -15,8 +15,8 @@ typedef std::pair<int, std::string> scopeName;
 typedef std::vector<std::string> vectorString;
 
 #define GL "Global"
-//#define NI "Not Initialized"
-//#define IN "Initialized"
+#define NI "Not Initialized"
+#define IN "Initialized"
 #define FU "Function"
 
 namespace Semantic {
@@ -34,7 +34,7 @@ namespace Semantic {
         CompilerErrors::CompilerErrors error;
 
         /* Verifies if variables were already declared */
-        void verifyTable(scopeName, Tree::Tree&);
+        int verifyTable(scopeName, Tree::Tree&);
 
         /* Semantic verification of the language */
         void readStatement(Tree::Tree&);

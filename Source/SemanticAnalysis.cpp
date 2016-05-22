@@ -18,7 +18,7 @@ namespace Semantic {
     SemanticAnalysis::~SemanticAnalysis() {
     }
 
-    void SemanticAnalysis::verifyTable(scopeName key, Tree::Tree& tree) {
+    int SemanticAnalysis::verifyTable(scopeName key, Tree::Tree& tree) {
 
         for (; key.first >= 0; key.first--) {
 
@@ -27,17 +27,25 @@ namespace Semantic {
 
             if (entry != symbolTable.end())
                 if ((key.first != scope && !entry->second[1].compare(GL)) ||
+                        (key.first != scope && !entry->second[1].compare(FU)) ||
                         key.first == scope)
                     break;
         }
 
         if (key.first == -1)
             error.variableNotDeclared(tree.token);
+
+        return key.first;
     }
 
     void SemanticAnalysis::variableDeclaration(Tree::Tree& tree, int level) {
 
-        scopeName t(scope, tree.children[1]->token.getTokenName());
+        int scopeL;
+
+        if (level == 1) scopeL = 0;
+        else scopeL = scope;
+
+        scopeName t(scopeL, tree.children[1]->token.getTokenName());
 
         if (symbolTable.find(t) != symbolTable.end())
             error.declarationScopeError(tree.children[1]->token);
@@ -47,6 +55,8 @@ namespace Semantic {
 
         if (level == 1)
             symbolTable[t].push_back(GL);
+
+        symbolTable[t].push_back(NI);
     }
 
     void SemanticAnalysis::functionDeclaration(Tree::Tree& tree) {
@@ -77,8 +87,13 @@ namespace Semantic {
 
             scopeName sn(scope, tree.children[0]->token.getTokenName());
 
-            if (tree.children[0]->token.getTokenType() == Token::IDENTIFIER)
-                verifyTable(sn, *tree.children[0]);
+            if (tree.children[0]->token.getTokenType() == Token::IDENTIFIER) {
+
+                sn.first = verifyTable(sn, *tree.children[0]);
+
+                if (!symbolTable[sn][symbolTable[sn].size() - 1].compare(NI))
+                    error.variableNotDefined(tree.children[0]->token);
+            }
 
             for (unsigned int i = 0; i < tree.children.size(); i++)
                 if (tree.children[i])
@@ -111,16 +126,20 @@ namespace Semantic {
 
         scopeName sn(scope, tree.children[0]->token.getTokenName());
 
-        verifyTable(sn, *tree.children[0]);
+        sn.first = verifyTable(sn, *tree.children[0]);
 
         operationExpression(*tree.children[1]);
+
+        symbolTable[sn][symbolTable[sn].size() - 1] = IN;
     }
 
     void SemanticAnalysis::readStatement(Tree::Tree& tree) {
 
         scopeName sn(scope, tree.children[0]->token.getTokenName());
 
-        verifyTable(sn, *tree.children[0]);
+        sn.first = verifyTable(sn, *tree.children[0]);
+
+        symbolTable[sn][symbolTable[sn].size() - 1] = IN;
     }
 
     void SemanticAnalysis::expressionStatement(Tree::Tree & tree) {

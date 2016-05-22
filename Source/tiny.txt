@@ -3,7 +3,7 @@ inteiro principal()
     
 fim
 
-vazio teste()
+inteiro teste()
     
     inteiro: a
     inteiro: b
@@ -11,6 +11,16 @@ vazio teste()
     inteiro: j
     inteiro: k
     inteiro: l
+
+    a := (10)
+    c := (15)
+    b := (c)
+
+    leia(k)
+    leia(j)
+    leia(global1)
+    
+    l := (j)
 
     escreve(a)
 
@@ -24,7 +34,7 @@ vazio teste()
         fim
     fim
 
-    retorna(0)
+    retorna(global1)
 fim
 
 inteiro: global2
@@ -37,11 +47,10 @@ inteiro foo(flutuante: param1, flutuante: param2)
     leia(a)
     leia(b)
     leia(abc)
+    global2 := (teste())
 
     foo(a,b)
-    
-    teste()
-    
+        
     repita
         param1 := (global2)
     ate(abc)
