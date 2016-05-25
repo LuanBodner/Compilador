@@ -373,7 +373,7 @@
 "a" == IDENTIFIER
 	LINE : 44
 	COLUMN : 3
-"inteiro" == INTEGER
+"flutuante" == FLOAT
 	LINE : 45
 	COLUMN : 1
 ":" == DOUBLE_POINT

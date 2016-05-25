@@ -42,7 +42,7 @@ inteiro foo(inteiro: param1, inteiro: param2)
     
     flutuante: abc
     inteiro: a
-    inteiro: b
+    flutuante: b
 
     leia(a)
     leia(b)

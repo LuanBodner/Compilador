@@ -148,7 +148,7 @@ Declaration
                 CompoundStatement
                     ExpressionStatement
                         VariableDecStatement
-                            inteiro
+                            flutuante
                             b
                     CompoundStatement
                         ExpressionStatement

@@ -23,85 +23,85 @@ namespace CompilerErrors {
 
     void CompilerErrors::printError(Token::Token token) {
 
-        std::cout << "Line: " << token.getTokenLine() << "; ";
-        std::cout << "Column: " << token.getTokenColumn() << "; ";
-        std::cout << "Received '" << token.getTokenName() << "';\n";
+        std::cout << "\033[1;36mLine\033[0m: " << token.getTokenLine() << "; ";
+        std::cout << "\033[1;36mColumn\033[0m: " << token.getTokenColumn() << "; ";
+        std::cout << "\033[1;32mReceived\033[0m: " << token.getTokenName() << "';\n";
 
         exit(EXIT_FAILURE);
     }
 
     void CompilerErrors::variableDeclarationError(Token::Token token) {
 
-        std::cout << "Variable Declaration Error; ";
+        std::cout << "\033[1;31mError\033[0m; Variable Declaration Error; ";
         printError(token);
     }
 
     void CompilerErrors::functionDeclarationError(Token::Token token) {
 
-        std::cout << "Function Declaration Error; ";
+        std::cout << "\033[1;31mError\033[0m; Function Declaration Error; ";
         printError(token);
     }
 
     void CompilerErrors::parameterDeclarationError(Token::Token token) {
 
-        std::cout << "Parameter Declaration Error; ";
+        std::cout << "\033[1;31mError\033[0m; Parameter Declaration Error; ";
         printError(token);
     }
 
     void CompilerErrors::expressionError(Token::Token token) {
 
-        std::cout << "Expression Error; ";
+        std::cout << "\033[1;31mError\033[0m; Expression Error; ";
         printError(token);
     }
 
     void CompilerErrors::numberOfArgumentsError(Token::Token token) {
 
-        std::cout << "Number Of Arguments Error; ";
+        std::cout << "\033[1;31mError\033[0m; Number Of Arguments Error; ";
         printError(token);
     }
 
     void CompilerErrors::functionCallError(Token::Token token) {
 
-        std::cout << "Wrong Number Of Arguments In Function Call; ";
+        std::cout << "\033[1;31mError\033[0m; Wrong Number Of Arguments In Function Call; ";
         printError(token);
     }
 
     void CompilerErrors::functionCallScopeError(Token::Token token) {
 
-        std::cout << "Function Not Previously Declared; ";
+        std::cout << "\033[1;31mError\033[0m; Function Not Previously Declared; ";
         printError(token);
     }
 
     void CompilerErrors::declarationScopeError(Token::Token token) {
 
-        std::cout << "Variable Already Declared In This Scope; ";
+        std::cout << "\033[1;31mError\033[0m; Variable Already Declared In This Scope; ";
         printError(token);
     }
 
     void CompilerErrors::factorError(Token::Token token) {
 
-        std::cout << "Factor Error; ";
+        std::cout << "\033[1;31mError\033[0m; Factor Error; ";
         printError(token);
     }
 
     void CompilerErrors::typeError(Token::Token token) {
 
-        std::cout << "Unidentified Type Error; ";
+        std::cout << "\033[1;31mError\033[0m; Unidentified Type Error; ";
         printError(token);
     }
 
     void CompilerErrors::variableNotDefined(Token::Token token) {
 
-        std::cout << "Variable Used But Not Defined In This Scope; ";
+        std::cout << "\033[1;31mError\033[0m; Variable Used But Not Defined In This Scope; ";
         printError(token);
     }
 
     void CompilerErrors::unidentifiedTokenError(int Token, Token::Token token) {
 
-        std::cout << "Unidentified Token Error; "
-                << "Expected : "
+        std::cout << "\033[1;31mError\033[0m; Unidentified Token Error; "
+                << "\033[1;32mExpected\033[0m: "
                 << intToString(Token)
-                << "; Received : "
+                << "; \033[1;32mReceived\033[0m: "
                 << token.tokenTypeToString()
                 << std::endl;
 
@@ -110,15 +110,16 @@ namespace CompilerErrors {
 
     void CompilerErrors::unknownCaracterStringError(int line, int column) {
 
-        std::cout << "Token Not Recognized; ";
-        std::cout << "Line: " << line << ";Column: " << column << std::endl;
+        std::cout << "\033[1;31mError\033[0m; Token Not Recognized; ";
+        std::cout << "\033[1;36mLine\033[0m: " << line
+                << ";\033[1;36mColumn\033[0m: " << column << std::endl;
 
         exit(EXIT_FAILURE);
     }
 
     void CompilerErrors::mainDeclarationError() {
 
-        std::cout << "No Main Declaration In File; "
+        std::cout << "\033[1;31mError\033[0m; No Main Declaration In File; "
                 << "Program Terminated;\n";
 
         exit(EXIT_FAILURE);
@@ -126,21 +127,21 @@ namespace CompilerErrors {
 
     void CompilerErrors::expressionTypeWarning(Token::Token token) {
 
-        std::cout << "Expression from unexpected type; ";
-        std::cout << "Line: " << token.getTokenLine() << "; ";
-        std::cout << "Column: " << token.getTokenColumn() << "; ";
-        std::cout << "Received '" << token.getTokenName() << "';\n";
+        std::cout << "\033[1;35mWarning\033[0m; Expression from unexpected type; ";
+        std::cout << "\033[1;36mLine\033[0m: " << token.getTokenLine() << "; ";
+        std::cout << "\033[1;36mColumn\033[0m: " << token.getTokenColumn() << "; ";
+        std::cout << "\033[1;32mReceived\033[0m: " << token.getTokenName() << "';\n";
     }
 
     void CompilerErrors::variableNotDeclared(Token::Token token) {
 
-        std::cout << "Variable Not Declared In This Scope; ";
+        std::cout << "\033[1;31mError\033[0m; Variable Not Declared In This Scope; ";
         printError(token);
     }
 
     void CompilerErrors::vectorSizeError() {
 
-        std::cout << "No Expression Defined\n";
+        std::cout << "\033[1;31mError\033[0m; No Expression Defined\n";
 
         exit(EXIT_FAILURE);
     }
