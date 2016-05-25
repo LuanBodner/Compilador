@@ -19,7 +19,7 @@
 ")" == CLOSE
 	LINE : 2
 	COLUMN : 4
-"inteiro" == INTEGER
+"flutuante" == FLOAT
 	LINE : 4
 	COLUMN : 1
 ":" == DOUBLE_POINT
@@ -37,7 +37,7 @@
 "b" == IDENTIFIER
 	LINE : 5
 	COLUMN : 3
-"inteiro" == INTEGER
+"flutuante" == FLOAT
 	LINE : 6
 	COLUMN : 1
 ":" == DOUBLE_POINT
@@ -82,7 +82,7 @@
 "(" == OPEN
 	LINE : 11
 	COLUMN : 3
-"10" == NUMBER_INTEGER
+"10.0" == NUMBER_FLOAT
 	LINE : 11
 	COLUMN : 4
 ")" == CLOSE
@@ -112,12 +112,18 @@
 "(" == OPEN
 	LINE : 13
 	COLUMN : 3
-"c" == IDENTIFIER
+"teste" == IDENTIFIER
 	LINE : 13
 	COLUMN : 4
-")" == CLOSE
+"(" == OPEN
 	LINE : 13
 	COLUMN : 5
+")" == CLOSE
+	LINE : 13
+	COLUMN : 6
+")" == CLOSE
+	LINE : 13
+	COLUMN : 7
 "leia" == READ
 	LINE : 15
 	COLUMN : 1

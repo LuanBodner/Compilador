@@ -9,7 +9,7 @@ Declaration
         CompoundStatement
             ExpressionStatement
                 VariableDecStatement
-                    inteiro
+                    flutuante
                     a
             CompoundStatement
                 ExpressionStatement
@@ -19,7 +19,7 @@ Declaration
                 CompoundStatement
                     ExpressionStatement
                         VariableDecStatement
-                            inteiro
+                            flutuante
                             c
                     CompoundStatement
                         ExpressionStatement
@@ -41,7 +41,7 @@ Declaration
                                         AttributionStatement
                                             a
                                             OperationExpression
-                                                10
+                                                10.0
                                     CompoundStatement
                                         ExpressionStatement
                                             AttributionStatement
@@ -53,7 +53,9 @@ Declaration
                                                 AttributionStatement
                                                     b
                                                     OperationExpression
-                                                        c
+                                                        FunctionCallStatement
+                                                            teste
+                                                            OperationExpression
                                             CompoundStatement
                                                 ExpressionStatement
                                                     ReadStatement

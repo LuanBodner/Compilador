@@ -1,16 +1,16 @@
 inteiro : global1
 inteiro teste()
     
-    inteiro: a
+    flutuante: a
     inteiro: b
-    inteiro: c
+    flutuante: c
     inteiro: j
     inteiro: k
     inteiro: l
 
-    a := (10)
+    a := (10.0)
     c := (15)
-    b := (c)
+    b := (teste())
 
     leia(k)
     leia(j)

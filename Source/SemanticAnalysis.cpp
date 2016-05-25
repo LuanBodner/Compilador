@@ -178,7 +178,9 @@ namespace Semantic {
 
         sn.first = verifyTable(sn, *tree.children[0]);
 
-        operationExpression(*tree.children[1]);
+        if (!symbolTable[sn][0].compare("inteiro"))
+            operationExpression(*tree.children[1], Token::INTEGER);
+        else operationExpression(*tree.children[1], Token::FLOAT);
 
         symbolTable[sn][symbolTable[sn].size() - 1] = IN;
     }

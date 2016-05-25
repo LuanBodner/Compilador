@@ -75,6 +75,6 @@ namespace Token {
 
     void Token::print() {
 
-        std::cout << "<" << this->tokenName << "," << this->token << ">" << std::endl;
+        std::cout << "<" << this->tokenName << "," << enumString[this->token] << ">" << std::endl;
     }
 }
