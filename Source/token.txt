@@ -1,4 +1,4 @@
-"inteiro" == INTEGER
+"flutuante" == FLOAT
 	LINE : 1
 	COLUMN : 1
 ":" == DOUBLE_POINT
@@ -19,7 +19,7 @@
 ")" == CLOSE
 	LINE : 2
 	COLUMN : 4
-"flutuante" == FLOAT
+"inteiro" == INTEGER
 	LINE : 4
 	COLUMN : 1
 ":" == DOUBLE_POINT
@@ -37,7 +37,7 @@
 "b" == IDENTIFIER
 	LINE : 5
 	COLUMN : 3
-"flutuante" == FLOAT
+"inteiro" == INTEGER
 	LINE : 6
 	COLUMN : 1
 ":" == DOUBLE_POINT
@@ -82,7 +82,7 @@
 "(" == OPEN
 	LINE : 11
 	COLUMN : 3
-"10.0" == NUMBER_FLOAT
+"10" == NUMBER_INTEGER
 	LINE : 11
 	COLUMN : 4
 ")" == CLOSE
@@ -97,7 +97,7 @@
 "(" == OPEN
 	LINE : 12
 	COLUMN : 3
-"15" == NUMBER_INTEGER
+"154" == NUMBER_INTEGER
 	LINE : 12
 	COLUMN : 4
 ")" == CLOSE
@@ -181,12 +181,18 @@
 "(" == OPEN
 	LINE : 21
 	COLUMN : 2
-"a" == IDENTIFIER
+"15.0" == NUMBER_FLOAT
 	LINE : 21
 	COLUMN : 3
-")" == CLOSE
+"*" == MULTIPLICATION
 	LINE : 21
 	COLUMN : 4
+"a" == IDENTIFIER
+	LINE : 21
+	COLUMN : 5
+")" == CLOSE
+	LINE : 21
+	COLUMN : 6
 "teste" == IDENTIFIER
 	LINE : 23
 	COLUMN : 1

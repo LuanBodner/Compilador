@@ -1,15 +1,15 @@
-inteiro : global1
+flutuante : global1
 inteiro teste()
     
-    flutuante: a
+    inteiro: a
     inteiro: b
-    flutuante: c
+    inteiro: c
     inteiro: j
     inteiro: k
     inteiro: l
 
-    a := (10.0)
-    c := (15)
+    a := (10)
+    c := (154)
     b := (teste())
 
     leia(k)
@@ -18,7 +18,7 @@ inteiro teste()
     
     l := (j)
 
-    escreve(a)
+    escreve(15.0*a)
 
     teste()
     

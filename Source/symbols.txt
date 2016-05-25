@@ -8,11 +8,11 @@
 1, k / inteiro / Initialized
 1, testeSe / inteiro / Not Initialized
 1, j / inteiro / Initialized
-1, c / flutuante / Initialized
+1, c / inteiro / Initialized
 0, foo / vazio / Function / 2 / inteiro / inteiro
 2, param2 / inteiro / Not Initialized
 1, b / inteiro / Initialized
 2, abc / flutuante / Initialized
 0, teste / inteiro / Function / 0
-1, a / flutuante / Initialized
-0, global1 / inteiro / Global / Initialized
+1, a / inteiro / Initialized
+0, global1 / flutuante / Global / Initialized

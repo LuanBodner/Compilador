@@ -1,6 +1,6 @@
 Declaration
     VariableDecStatement
-        inteiro
+        flutuante
         global1
     FunctionDecStatement
         inteiro
@@ -9,7 +9,7 @@ Declaration
         CompoundStatement
             ExpressionStatement
                 VariableDecStatement
-                    flutuante
+                    inteiro
                     a
             CompoundStatement
                 ExpressionStatement
@@ -19,7 +19,7 @@ Declaration
                 CompoundStatement
                     ExpressionStatement
                         VariableDecStatement
-                            flutuante
+                            inteiro
                             c
                     CompoundStatement
                         ExpressionStatement
@@ -41,13 +41,13 @@ Declaration
                                         AttributionStatement
                                             a
                                             OperationExpression
-                                                10.0
+                                                10
                                     CompoundStatement
                                         ExpressionStatement
                                             AttributionStatement
                                                 c
                                                 OperationExpression
-                                                    15
+                                                    154
                                         CompoundStatement
                                             ExpressionStatement
                                                 AttributionStatement
@@ -78,7 +78,9 @@ Declaration
                                                                 ExpressionStatement
                                                                     WriteStatement
                                                                         OperationExpression
-                                                                            a
+                                                                            15.0
+                                                                            MultiplicationExpression
+                                                                                a
                                                                 CompoundStatement
                                                                     ExpressionStatement
                                                                         FunctionCallStatement

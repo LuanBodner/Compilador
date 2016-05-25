@@ -8,6 +8,7 @@
 #ifndef SEMANTICANALYSIS_H
 #define SEMANTICANALYSIS_H
 #include <iostream>
+#include <string>
 #include <boost/unordered_map.hpp>
 #include "SyntaxAnalysis.h"
 

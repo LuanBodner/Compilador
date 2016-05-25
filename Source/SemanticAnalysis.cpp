@@ -10,6 +10,7 @@
 namespace Semantic {
 
     bool main = false;
+    std::string otype;
     int scope = 0;
 
     SemanticAnalysis::SemanticAnalysis() {
@@ -95,6 +96,8 @@ namespace Semantic {
 
     void SemanticAnalysis::operationExpression(Tree::Tree& tree) {
 
+        static int counter = 0;
+
         if (tree.children.size()) {
 
             scopeName sn(scope, tree.children[0]->token.getTokenName());
@@ -105,11 +108,38 @@ namespace Semantic {
 
                 if (!symbolTable[sn][symbolTable[sn].size() - 1].compare(NI))
                     error.variableNotDefined(tree.children[0]->token);
+
+                if (!counter)
+                    otype = symbolTable[sn][0];
+
+                if (symbolTable[sn][0].compare(otype))
+                    error.expressionTypeWarning(tree.children[0]->token);
+            } else {
+
+                Token::TokenType t = tree.children[0]->token.getTokenType();
+
+                if (!counter) {
+                    
+                    if (t == Token::NUMBER_FLOAT)
+                        otype = "flutuante";
+                    else otype = "inteiro";
+                }
+                
+                if ((otype.compare("inteiro") && t == Token::NUMBER_INTEGER) ||
+                        (otype.compare("flutuante") && t == Token::NUMBER_FLOAT))
+                    error.expressionTypeWarning(tree.children[0]->token);
             }
 
-            for (unsigned int i = 0; i < tree.children.size(); i++)
-                if (tree.children[i])
+            for (unsigned int i = 0; i < tree.children.size(); i++) {
+
+                if (tree.children[i]) {
+
+                    counter++;
                     operationExpression(*tree.children[i]);
+                    counter--;
+                }
+            }
+
         }
     }
 
@@ -215,7 +245,6 @@ namespace Semantic {
             operationExpression(*tree.children[0]->children[0]);
 
         else
-
             if (!tree.children[0]->exp.compare(RETURNSTRING))
             operationExpression(*tree.children[0]->children[0]);
     }
