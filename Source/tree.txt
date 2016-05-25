@@ -1,6 +1,6 @@
 Declaration
     VariableDecStatement
-        flutuante
+        inteiro
         global1
     FunctionDecStatement
         inteiro
@@ -78,7 +78,7 @@ Declaration
                                                                 ExpressionStatement
                                                                     WriteStatement
                                                                         OperationExpression
-                                                                            15.0
+                                                                            15
                                                                             MultiplicationExpression
                                                                                 a
                                                                 CompoundStatement
@@ -121,7 +121,8 @@ Declaration
                                                                             ExpressionStatement
                                                                                 ReturnStatement
                                                                                     OperationExpression
-                                                                                        global1
+                                                                                        12
+                                                                                    retorna
     VariableDecStatement
         inteiro
         global2

@@ -298,10 +298,12 @@ namespace Syntax {
         Tree::Tree * tempTree = subTree;
         setAndAdvance(RETURNSTRING);
 
-        eat(Token::RETURN);
+        Token::Token t = eat(Token::RETURN);
         eat(Token::OPEN);
 
         operationsExp();
+
+        subTree->setChild(t);
 
         eat(Token::CLOSE);
 

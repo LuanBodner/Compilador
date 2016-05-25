@@ -36,6 +36,19 @@ namespace CompilerErrors {
         printError(token);
     }
 
+    void CompilerErrors::returnIgnoredWarning(Token::Token token) {
+
+        std::cout << "\033[1;35mWarning\033[0m; Return Value Ignored;";
+        std::cout << "\033[1;36mLine\033[0m: " << token.getTokenLine() << "; ";
+        std::cout << "\033[1;36mColumn\033[0m: " << token.getTokenColumn() << "; ";
+        std::cout << "\033[1;32mReceived\033[0m: " << token.getTokenName() << "';\n";
+    }
+
+    void CompilerErrors::emptyOperationError() {
+
+
+    }
+
     void CompilerErrors::variableVoidError(Token::Token token) {
 
         std::cout << "\033[1;31mError\033[0m; Void Variable Declared; ";
@@ -96,7 +109,7 @@ namespace CompilerErrors {
         printError(token);
     }
 
-    void CompilerErrors::variableNotDefined(Token::Token token) {
+    void CompilerErrors::variableNotDefinedError(Token::Token token) {
 
         std::cout << "\033[1;31mError\033[0m; Variable Used But Not Defined In This Scope; ";
         printError(token);
@@ -139,7 +152,7 @@ namespace CompilerErrors {
         std::cout << "\033[1;32mReceived\033[0m: " << token.getTokenName() << "';\n";
     }
 
-    void CompilerErrors::variableNotDeclared(Token::Token token) {
+    void CompilerErrors::variableNotDeclaredError(Token::Token token) {
 
         std::cout << "\033[1;31mError\033[0m; Variable Not Declared In This Scope; ";
         printError(token);

@@ -1,4 +1,4 @@
-flutuante : global1
+inteiro : global1
 inteiro teste()
     
     inteiro: a
@@ -18,7 +18,7 @@ inteiro teste()
     
     l := (j)
 
-    escreve(15.0*a)
+    escreve(15*a)
 
     teste()
     
@@ -30,7 +30,7 @@ inteiro teste()
         fim
     fim
 
-    retorna(global1)
+    retorna(12)
 fim
 
 inteiro: global2
@@ -50,7 +50,7 @@ vazio foo(inteiro: param1, inteiro: param2)
     repita
         param1 := (global2)
     ate(abc)
-
+    
 fim
 inteiro principal()
     

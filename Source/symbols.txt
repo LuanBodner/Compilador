@@ -15,4 +15,4 @@
 2, abc / flutuante / Initialized
 0, teste / inteiro / Function / 0
 1, a / inteiro / Initialized
-0, global1 / flutuante / Global / Initialized
+0, global1 / inteiro / Global / Initialized

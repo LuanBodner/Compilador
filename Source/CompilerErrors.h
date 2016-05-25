@@ -9,7 +9,6 @@
 #define COMPILERERRORS_H
 
 #include <string>
-
 #include "Token.h"
 
 namespace CompilerErrors {
@@ -21,14 +20,16 @@ namespace CompilerErrors {
 
         /* Semantic errors */
         void declarationScopeError(Token::Token);
-        void variableNotDeclared(Token::Token);
+        void variableNotDeclaredError(Token::Token);
         void functionCallError(Token::Token);
         void functionCallScopeError(Token::Token);
-        void variableNotDefined(Token::Token);
+        void variableNotDefinedError(Token::Token);
         void variableVoidError(Token::Token);
         void expressionTypeWarning(Token::Token);
+        void returnIgnoredWarning(Token::Token);
+        void emptyOperationError();
         void mainDeclarationError();
-        
+
         /* Syntax errors */
         void variableDeclarationError(Token::Token);
         void functionDeclarationError(Token::Token);

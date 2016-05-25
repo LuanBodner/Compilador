@@ -1,4 +1,4 @@
-"flutuante" == FLOAT
+"inteiro" == INTEGER
 	LINE : 1
 	COLUMN : 1
 ":" == DOUBLE_POINT
@@ -181,7 +181,7 @@
 "(" == OPEN
 	LINE : 21
 	COLUMN : 2
-"15.0" == NUMBER_FLOAT
+"15" == NUMBER_INTEGER
 	LINE : 21
 	COLUMN : 3
 "*" == MULTIPLICATION
@@ -301,7 +301,7 @@
 "(" == OPEN
 	LINE : 33
 	COLUMN : 2
-"global1" == IDENTIFIER
+"12" == NUMBER_INTEGER
 	LINE : 33
 	COLUMN : 3
 ")" == CLOSE

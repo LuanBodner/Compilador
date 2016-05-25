@@ -47,6 +47,7 @@ namespace Semantic {
         void operationExpression(Tree::Tree&, Token::TokenType);
         void expressionStatement(Tree::Tree&);
         void parameterTypes(Tree::Tree&, scopeName);
+        void returnStatement(Tree::Tree&);
 
         /* Table of Symbols */
         boost::unordered_map<scopeName, vectorString> symbolTable;

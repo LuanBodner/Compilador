@@ -10,8 +10,12 @@
 namespace Semantic {
 
     bool main = false;
+
     std::string otype;
+
     int scope = 0;
+
+    std::vector<std::string> returnType;
 
     SemanticAnalysis::SemanticAnalysis() {
     }
@@ -34,7 +38,7 @@ namespace Semantic {
         }
 
         if (key.first == -1)
-            error.variableNotDeclared(tree.token);
+            error.variableNotDeclaredError(tree.token);
 
         return key.first;
     }
@@ -83,6 +87,8 @@ namespace Semantic {
         symbolTable.emplace(s, std::vector<std::string>());
         symbolTable[s].push_back(tree.children[0]->token.getTokenName());
 
+        returnType.push_back(tree.children[0]->token.getTokenName());
+
         if (!s.second.compare("principal"))
             main = true;
 
@@ -107,7 +113,7 @@ namespace Semantic {
                 sn.first = verifyTable(sn, *tree.children[0]);
 
                 if (!symbolTable[sn][symbolTable[sn].size() - 1].compare(NI))
-                    error.variableNotDefined(tree.children[0]->token);
+                    error.variableNotDefinedError(tree.children[0]->token);
 
                 if (!counter)
                     otype = symbolTable[sn][0];
@@ -119,12 +125,12 @@ namespace Semantic {
                 Token::TokenType t = tree.children[0]->token.getTokenType();
 
                 if (!counter) {
-                    
+
                     if (t == Token::NUMBER_FLOAT)
                         otype = "flutuante";
                     else otype = "inteiro";
                 }
-                
+
                 if ((otype.compare("inteiro") && t == Token::NUMBER_INTEGER) ||
                         (otype.compare("flutuante") && t == Token::NUMBER_FLOAT))
                     error.expressionTypeWarning(tree.children[0]->token);
@@ -139,7 +145,6 @@ namespace Semantic {
                     counter--;
                 }
             }
-
         }
     }
 
@@ -154,7 +159,7 @@ namespace Semantic {
                 sn.first = verifyTable(sn, *tree.children[0]);
 
                 if (!symbolTable[sn][symbolTable[sn].size() - 1].compare(NI))
-                    error.variableNotDefined(tree.children[0]->token);
+                    error.variableNotDefinedError(tree.children[0]->token);
 
                 if ((symbolTable[sn][0].compare("flutuante") && ttype == Token::FLOAT) ||
                         (symbolTable[sn][0].compare("inteiro") && ttype == Token::INTEGER))
@@ -168,7 +173,8 @@ namespace Semantic {
             for (unsigned int i = 0; i < tree.children.size(); i++)
                 if (tree.children[i])
                     operationExpression(*tree.children[i], ttype);
-        }
+        } else
+            error.emptyOperationError();
     }
 
     void SemanticAnalysis::functionCallStatement(Tree::Tree& tree) {
@@ -224,6 +230,20 @@ namespace Semantic {
         symbolTable[sn][symbolTable[sn].size() - 1] = IN;
     }
 
+    void SemanticAnalysis::returnStatement(Tree::Tree& tree) {
+
+        int i = returnType.size() - 1;
+
+        if (!returnType[i].compare("inteiro"))
+            operationExpression(*tree.children[0], Token::INTEGER);
+        else if (!returnType[i].compare("flutuante"))
+            operationExpression(*tree.children[0], Token::FLOAT);
+        else
+            error.returnIgnoredWarning(tree.children[1]->token);
+
+        returnType.pop_back();
+    }
+
     void SemanticAnalysis::expressionStatement(Tree::Tree & tree) {
 
         if (!tree.children[0]->exp.compare(IFSTRING))
@@ -244,9 +264,8 @@ namespace Semantic {
         else if (!tree.children[0]->exp.compare(WRITESTRING))
             operationExpression(*tree.children[0]->children[0]);
 
-        else
-            if (!tree.children[0]->exp.compare(RETURNSTRING))
-            operationExpression(*tree.children[0]->children[0]);
+        else if (!tree.children[0]->exp.compare(RETURNSTRING))
+            returnStatement(*tree.children[0]);
     }
 
     void SemanticAnalysis::treeAnalyzer(Tree::Tree & tree, int level) {
