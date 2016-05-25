@@ -51,6 +51,9 @@ namespace Semantic {
             error.declarationScopeError(tree.children[1]->token);
 
         symbolTable.emplace(t, std::vector<std::string>());
+
+        if (!tree.children[0]->token.getTokenName().compare("vazio"))
+            error.variableVoidError(tree.children[1]->token);
         symbolTable[t].push_back(tree.children[0]->token.getTokenName());
 
         if (level == 1)

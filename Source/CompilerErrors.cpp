@@ -36,6 +36,12 @@ namespace CompilerErrors {
         printError(token);
     }
 
+    void CompilerErrors::variableVoidError(Token::Token token) {
+
+        std::cout << "\033[1;31mError\033[0m; Void Variable Declared; ";
+        printError(token);
+    }
+
     void CompilerErrors::functionDeclarationError(Token::Token token) {
 
         std::cout << "\033[1;31mError\033[0m; Function Declaration Error; ";

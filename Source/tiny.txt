@@ -1,8 +1,4 @@
 inteiro : global1
-inteiro principal()
-    
-fim
-
 inteiro teste()
     
     inteiro: a
@@ -28,7 +24,7 @@ inteiro teste()
     
     se (global1) então        
         se (c >= b * ((k - j) - l)) então
-            vazio: testeSe              
+            inteiro: testeSe              
         senão               
             flutuante: testeSenão   
         fim
@@ -38,21 +34,24 @@ inteiro teste()
 fim
 
 inteiro: global2
-inteiro foo(inteiro: param1, inteiro: param2)
+vazio foo(flutuante: param1, flutuante: param2)
     
     flutuante: abc
     inteiro: a
-    flutuante: b
+    inteiro: b
 
     leia(a)
     leia(b)
     leia(abc)
     global2 := (teste())
 
-    foo(a,b)
+    foo(abc,abc)
         
     repita
         param1 := (global2)
     ate(abc)
 
+fim
+inteiro principal()
+    
 fim

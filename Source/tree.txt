@@ -4,10 +4,6 @@ Declaration
         global1
     FunctionDecStatement
         inteiro
-        principal
-        ParametersDecStatement
-    FunctionDecStatement
-        inteiro
         teste
         ParametersDecStatement
         CompoundStatement
@@ -109,7 +105,7 @@ Declaration
                                                                                             CompoundStatement
                                                                                                 ExpressionStatement
                                                                                                     VariableDecStatement
-                                                                                                        vazio
+                                                                                                        inteiro
                                                                                                         testeSe
                                                                                             OtherwiseStement
                                                                                                 CompoundStatement
@@ -126,14 +122,14 @@ Declaration
         inteiro
         global2
     FunctionDecStatement
-        inteiro
+        vazio
         foo
         ParametersDecStatement
             VariableDecStatement
-                inteiro
+                flutuante
                 param1
             VariableDecStatement
-                inteiro
+                flutuante
                 param2
         CompoundStatement
             ExpressionStatement
@@ -148,7 +144,7 @@ Declaration
                 CompoundStatement
                     ExpressionStatement
                         VariableDecStatement
-                            flutuante
+                            inteiro
                             b
                     CompoundStatement
                         ExpressionStatement
@@ -175,9 +171,9 @@ Declaration
                                             FunctionCallStatement
                                                 foo
                                                 OperationExpression
-                                                    a
+                                                    abc
                                                 OperationExpression
-                                                    b
+                                                    abc
                                         CompoundStatement
                                             ExpressionStatement
                                                 WhileStatement
@@ -189,3 +185,7 @@ Declaration
                                                                     global2
                                                     OperationExpression
                                                         abc
+    FunctionDecStatement
+        inteiro
+        principal
+        ParametersDecStatement
