@@ -44,9 +44,10 @@ namespace CompilerErrors {
         std::cout << "\033[1;32mReceived\033[0m: " << token.getTokenName() << "';\n";
     }
 
-    void CompilerErrors::emptyOperationError() {
+    void CompilerErrors::functionWithoutReturnWarning(std::string name) {
 
-
+        std::cout << "\033[1;35mWarning\033[0m; Non-Void Function Without Return; ";
+        std::cout << "\033[1;32mFunction Name\033[0m: " << name << std::endl;
     }
 
     void CompilerErrors::variableVoidError(Token::Token token) {

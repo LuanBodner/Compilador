@@ -52,6 +52,7 @@ vazio foo(inteiro: param1, inteiro: param2)
     ate(abc)
     
 fim
+
 inteiro principal()
     
 fim

@@ -488,17 +488,17 @@
 	LINE : 54
 	COLUMN : 1
 "inteiro" == INTEGER
-	LINE : 55
+	LINE : 56
 	COLUMN : 1
 "principal" == IDENTIFIER
-	LINE : 55
+	LINE : 56
 	COLUMN : 2
 "(" == OPEN
-	LINE : 55
+	LINE : 56
 	COLUMN : 3
 ")" == CLOSE
-	LINE : 55
+	LINE : 56
 	COLUMN : 4
 "fim" == END
-	LINE : 57
+	LINE : 58
 	COLUMN : 1

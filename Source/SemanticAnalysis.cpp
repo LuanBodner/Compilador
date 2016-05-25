@@ -15,7 +15,9 @@ namespace Semantic {
 
     int scope = 0;
 
-    std::vector<std::string> returnType;
+    typedef std::pair<std::string, std::string> nameFunction;
+
+    std::vector<nameFunction> returnType;
 
     SemanticAnalysis::SemanticAnalysis() {
     }
@@ -87,7 +89,8 @@ namespace Semantic {
         symbolTable.emplace(s, std::vector<std::string>());
         symbolTable[s].push_back(tree.children[0]->token.getTokenName());
 
-        returnType.push_back(tree.children[0]->token.getTokenName());
+        nameFunction nf(tree.children[0]->token.getTokenName(), tree.children[1]->token.getTokenName());
+        returnType.push_back(nf);
 
         if (!s.second.compare("principal"))
             main = true;
@@ -173,8 +176,7 @@ namespace Semantic {
             for (unsigned int i = 0; i < tree.children.size(); i++)
                 if (tree.children[i])
                     operationExpression(*tree.children[i], ttype);
-        } else
-            error.emptyOperationError();
+        }
     }
 
     void SemanticAnalysis::functionCallStatement(Tree::Tree& tree) {
@@ -234,14 +236,16 @@ namespace Semantic {
 
         int i = returnType.size() - 1;
 
-        if (!returnType[i].compare("inteiro"))
-            operationExpression(*tree.children[0], Token::INTEGER);
-        else if (!returnType[i].compare("flutuante"))
-            operationExpression(*tree.children[0], Token::FLOAT);
-        else
-            error.returnIgnoredWarning(tree.children[1]->token);
+        if (!returnType[i].first.compare("inteiro")) {
 
-        returnType.pop_back();
+            operationExpression(*tree.children[0], Token::INTEGER);
+            returnType.pop_back();
+        } else if (!returnType[i].first.compare("flutuante")) {
+
+            operationExpression(*tree.children[0], Token::FLOAT);
+            returnType.pop_back();
+        } else
+            error.returnIgnoredWarning(tree.children[1]->token);
     }
 
     void SemanticAnalysis::expressionStatement(Tree::Tree & tree) {
@@ -287,8 +291,18 @@ namespace Semantic {
 
         level--;
 
-        if (!main && !level)
-            error.mainDeclarationError();
+        if (!level) {
+
+            if (!main)
+                error.mainDeclarationError();
+
+            while (returnType.size()) {
+
+                if (returnType[returnType.size() - 1].first.compare("vazio"))
+                    error.functionWithoutReturnWarning(returnType[returnType.size() - 1].second);
+                returnType.pop_back();
+            }
+        }
     }
 
     void SemanticAnalysis::printTable() {
