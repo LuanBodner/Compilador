@@ -316,7 +316,7 @@
 "(" == OPEN
 	LINE : 37
 	COLUMN : 3
-"flutuante" == FLOAT
+"inteiro" == INTEGER
 	LINE : 37
 	COLUMN : 4
 ":" == DOUBLE_POINT
@@ -328,7 +328,7 @@
 "," == COMMA
 	LINE : 37
 	COLUMN : 7
-"flutuante" == FLOAT
+"inteiro" == INTEGER
 	LINE : 37
 	COLUMN : 8
 ":" == DOUBLE_POINT
@@ -349,7 +349,7 @@
 "abc" == IDENTIFIER
 	LINE : 39
 	COLUMN : 3
-"inteiro" == INTEGER
+"flutuante" == FLOAT
 	LINE : 40
 	COLUMN : 1
 ":" == DOUBLE_POINT
@@ -430,13 +430,13 @@
 "(" == OPEN
 	LINE : 48
 	COLUMN : 2
-"abc" == IDENTIFIER
+"10" == NUMBER_INTEGER
 	LINE : 48
 	COLUMN : 3
 "," == COMMA
 	LINE : 48
 	COLUMN : 4
-"abc" == IDENTIFIER
+"120" == NUMBER_INTEGER
 	LINE : 48
 	COLUMN : 5
 ")" == CLOSE

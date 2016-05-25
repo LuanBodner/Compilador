@@ -129,11 +129,15 @@ namespace Semantic {
                 if ((symbolTable[sn][0].compare("flutuante") && ttype == Token::FLOAT) ||
                         (symbolTable[sn][0].compare("inteiro") && ttype == Token::INTEGER))
                     error.expressionTypeWarning(tree.children[0]->token);
-            }
+            } else if ((tree.children[0]->token.getTokenType() == Token::NUMBER_FLOAT
+                    && ttype == Token::INTEGER) ||
+                    (tree.children[0]->token.getTokenType() == Token::NUMBER_INTEGER
+                    && ttype == Token::FLOAT))
+                error.expressionTypeWarning(tree.children[0]->token);
 
             for (unsigned int i = 0; i < tree.children.size(); i++)
                 if (tree.children[i])
-                    operationExpression(*tree.children[i]);
+                    operationExpression(*tree.children[i], ttype);
         }
     }
 
@@ -208,7 +212,9 @@ namespace Semantic {
         else if (!tree.children[0]->exp.compare(WRITESTRING))
             operationExpression(*tree.children[0]->children[0]);
 
-        else if (!tree.children[0]->exp.compare(RETURNSTRING))
+        else
+
+            if (!tree.children[0]->exp.compare(RETURNSTRING))
             operationExpression(*tree.children[0]->children[0]);
     }
 

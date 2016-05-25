@@ -34,10 +34,10 @@ inteiro teste()
 fim
 
 inteiro: global2
-vazio foo(flutuante: param1, flutuante: param2)
+vazio foo(inteiro: param1, inteiro: param2)
     
     flutuante: abc
-    inteiro: a
+    flutuante: a
     inteiro: b
 
     leia(a)
@@ -45,7 +45,7 @@ vazio foo(flutuante: param1, flutuante: param2)
     leia(abc)
     global2 := (teste())
 
-    foo(abc,abc)
+    foo(10,120)
         
     repita
         param1 := (global2)

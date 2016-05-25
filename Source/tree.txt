@@ -126,10 +126,10 @@ Declaration
         foo
         ParametersDecStatement
             VariableDecStatement
-                flutuante
+                inteiro
                 param1
             VariableDecStatement
-                flutuante
+                inteiro
                 param2
         CompoundStatement
             ExpressionStatement
@@ -139,7 +139,7 @@ Declaration
             CompoundStatement
                 ExpressionStatement
                     VariableDecStatement
-                        inteiro
+                        flutuante
                         a
                 CompoundStatement
                     ExpressionStatement
@@ -171,9 +171,9 @@ Declaration
                                             FunctionCallStatement
                                                 foo
                                                 OperationExpression
-                                                    abc
+                                                    10
                                                 OperationExpression
-                                                    abc
+                                                    120
                                         CompoundStatement
                                             ExpressionStatement
                                                 WhileStatement
