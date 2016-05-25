@@ -202,12 +202,9 @@
 "(" == OPEN
 	LINE : 27
 	COLUMN : 2
-"a" == IDENTIFIER
-	LINE : 27
-	COLUMN : 3
 ")" == CLOSE
 	LINE : 27
-	COLUMN : 4
+	COLUMN : 3
 "se" == IF
 	LINE : 29
 	COLUMN : 1
@@ -367,7 +364,7 @@
 "abc" == IDENTIFIER
 	LINE : 43
 	COLUMN : 3
-"inteiro" == INTEGER
+"flutuante" == FLOAT
 	LINE : 44
 	COLUMN : 1
 ":" == DOUBLE_POINT
@@ -376,7 +373,7 @@
 "a" == IDENTIFIER
 	LINE : 44
 	COLUMN : 3
-"inteiro" == INTEGER
+"flutuante" == FLOAT
 	LINE : 45
 	COLUMN : 1
 ":" == DOUBLE_POINT

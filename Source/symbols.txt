@@ -1,8 +1,8 @@
-3, a / inteiro / Initialized
+3, a / flutuante / Initialized
 3, abc / flutuante / Initialized
 0, global2 / inteiro / Global / Initialized
 2, testeSe / vazio / Not Initialized
-3, b / inteiro / Initialized
+3, b / flutuante / Initialized
 2, l / inteiro / Initialized
 2, k / inteiro / Initialized
 2, c / inteiro / Initialized

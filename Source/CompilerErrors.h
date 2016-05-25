@@ -25,8 +25,9 @@ namespace CompilerErrors {
         void functionCallError(Token::Token);
         void functionCallScopeError(Token::Token);
         void variableNotDefined(Token::Token);
+        void expressionTypeWarning(Token::Token);
         void mainDeclarationError();
-
+        
         /* Syntax errors */
         void variableDeclarationError(Token::Token);
         void functionDeclarationError(Token::Token);

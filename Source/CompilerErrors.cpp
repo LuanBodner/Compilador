@@ -124,6 +124,14 @@ namespace CompilerErrors {
         exit(EXIT_FAILURE);
     }
 
+    void CompilerErrors::expressionTypeWarning(Token::Token token) {
+
+        std::cout << "Expression from unexpected type; ";
+        std::cout << "Line: " << token.getTokenLine() << "; ";
+        std::cout << "Column: " << token.getTokenColumn() << "; ";
+        std::cout << "Received '" << token.getTokenName() << "';\n";
+    }
+
     void CompilerErrors::variableNotDeclared(Token::Token token) {
 
         std::cout << "Variable Not Declared In This Scope; ";

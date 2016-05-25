@@ -110,6 +110,30 @@ namespace Semantic {
         }
     }
 
+    void SemanticAnalysis::operationExpression(Tree::Tree& tree, Token::TokenType ttype) {
+
+        if (tree.children.size()) {
+
+            scopeName sn(scope, tree.children[0]->token.getTokenName());
+
+            if (tree.children[0]->token.getTokenType() == Token::IDENTIFIER) {
+
+                sn.first = verifyTable(sn, *tree.children[0]);
+
+                if (!symbolTable[sn][symbolTable[sn].size() - 1].compare(NI))
+                    error.variableNotDefined(tree.children[0]->token);
+
+                if ((symbolTable[sn][0].compare("flutuante") && ttype == Token::FLOAT) ||
+                        (symbolTable[sn][0].compare("inteiro") && ttype == Token::INTEGER))
+                    error.expressionTypeWarning(tree.children[0]->token);
+            }
+
+            for (unsigned int i = 0; i < tree.children.size(); i++)
+                if (tree.children[i])
+                    operationExpression(*tree.children[i]);
+        }
+    }
+
     void SemanticAnalysis::functionCallStatement(Tree::Tree& tree) {
 
         scopeName sn(0, tree.children[0]->token.getTokenName());
@@ -122,10 +146,20 @@ namespace Semantic {
             unsigned int callParam = tree.children.size();
 
             if (!symbolTable[sn][2].compare(std::to_string(callParam - 1)) ||
-                    (!tree.children[1]->children.size() && !symbolTable[sn][2].compare("0")))
-                for (unsigned int i = 1; i < tree.children.size(); i++)
-                    operationExpression(*tree.children[i]);
-            else
+                    (!tree.children[1]->children.size() && !symbolTable[sn][2].compare("0"))) {
+
+                for (unsigned int i = 1; i < tree.children.size(); i++) {
+
+                    unsigned int index = 3;
+                    if (!symbolTable[sn][index].compare("flutuante"))
+                        operationExpression(*tree.children[i], Token::FLOAT);
+                    else if (!symbolTable[sn][index].compare("inteiro"))
+                        operationExpression(*tree.children[index], Token::INTEGER);
+
+                    index++;
+                }
+
+            } else
                 error.functionCallError(tree.children[0]->token);
         } else
             error.functionCallScopeError(tree.children[0]->token);

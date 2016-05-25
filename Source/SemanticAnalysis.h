@@ -43,6 +43,7 @@ namespace Semantic {
         void functionCallStatement(Tree::Tree&);
         void attributionExpression(Tree::Tree&);
         void operationExpression(Tree::Tree&);
+        void operationExpression(Tree::Tree&, Token::TokenType);
         void expressionStatement(Tree::Tree&);
         void parameterTypes(Tree::Tree&, scopeName);
 
