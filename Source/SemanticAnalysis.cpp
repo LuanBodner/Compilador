@@ -59,6 +59,13 @@ namespace Semantic {
         symbolTable[t].push_back(NI);
     }
 
+    void SemanticAnalysis::parameterTypes(Tree::Tree& tree, scopeName scope) {
+
+        if (!tree.children.empty())
+            for (unsigned int i = 0; i < tree.children.size(); i++)
+                symbolTable[scope].push_back(tree.children[i]->children[0]->token.getTokenName());
+    }
+
     void SemanticAnalysis::functionDeclaration(Tree::Tree& tree) {
 
         int auxScope = scope;
@@ -77,6 +84,8 @@ namespace Semantic {
 
         symbolTable[s].push_back(FU);
         symbolTable[s].push_back(std::to_string(tree.children[2]->children.size()));
+
+        parameterTypes(*tree.children[2], s);
 
         scope = ++auxScope;
     }

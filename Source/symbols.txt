@@ -11,7 +11,7 @@
 3, param1 / flutuante / Initialized
 0, teste / inteiro / Function / 0
 2, j / inteiro / Initialized
-0, foo / inteiro / Function / 2
+0, foo / inteiro / Function / 2 / flutuante / flutuante
 0, principal / inteiro / Function / 0
 2, testeSenão / flutuante / Not Initialized
 3, param2 / flutuante / Not Initialized

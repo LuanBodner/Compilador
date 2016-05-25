@@ -202,9 +202,12 @@
 "(" == OPEN
 	LINE : 27
 	COLUMN : 2
-")" == CLOSE
+"a" == IDENTIFIER
 	LINE : 27
 	COLUMN : 3
+")" == CLOSE
+	LINE : 27
+	COLUMN : 4
 "se" == IF
 	LINE : 29
 	COLUMN : 1

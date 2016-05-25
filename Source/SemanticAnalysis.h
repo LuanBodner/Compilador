@@ -25,7 +25,7 @@ namespace Semantic {
     public:
         SemanticAnalysis();
         virtual ~SemanticAnalysis();
-        
+
         /* Kicks off the semantic analysis */
         void treeAnalyzer(Tree::Tree&, int level = 0);
         void printTable();
@@ -44,6 +44,7 @@ namespace Semantic {
         void attributionExpression(Tree::Tree&);
         void operationExpression(Tree::Tree&);
         void expressionStatement(Tree::Tree&);
+        void parameterTypes(Tree::Tree&, scopeName);
 
         /* Table of Symbols */
         boost::unordered_map<scopeName, vectorString> symbolTable;
