@@ -53,6 +53,6 @@ vazio foo(inteiro: param1, inteiro: param2)
     
 fim
 
-inteiro principal()
+vazio principal()
     
 fim

@@ -25,7 +25,7 @@ namespace CompilerErrors {
 
         std::cout << "\033[1;36mLine\033[0m: " << token.getTokenLine() << "; ";
         std::cout << "\033[1;36mColumn\033[0m: " << token.getTokenColumn() << "; ";
-        std::cout << "\033[1;32mReceived\033[0m: " << token.getTokenName() << "';\n";
+        std::cout << "\033[1;32mReceived\033[0m: " << token.getTokenName() << ".\n";
 
         exit(EXIT_FAILURE);
     }
@@ -147,10 +147,16 @@ namespace CompilerErrors {
 
     void CompilerErrors::expressionTypeWarning(Token::Token token) {
 
-        std::cout << "\033[1;35mWarning\033[0m; Expression from unexpected type; ";
+        std::cout << "\033[1;35mWarning\033[0m; Unexpected Type; ";
         std::cout << "\033[1;36mLine\033[0m: " << token.getTokenLine() << "; ";
         std::cout << "\033[1;36mColumn\033[0m: " << token.getTokenColumn() << "; ";
         std::cout << "\033[1;32mReceived\033[0m: " << token.getTokenName() << "';\n";
+    }
+
+    void CompilerErrors::voidAttributionError(Token::Token token) {
+
+        std::cout << "\033[1;31mError\033[0m; Function Type Is Void; ";
+        printError(token);
     }
 
     void CompilerErrors::variableNotDeclaredError(Token::Token token) {

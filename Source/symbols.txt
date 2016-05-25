@@ -1,4 +1,4 @@
-0, principal / inteiro / Function / 0
+0, principal / vazio / Function / 0
 2, b / inteiro / Initialized
 2, a / flutuante / Initialized
 2, param1 / inteiro / Initialized

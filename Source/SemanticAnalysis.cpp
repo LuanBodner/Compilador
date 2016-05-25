@@ -121,7 +121,10 @@ namespace Semantic {
                 if (!counter)
                     otype = symbolTable[sn][0];
 
-                if (symbolTable[sn][0].compare(otype))
+                if (!symbolTable[sn][0].compare("vazio"))
+                    error.voidAttributionError(tree.children[0]->token);
+
+                else if (symbolTable[sn][0].compare(otype))
                     error.expressionTypeWarning(tree.children[0]->token);
             } else {
 
@@ -164,7 +167,10 @@ namespace Semantic {
                 if (!symbolTable[sn][symbolTable[sn].size() - 1].compare(NI))
                     error.variableNotDefinedError(tree.children[0]->token);
 
-                if ((symbolTable[sn][0].compare("flutuante") && ttype == Token::FLOAT) ||
+                if (!symbolTable[sn][0].compare("vazio"))
+                    error.voidAttributionError(tree.children[0]->token);
+
+                else if ((symbolTable[sn][0].compare("flutuante") && ttype == Token::FLOAT) ||
                         (symbolTable[sn][0].compare("inteiro") && ttype == Token::INTEGER))
                     error.expressionTypeWarning(tree.children[0]->token);
             } else if ((tree.children[0]->token.getTokenType() == Token::NUMBER_FLOAT
@@ -218,7 +224,8 @@ namespace Semantic {
 
         if (!symbolTable[sn][0].compare("inteiro"))
             operationExpression(*tree.children[1], Token::INTEGER);
-        else operationExpression(*tree.children[1], Token::FLOAT);
+        else
+            operationExpression(*tree.children[1], Token::FLOAT);
 
         symbolTable[sn][symbolTable[sn].size() - 1] = IN;
     }

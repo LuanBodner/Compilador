@@ -191,6 +191,6 @@ Declaration
                                                     OperationExpression
                                                         abc
     FunctionDecStatement
-        inteiro
+        vazio
         principal
         ParametersDecStatement
