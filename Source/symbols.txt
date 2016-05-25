@@ -1,18 +1,18 @@
-3, a / flutuante / Initialized
+3, a / inteiro / Initialized
 3, abc / flutuante / Initialized
 0, global2 / inteiro / Global / Initialized
 2, testeSe / vazio / Not Initialized
-3, b / flutuante / Initialized
+3, b / inteiro / Initialized
 2, l / inteiro / Initialized
 2, k / inteiro / Initialized
 2, c / inteiro / Initialized
 2, b / inteiro / Initialized
 2, a / inteiro / Initialized
-3, param1 / flutuante / Initialized
+3, param1 / inteiro / Initialized
 0, teste / inteiro / Function / 0
 2, j / inteiro / Initialized
-0, foo / inteiro / Function / 2 / flutuante / flutuante
+0, foo / inteiro / Function / 2 / inteiro / inteiro
 0, principal / inteiro / Function / 0
 2, testeSenão / flutuante / Not Initialized
-3, param2 / flutuante / Not Initialized
+3, param2 / inteiro / Not Initialized
 0, global1 / inteiro / Global / Initialized

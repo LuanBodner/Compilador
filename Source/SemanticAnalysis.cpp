@@ -140,6 +140,7 @@ namespace Semantic {
 
         boost::unordered_map<scopeName, vectorString>::const_iterator entry;
         entry = symbolTable.find(sn);
+        unsigned int index = 3;
 
         if (entry != symbolTable.end()) {
 
@@ -150,11 +151,10 @@ namespace Semantic {
 
                 for (unsigned int i = 1; i < tree.children.size(); i++) {
 
-                    unsigned int index = 3;
                     if (!symbolTable[sn][index].compare("flutuante"))
                         operationExpression(*tree.children[i], Token::FLOAT);
                     else if (!symbolTable[sn][index].compare("inteiro"))
-                        operationExpression(*tree.children[index], Token::INTEGER);
+                        operationExpression(*tree.children[i], Token::INTEGER);
 
                     index++;
                 }

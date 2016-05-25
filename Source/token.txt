@@ -331,7 +331,7 @@
 "(" == OPEN
 	LINE : 41
 	COLUMN : 3
-"flutuante" == FLOAT
+"inteiro" == INTEGER
 	LINE : 41
 	COLUMN : 4
 ":" == DOUBLE_POINT
@@ -343,7 +343,7 @@
 "," == COMMA
 	LINE : 41
 	COLUMN : 7
-"flutuante" == FLOAT
+"inteiro" == INTEGER
 	LINE : 41
 	COLUMN : 8
 ":" == DOUBLE_POINT
@@ -364,7 +364,7 @@
 "abc" == IDENTIFIER
 	LINE : 43
 	COLUMN : 3
-"flutuante" == FLOAT
+"inteiro" == INTEGER
 	LINE : 44
 	COLUMN : 1
 ":" == DOUBLE_POINT
@@ -373,7 +373,7 @@
 "a" == IDENTIFIER
 	LINE : 44
 	COLUMN : 3
-"flutuante" == FLOAT
+"inteiro" == INTEGER
 	LINE : 45
 	COLUMN : 1
 ":" == DOUBLE_POINT
