@@ -14,6 +14,7 @@
 #include "LexicalAnalyzer.h"
 #include "SyntaxAnalysis.h"
 #include "SemanticAnalysis.h"
+#include "CodeGeneration.h"
 
 int main(int argc, char** argv) {
 
@@ -38,6 +39,10 @@ int main(int argc, char** argv) {
     synx.getTree().printTree(output);
 
     output.close();
+    
+    CodeGeneration::CodeGeneration t;
+    
+    t.teste();
 
     return EXIT_SUCCESS;
 }

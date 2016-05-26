@@ -4,12 +4,19 @@
  * 
  * Created on May 22, 2016, 11:01 AM
  */
-
 #include "CodeGeneration.h"
 
-CodeGeneration::CodeGeneration() {
-}
+namespace CodeGeneration {
 
-CodeGeneration::~CodeGeneration() {
+    CodeGeneration::CodeGeneration() {
+    }
+
+    CodeGeneration::~CodeGeneration() {
+    }
+
+    void CodeGeneration::teste() {
+
+        LLVMModuleRef mod = LLVMModuleCreateWithName("my_module");
+    }
 }
 

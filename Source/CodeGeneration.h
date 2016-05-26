@@ -8,13 +8,18 @@
 #ifndef CODEGENERATION_H
 #define CODEGENERATION_H
 
-class CodeGeneration {
-public:
-    CodeGeneration();
-    virtual ~CodeGeneration();
-private:
+#include <llvm-c/Core.h>
 
-};
+namespace CodeGeneration {
 
+    class CodeGeneration {
+    public:
+        CodeGeneration();
+        virtual ~CodeGeneration();
+        void teste();
+    private:
+
+    };
+}
 #endif /* CODEGENERATION_H */
 
