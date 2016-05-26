@@ -4,6 +4,7 @@
  * 
  * Created on May 22, 2016, 11:01 AM
  */
+
 #include "CodeGeneration.h"
 
 namespace CodeGeneration {
@@ -14,9 +15,8 @@ namespace CodeGeneration {
     CodeGeneration::~CodeGeneration() {
     }
 
-    void CodeGeneration::teste() {
+    void CodeGeneration::treeAnalyzer() {
 
-        LLVMModuleRef mod = LLVMModuleCreateWithName("my_module");
     }
 }
 

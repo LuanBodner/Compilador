@@ -18,7 +18,7 @@
 
 int main(int argc, char** argv) {
 
-    if (argc < 4) {
+     if (argc < 4) {
 
         std::cout << "Wrong number of arguments\n";
         return EXIT_FAILURE;
@@ -42,7 +42,7 @@ int main(int argc, char** argv) {
     
     CodeGeneration::CodeGeneration t;
     
-    t.teste();
+    t.treeAnalyzer();
 
     return EXIT_SUCCESS;
 }

@@ -8,7 +8,14 @@
 #ifndef CODEGENERATION_H
 #define CODEGENERATION_H
 
+#include <stddef.h>
+#include <stdlib.h>
+#include <stdio.h>
 #include <llvm-c/Core.h>
+#include <llvm-c/ExecutionEngine.h>
+#include <llvm-c/Target.h>
+#include <llvm-c/Analysis.h>
+#include <llvm-c/BitWriter.h>
 
 namespace CodeGeneration {
 
@@ -16,7 +23,7 @@ namespace CodeGeneration {
     public:
         CodeGeneration();
         virtual ~CodeGeneration();
-        void teste();
+        void treeAnalyzer();
     private:
 
     };

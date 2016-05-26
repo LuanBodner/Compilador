@@ -3,19 +3,12 @@
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <df root="." name="0">
       <in>CodeGeneration.cpp</in>
-      <in>CodeGeneration.h</in>
       <in>CompilerErrors.cpp</in>
-      <in>CompilerErrors.h</in>
       <in>LexicalAnalyzer.cpp</in>
-      <in>LexicalAnalyzer.h</in>
       <in>SemanticAnalysis.cpp</in>
-      <in>SemanticAnalysis.h</in>
       <in>SyntaxAnalysis.cpp</in>
-      <in>SyntaxAnalysis.h</in>
       <in>Token.cpp</in>
-      <in>Token.h</in>
       <in>Tree.cpp</in>
-      <in>Tree.h</in>
       <in>main.cpp</in>
     </df>
     <logicalFolder name="ExternalFiles"
@@ -38,6 +31,10 @@
         <dependencyChecking>false</dependencyChecking>
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
+      <flagsDictionary>
+        <element flagsID="0" commonFlags="-std=c++11"/>
+        <element flagsID="1" commonFlags="-std=c++11 -O3 -fPIC"/>
+      </flagsDictionary>
       <codeAssistance>
       </codeAssistance>
       <makefileType>
@@ -52,35 +49,51 @@
           <preBuildCommand></preBuildCommand>
         </preBuild>
       </makefileType>
-      <item path="CodeGeneration.cpp" ex="false" tool="1" flavor2="0">
+      <item path="CodeGeneration.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="1">
+          <incDir>
+            <pElem>/usr/include</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>NDEBUG</Elem>
+            <Elem>_GNU_SOURCE</Elem>
+            <Elem>__STDC_CONSTANT_MACROS</Elem>
+            <Elem>__STDC_FORMAT_MACROS</Elem>
+            <Elem>__STDC_LIMIT_MACROS</Elem>
+          </preprocessorList>
+        </ccTool>
       </item>
-      <item path="CodeGeneration.h" ex="false" tool="3" flavor2="0">
+      <item path="CompilerErrors.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
       </item>
-      <item path="CompilerErrors.cpp" ex="false" tool="1" flavor2="0">
+      <item path="LexicalAnalyzer.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
       </item>
-      <item path="CompilerErrors.h" ex="false" tool="3" flavor2="0">
+      <item path="SemanticAnalysis.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
       </item>
-      <item path="LexicalAnalyzer.cpp" ex="false" tool="1" flavor2="0">
+      <item path="SyntaxAnalysis.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
       </item>
-      <item path="LexicalAnalyzer.h" ex="false" tool="3" flavor2="0">
+      <item path="Token.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
       </item>
-      <item path="SemanticAnalysis.cpp" ex="false" tool="1" flavor2="0">
+      <item path="Tree.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
       </item>
-      <item path="SemanticAnalysis.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="SyntaxAnalysis.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="SyntaxAnalysis.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Token.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Token.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Tree.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Tree.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      <item path="main.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="0">
+          <preprocessorList>
+            <Elem>__STDC_CONSTANT_MACROS</Elem>
+            <Elem>__STDC_LIMIT_MACROS</Elem>
+          </preprocessorList>
+        </ccTool>
       </item>
     </conf>
   </confs>
