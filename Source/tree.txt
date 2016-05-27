@@ -83,6 +83,8 @@ Declaration
                                                                             15
                                                                             MultiplicationExpression
                                                                                 a
+                                                                            SubtractionExpression
+                                                                                10
                                                                 CompoundStatement
                                                                     ExpressionStatement
                                                                         FunctionCallStatement
@@ -104,7 +106,7 @@ Declaration
                                                                                                         OperationExpression
                                                                                                             OperationExpression
                                                                                                                 k
-                                                                                                                SubtractionExpression
+                                                                                                                LessThanExpression
                                                                                                                     j
                                                                                                             SubtractionExpression
                                                                                                                 l
@@ -141,7 +143,7 @@ Declaration
                 inteiro
                 param1
             VariableDecStatement
-                inteiro
+                flutuante
                 param2
         CompoundStatement
             ExpressionStatement
@@ -185,7 +187,7 @@ Declaration
                                                 OperationExpression
                                                     10
                                                 OperationExpression
-                                                    20
+                                                    20.0
                                         CompoundStatement
                                             ExpressionStatement
                                                 WhileStatement
@@ -196,7 +198,7 @@ Declaration
                                                                 OperationExpression
                                                                     10
                                                     OperationExpression
-                                                        abc
+                                                        0
     FunctionDecStatement
         vazio
         principal

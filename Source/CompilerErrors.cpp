@@ -56,9 +56,9 @@ namespace CompilerErrors {
 
     void CompilerErrors::printError(Token::Token token) {
 
-        std::cout << "\033[1;36mLine\033[0m: " << token.getTokenLine() << "; ";
-        std::cout << "\033[1;36mColumn\033[0m: " << token.getTokenColumn() << "; ";
-        std::cout << "\033[1;32mReceived\033[0m: " << token.getTokenName() << ".\n";
+        std::cout << "\033[1;36mLine\033[0m: " << token.getTokenLine() << "; "
+                "\033[1;36mColumn\033[0m: " << token.getTokenColumn() << "; "
+                "\033[1;32mReceived\033[0m: " << token.getTokenName() << ".\n";
 
         printLine(token.getTokenLine());
         system("rm -f tempTiny.txt");
@@ -74,18 +74,18 @@ namespace CompilerErrors {
 
     void CompilerErrors::returnIgnoredWarning(Token::Token token) {
 
-        std::cout << "\033[1;35mWarning\033[0m; Return Value Ignored;";
-        std::cout << "\033[1;36mLine\033[0m: " << token.getTokenLine() << "; ";
-        std::cout << "\033[1;36mColumn\033[0m: " << token.getTokenColumn() << "; ";
-        std::cout << "\033[1;32mReceived\033[0m: " << token.getTokenName() << "';\n";
+        std::cout << "\033[1;35mWarning\033[0m; Return Value Ignored; "
+                << "\033[1;36mLine\033[0m: " << token.getTokenLine() << "; "
+                << "\033[1;36mColumn\033[0m: " << token.getTokenColumn() << "; "
+                << "\033[1;32mReceived\033[0m: " << token.getTokenName() << ";\n";
 
         printLine(token.getTokenLine());
     }
 
     void CompilerErrors::functionWithoutReturnWarning(std::string name) {
 
-        std::cout << "\033[1;35mWarning\033[0m; Non-Void Function Without Return; ";
-        std::cout << "\033[1;32mFunction Name\033[0m: " << name << std::endl;
+        std::cout << "\033[1;35mWarning\033[0m; Non-Void Function Without Return; "
+                << "\033[1;32mFunction Name\033[0m: " << name << "\n\n";
     }
 
     void CompilerErrors::variableVoidError(Token::Token token) {
@@ -172,8 +172,8 @@ namespace CompilerErrors {
 
     void CompilerErrors::unknownCaracterStringError(int line, int column) {
 
-        std::cout << "\033[1;31mError\033[0m; Token Not Recognized; ";
-        std::cout << "\033[1;36mLine\033[0m: " << line
+        std::cout << "\033[1;31mError\033[0m; Token Not Recognized; "
+                << "\033[1;36mLine\033[0m: " << line
                 << ";\033[1;36mColumn\033[0m: " << column << std::endl;
 
         printLine(line);
@@ -186,7 +186,7 @@ namespace CompilerErrors {
     void CompilerErrors::mainDeclarationError() {
 
         std::cout << "\033[1;31mError\033[0m; No Main Declaration In File; "
-                << "Program Terminated;\n";
+                << "Program Terminated;\n\n";
 
         system("rm -f tempTiny.txt");
 
@@ -195,10 +195,10 @@ namespace CompilerErrors {
 
     void CompilerErrors::expressionTypeWarning(Token::Token token) {
 
-        std::cout << "\033[1;35mWarning\033[0m; Unexpected Type; ";
-        std::cout << "\033[1;36mLine\033[0m: " << token.getTokenLine() << "; ";
-        std::cout << "\033[1;36mColumn\033[0m: " << token.getTokenColumn() << "; ";
-        std::cout << "\033[1;32mReceived\033[0m: " << token.getTokenName() << "';\n";
+        std::cout << "\033[1;35mWarning\033[0m; Unexpected Type; "
+                << "\033[1;36mLine\033[0m: " << token.getTokenLine() << "; "
+                << "\033[1;36mColumn\033[0m: " << token.getTokenColumn() << "; "
+                << "\033[1;32mReceived\033[0m: " << token.getTokenName() << "';\n";
 
         printLine(token.getTokenLine());
     }
@@ -217,7 +217,7 @@ namespace CompilerErrors {
 
     void CompilerErrors::vectorSizeError() {
 
-        std::cout << "\033[1;31mError\033[0m; No Expression Defined\n";
+        std::cout << "\033[1;31mError\033[0m; No Expression Defined\n\n";
 
         system("rm -f tempTiny.txt");
 

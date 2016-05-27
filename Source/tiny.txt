@@ -18,12 +18,12 @@ inteiro teste()
     
     l := (j)
 
-    escreve(15*a)
+    escreve(15*a-10)
 
     teste()
     
     se (global1) então        
-        se (c >= b * ((k - j) - l) - (teste())) então
+        se (c >= b * ((k < j) - l) - (teste())) então
             inteiro: testeSe              
         senão               
             flutuante: testeSenão   
@@ -34,7 +34,7 @@ inteiro teste()
 fim
 
 inteiro: global2
-vazio foo(inteiro: param1, inteiro: param2)
+vazio foo(inteiro: param1, flutuante: param2)
     
     flutuante: abc
     flutuante: a
@@ -45,11 +45,11 @@ vazio foo(inteiro: param1, inteiro: param2)
     leia(abc)
     global2 := (teste())
 
-    foo(10,20)
+    foo(10,20.0)
         
     repita
         param1 := (10)
-    ate(abc)
+    ate(0)
     
 fim
 

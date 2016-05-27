@@ -206,16 +206,13 @@ namespace Semantic {
             if (!symbolTable[sn][2].compare(std::to_string(callParam - 1)) ||
                     (!tree.children[1]->children.size() && !symbolTable[sn][2].compare("0"))) {
 
-                for (unsigned int i = 1; i < tree.children.size(); i++) {
+                for (unsigned int i = 1; i < tree.children.size(); i++, index++) {
 
                     if (!symbolTable[sn][index].compare("flutuante"))
                         operationExpression(*tree.children[i], Token::FLOAT);
                     else if (!symbolTable[sn][index].compare("inteiro"))
                         operationExpression(*tree.children[i], Token::INTEGER);
-
-                    index++;
                 }
-
             } else
                 error.functionCallError(tree.children[0]->token);
         } else
@@ -309,12 +306,9 @@ namespace Semantic {
             if (!main)
                 error.mainDeclarationError();
 
-            while (returnType.size()) {
-
+            for (; returnType.size(); returnType.pop_back())
                 if (returnType[returnType.size() - 1].first.compare("vazio"))
                     error.functionWithoutReturnWarning(returnType[returnType.size() - 1].second);
-                returnType.pop_back();
-            }
         }
     }
 
@@ -324,8 +318,7 @@ namespace Semantic {
 
         for (const auto &p : symbolTable) {
 
-            file << p.first.first << ", "
-                    << p.first.second;
+            file << p.first.first << ", " << p.first.second;
 
             for (unsigned int i = 0; i < p.second.size(); i++)
                 file << " / " << p.second[i];
