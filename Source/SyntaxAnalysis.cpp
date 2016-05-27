@@ -592,8 +592,10 @@ namespace Syntax {
 
     void SyntaxAnalysis::initialTarget(std::string in, std::string out) {
 
-        fileIn.open(in.c_str());
+        fileIn.open(in.c_str(), std::ifstream::in);
         fileOut.open(out.c_str(), std::ofstream::out);
+
+        this->error.openTinyFile(fileIn);
 
         subTree = &(this->syntaxTree);
 
@@ -628,8 +630,5 @@ namespace Syntax {
 
             token = targetAdvance();
         }
-
-        fileIn.close();
-        fileOut.close();
     }
 }

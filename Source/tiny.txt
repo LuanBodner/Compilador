@@ -8,7 +8,7 @@ inteiro teste()
     inteiro: k
     inteiro: l
 
-    a := (10)
+    a := (10+10)
     c := (154)
     b := (teste())
 
@@ -30,7 +30,7 @@ inteiro teste()
         fim
     fim
 
-    retorna(12)
+    retorna(testeSe)
 fim
 
 inteiro: global2

@@ -18,7 +18,7 @@
 
 int main(int argc, char** argv) {
 
-     if (argc < 4) {
+    if (argc < 4) {
 
         std::cout << "Wrong number of arguments\n";
         return EXIT_FAILURE;
@@ -38,11 +38,11 @@ int main(int argc, char** argv) {
 
     synx.getTree().printTree(output);
 
-    output.close();
-    
     CodeGeneration::CodeGeneration t;
-    
+
     t.treeAnalyzer();
+
+    system("rm -f tempTiny.txt");
 
     return EXIT_SUCCESS;
 }

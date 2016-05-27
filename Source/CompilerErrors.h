@@ -45,8 +45,11 @@ namespace CompilerErrors {
         void unknownCaracterStringError(int, int);
         void vectorSizeError();
 
+        void openTinyFile(std::ifstream&);
+        
     private:
         void printError(Token::Token);
+        void printLine(int);
     };
 }
 

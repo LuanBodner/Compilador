@@ -326,7 +326,5 @@ namespace Semantic {
 
             file << "\n";
         }
-
-        file.close();
     }
 }

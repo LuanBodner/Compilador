@@ -6,9 +6,13 @@
  */
 
 #include <stdlib.h>
+#include <fstream>
+#include <limits>
 #include "CompilerErrors.h"
 
 namespace CompilerErrors {
+
+    std::fstream tinyFile;
 
     CompilerErrors::CompilerErrors() {
     }
@@ -21,11 +25,43 @@ namespace CompilerErrors {
         return std::string(Token::enumString[i]);
     }
 
+    void CompilerErrors::openTinyFile(std::ifstream& file) {
+
+        tinyFile.open("tempTiny.txt", std::fstream::in | std::fstream::out | std::fstream::trunc);
+
+        std::string content;
+        file.seekg(std::ifstream::beg);
+
+        while (!file.eof()) {
+
+            std::getline(file, content);
+            tinyFile << content << "\n";
+        }
+
+        file.seekg(std::ifstream::beg);
+    }
+
+    void CompilerErrors::printLine(int line) {
+
+        std::string pline;
+
+        tinyFile.seekg(std::ios::beg);
+
+        for (int i = 0; i < line - 1; i++)
+            std::getline(tinyFile, pline);
+
+        std::getline(tinyFile, pline);
+        std::cout << "\033[1;35mCode\033[0m: " << pline << "\n\n";
+    }
+
     void CompilerErrors::printError(Token::Token token) {
 
         std::cout << "\033[1;36mLine\033[0m: " << token.getTokenLine() << "; ";
         std::cout << "\033[1;36mColumn\033[0m: " << token.getTokenColumn() << "; ";
         std::cout << "\033[1;32mReceived\033[0m: " << token.getTokenName() << ".\n";
+
+        printLine(token.getTokenLine());
+        system("rm -f tempTiny.txt");
 
         exit(EXIT_FAILURE);
     }
@@ -42,6 +78,8 @@ namespace CompilerErrors {
         std::cout << "\033[1;36mLine\033[0m: " << token.getTokenLine() << "; ";
         std::cout << "\033[1;36mColumn\033[0m: " << token.getTokenColumn() << "; ";
         std::cout << "\033[1;32mReceived\033[0m: " << token.getTokenName() << "';\n";
+
+        printLine(token.getTokenLine());
     }
 
     void CompilerErrors::functionWithoutReturnWarning(std::string name) {
@@ -125,6 +163,10 @@ namespace CompilerErrors {
                 << token.tokenTypeToString()
                 << std::endl;
 
+        printLine(token.getTokenLine());
+
+        system("rm -f tempTiny.txt");
+
         exit(EXIT_FAILURE);
     }
 
@@ -134,6 +176,10 @@ namespace CompilerErrors {
         std::cout << "\033[1;36mLine\033[0m: " << line
                 << ";\033[1;36mColumn\033[0m: " << column << std::endl;
 
+        printLine(line);
+
+        system("rm -f tempTiny.txt");
+
         exit(EXIT_FAILURE);
     }
 
@@ -141,6 +187,8 @@ namespace CompilerErrors {
 
         std::cout << "\033[1;31mError\033[0m; No Main Declaration In File; "
                 << "Program Terminated;\n";
+
+        system("rm -f tempTiny.txt");
 
         exit(EXIT_FAILURE);
     }
@@ -151,6 +199,8 @@ namespace CompilerErrors {
         std::cout << "\033[1;36mLine\033[0m: " << token.getTokenLine() << "; ";
         std::cout << "\033[1;36mColumn\033[0m: " << token.getTokenColumn() << "; ";
         std::cout << "\033[1;32mReceived\033[0m: " << token.getTokenName() << "';\n";
+
+        printLine(token.getTokenLine());
     }
 
     void CompilerErrors::voidAttributionError(Token::Token token) {
@@ -168,6 +218,8 @@ namespace CompilerErrors {
     void CompilerErrors::vectorSizeError() {
 
         std::cout << "\033[1;31mError\033[0m; No Expression Defined\n";
+
+        system("rm -f tempTiny.txt");
 
         exit(EXIT_FAILURE);
     }
