@@ -48,7 +48,7 @@ vazio foo(inteiro: param1, inteiro: param2)
     foo(10,20)
         
     repita
-        param1 := (global2)
+        param1 := (foo(1.0,10))
     ate(abc)
     
 fim

@@ -51,7 +51,7 @@ namespace CompilerErrors {
             std::getline(tinyFile, pline);
 
         std::getline(tinyFile, pline);
-        std::cout << "\033[1;35mCode\033[0m: " << pline << "\n\n";
+        std::cout << "\033[1;30mCode\033[0m: " << pline << "\n\n";
     }
 
     void CompilerErrors::printError(Token::Token token) {

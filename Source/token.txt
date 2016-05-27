@@ -490,12 +490,27 @@
 "(" == OPEN
 	LINE : 51
 	COLUMN : 3
-"global2" == IDENTIFIER
+"foo" == IDENTIFIER
 	LINE : 51
 	COLUMN : 4
-")" == CLOSE
+"(" == OPEN
 	LINE : 51
 	COLUMN : 5
+"1.0" == NUMBER_FLOAT
+	LINE : 51
+	COLUMN : 6
+"," == COMMA
+	LINE : 51
+	COLUMN : 7
+"10" == NUMBER_INTEGER
+	LINE : 51
+	COLUMN : 8
+")" == CLOSE
+	LINE : 51
+	COLUMN : 9
+")" == CLOSE
+	LINE : 51
+	COLUMN : 10
 "ate" == UNTIL
 	LINE : 52
 	COLUMN : 1
