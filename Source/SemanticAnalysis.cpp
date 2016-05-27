@@ -118,6 +118,9 @@ namespace Semantic {
                 if (!symbolTable[sn][symbolTable[sn].size() - 1].compare(NI))
                     error.variableNotDefinedError(tree.children[0]->token);
 
+                if (!symbolTable[sn][1].compare(FU))
+                    functionCallStatement(tree);
+
                 if (!counter)
                     otype = symbolTable[sn][0];
 
@@ -166,6 +169,9 @@ namespace Semantic {
 
                 if (!symbolTable[sn][symbolTable[sn].size() - 1].compare(NI))
                     error.variableNotDefinedError(tree.children[0]->token);
+
+                if (!symbolTable[sn][1].compare(FU))
+                    functionCallStatement(tree);
 
                 if (!symbolTable[sn][0].compare("vazio"))
                     error.voidAttributionError(tree.children[0]->token);

@@ -268,12 +268,30 @@
 ")" == CLOSE
 	LINE : 26
 	COLUMN : 15
-")" == CLOSE
+"-" == SUBTRACTION
 	LINE : 26
 	COLUMN : 16
-"então" == THEN
+"(" == OPEN
 	LINE : 26
 	COLUMN : 17
+"teste" == IDENTIFIER
+	LINE : 26
+	COLUMN : 18
+"(" == OPEN
+	LINE : 26
+	COLUMN : 19
+")" == CLOSE
+	LINE : 26
+	COLUMN : 20
+")" == CLOSE
+	LINE : 26
+	COLUMN : 21
+")" == CLOSE
+	LINE : 26
+	COLUMN : 22
+"então" == THEN
+	LINE : 26
+	COLUMN : 23
 "inteiro" == INTEGER
 	LINE : 27
 	COLUMN : 1
@@ -307,7 +325,7 @@
 "(" == OPEN
 	LINE : 33
 	COLUMN : 2
-"testeSe" == IDENTIFIER
+"0" == NUMBER_INTEGER
 	LINE : 33
 	COLUMN : 3
 ")" == CLOSE
@@ -454,7 +472,7 @@
 "," == COMMA
 	LINE : 48
 	COLUMN : 4
-"120" == NUMBER_INTEGER
+"20" == NUMBER_INTEGER
 	LINE : 48
 	COLUMN : 5
 ")" == CLOSE
