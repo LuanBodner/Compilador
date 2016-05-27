@@ -497,14 +497,15 @@ namespace Syntax {
 
             case(Token::INTEGER): case(Token::FLOAT): case(Token::VOID):
                 variableDecStmt();
-                paramFunctionStmt();
-                break;
 
-            case(Token::COMMA):
-                eat(Token::COMMA);
-                targetAdvance();
-                variableDecStmt();
-                paramFunctionStmt();
+                tokenTemp = targetAdvance();
+
+                if (tokenTemp.getTokenType() == Token::COMMA) {
+
+                    eat(Token::COMMA);
+                    paramFunctionStmt();
+                } else if (tokenTemp.getTokenType() == Token::CLOSE)
+                    break;
                 break;
 
             case(Token::CLOSE):
