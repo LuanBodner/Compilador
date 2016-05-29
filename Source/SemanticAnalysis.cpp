@@ -59,7 +59,7 @@ namespace Semantic {
 
         symbolTable.emplace(t, std::vector<std::string>());
 
-        if (!tree.children[0]->token.getTokenName().compare("vazio"))
+        if (!tree.children[0]->token.getTokenName().compare(TV))
             error.variableVoidError(tree.children[1]->token);
         symbolTable[t].push_back(tree.children[0]->token.getTokenName());
 
@@ -124,7 +124,7 @@ namespace Semantic {
                 if (!counter)
                     otype = symbolTable[sn][0];
 
-                if (!symbolTable[sn][0].compare("vazio"))
+                if (!symbolTable[sn][0].compare(TV))
                     error.voidAttributionError(tree.children[0]->token);
 
                 else if (symbolTable[sn][0].compare(otype))
@@ -136,12 +136,12 @@ namespace Semantic {
                 if (!counter) {
 
                     if (t == Token::NUMBER_FLOAT)
-                        otype = "flutuante";
-                    else otype = "inteiro";
+                        otype = TF;
+                    else otype = TI;
                 }
 
-                if ((otype.compare("inteiro") && t == Token::NUMBER_INTEGER) ||
-                        (otype.compare("flutuante") && t == Token::NUMBER_FLOAT))
+                if ((otype.compare(TI) && t == Token::NUMBER_INTEGER) ||
+                        (otype.compare(TF) && t == Token::NUMBER_FLOAT))
                     error.expressionTypeWarning(tree.children[0]->token);
             }
 
@@ -173,11 +173,11 @@ namespace Semantic {
                 if (!symbolTable[sn][1].compare(FU))
                     functionCallStatement(tree);
 
-                if (!symbolTable[sn][0].compare("vazio"))
+                if (!symbolTable[sn][0].compare(TV))
                     error.voidAttributionError(tree.children[0]->token);
 
-                else if ((symbolTable[sn][0].compare("flutuante") && ttype == Token::FLOAT) ||
-                        (symbolTable[sn][0].compare("inteiro") && ttype == Token::INTEGER))
+                else if ((symbolTable[sn][0].compare(TF) && ttype == Token::FLOAT) ||
+                        (symbolTable[sn][0].compare(TI) && ttype == Token::INTEGER))
                     error.expressionTypeWarning(tree.children[0]->token);
             } else if ((tree.children[0]->token.getTokenType() == Token::NUMBER_FLOAT
                     && ttype == Token::INTEGER) ||
@@ -208,9 +208,9 @@ namespace Semantic {
 
                 for (unsigned int i = 1; i < tree.children.size(); i++, index++) {
 
-                    if (!symbolTable[sn][index].compare("flutuante"))
+                    if (!symbolTable[sn][index].compare(TF))
                         operationExpression(*tree.children[i], Token::FLOAT);
-                    else if (!symbolTable[sn][index].compare("inteiro"))
+                    else if (!symbolTable[sn][index].compare(TI))
                         operationExpression(*tree.children[i], Token::INTEGER);
                 }
             } else
@@ -225,7 +225,7 @@ namespace Semantic {
 
         sn.first = verifyTable(sn, *tree.children[0]);
 
-        if (!symbolTable[sn][0].compare("inteiro"))
+        if (!symbolTable[sn][0].compare(TI))
             operationExpression(*tree.children[1], Token::INTEGER);
         else
             operationExpression(*tree.children[1], Token::FLOAT);
@@ -246,11 +246,11 @@ namespace Semantic {
 
         int i = returnType.size() - 1;
 
-        if (!returnType[i].first.compare("inteiro")) {
+        if (!returnType[i].first.compare(TI)) {
 
             operationExpression(*tree.children[0], Token::INTEGER);
             returnType.pop_back();
-        } else if (!returnType[i].first.compare("flutuante")) {
+        } else if (!returnType[i].first.compare(TF)) {
 
             operationExpression(*tree.children[0], Token::FLOAT);
             returnType.pop_back();
@@ -307,7 +307,7 @@ namespace Semantic {
                 error.mainDeclarationError();
 
             for (; returnType.size(); returnType.pop_back())
-                if (returnType[returnType.size() - 1].first.compare("vazio"))
+                if (returnType[returnType.size() - 1].first.compare(TV))
                     error.functionWithoutReturnWarning(returnType[returnType.size() - 1].second);
         }
     }

@@ -88,7 +88,7 @@
 "+" == SUM
 	LINE : 11
 	COLUMN : 5
-"10" == NUMBER_INTEGER
+"10.0" == NUMBER_FLOAT
 	LINE : 11
 	COLUMN : 6
 ")" == CLOSE
@@ -478,7 +478,7 @@
 "," == COMMA
 	LINE : 48
 	COLUMN : 4
-"20.0" == NUMBER_FLOAT
+"20" == NUMBER_INTEGER
 	LINE : 48
 	COLUMN : 5
 ")" == CLOSE
@@ -496,7 +496,7 @@
 "(" == OPEN
 	LINE : 51
 	COLUMN : 3
-"10" == NUMBER_INTEGER
+"10.0" == NUMBER_FLOAT
 	LINE : 51
 	COLUMN : 4
 ")" == CLOSE

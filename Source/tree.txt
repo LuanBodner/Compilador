@@ -43,7 +43,7 @@ Declaration
                                             OperationExpression
                                                 10
                                                 SumExpression
-                                                    10
+                                                    10.0
                                     CompoundStatement
                                         ExpressionStatement
                                             AttributionStatement
@@ -187,7 +187,7 @@ Declaration
                                                 OperationExpression
                                                     10
                                                 OperationExpression
-                                                    20.0
+                                                    20
                                         CompoundStatement
                                             ExpressionStatement
                                                 WhileStatement
@@ -196,7 +196,7 @@ Declaration
                                                             AttributionStatement
                                                                 param1
                                                                 OperationExpression
-                                                                    10
+                                                                    10.0
                                                     OperationExpression
                                                         0
     FunctionDecStatement

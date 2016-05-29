@@ -20,6 +20,10 @@ typedef std::vector<std::string> vectorString;
 #define IN "Initialized"
 #define FU "Function"
 
+#define TI "inteiro"
+#define TV "vazio"
+#define TF "flutuante"
+
 namespace Semantic {
 
     class SemanticAnalysis {
