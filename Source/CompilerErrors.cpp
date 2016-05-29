@@ -66,6 +66,18 @@ namespace CompilerErrors {
         exit(EXIT_FAILURE);
     }
 
+    void CompilerErrors::returnMayBeIgnoredWarning(Token::Token token) {
+
+        std::cout << "\033[1;35mWarning\033[0m; Return Value May Be Ignored; ";
+        printError(token);
+    }
+
+    void CompilerErrors::tooManyReturnsError(Token::Token token) {
+
+        std::cout << "\033[1;31mError\033[0m; More Than One Return Statement; ";
+        printError(token);
+    }
+
     void CompilerErrors::variableDeclarationError(Token::Token token) {
 
         std::cout << "\033[1;31mError\033[0m; Variable Declaration Error; ";

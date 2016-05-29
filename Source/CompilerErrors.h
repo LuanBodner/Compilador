@@ -29,7 +29,9 @@ namespace CompilerErrors {
         void returnIgnoredWarning(Token::Token);
         void voidAttributionError(Token::Token);
         void functionWithoutReturnWarning(std::string);
+        void returnMayBeIgnoredWarning(Token::Token);
         void mainDeclarationError();
+        void tooManyReturnsError(Token::Token);
 
         /* Syntax errors */
         void variableDeclarationError(Token::Token);
@@ -46,7 +48,7 @@ namespace CompilerErrors {
         void vectorSizeError();
 
         void openTinyFile(std::ifstream&);
-        
+
     private:
         void printError(Token::Token);
         void printLine(int);

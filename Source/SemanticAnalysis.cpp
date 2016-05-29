@@ -246,16 +246,20 @@ namespace Semantic {
 
         int i = returnType.size() - 1;
 
-        if (!returnType[i].first.compare(TI)) {
+        if (returnType.size()) {
 
-            operationExpression(*tree.children[0], Token::INTEGER);
-            returnType.pop_back();
-        } else if (!returnType[i].first.compare(TF)) {
+            if (!returnType[i].first.compare(TI)) {
 
-            operationExpression(*tree.children[0], Token::FLOAT);
-            returnType.pop_back();
+                operationExpression(*tree.children[0], Token::INTEGER);
+                returnType.pop_back();
+            } else if (!returnType[i].first.compare(TF)) {
+
+                operationExpression(*tree.children[0], Token::FLOAT);
+                returnType.pop_back();
+            } else
+                error.returnIgnoredWarning(tree.children[1]->token);
         } else
-            error.returnIgnoredWarning(tree.children[1]->token);
+            error.tooManyReturnsError(tree.children[1]->token);
     }
 
     void SemanticAnalysis::expressionStatement(Tree::Tree & tree) {

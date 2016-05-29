@@ -43,7 +43,7 @@ Declaration
                                             OperationExpression
                                                 10
                                                 SumExpression
-                                                    10.0
+                                                    10
                                     CompoundStatement
                                         ExpressionStatement
                                             AttributionStatement
@@ -120,18 +120,18 @@ Declaration
                                                                                                     VariableDecStatement
                                                                                                         inteiro
                                                                                                         testeSe
+                                                                                                CompoundStatement
+                                                                                                    ExpressionStatement
+                                                                                                        ReturnStatement
+                                                                                                            OperationExpression
+                                                                                                                0
+                                                                                                            retorna
                                                                                             OtherwiseStement
                                                                                                 CompoundStatement
                                                                                                     ExpressionStatement
                                                                                                         VariableDecStatement
                                                                                                             flutuante
                                                                                                             testeSenão
-                                                                        CompoundStatement
-                                                                            ExpressionStatement
-                                                                                ReturnStatement
-                                                                                    OperationExpression
-                                                                                        0
-                                                                                    retorna
     VariableDecStatement
         inteiro
         global2
@@ -187,7 +187,7 @@ Declaration
                                                 OperationExpression
                                                     10
                                                 OperationExpression
-                                                    20
+                                                    20.0
                                         CompoundStatement
                                             ExpressionStatement
                                                 WhileStatement
@@ -196,7 +196,7 @@ Declaration
                                                             AttributionStatement
                                                                 param1
                                                                 OperationExpression
-                                                                    10.0
+                                                                    10
                                                     OperationExpression
                                                         0
     FunctionDecStatement
