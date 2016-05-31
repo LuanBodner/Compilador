@@ -298,234 +298,234 @@
 "então" == THEN
 	LINE : 26
 	COLUMN : 23
-"inteiro" == INTEGER
-	LINE : 27
-	COLUMN : 1
-":" == DOUBLE_POINT
-	LINE : 27
-	COLUMN : 2
-"testeSe" == IDENTIFIER
-	LINE : 27
-	COLUMN : 3
 "retorna" == RETURN
-	LINE : 28
+	LINE : 27
 	COLUMN : 1
 "(" == OPEN
-	LINE : 28
+	LINE : 27
 	COLUMN : 2
 "0" == NUMBER_INTEGER
-	LINE : 28
+	LINE : 27
 	COLUMN : 3
 ")" == CLOSE
-	LINE : 28
+	LINE : 27
 	COLUMN : 4
 "senão" == OTHERWISE
+	LINE : 28
+	COLUMN : 1
+"repita" == REPEAT
 	LINE : 29
 	COLUMN : 1
-"flutuante" == FLOAT
+"a" == IDENTIFIER
 	LINE : 30
 	COLUMN : 1
-":" == DOUBLE_POINT
+":=" == ATTRIBUTION
 	LINE : 30
 	COLUMN : 2
-"testeSenão" == IDENTIFIER
+"(" == OPEN
 	LINE : 30
 	COLUMN : 3
-"fim" == END
+"10" == NUMBER_INTEGER
+	LINE : 30
+	COLUMN : 4
+")" == CLOSE
+	LINE : 30
+	COLUMN : 5
+"ate" == UNTIL
 	LINE : 31
 	COLUMN : 1
+"(" == OPEN
+	LINE : 31
+	COLUMN : 2
+"0" == NUMBER_INTEGER
+	LINE : 31
+	COLUMN : 3
+")" == CLOSE
+	LINE : 31
+	COLUMN : 4
 "fim" == END
 	LINE : 32
 	COLUMN : 1
 "fim" == END
 	LINE : 33
 	COLUMN : 1
+"fim" == END
+	LINE : 34
+	COLUMN : 1
 "inteiro" == INTEGER
-	LINE : 35
+	LINE : 36
 	COLUMN : 1
 ":" == DOUBLE_POINT
-	LINE : 35
+	LINE : 36
 	COLUMN : 2
 "global2" == IDENTIFIER
-	LINE : 35
+	LINE : 36
 	COLUMN : 3
 "vazio" == VOID
-	LINE : 36
+	LINE : 37
 	COLUMN : 1
 "foo" == IDENTIFIER
-	LINE : 36
+	LINE : 37
 	COLUMN : 2
 "(" == OPEN
-	LINE : 36
+	LINE : 37
 	COLUMN : 3
 "inteiro" == INTEGER
-	LINE : 36
+	LINE : 37
 	COLUMN : 4
 ":" == DOUBLE_POINT
-	LINE : 36
+	LINE : 37
 	COLUMN : 5
 "param1" == IDENTIFIER
-	LINE : 36
+	LINE : 37
 	COLUMN : 6
-"," == COMMA
-	LINE : 36
+")" == CLOSE
+	LINE : 37
 	COLUMN : 7
 "flutuante" == FLOAT
-	LINE : 36
-	COLUMN : 8
-":" == DOUBLE_POINT
-	LINE : 36
-	COLUMN : 9
-"param2" == IDENTIFIER
-	LINE : 36
-	COLUMN : 10
-")" == CLOSE
-	LINE : 36
-	COLUMN : 11
-"flutuante" == FLOAT
-	LINE : 38
+	LINE : 39
 	COLUMN : 1
 ":" == DOUBLE_POINT
-	LINE : 38
+	LINE : 39
 	COLUMN : 2
 "abc" == IDENTIFIER
-	LINE : 38
+	LINE : 39
 	COLUMN : 3
 "flutuante" == FLOAT
-	LINE : 39
+	LINE : 40
 	COLUMN : 1
 ":" == DOUBLE_POINT
-	LINE : 39
+	LINE : 40
 	COLUMN : 2
 "a" == IDENTIFIER
-	LINE : 39
+	LINE : 40
 	COLUMN : 3
 "inteiro" == INTEGER
-	LINE : 40
+	LINE : 41
 	COLUMN : 1
 ":" == DOUBLE_POINT
-	LINE : 40
+	LINE : 41
 	COLUMN : 2
 "b" == IDENTIFIER
-	LINE : 40
+	LINE : 41
 	COLUMN : 3
 "leia" == READ
-	LINE : 42
+	LINE : 43
 	COLUMN : 1
 "(" == OPEN
-	LINE : 42
+	LINE : 43
 	COLUMN : 2
 "a" == IDENTIFIER
-	LINE : 42
+	LINE : 43
 	COLUMN : 3
 ")" == CLOSE
-	LINE : 42
+	LINE : 43
 	COLUMN : 4
 "leia" == READ
-	LINE : 43
+	LINE : 44
 	COLUMN : 1
 "(" == OPEN
-	LINE : 43
+	LINE : 44
 	COLUMN : 2
 "b" == IDENTIFIER
-	LINE : 43
+	LINE : 44
 	COLUMN : 3
 ")" == CLOSE
-	LINE : 43
+	LINE : 44
 	COLUMN : 4
 "leia" == READ
-	LINE : 44
+	LINE : 45
 	COLUMN : 1
 "(" == OPEN
-	LINE : 44
+	LINE : 45
 	COLUMN : 2
 "abc" == IDENTIFIER
-	LINE : 44
+	LINE : 45
 	COLUMN : 3
 ")" == CLOSE
-	LINE : 44
+	LINE : 45
 	COLUMN : 4
 "global2" == IDENTIFIER
-	LINE : 45
+	LINE : 46
 	COLUMN : 1
 ":=" == ATTRIBUTION
-	LINE : 45
+	LINE : 46
 	COLUMN : 2
 "(" == OPEN
-	LINE : 45
+	LINE : 46
 	COLUMN : 3
-"teste" == IDENTIFIER
-	LINE : 45
+")" == CLOSE
+	LINE : 46
 	COLUMN : 4
-"(" == OPEN
-	LINE : 45
-	COLUMN : 5
-")" == CLOSE
-	LINE : 45
-	COLUMN : 6
-")" == CLOSE
-	LINE : 45
-	COLUMN : 7
 "foo" == IDENTIFIER
-	LINE : 47
+	LINE : 48
 	COLUMN : 1
 "(" == OPEN
-	LINE : 47
+	LINE : 48
 	COLUMN : 2
 "10" == NUMBER_INTEGER
-	LINE : 47
+	LINE : 48
 	COLUMN : 3
-"," == COMMA
-	LINE : 47
-	COLUMN : 4
-"20.0" == NUMBER_FLOAT
-	LINE : 47
-	COLUMN : 5
 ")" == CLOSE
-	LINE : 47
-	COLUMN : 6
+	LINE : 48
+	COLUMN : 4
 "repita" == REPEAT
-	LINE : 49
+	LINE : 50
 	COLUMN : 1
 "param1" == IDENTIFIER
-	LINE : 50
+	LINE : 51
 	COLUMN : 1
 ":=" == ATTRIBUTION
-	LINE : 50
+	LINE : 51
 	COLUMN : 2
 "(" == OPEN
-	LINE : 50
+	LINE : 51
 	COLUMN : 3
 "10" == NUMBER_INTEGER
-	LINE : 50
+	LINE : 51
 	COLUMN : 4
 ")" == CLOSE
-	LINE : 50
+	LINE : 51
 	COLUMN : 5
 "ate" == UNTIL
-	LINE : 51
+	LINE : 52
 	COLUMN : 1
 "(" == OPEN
-	LINE : 51
+	LINE : 52
 	COLUMN : 2
-"0" == NUMBER_INTEGER
-	LINE : 51
+"a" == IDENTIFIER
+	LINE : 52
 	COLUMN : 3
 ")" == CLOSE
-	LINE : 51
+	LINE : 52
 	COLUMN : 4
 "fim" == END
-	LINE : 53
+	LINE : 54
 	COLUMN : 1
 "vazio" == VOID
-	LINE : 55
+	LINE : 56
 	COLUMN : 1
 "principal" == IDENTIFIER
-	LINE : 55
+	LINE : 56
 	COLUMN : 2
 "(" == OPEN
-	LINE : 55
+	LINE : 56
 	COLUMN : 3
 ")" == CLOSE
-	LINE : 55
+	LINE : 56
 	COLUMN : 4
+"foo" == IDENTIFIER
+	LINE : 58
+	COLUMN : 1
+"(" == OPEN
+	LINE : 58
+	COLUMN : 2
+"0" == NUMBER_INTEGER
+	LINE : 58
+	COLUMN : 3
+")" == CLOSE
+	LINE : 58
+	COLUMN : 4
+"fim" == END
+	LINE : 60
+	COLUMN : 1

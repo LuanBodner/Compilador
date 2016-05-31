@@ -66,6 +66,13 @@ namespace CompilerErrors {
         exit(EXIT_FAILURE);
     }
 
+    void CompilerErrors::variableNotUsedWarning(std::string name, std::string type) {
+
+        std::cout << "\033[1;35mWarning\033[0m; Variable Defined But Not Used; "
+                << "\033[1;36mName\033[0m: " << name << "; "
+                << "\033[1;36mType\033[0m: " << type << "\n\n";
+    }
+
     void CompilerErrors::returnMayBeIgnoredWarning(Token::Token token) {
 
         std::cout << "\033[1;35mWarning\033[0m; Return Value May Be Ignored; ";

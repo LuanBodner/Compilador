@@ -24,6 +24,9 @@ typedef std::vector<std::string> vectorString;
 #define TV "vazio"
 #define TF "flutuante"
 
+#define UV "Used"
+#define NV "Unused"
+
 namespace Semantic {
 
     class SemanticAnalysis {

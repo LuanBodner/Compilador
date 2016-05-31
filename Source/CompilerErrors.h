@@ -30,6 +30,7 @@ namespace CompilerErrors {
         void voidAttributionError(Token::Token);
         void functionWithoutReturnWarning(std::string);
         void returnMayBeIgnoredWarning(Token::Token);
+        void variableNotUsedWarning(std::string, std::string);
         void mainDeclarationError();
         void tooManyReturnsError(Token::Token);
 

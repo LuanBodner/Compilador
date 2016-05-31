@@ -66,6 +66,7 @@ namespace Semantic {
         if (level == 1)
             symbolTable[t].push_back(GL);
 
+        symbolTable[t].push_back(NV);
         symbolTable[t].push_back(NI);
     }
 
@@ -129,6 +130,9 @@ namespace Semantic {
 
                 else if (symbolTable[sn][0].compare(otype))
                     error.expressionTypeWarning(tree.children[0]->token);
+
+                if (!symbolTable[sn][1].compare(NV))
+                    symbolTable[sn][1] = UV;
             } else {
 
                 Token::TokenType t = tree.children[0]->token.getTokenType();
@@ -179,6 +183,9 @@ namespace Semantic {
                 else if ((symbolTable[sn][0].compare(TF) && ttype == Token::FLOAT) ||
                         (symbolTable[sn][0].compare(TI) && ttype == Token::INTEGER))
                     error.expressionTypeWarning(tree.children[0]->token);
+
+                if (!symbolTable[sn][1].compare(NV))
+                    symbolTable[sn][1] = UV;
             } else if ((tree.children[0]->token.getTokenType() == Token::NUMBER_FLOAT
                     && ttype == Token::INTEGER) ||
                     (tree.children[0]->token.getTokenType() == Token::NUMBER_INTEGER
@@ -230,6 +237,7 @@ namespace Semantic {
         else
             operationExpression(*tree.children[1], Token::FLOAT);
 
+        symbolTable[sn][symbolTable[sn].size() - 2] = UV;
         symbolTable[sn][symbolTable[sn].size() - 1] = IN;
     }
 
@@ -239,6 +247,7 @@ namespace Semantic {
 
         sn.first = verifyTable(sn, *tree.children[0]);
 
+        symbolTable[sn][symbolTable[sn].size() - 2] = UV;
         symbolTable[sn][symbolTable[sn].size() - 1] = IN;
     }
 
@@ -313,6 +322,11 @@ namespace Semantic {
             for (; returnType.size(); returnType.pop_back())
                 if (returnType[returnType.size() - 1].first.compare(TV))
                     error.functionWithoutReturnWarning(returnType[returnType.size() - 1].second);
+
+            for (const auto &p : symbolTable)
+                if (p.second[1].compare(FU))
+                    if (!p.second[1].compare(NV))
+                        error.variableNotUsedWarning(p.first.second, p.second[0]);
         }
     }
 

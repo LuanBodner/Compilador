@@ -24,16 +24,17 @@ inteiro teste()
     
     se (global1) então        
         se (c >= b * ((k < j) - l) - (teste())) então
-            inteiro: testeSe 
             retorna(0)
         senão               
-            flutuante: testeSenão   
+            repita
+                a := (10)
+            ate(0)
         fim
     fim
 fim
 
 inteiro: global2
-vazio foo(inteiro: param1, flutuante: param2)
+vazio foo(inteiro: param1)
     
     flutuante: abc
     flutuante: a
@@ -42,16 +43,18 @@ vazio foo(inteiro: param1, flutuante: param2)
     leia(a)
     leia(b)
     leia(abc)
-    global2 := (teste())
+    global2 := ()
 
-    foo(10,20.0)
+    foo(10)
         
     repita
         param1 := (10)
-    ate(0)
+    ate(a)
     
 fim
 
 vazio principal()
     
-fi
+    foo(0)
+    
+fim
