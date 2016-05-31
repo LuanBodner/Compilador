@@ -529,6 +529,3 @@
 ")" == CLOSE
 	LINE : 55
 	COLUMN : 4
-"fim" == END
-	LINE : 57
-	COLUMN : 1

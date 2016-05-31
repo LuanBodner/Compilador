@@ -386,6 +386,7 @@ namespace Syntax {
     void SyntaxAnalysis::expression() {
 
         Token::Token tokenTemp = vecToken[0];
+        Token::Token recover;
 
         Tree::Tree * tempTree = subTree;
         setAndAdvance(EXPSTRING);
@@ -410,6 +411,7 @@ namespace Syntax {
                 break;
 
             case(Token::IDENTIFIER):
+                recover = tokenTemp;
                 tokenTemp = targetAdvance();
                 switch (tokenTemp.getTokenType()) {
 
@@ -421,7 +423,7 @@ namespace Syntax {
                         functionCallStmt();
                         break;
 
-                    default: this->error.expressionError(tokenTemp);
+                    default: this->error.expressionError(recover);
                 }
                 break;
 
