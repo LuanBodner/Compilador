@@ -67,7 +67,9 @@ namespace Semantic {
             symbolTable[t].push_back(GL);
 
         symbolTable[t].push_back(NV);
-        symbolTable[t].push_back(NI);
+        if (level != 3)
+            symbolTable[t].push_back(NI);
+        else symbolTable[t].push_back(IN);
     }
 
     void SemanticAnalysis::parameterTypes(Tree::Tree& tree, scopeName scope) {

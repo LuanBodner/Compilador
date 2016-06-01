@@ -1,15 +1,17 @@
+0, principal / vazio / Function / 0
 2, b / inteiro / Used / Initialized
 2, a / flutuante / Used / Initialized
 2, param1 / inteiro / Used / Initialized
 0, global2 / inteiro / Global / Used / Initialized
+1, aux / flutuante / Used / Initialized
 1, l / inteiro / Used / Initialized
 1, k / inteiro / Used / Initialized
 1, j / inteiro / Used / Initialized
-0, principal / vazio / Function / 0
-0, foo / vazio / Function / 1 / inteiro
 1, c / inteiro / Used / Initialized
-2, abc / flutuante / Used / Initialized
+0, foo / vazio / Function / 1 / inteiro
 1, b / inteiro / Used / Initialized
-0, teste / inteiro / Function / 0
+2, abc / flutuante / Used / Initialized
+1, param0 / flutuante / Used / Initialized
+0, teste / inteiro / Function / 1 / flutuante
 1, a / inteiro / Used / Initialized
 0, global1 / inteiro / Global / Used / Initialized

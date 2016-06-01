@@ -1,5 +1,5 @@
 inteiro : global1
-inteiro teste()
+inteiro teste(flutuante: param0)
     
     inteiro: a
     inteiro: b
@@ -7,6 +7,8 @@ inteiro teste()
     inteiro: j
     inteiro: k
     inteiro: l
+
+    flutuante: aux
 
     a := (10+10)
     c := (154)
@@ -17,6 +19,8 @@ inteiro teste()
     leia(global1)
     
     l := (j)
+
+    aux := (param0)
 
     escreve(15*a-10)
 

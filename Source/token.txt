@@ -16,9 +16,18 @@
 "(" == OPEN
 	LINE : 2
 	COLUMN : 3
-")" == CLOSE
+"flutuante" == FLOAT
 	LINE : 2
 	COLUMN : 4
+":" == DOUBLE_POINT
+	LINE : 2
+	COLUMN : 5
+"param0" == IDENTIFIER
+	LINE : 2
+	COLUMN : 6
+")" == CLOSE
+	LINE : 2
+	COLUMN : 7
 "inteiro" == INTEGER
 	LINE : 4
 	COLUMN : 1
@@ -73,265 +82,256 @@
 "l" == IDENTIFIER
 	LINE : 9
 	COLUMN : 3
-"a" == IDENTIFIER
+"flutuante" == FLOAT
 	LINE : 11
 	COLUMN : 1
-":=" == ATTRIBUTION
+":" == DOUBLE_POINT
 	LINE : 11
 	COLUMN : 2
-"(" == OPEN
+"aux" == IDENTIFIER
 	LINE : 11
 	COLUMN : 3
+"a" == IDENTIFIER
+	LINE : 13
+	COLUMN : 1
+":=" == ATTRIBUTION
+	LINE : 13
+	COLUMN : 2
+"(" == OPEN
+	LINE : 13
+	COLUMN : 3
 "10" == NUMBER_INTEGER
-	LINE : 11
+	LINE : 13
 	COLUMN : 4
 "+" == SUM
-	LINE : 11
+	LINE : 13
 	COLUMN : 5
 "10" == NUMBER_INTEGER
-	LINE : 11
+	LINE : 13
 	COLUMN : 6
 ")" == CLOSE
-	LINE : 11
+	LINE : 13
 	COLUMN : 7
 "c" == IDENTIFIER
-	LINE : 12
+	LINE : 14
 	COLUMN : 1
 ":=" == ATTRIBUTION
-	LINE : 12
+	LINE : 14
 	COLUMN : 2
 "(" == OPEN
-	LINE : 12
+	LINE : 14
 	COLUMN : 3
 "154" == NUMBER_INTEGER
-	LINE : 12
+	LINE : 14
 	COLUMN : 4
 ")" == CLOSE
-	LINE : 12
+	LINE : 14
 	COLUMN : 5
 "b" == IDENTIFIER
-	LINE : 13
+	LINE : 15
 	COLUMN : 1
 ":=" == ATTRIBUTION
-	LINE : 13
+	LINE : 15
 	COLUMN : 2
 "(" == OPEN
-	LINE : 13
+	LINE : 15
 	COLUMN : 3
 "teste" == IDENTIFIER
-	LINE : 13
+	LINE : 15
 	COLUMN : 4
 "(" == OPEN
-	LINE : 13
+	LINE : 15
 	COLUMN : 5
 ")" == CLOSE
-	LINE : 13
+	LINE : 15
 	COLUMN : 6
 ")" == CLOSE
-	LINE : 13
+	LINE : 15
 	COLUMN : 7
 "leia" == READ
-	LINE : 15
+	LINE : 17
 	COLUMN : 1
 "(" == OPEN
-	LINE : 15
+	LINE : 17
 	COLUMN : 2
 "k" == IDENTIFIER
-	LINE : 15
+	LINE : 17
 	COLUMN : 3
 ")" == CLOSE
-	LINE : 15
+	LINE : 17
 	COLUMN : 4
 "leia" == READ
-	LINE : 16
+	LINE : 18
 	COLUMN : 1
 "(" == OPEN
-	LINE : 16
+	LINE : 18
 	COLUMN : 2
 "j" == IDENTIFIER
-	LINE : 16
+	LINE : 18
 	COLUMN : 3
 ")" == CLOSE
-	LINE : 16
+	LINE : 18
 	COLUMN : 4
 "leia" == READ
-	LINE : 17
+	LINE : 19
 	COLUMN : 1
 "(" == OPEN
-	LINE : 17
+	LINE : 19
 	COLUMN : 2
 "global1" == IDENTIFIER
-	LINE : 17
+	LINE : 19
 	COLUMN : 3
 ")" == CLOSE
-	LINE : 17
+	LINE : 19
 	COLUMN : 4
 "l" == IDENTIFIER
-	LINE : 19
+	LINE : 21
 	COLUMN : 1
 ":=" == ATTRIBUTION
-	LINE : 19
+	LINE : 21
 	COLUMN : 2
 "(" == OPEN
-	LINE : 19
+	LINE : 21
 	COLUMN : 3
 "j" == IDENTIFIER
-	LINE : 19
+	LINE : 21
 	COLUMN : 4
 ")" == CLOSE
-	LINE : 19
+	LINE : 21
+	COLUMN : 5
+"aux" == IDENTIFIER
+	LINE : 23
+	COLUMN : 1
+":=" == ATTRIBUTION
+	LINE : 23
+	COLUMN : 2
+"(" == OPEN
+	LINE : 23
+	COLUMN : 3
+"param0" == IDENTIFIER
+	LINE : 23
+	COLUMN : 4
+")" == CLOSE
+	LINE : 23
 	COLUMN : 5
 "escreve" == WRITE
-	LINE : 21
+	LINE : 25
 	COLUMN : 1
 "(" == OPEN
-	LINE : 21
+	LINE : 25
 	COLUMN : 2
 "15" == NUMBER_INTEGER
-	LINE : 21
+	LINE : 25
 	COLUMN : 3
 "*" == MULTIPLICATION
-	LINE : 21
+	LINE : 25
 	COLUMN : 4
 "a" == IDENTIFIER
-	LINE : 21
+	LINE : 25
 	COLUMN : 5
 "-" == SUBTRACTION
-	LINE : 21
+	LINE : 25
 	COLUMN : 6
 "10" == NUMBER_INTEGER
-	LINE : 21
+	LINE : 25
 	COLUMN : 7
 ")" == CLOSE
-	LINE : 21
+	LINE : 25
 	COLUMN : 8
 "teste" == IDENTIFIER
-	LINE : 23
+	LINE : 27
 	COLUMN : 1
 "(" == OPEN
-	LINE : 23
+	LINE : 27
 	COLUMN : 2
 ")" == CLOSE
-	LINE : 23
+	LINE : 27
 	COLUMN : 3
 "se" == IF
-	LINE : 25
-	COLUMN : 1
-"(" == OPEN
-	LINE : 25
-	COLUMN : 2
-"global1" == IDENTIFIER
-	LINE : 25
-	COLUMN : 3
-")" == CLOSE
-	LINE : 25
-	COLUMN : 4
-"então" == THEN
-	LINE : 25
-	COLUMN : 5
-"se" == IF
-	LINE : 26
-	COLUMN : 1
-"(" == OPEN
-	LINE : 26
-	COLUMN : 2
-"c" == IDENTIFIER
-	LINE : 26
-	COLUMN : 3
-">=" == BIGGER_EQUAL
-	LINE : 26
-	COLUMN : 4
-"b" == IDENTIFIER
-	LINE : 26
-	COLUMN : 5
-"*" == MULTIPLICATION
-	LINE : 26
-	COLUMN : 6
-"(" == OPEN
-	LINE : 26
-	COLUMN : 7
-"(" == OPEN
-	LINE : 26
-	COLUMN : 8
-"k" == IDENTIFIER
-	LINE : 26
-	COLUMN : 9
-"<" == LESS_THAN
-	LINE : 26
-	COLUMN : 10
-"j" == IDENTIFIER
-	LINE : 26
-	COLUMN : 11
-")" == CLOSE
-	LINE : 26
-	COLUMN : 12
-"-" == SUBTRACTION
-	LINE : 26
-	COLUMN : 13
-"l" == IDENTIFIER
-	LINE : 26
-	COLUMN : 14
-")" == CLOSE
-	LINE : 26
-	COLUMN : 15
-"-" == SUBTRACTION
-	LINE : 26
-	COLUMN : 16
-"(" == OPEN
-	LINE : 26
-	COLUMN : 17
-"teste" == IDENTIFIER
-	LINE : 26
-	COLUMN : 18
-"(" == OPEN
-	LINE : 26
-	COLUMN : 19
-")" == CLOSE
-	LINE : 26
-	COLUMN : 20
-")" == CLOSE
-	LINE : 26
-	COLUMN : 21
-")" == CLOSE
-	LINE : 26
-	COLUMN : 22
-"então" == THEN
-	LINE : 26
-	COLUMN : 23
-"retorna" == RETURN
-	LINE : 27
-	COLUMN : 1
-"(" == OPEN
-	LINE : 27
-	COLUMN : 2
-"0" == NUMBER_INTEGER
-	LINE : 27
-	COLUMN : 3
-")" == CLOSE
-	LINE : 27
-	COLUMN : 4
-"senão" == OTHERWISE
-	LINE : 28
-	COLUMN : 1
-"repita" == REPEAT
 	LINE : 29
 	COLUMN : 1
-"a" == IDENTIFIER
+"(" == OPEN
+	LINE : 29
+	COLUMN : 2
+"global1" == IDENTIFIER
+	LINE : 29
+	COLUMN : 3
+")" == CLOSE
+	LINE : 29
+	COLUMN : 4
+"então" == THEN
+	LINE : 29
+	COLUMN : 5
+"se" == IF
 	LINE : 30
 	COLUMN : 1
-":=" == ATTRIBUTION
-	LINE : 30
-	COLUMN : 2
 "(" == OPEN
 	LINE : 30
+	COLUMN : 2
+"c" == IDENTIFIER
+	LINE : 30
 	COLUMN : 3
-"10" == NUMBER_INTEGER
+">=" == BIGGER_EQUAL
 	LINE : 30
 	COLUMN : 4
-")" == CLOSE
+"b" == IDENTIFIER
 	LINE : 30
 	COLUMN : 5
-"ate" == UNTIL
+"*" == MULTIPLICATION
+	LINE : 30
+	COLUMN : 6
+"(" == OPEN
+	LINE : 30
+	COLUMN : 7
+"(" == OPEN
+	LINE : 30
+	COLUMN : 8
+"k" == IDENTIFIER
+	LINE : 30
+	COLUMN : 9
+"<" == LESS_THAN
+	LINE : 30
+	COLUMN : 10
+"j" == IDENTIFIER
+	LINE : 30
+	COLUMN : 11
+")" == CLOSE
+	LINE : 30
+	COLUMN : 12
+"-" == SUBTRACTION
+	LINE : 30
+	COLUMN : 13
+"l" == IDENTIFIER
+	LINE : 30
+	COLUMN : 14
+")" == CLOSE
+	LINE : 30
+	COLUMN : 15
+"-" == SUBTRACTION
+	LINE : 30
+	COLUMN : 16
+"(" == OPEN
+	LINE : 30
+	COLUMN : 17
+"teste" == IDENTIFIER
+	LINE : 30
+	COLUMN : 18
+"(" == OPEN
+	LINE : 30
+	COLUMN : 19
+")" == CLOSE
+	LINE : 30
+	COLUMN : 20
+")" == CLOSE
+	LINE : 30
+	COLUMN : 21
+")" == CLOSE
+	LINE : 30
+	COLUMN : 22
+"então" == THEN
+	LINE : 30
+	COLUMN : 23
+"retorna" == RETURN
 	LINE : 31
 	COLUMN : 1
 "(" == OPEN
@@ -343,189 +343,222 @@
 ")" == CLOSE
 	LINE : 31
 	COLUMN : 4
-"fim" == END
+"senão" == OTHERWISE
 	LINE : 32
 	COLUMN : 1
-"fim" == END
+"repita" == REPEAT
 	LINE : 33
 	COLUMN : 1
-"fim" == END
+"a" == IDENTIFIER
 	LINE : 34
 	COLUMN : 1
-"inteiro" == INTEGER
-	LINE : 36
-	COLUMN : 1
-":" == DOUBLE_POINT
-	LINE : 36
-	COLUMN : 2
-"global2" == IDENTIFIER
-	LINE : 36
-	COLUMN : 3
-"vazio" == VOID
-	LINE : 37
-	COLUMN : 1
-"foo" == IDENTIFIER
-	LINE : 37
-	COLUMN : 2
-"(" == OPEN
-	LINE : 37
-	COLUMN : 3
-"inteiro" == INTEGER
-	LINE : 37
-	COLUMN : 4
-":" == DOUBLE_POINT
-	LINE : 37
-	COLUMN : 5
-"param1" == IDENTIFIER
-	LINE : 37
-	COLUMN : 6
-")" == CLOSE
-	LINE : 37
-	COLUMN : 7
-"flutuante" == FLOAT
-	LINE : 39
-	COLUMN : 1
-":" == DOUBLE_POINT
-	LINE : 39
-	COLUMN : 2
-"abc" == IDENTIFIER
-	LINE : 39
-	COLUMN : 3
-"flutuante" == FLOAT
-	LINE : 40
-	COLUMN : 1
-":" == DOUBLE_POINT
-	LINE : 40
-	COLUMN : 2
-"a" == IDENTIFIER
-	LINE : 40
-	COLUMN : 3
-"inteiro" == INTEGER
-	LINE : 41
-	COLUMN : 1
-":" == DOUBLE_POINT
-	LINE : 41
-	COLUMN : 2
-"b" == IDENTIFIER
-	LINE : 41
-	COLUMN : 3
-"leia" == READ
-	LINE : 43
-	COLUMN : 1
-"(" == OPEN
-	LINE : 43
-	COLUMN : 2
-"a" == IDENTIFIER
-	LINE : 43
-	COLUMN : 3
-")" == CLOSE
-	LINE : 43
-	COLUMN : 4
-"leia" == READ
-	LINE : 44
-	COLUMN : 1
-"(" == OPEN
-	LINE : 44
-	COLUMN : 2
-"b" == IDENTIFIER
-	LINE : 44
-	COLUMN : 3
-")" == CLOSE
-	LINE : 44
-	COLUMN : 4
-"leia" == READ
-	LINE : 45
-	COLUMN : 1
-"(" == OPEN
-	LINE : 45
-	COLUMN : 2
-"abc" == IDENTIFIER
-	LINE : 45
-	COLUMN : 3
-")" == CLOSE
-	LINE : 45
-	COLUMN : 4
-"global2" == IDENTIFIER
-	LINE : 46
-	COLUMN : 1
 ":=" == ATTRIBUTION
-	LINE : 46
+	LINE : 34
 	COLUMN : 2
 "(" == OPEN
-	LINE : 46
-	COLUMN : 3
-")" == CLOSE
-	LINE : 46
-	COLUMN : 4
-"foo" == IDENTIFIER
-	LINE : 48
-	COLUMN : 1
-"(" == OPEN
-	LINE : 48
-	COLUMN : 2
-"10" == NUMBER_INTEGER
-	LINE : 48
-	COLUMN : 3
-")" == CLOSE
-	LINE : 48
-	COLUMN : 4
-"repita" == REPEAT
-	LINE : 50
-	COLUMN : 1
-"param1" == IDENTIFIER
-	LINE : 51
-	COLUMN : 1
-":=" == ATTRIBUTION
-	LINE : 51
-	COLUMN : 2
-"(" == OPEN
-	LINE : 51
+	LINE : 34
 	COLUMN : 3
 "10" == NUMBER_INTEGER
-	LINE : 51
+	LINE : 34
 	COLUMN : 4
 ")" == CLOSE
-	LINE : 51
+	LINE : 34
 	COLUMN : 5
 "ate" == UNTIL
-	LINE : 52
+	LINE : 35
 	COLUMN : 1
 "(" == OPEN
-	LINE : 52
-	COLUMN : 2
-"a" == IDENTIFIER
-	LINE : 52
-	COLUMN : 3
-")" == CLOSE
-	LINE : 52
-	COLUMN : 4
-"fim" == END
-	LINE : 54
-	COLUMN : 1
-"vazio" == VOID
-	LINE : 56
-	COLUMN : 1
-"principal" == IDENTIFIER
-	LINE : 56
-	COLUMN : 2
-"(" == OPEN
-	LINE : 56
-	COLUMN : 3
-")" == CLOSE
-	LINE : 56
-	COLUMN : 4
-"foo" == IDENTIFIER
-	LINE : 58
-	COLUMN : 1
-"(" == OPEN
-	LINE : 58
+	LINE : 35
 	COLUMN : 2
 "0" == NUMBER_INTEGER
-	LINE : 58
+	LINE : 35
 	COLUMN : 3
 ")" == CLOSE
-	LINE : 58
+	LINE : 35
 	COLUMN : 4
 "fim" == END
+	LINE : 36
+	COLUMN : 1
+"fim" == END
+	LINE : 37
+	COLUMN : 1
+"fim" == END
+	LINE : 38
+	COLUMN : 1
+"inteiro" == INTEGER
+	LINE : 40
+	COLUMN : 1
+":" == DOUBLE_POINT
+	LINE : 40
+	COLUMN : 2
+"global2" == IDENTIFIER
+	LINE : 40
+	COLUMN : 3
+"vazio" == VOID
+	LINE : 41
+	COLUMN : 1
+"foo" == IDENTIFIER
+	LINE : 41
+	COLUMN : 2
+"(" == OPEN
+	LINE : 41
+	COLUMN : 3
+"inteiro" == INTEGER
+	LINE : 41
+	COLUMN : 4
+":" == DOUBLE_POINT
+	LINE : 41
+	COLUMN : 5
+"param1" == IDENTIFIER
+	LINE : 41
+	COLUMN : 6
+")" == CLOSE
+	LINE : 41
+	COLUMN : 7
+"flutuante" == FLOAT
+	LINE : 43
+	COLUMN : 1
+":" == DOUBLE_POINT
+	LINE : 43
+	COLUMN : 2
+"abc" == IDENTIFIER
+	LINE : 43
+	COLUMN : 3
+"flutuante" == FLOAT
+	LINE : 44
+	COLUMN : 1
+":" == DOUBLE_POINT
+	LINE : 44
+	COLUMN : 2
+"a" == IDENTIFIER
+	LINE : 44
+	COLUMN : 3
+"inteiro" == INTEGER
+	LINE : 45
+	COLUMN : 1
+":" == DOUBLE_POINT
+	LINE : 45
+	COLUMN : 2
+"b" == IDENTIFIER
+	LINE : 45
+	COLUMN : 3
+"leia" == READ
+	LINE : 47
+	COLUMN : 1
+"(" == OPEN
+	LINE : 47
+	COLUMN : 2
+"a" == IDENTIFIER
+	LINE : 47
+	COLUMN : 3
+")" == CLOSE
+	LINE : 47
+	COLUMN : 4
+"leia" == READ
+	LINE : 48
+	COLUMN : 1
+"(" == OPEN
+	LINE : 48
+	COLUMN : 2
+"b" == IDENTIFIER
+	LINE : 48
+	COLUMN : 3
+")" == CLOSE
+	LINE : 48
+	COLUMN : 4
+"leia" == READ
+	LINE : 49
+	COLUMN : 1
+"(" == OPEN
+	LINE : 49
+	COLUMN : 2
+"abc" == IDENTIFIER
+	LINE : 49
+	COLUMN : 3
+")" == CLOSE
+	LINE : 49
+	COLUMN : 4
+"global2" == IDENTIFIER
+	LINE : 50
+	COLUMN : 1
+":=" == ATTRIBUTION
+	LINE : 50
+	COLUMN : 2
+"(" == OPEN
+	LINE : 50
+	COLUMN : 3
+")" == CLOSE
+	LINE : 50
+	COLUMN : 4
+"foo" == IDENTIFIER
+	LINE : 52
+	COLUMN : 1
+"(" == OPEN
+	LINE : 52
+	COLUMN : 2
+"10" == NUMBER_INTEGER
+	LINE : 52
+	COLUMN : 3
+")" == CLOSE
+	LINE : 52
+	COLUMN : 4
+"repita" == REPEAT
+	LINE : 54
+	COLUMN : 1
+"param1" == IDENTIFIER
+	LINE : 55
+	COLUMN : 1
+":=" == ATTRIBUTION
+	LINE : 55
+	COLUMN : 2
+"(" == OPEN
+	LINE : 55
+	COLUMN : 3
+"10" == NUMBER_INTEGER
+	LINE : 55
+	COLUMN : 4
+")" == CLOSE
+	LINE : 55
+	COLUMN : 5
+"ate" == UNTIL
+	LINE : 56
+	COLUMN : 1
+"(" == OPEN
+	LINE : 56
+	COLUMN : 2
+"a" == IDENTIFIER
+	LINE : 56
+	COLUMN : 3
+")" == CLOSE
+	LINE : 56
+	COLUMN : 4
+"fim" == END
+	LINE : 58
+	COLUMN : 1
+"vazio" == VOID
 	LINE : 60
+	COLUMN : 1
+"principal" == IDENTIFIER
+	LINE : 60
+	COLUMN : 2
+"(" == OPEN
+	LINE : 60
+	COLUMN : 3
+")" == CLOSE
+	LINE : 60
+	COLUMN : 4
+"foo" == IDENTIFIER
+	LINE : 62
+	COLUMN : 1
+"(" == OPEN
+	LINE : 62
+	COLUMN : 2
+"0" == NUMBER_INTEGER
+	LINE : 62
+	COLUMN : 3
+")" == CLOSE
+	LINE : 62
+	COLUMN : 4
+"fim" == END
+	LINE : 64
 	COLUMN : 1
