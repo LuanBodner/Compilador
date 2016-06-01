@@ -17,6 +17,9 @@ namespace CodeGeneration {
 
     void CodeGeneration::treeAnalyzer() {
 
+        LLVMModuleRef mod = LLVMModuleCreateWithName("my_module");
+
+        
     }
 }
 
