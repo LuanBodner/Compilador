@@ -38,9 +38,8 @@ int main(int argc, char** argv) {
 
     synx.getTree().printTree(output);
 
-    CodeGeneration::CodeGeneration t;
-
-    t.treeAnalyzer();
+    CodeGeneration::CodeGeneration cgen;
+    cgen.treeAnalyzer(subTree, semantic.symbolTable);
 
     system("rm -f tempTiny.txt");
 

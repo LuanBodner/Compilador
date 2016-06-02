@@ -17,6 +17,10 @@
 #include <llvm-c/Target.h>
 #include <llvm-c/Analysis.h>
 #include <llvm-c/BitWriter.h>
+#include "Tree.h"
+#include "SemanticAnalysis.h"
+
+typedef boost::unordered_map<scopeName, vectorString> SymbolTable;
 
 namespace CodeGeneration {
 
@@ -24,9 +28,10 @@ namespace CodeGeneration {
     public:
         CodeGeneration();
         virtual ~CodeGeneration();
-        void treeAnalyzer();
+        void treeAnalyzer(Tree::Tree&, SymbolTable);
     private:
-
+        void functionDefinition(Tree::Tree&, SymbolTable);
+        void variableDeclaration(Tree::Tree&, SymbolTable);
     };
 }
 #endif /* CODEGENERATION_H */

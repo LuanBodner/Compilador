@@ -38,6 +38,9 @@ namespace Semantic {
         void treeAnalyzer(Tree::Tree&, int level = 0);
         void printTable();
 
+        /* Table of Symbols */
+        boost::unordered_map<scopeName, vectorString> symbolTable;
+
     private:
         CompilerErrors::CompilerErrors error;
 
@@ -55,9 +58,6 @@ namespace Semantic {
         void expressionStatement(Tree::Tree&);
         void parameterTypes(Tree::Tree&, scopeName);
         void returnStatement(Tree::Tree&);
-
-        /* Table of Symbols */
-        boost::unordered_map<scopeName, vectorString> symbolTable;
     };
 }
 #endif /* SEMANTICANALYSIS_H */
