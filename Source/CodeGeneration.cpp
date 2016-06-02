@@ -16,18 +16,13 @@ namespace CodeGeneration {
     }
 
     void CodeGeneration::functionDefinition(Tree::Tree& tree, SymbolTable s) {
-
     }
 
     void CodeGeneration::variableDeclaration(Tree::Tree& tree, SymbolTable s) {
-
     }
 
     void CodeGeneration::treeAnalyzer(Tree::Tree& tree, SymbolTable s) {
 
         LLVMModuleRef mod = LLVMModuleCreateWithName("mainModule");
-        
-
     }
 }
-
