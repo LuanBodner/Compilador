@@ -30,8 +30,9 @@ namespace CodeGeneration {
         virtual ~CodeGeneration();
         void treeAnalyzer(Tree::Tree&, SymbolTable);
     private:
-        void functionDefinition(Tree::Tree&, SymbolTable);
-        void variableDeclaration(Tree::Tree&, SymbolTable);
+        void functionDefinition(Tree::Tree&, SymbolTable, LLVMModuleRef);
+        void globalVariableDeclaration(Tree::Tree&, SymbolTable, LLVMModuleRef);
+        void generateCode(Tree::Tree&, SymbolTable, LLVMModuleRef);
     };
 }
 #endif /* CODEGENERATION_H */
