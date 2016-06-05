@@ -1,6 +1,6 @@
 0, global3 / flutuante / Global / Unused / Not Initialized
-1, param1 / flutuante / Unused / Initialized
+1, param1 / inteiro / Used / Initialized
 0, principal / vazio / Function / 0
-0, foo / inteiro / Function / 1 / flutuante
+0, foo / inteiro / Function / 1 / inteiro
 0, global2 / inteiro / Global / Unused / Not Initialized
 0, global1 / inteiro / Global / Unused / Not Initialized

@@ -25,7 +25,7 @@
 "(" == OPEN
 	LINE : 4
 	COLUMN : 3
-"flutuante" == FLOAT
+"inteiro" == INTEGER
 	LINE : 4
 	COLUMN : 4
 ":" == DOUBLE_POINT
@@ -43,30 +43,12 @@
 "(" == OPEN
 	LINE : 5
 	COLUMN : 2
-"1" == NUMBER_INTEGER
+"param1" == IDENTIFIER
 	LINE : 5
 	COLUMN : 3
-"+" == SUM
-	LINE : 5
-	COLUMN : 4
-"2" == NUMBER_INTEGER
-	LINE : 5
-	COLUMN : 5
-"*" == MULTIPLICATION
-	LINE : 5
-	COLUMN : 6
-"2" == NUMBER_INTEGER
-	LINE : 5
-	COLUMN : 7
-"+" == SUM
-	LINE : 5
-	COLUMN : 8
-"2" == NUMBER_INTEGER
-	LINE : 5
-	COLUMN : 9
 ")" == CLOSE
 	LINE : 5
-	COLUMN : 10
+	COLUMN : 4
 "fim" == END
 	LINE : 6
 	COLUMN : 1

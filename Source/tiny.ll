@@ -3,9 +3,8 @@
 @global1 = external global i32
 @global2 = external global i32
 @global3 = external global float
-@global4 = external global i32
 
-define i32 @foo(float) {
+define i32 @foo(i32) {
 entry_foo:
 }
 

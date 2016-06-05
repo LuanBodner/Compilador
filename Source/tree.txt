@@ -10,19 +10,13 @@ Declaration
         foo
         ParametersDecStatement
             VariableDecStatement
-                flutuante
+                inteiro
                 param1
         CompoundStatement
             ExpressionStatement
                 ReturnStatement
                     OperationExpression
-                        1
-                        SumExpression
-                            2
-                            MultiplicationExpression
-                                2
-                            SumExpression
-                                2
+                        param1
                     retorna
     VariableDecStatement
         flutuante

@@ -37,7 +37,6 @@ namespace CodeGeneration {
                 paramTypes[i] = LLVMFloatType();
         }
         
-        LLVMAlloca
         LLVMTypeRef retType = LLVMFunctionType(LLVMVoidType(), paramTypes, nop, 0);
 
         if (!s[sc][0].compare(TI))

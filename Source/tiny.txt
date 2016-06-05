@@ -1,8 +1,8 @@
 inteiro : global1
 inteiro: global2
 
-inteiro foo(flutuante: param1)
-    retorna(1+2*2+2)
+inteiro foo(inteiro: param1)
+    retorna(param1)
 fim
 
 flutuante: global3
