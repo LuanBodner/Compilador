@@ -1,5 +1,11 @@
 inteiro : global1
 inteiro: global2
+
+inteiro foo(flutuante: param1)
+    retorna(1+2*2+2)
+fim
+
 flutuante: global3
+
 vazio principal()    
 fim

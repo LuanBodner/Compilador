@@ -5,6 +5,25 @@ Declaration
     VariableDecStatement
         inteiro
         global2
+    FunctionDecStatement
+        inteiro
+        foo
+        ParametersDecStatement
+            VariableDecStatement
+                flutuante
+                param1
+        CompoundStatement
+            ExpressionStatement
+                ReturnStatement
+                    OperationExpression
+                        1
+                        SumExpression
+                            2
+                            MultiplicationExpression
+                                2
+                            SumExpression
+                                2
+                    retorna
     VariableDecStatement
         flutuante
         global3

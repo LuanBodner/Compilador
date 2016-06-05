@@ -16,27 +16,81 @@
 "global2" == IDENTIFIER
 	LINE : 2
 	COLUMN : 3
-"flutuante" == FLOAT
-	LINE : 3
-	COLUMN : 1
-":" == DOUBLE_POINT
-	LINE : 3
-	COLUMN : 2
-"global3" == IDENTIFIER
-	LINE : 3
-	COLUMN : 3
-"vazio" == VOID
+"inteiro" == INTEGER
 	LINE : 4
 	COLUMN : 1
-"principal" == IDENTIFIER
+"foo" == IDENTIFIER
 	LINE : 4
 	COLUMN : 2
 "(" == OPEN
 	LINE : 4
 	COLUMN : 3
-")" == CLOSE
+"flutuante" == FLOAT
 	LINE : 4
 	COLUMN : 4
-"fim" == END
+":" == DOUBLE_POINT
+	LINE : 4
+	COLUMN : 5
+"param1" == IDENTIFIER
+	LINE : 4
+	COLUMN : 6
+")" == CLOSE
+	LINE : 4
+	COLUMN : 7
+"retorna" == RETURN
 	LINE : 5
+	COLUMN : 1
+"(" == OPEN
+	LINE : 5
+	COLUMN : 2
+"1" == NUMBER_INTEGER
+	LINE : 5
+	COLUMN : 3
+"+" == SUM
+	LINE : 5
+	COLUMN : 4
+"2" == NUMBER_INTEGER
+	LINE : 5
+	COLUMN : 5
+"*" == MULTIPLICATION
+	LINE : 5
+	COLUMN : 6
+"2" == NUMBER_INTEGER
+	LINE : 5
+	COLUMN : 7
+"+" == SUM
+	LINE : 5
+	COLUMN : 8
+"2" == NUMBER_INTEGER
+	LINE : 5
+	COLUMN : 9
+")" == CLOSE
+	LINE : 5
+	COLUMN : 10
+"fim" == END
+	LINE : 6
+	COLUMN : 1
+"flutuante" == FLOAT
+	LINE : 8
+	COLUMN : 1
+":" == DOUBLE_POINT
+	LINE : 8
+	COLUMN : 2
+"global3" == IDENTIFIER
+	LINE : 8
+	COLUMN : 3
+"vazio" == VOID
+	LINE : 10
+	COLUMN : 1
+"principal" == IDENTIFIER
+	LINE : 10
+	COLUMN : 2
+"(" == OPEN
+	LINE : 10
+	COLUMN : 3
+")" == CLOSE
+	LINE : 10
+	COLUMN : 4
+"fim" == END
+	LINE : 11
 	COLUMN : 1
