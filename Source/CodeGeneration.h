@@ -17,6 +17,7 @@
 #include <llvm-c/Target.h>
 #include <llvm-c/Analysis.h>
 #include <llvm-c/BitWriter.h>
+#include <llvm/IR/Value.h>
 #include "Tree.h"
 #include "SemanticAnalysis.h"
 
@@ -29,10 +30,11 @@ namespace CodeGeneration {
         CodeGeneration();
         virtual ~CodeGeneration();
         void treeAnalyzer(Tree::Tree&, SymbolTable);
+
     private:
         void functionDefinition(Tree::Tree&, SymbolTable, LLVMModuleRef);
         void globalVariableDeclaration(Tree::Tree&, SymbolTable, LLVMModuleRef);
-        void generateCode(Tree::Tree&, SymbolTable, LLVMModuleRef,int);
+        void generateCode(Tree::Tree&, SymbolTable, LLVMModuleRef, int);
         void expressionStatement(Tree::Tree&, SymbolTable, LLVMModuleRef);
     };
 }

@@ -36,7 +36,7 @@ namespace CodeGeneration {
             else if (!s[sc][3 + i].compare(TF))
                 paramTypes[i] = LLVMFloatType();
         }
-        
+
         LLVMTypeRef retType = LLVMFunctionType(LLVMVoidType(), paramTypes, nop, 0);
 
         if (!s[sc][0].compare(TI))
@@ -51,7 +51,6 @@ namespace CodeGeneration {
 
         LLVMBuilderRef builder = LLVMCreateBuilder();
         LLVMPositionBuilderAtEnd(builder, entry);
-
         currentBlock = &entry;
     }
 
