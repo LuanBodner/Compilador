@@ -25,7 +25,6 @@ int main(int argc, char** argv) {
     }
 
     std::ofstream output;
-
     output.open(argv[3], std::ofstream::out);
 
     Syntax::SyntaxAnalysis synx;
