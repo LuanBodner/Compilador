@@ -68,9 +68,11 @@ namespace CompilerErrors {
 
     void CompilerErrors::variableNotUsedWarning(std::string name, std::string type) {
 
-        std::cout << "\033[1;35mWarning\033[0m; Variable Defined But Not Used; "
-                << "\033[1;36mName\033[0m: " << name << "; "
-                << "\033[1;36mType\033[0m: " << type << "\n\n";
+        std::cout << "\033[1;35mWarning\033[0m; Variable Defined But Not Used;\n"
+                << "\033[1;30mCode\033[0m: " << type << ": "
+                << name << "\n\n";
+
+        //std::cout << scope << std::endl;
     }
 
     void CompilerErrors::returnMayBeIgnoredWarning(Token::Token token) {
