@@ -11,8 +11,6 @@ namespace CodeGeneration {
 
     int scope = 0;
 
-    LLVMBasicBlockRef * currentBlock;
-
     CodeGeneration::CodeGeneration() {
     }
 
@@ -51,7 +49,6 @@ namespace CodeGeneration {
 
         LLVMBuilderRef builder = LLVMCreateBuilder();
         LLVMPositionBuilderAtEnd(builder, entry);
-        currentBlock = &entry;
     }
 
     void CodeGeneration::globalVariableDeclaration(Tree::Tree& t, SymbolTable s, LLVMModuleRef m) {
@@ -75,8 +72,20 @@ namespace CodeGeneration {
         }
     }
 
+    void CodeGeneration::localVariableDeclaration(Tree::Tree& t, SymbolTable s, LLVMModuleRef m) {
+
+        LLVMTypeRef var;
+        const char * name = t.children[1]->token.getTokenName().c_str();
+
+        var = LLVMInt32Type();
+
+        LLVMBuildAlloca(currentBuilder, var, name);
+    }
+
     void CodeGeneration::expressionStatement(Tree::Tree& t, SymbolTable s, LLVMModuleRef m) {
 
+        if (!t.exp.compare(VARDECSTRING))
+            localVariableDeclaration(*t.children[0], s, m);
     }
 
     void CodeGeneration::generateCode(Tree::Tree& t, SymbolTable s, LLVMModuleRef m, int l) {
@@ -88,7 +97,7 @@ namespace CodeGeneration {
             functionDefinition(t, s, m);
 
         if (!t.exp.compare(EXPSTRING))
-            expressionStatement(t, s, m);
+            expressionStatement(*t.children[0], s, m);
 
         l++;
 
@@ -107,6 +116,5 @@ namespace CodeGeneration {
 
         if (LLVMWriteBitcodeToFile(mod, "tiny.bc") != 0)
             fprintf(stderr, "error writing bitcode to file, skipping\n");
-
     }
 }

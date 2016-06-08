@@ -34,6 +34,7 @@ namespace CodeGeneration {
     private:
         void functionDefinition(Tree::Tree&, SymbolTable, LLVMModuleRef);
         void globalVariableDeclaration(Tree::Tree&, SymbolTable, LLVMModuleRef);
+        void localVariableDeclaration(Tree::Tree&, SymbolTable, LLVMModuleRef);
         void generateCode(Tree::Tree&, SymbolTable, LLVMModuleRef, int);
         void expressionStatement(Tree::Tree&, SymbolTable, LLVMModuleRef);
     };
