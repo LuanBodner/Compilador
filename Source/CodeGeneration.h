@@ -32,11 +32,11 @@ namespace CodeGeneration {
         void treeAnalyzer(Tree::Tree&, SymbolTable);
 
     private:
-        void functionDefinition(Tree::Tree&, SymbolTable, LLVMModuleRef);
+        LLVMBuilderRef functionDefinition(Tree::Tree&, SymbolTable, LLVMModuleRef);
         void globalVariableDeclaration(Tree::Tree&, SymbolTable, LLVMModuleRef);
-        void localVariableDeclaration(Tree::Tree&, SymbolTable, LLVMModuleRef);
+        void localVariableDeclaration(Tree::Tree&, SymbolTable, LLVMBuilderRef);
+        void expressionStatement(Tree::Tree&, SymbolTable, LLVMBuilderRef);
         void generateCode(Tree::Tree&, SymbolTable, LLVMModuleRef, int);
-        void expressionStatement(Tree::Tree&, SymbolTable, LLVMModuleRef);
     };
 }
 #endif /* CODEGENERATION_H */

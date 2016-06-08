@@ -19,10 +19,8 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/todos/alunos/cm/a1509950/Compilador/Source/tiny.ll</file>
-            <file>file:/home/todos/alunos/cm/a1509950/Compilador/Source/CodeGeneration.cpp</file>
-            <file>file:/home/todos/alunos/cm/a1509950/Compilador/Source/SemanticAnalysis.cpp</file>
-            <file>file:/home/todos/alunos/cm/a1509950/Compilador/Source/CodeGeneration.h</file>
+            <file>file:/home/lbodner/Compilador/Source/SemanticAnalysis.cpp</file>
+            <file>file:/home/lbodner/Compilador/Source/CompilerErrors.cpp</file>
         </group>
     </open-files>
 </project-private>

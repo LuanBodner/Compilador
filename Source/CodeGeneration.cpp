@@ -17,7 +17,7 @@ namespace CodeGeneration {
     CodeGeneration::~CodeGeneration() {
     }
 
-    void CodeGeneration::functionDefinition(Tree::Tree& t, SymbolTable s, LLVMModuleRef m) {
+    LLVMBuilderRef CodeGeneration::functionDefinition(Tree::Tree& t, SymbolTable s, LLVMModuleRef m) {
 
         scopeName sc(0, t.children[1]->token.getTokenName());
         scope++;
@@ -49,6 +49,8 @@ namespace CodeGeneration {
 
         LLVMBuilderRef builder = LLVMCreateBuilder();
         LLVMPositionBuilderAtEnd(builder, entry);
+
+        return builder;
     }
 
     void CodeGeneration::globalVariableDeclaration(Tree::Tree& t, SymbolTable s, LLVMModuleRef m) {
@@ -72,36 +74,46 @@ namespace CodeGeneration {
         }
     }
 
-    void CodeGeneration::localVariableDeclaration(Tree::Tree& t, SymbolTable s, LLVMModuleRef m) {
+    void CodeGeneration::localVariableDeclaration(Tree::Tree& t, SymbolTable s, LLVMBuilderRef b) {
 
-        LLVMTypeRef var;
-        const char * name = t.children[1]->token.getTokenName().c_str();
+        switch (t.children[0]->token.getTokenType()) {
 
-        var = LLVMInt32Type();
+            case (Token::INTEGER):
+                LLVMBuildAlloca(b, LLVMInt32Type(), t.children[1]->token.getTokenName().c_str());
+                break;
 
-        LLVMBuildAlloca(currentBuilder, var, name);
+            case (Token::FLOAT):
+                LLVMBuildAlloca(b, LLVMFloatType(), t.children[1]->token.getTokenName().c_str());
+                break;
+
+            default:
+                break;
+        }
     }
 
-    void CodeGeneration::expressionStatement(Tree::Tree& t, SymbolTable s, LLVMModuleRef m) {
+    void CodeGeneration::expressionStatement(Tree::Tree& t, SymbolTable s, LLVMBuilderRef b) {
 
         if (!t.exp.compare(VARDECSTRING))
-            localVariableDeclaration(*t.children[0], s, m);
+            localVariableDeclaration(t, s, b);
     }
 
     void CodeGeneration::generateCode(Tree::Tree& t, SymbolTable s, LLVMModuleRef m, int l) {
+
+        static LLVMBuilderRef builder;
 
         if (!t.exp.compare(VARDECSTRING) && l == 1)
             globalVariableDeclaration(t, s, m);
 
         if (!t.exp.compare(FUNCDECSTRING))
-            functionDefinition(t, s, m);
+            builder = functionDefinition(t, s, m);
 
         if (!t.exp.compare(EXPSTRING))
-            expressionStatement(*t.children[0], s, m);
+            expressionStatement(*t.children[0], s, builder);
 
         l++;
 
         for (unsigned int i = 0; i < t.children.size(); i++)
+
             if (!t.active)
                 generateCode(*t.children[i], s, m, l);
     }
