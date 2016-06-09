@@ -59,7 +59,7 @@ namespace Semantic {
 
         symbolTable.emplace(t, std::vector<std::string>());
 
-        if (!tree.children[0]->token.getTokenName().compare(TV))
+        if (!tree.children[0]->token.getTokenName().compare(VOIDS))
             error.variableVoidError(tree.children[1]->token);
         symbolTable[t].push_back(tree.children[0]->token.getTokenName());
 
@@ -68,7 +68,7 @@ namespace Semantic {
 
         symbolTable[t].push_back(NUV);
         if (level != 3)
-            symbolTable[t].push_back(NI);
+            symbolTable[t].push_back(NIN);
         else symbolTable[t].push_back(IN);
     }
 
@@ -118,7 +118,7 @@ namespace Semantic {
 
                 sn.first = verifyTable(sn, *tree.children[0]);
 
-                if (!symbolTable[sn][symbolTable[sn].size() - 1].compare(NI))
+                if (!symbolTable[sn][symbolTable[sn].size() - 1].compare(NIN))
                     error.variableNotDefinedError(tree.children[0]->token);
 
                 if (!symbolTable[sn][1].compare(FU))
@@ -127,7 +127,7 @@ namespace Semantic {
                 if (!counter)
                     otype = symbolTable[sn][0];
 
-                if (!symbolTable[sn][0].compare(TV))
+                if (!symbolTable[sn][0].compare(VOIDS))
                     error.voidAttributionError(tree.children[0]->token);
 
                 else if (symbolTable[sn][0].compare(otype))
@@ -142,12 +142,12 @@ namespace Semantic {
                 if (!counter) {
 
                     if (t == Token::NUMBER_FLOAT)
-                        otype = TF;
-                    else otype = TI;
+                        otype = FLOATS;
+                    else otype = INTS;
                 }
 
-                if ((otype.compare(TI) && t == Token::NUMBER_INTEGER) ||
-                        (otype.compare(TF) && t == Token::NUMBER_FLOAT))
+                if ((otype.compare(INTS) && t == Token::NUMBER_INTEGER) ||
+                        (otype.compare(FLOATS) && t == Token::NUMBER_FLOAT))
                     error.expressionTypeWarning(tree.children[0]->token);
             }
 
@@ -173,17 +173,17 @@ namespace Semantic {
 
                 sn.first = verifyTable(sn, *tree.children[0]);
 
-                if (!symbolTable[sn][symbolTable[sn].size() - 1].compare(NI))
+                if (!symbolTable[sn][symbolTable[sn].size() - 1].compare(NIN))
                     error.variableNotDefinedError(tree.children[0]->token);
 
                 if (!symbolTable[sn][1].compare(FU))
                     functionCallStatement(tree);
 
-                if (!symbolTable[sn][0].compare(TV))
+                if (!symbolTable[sn][0].compare(VOIDS))
                     error.voidAttributionError(tree.children[0]->token);
 
-                else if ((symbolTable[sn][0].compare(TF) && ttype == Token::FLOAT) ||
-                        (symbolTable[sn][0].compare(TI) && ttype == Token::INTEGER))
+                else if ((symbolTable[sn][0].compare(FLOATS) && ttype == Token::FLOAT) ||
+                        (symbolTable[sn][0].compare(INTS) && ttype == Token::INTEGER))
                     error.expressionTypeWarning(tree.children[0]->token);
 
                 if (!symbolTable[sn][1].compare(NUV))
@@ -217,10 +217,10 @@ namespace Semantic {
 
                 for (unsigned int i = 1; i < tree.children.size(); i++, index++) {
 
-                    if (!symbolTable[sn][index].compare(TF))
+                    if (!symbolTable[sn][index].compare(FLOATS))
                         operationExpression(*tree.children[i], Token::FLOAT);
                     
-                    else if (!symbolTable[sn][index].compare(TI))
+                    else if (!symbolTable[sn][index].compare(INTS))
                         operationExpression(*tree.children[i], Token::INTEGER);
                 }
             } else
@@ -235,7 +235,7 @@ namespace Semantic {
 
         sn.first = verifyTable(sn, *tree.children[0]);
 
-        if (!symbolTable[sn][0].compare(TI))
+        if (!symbolTable[sn][0].compare(INTS))
             operationExpression(*tree.children[1], Token::INTEGER);
         else
             operationExpression(*tree.children[1], Token::FLOAT);
@@ -260,11 +260,11 @@ namespace Semantic {
 
         if (returnType.size()) {
 
-            if (!returnType[i].first.compare(TI)) {
+            if (!returnType[i].first.compare(INTS)) {
 
                 operationExpression(*tree.children[0], Token::INTEGER);
                 returnType.pop_back();
-            } else if (!returnType[i].first.compare(TF)) {
+            } else if (!returnType[i].first.compare(FLOATS)) {
 
                 operationExpression(*tree.children[0], Token::FLOAT);
                 returnType.pop_back();
@@ -323,7 +323,7 @@ namespace Semantic {
                 error.mainDeclarationError();
 
             for (; returnType.size(); returnType.pop_back())
-                if (returnType[returnType.size() - 1].first.compare(TV))
+                if (returnType[returnType.size() - 1].first.compare(VOIDS))
                     error.functionWithoutReturnWarning(returnType[returnType.size() - 1].second);
 
             for (const auto &p : symbolTable)

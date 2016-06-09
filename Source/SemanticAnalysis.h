@@ -16,13 +16,13 @@ typedef std::pair<int, std::string> scopeName;
 typedef std::vector<std::string> vectorString;
 
 #define GL "Global"
-#define NI "Not Initialized"
+#define NIN "Not Initialized"
 #define IN "Initialized"
 #define FU "Function"
 
-#define TI "inteiro"
-#define TV "vazio"
-#define TF "flutuante"
+#define INTS "inteiro"
+#define VOIDS "vazio"
+#define FLOATS "flutuante"
 
 #define UV "Used"
 #define NUV "Unused"

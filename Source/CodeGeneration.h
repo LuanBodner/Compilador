@@ -12,20 +12,36 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <iostream>
-#include <llvm-c/Core.h>
-#include <llvm/DebugInfo/DIContext.h>
-#include <llvm-c/ExecutionEngine.h>
-#include <llvm-c/Target.h>
-#include <llvm-c/Analysis.h>
-#include <llvm-c/BitWriter.h>
-#include <llvm/IR/Value.h>
+//Bibliotecas do C
+//#include <llvm-c/Core.h>
+//#include <llvm/DebugInfo/DIContext.h>
+//#include <llvm-c/ExecutionEngine.h>
+//#include <llvm-c/Target.h>
+//#include <llvm-c/Analysis.h>
+//#include <llvm-c/BitWriter.h>
+//#include <llvm/IR/Value.h>
+//Bibliotecas do C++
+#include <llvm/IR/Module.h>
+#include <llvm/IR/Attributes.h>
+#include <llvm/IR/PassManager.h>
+#include <llvm/IR/CallingConv.h>
+#include <llvm/IR/Verifier.h>
+#include <llvm/IR/PassManager.h>
+#include <llvm/IR/PassManagerInternal.h>
+#include <llvm/IR/AssemblyAnnotationWriter.h>
+#include <llvm/IR/LLVMContext.h>
+#include <llvm/Bitcode/BitstreamWriter.h>
+#include <llvm/Bitcode/ReaderWriter.h>
+#include <llvm/Passes/PassBuilder.h>
+#include <llvm/Support/raw_ostream.h>
 #include "Tree.h"
 #include "SemanticAnalysis.h"
 
-typedef boost::unordered_map<scopeName, vectorString> SymbolTable;
-typedef std::pair<int, std::string> ValueReference;
-
 namespace CodeGeneration {
+
+    typedef boost::unordered_map<scopeName, vectorString> SymbolTable;
+    typedef std::pair<int, std::string> variable;
+    typedef std::pair <LLVMValueRef, std::string> llvmVariableValue;
 
     class CodeGeneration {
     public:
@@ -34,15 +50,17 @@ namespace CodeGeneration {
         void treeAnalyzer(Tree::Tree&, SymbolTable);
 
     private:
-        boost::unordered_map<ValueReference, LLVMValueRef> variablesHash;
+        boost::unordered_map<variable, llvmVariableValue> variablesHash;
 
-        LLVMBuilderRef functionDefinition(Tree::Tree&, SymbolTable, LLVMModuleRef);
         LLVMTypeRef llvmTokenType(int);
-        void globalVariableDeclaration(Tree::Tree&, LLVMModuleRef);
         void localVariableDeclaration(Tree::Tree&, LLVMBuilderRef);
         void attributionStatement(Tree::Tree&, LLVMBuilderRef);
         void expressionStatement(Tree::Tree&, SymbolTable, LLVMBuilderRef);
-        void generateCode(Tree::Tree&, SymbolTable, LLVMModuleRef, int);
+        //Transformed
+        void globalVariableDeclaration(Tree::Tree&, llvm::Module*);
+        llvm::Type* getTypefromString(std::string);
+        void functionDefinition(Tree::Tree&, SymbolTable, llvm::Module*);
+        void generateCode(Tree::Tree&, SymbolTable, llvm::Module*, int);
     };
 }
 #endif /* CODEGENERATION_H */

@@ -1,40 +1,8 @@
 Declaration
+    VariableDecStatement
+        inteiro
+        global0
     FunctionDecStatement
         vazio
         principal
         ParametersDecStatement
-        CompoundStatement
-            ExpressionStatement
-                VariableDecStatement
-                    inteiro
-                    a
-            CompoundStatement
-                ExpressionStatement
-                    VariableDecStatement
-                        inteiro
-                        b
-                CompoundStatement
-                    ExpressionStatement
-                        VariableDecStatement
-                            inteiro
-                            c
-                    CompoundStatement
-                        ExpressionStatement
-                            AttributionStatement
-                                a
-                                OperationExpression
-                                    10
-                                    SumExpression
-                                        10
-                        CompoundStatement
-                            ExpressionStatement
-                                AttributionStatement
-                                    c
-                                    OperationExpression
-                                        154
-                            CompoundStatement
-                                ExpressionStatement
-                                    AttributionStatement
-                                        b
-                                        OperationExpression
-                                            11

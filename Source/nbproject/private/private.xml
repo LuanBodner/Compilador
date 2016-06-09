@@ -20,8 +20,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/lbodner/Compilador/Source/CodeGeneration.h</file>
+            <file>file:/home/lbodner/Compilador/Source/SyntaxAnalysis.h</file>
             <file>file:/home/lbodner/Compilador/Source/CodeGeneration.cpp</file>
             <file>file:/home/lbodner/Compilador/Source/tiny.ll</file>
+            <file>file:/home/lbodner/Compilador/Source/SemanticAnalysis.h</file>
+            <file>file:/home/lbodner/Compilador/Source/tiny.txt</file>
         </group>
     </open-files>
 </project-private>
