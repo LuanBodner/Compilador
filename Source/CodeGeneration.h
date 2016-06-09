@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <llvm-c/Core.h>
+#include <llvm/DebugInfo/DIContext.h>
 #include <llvm-c/ExecutionEngine.h>
 #include <llvm-c/Target.h>
 #include <llvm-c/Analysis.h>
@@ -22,6 +23,7 @@
 #include "SemanticAnalysis.h"
 
 typedef boost::unordered_map<scopeName, vectorString> SymbolTable;
+typedef std::pair<int, std::string> ValueReference;
 
 namespace CodeGeneration {
 
@@ -32,9 +34,13 @@ namespace CodeGeneration {
         void treeAnalyzer(Tree::Tree&, SymbolTable);
 
     private:
+        boost::unordered_map<ValueReference, LLVMValueRef> variablesHash;
+
         LLVMBuilderRef functionDefinition(Tree::Tree&, SymbolTable, LLVMModuleRef);
-        void globalVariableDeclaration(Tree::Tree&, SymbolTable, LLVMModuleRef);
-        void localVariableDeclaration(Tree::Tree&, SymbolTable, LLVMBuilderRef);
+        LLVMTypeRef llvmTokenType(int);
+        void globalVariableDeclaration(Tree::Tree&, LLVMModuleRef);
+        void localVariableDeclaration(Tree::Tree&, LLVMBuilderRef);
+        void attributionStatement(Tree::Tree&, LLVMBuilderRef);
         void expressionStatement(Tree::Tree&, SymbolTable, LLVMBuilderRef);
         void generateCode(Tree::Tree&, SymbolTable, LLVMModuleRef, int);
     };

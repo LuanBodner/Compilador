@@ -53,48 +53,44 @@ namespace CodeGeneration {
         return builder;
     }
 
-    void CodeGeneration::globalVariableDeclaration(Tree::Tree& t, SymbolTable s, LLVMModuleRef m) {
+    void CodeGeneration::globalVariableDeclaration(Tree::Tree& t, LLVMModuleRef m) {
 
-        LLVMValueRef variable;
-
-        const char* name = t.children[1]->token.getTokenName().c_str();
-
-        switch (t.children[0]->token.getTokenType()) {
-
-            case(Token::INTEGER):
-                variable = LLVMAddGlobal(m, LLVMInt32Type(), name);
-                break;
-
-            case(Token::FLOAT):
-                variable = LLVMAddGlobal(m, LLVMFloatType(), name);
-                break;
-
-            default:
-                exit(EXIT_FAILURE);
-        }
+        LLVMAddGlobal(m, llvmTokenType(t.children[0]->token.getTokenType()), t.children[1]->token.getTokenName().c_str());
     }
 
-    void CodeGeneration::localVariableDeclaration(Tree::Tree& t, SymbolTable s, LLVMBuilderRef b) {
+    LLVMTypeRef CodeGeneration::llvmTokenType(int t) {
 
-        switch (t.children[0]->token.getTokenType()) {
+        return (t == Token::INTEGER) ? LLVMInt32Type() : LLVMFloatType();
+    }
 
-            case (Token::INTEGER):
-                LLVMBuildAlloca(b, LLVMInt32Type(), t.children[1]->token.getTokenName().c_str());
-                break;
+    void CodeGeneration::localVariableDeclaration(Tree::Tree& t, LLVMBuilderRef b) {
 
-            case (Token::FLOAT):
-                LLVMBuildAlloca(b, LLVMFloatType(), t.children[1]->token.getTokenName().c_str());
-                break;
+        LLVMValueRef value = LLVMBuildAlloca(b,
+                llvmTokenType(t.children[0]->token.getTokenType()),
+                t.children[1]->token.getTokenName().c_str());
 
-            default:
-                break;
-        }
+        ValueReference vr(scope, t.children[1]->token.getTokenName());
+
+        variablesHash.emplace(vr, value);
+    }
+
+    void CodeGeneration::attributionStatement(Tree::Tree& t, LLVMBuilderRef b) {
+
+        std::cout << "AttStmt\n";
+        t.children[0]->token.print();
+
+        ValueReference vr(scope, t.children[0]->token.getTokenName());
+
+        LLVMBuildLoad(b, variablesHash[vr], vr.second.c_str());
     }
 
     void CodeGeneration::expressionStatement(Tree::Tree& t, SymbolTable s, LLVMBuilderRef b) {
 
         if (!t.exp.compare(VARDECSTRING))
-            localVariableDeclaration(t, s, b);
+            localVariableDeclaration(t, b);
+
+        if (!t.exp.compare(ATTSTRING))
+            attributionStatement(t, b);
     }
 
     void CodeGeneration::generateCode(Tree::Tree& t, SymbolTable s, LLVMModuleRef m, int l) {
@@ -102,7 +98,7 @@ namespace CodeGeneration {
         static LLVMBuilderRef builder;
 
         if (!t.exp.compare(VARDECSTRING) && l == 1)
-            globalVariableDeclaration(t, s, m);
+            globalVariableDeclaration(t, m);
 
         if (!t.exp.compare(FUNCDECSTRING))
             builder = functionDefinition(t, s, m);
@@ -128,5 +124,6 @@ namespace CodeGeneration {
 
         if (LLVMWriteBitcodeToFile(mod, "tiny.bc") != 0)
             fprintf(stderr, "error writing bitcode to file, skipping\n");
+        system("llvm-dis tiny.bc");
     }
 }

@@ -66,7 +66,7 @@ namespace Semantic {
         if (level == 1)
             symbolTable[t].push_back(GL);
 
-        symbolTable[t].push_back(NV);
+        symbolTable[t].push_back(NUV);
         if (level != 3)
             symbolTable[t].push_back(NI);
         else symbolTable[t].push_back(IN);
@@ -133,7 +133,7 @@ namespace Semantic {
                 else if (symbolTable[sn][0].compare(otype))
                     error.expressionTypeWarning(tree.children[0]->token);
 
-                if (!symbolTable[sn][1].compare(NV))
+                if (!symbolTable[sn][1].compare(NUV))
                     symbolTable[sn][1] = UV;
             } else {
 
@@ -186,7 +186,7 @@ namespace Semantic {
                         (symbolTable[sn][0].compare(TI) && ttype == Token::INTEGER))
                     error.expressionTypeWarning(tree.children[0]->token);
 
-                if (!symbolTable[sn][1].compare(NV))
+                if (!symbolTable[sn][1].compare(NUV))
                     symbolTable[sn][1] = UV;
             } else if ((tree.children[0]->token.getTokenType() == Token::NUMBER_FLOAT
                     && ttype == Token::INTEGER) ||
@@ -328,7 +328,7 @@ namespace Semantic {
 
             for (const auto &p : symbolTable)
                 if (p.second[1].compare(FU))
-                    if (!p.second[1].compare(NV))
+                    if (!p.second[1].compare(NUV))
                         error.variableNotUsedWarning(p.first.second, p.second[0]);
         }
     }

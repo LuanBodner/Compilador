@@ -25,7 +25,7 @@ typedef std::vector<std::string> vectorString;
 #define TF "flutuante"
 
 #define UV "Used"
-#define NV "Unused"
+#define NUV "Unused"
 
 namespace Semantic {
 
