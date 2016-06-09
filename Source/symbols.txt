@@ -1,2 +1,4 @@
 0, principal / vazio / Function / 0
+1, a / inteiro / Used / Initialized
+0, func / vazio / Function / 1 / inteiro
 0, global0 / inteiro / Global / Unused / Not Initialized

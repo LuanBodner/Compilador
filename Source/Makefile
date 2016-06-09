@@ -7,11 +7,11 @@ OPT=-O0
 all: lib main link_main
 
 lib:
-	$(CC) Token.cpp -c $(OPT) $(CFLAGS) $(DEBUG)
-	$(CC) LexicalAnalyzer.cpp -c $(OPT) $(CFLAGS) $(DEBUG)
-	$(CC) SyntaxAnalysis.cpp -c $(OPT) $(CFLAGS) $(DEBUG)
-	$(CC) CompilerErrors.cpp -c $(OPT) $(CFLAGS) $(DEBUG)
-	$(CC) Tree.cpp -c $(OPT) $(CFLAGS) $(DEBUG)
+	#$(CC) Token.cpp -c $(OPT) $(CFLAGS) $(DEBUG)
+	#$(CC) LexicalAnalyzer.cpp -c $(OPT) $(CFLAGS) $(DEBUG)
+	#$(CC) SyntaxAnalysis.cpp -c $(OPT) $(CFLAGS) $(DEBUG)
+	#$(CC) CompilerErrors.cpp -c $(OPT) $(CFLAGS) $(DEBUG)
+	#$(CC) Tree.cpp -c $(OPT) $(CFLAGS) $(DEBUG)
 	$(CC) SemanticAnalysis.cpp -c $(OPT) $(CFLAGS) $(DEBUG)
 	$(CC) CodeGeneration.cpp -c $(OPT) `llvm-config --cflags` $(CFLAGS) $(DEBUG)
 

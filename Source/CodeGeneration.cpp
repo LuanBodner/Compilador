@@ -13,6 +13,7 @@ namespace CodeGeneration {
 
     int scope = 0;
     std::string currentFunction;
+    llvm::Type* currentType;
 
     CodeGeneration::CodeGeneration() {
     }
@@ -27,7 +28,7 @@ namespace CodeGeneration {
         if (!s.compare("flutuante"))
             return llvm::Type::getFloatTy(llvm::getGlobalContext());
         if (!s.compare("inteiro"))
-            return llvm::Type::getFloatTy(llvm::getGlobalContext());
+            return llvm::Type::getInt32Ty(llvm::getGlobalContext());
 
         return NULL;
     }
@@ -43,18 +44,56 @@ namespace CodeGeneration {
         glvar->setAlignment(4);
     }
 
+    void CodeGeneration::paramDeclaration(Tree::Tree& t, llvm::Module* m) {
+
+        /*t.children[1]->token.print();
+
+        llvm::Type* ty = llvm::cast<llvm::Type>(currentType);
+        llvm::Constant * c = m->getOrInsertFunction(currentFunction, ty);
+
+        llvm::Function *func = llvm::cast<llvm::Function>(c);
+
+        //func->setAttributes();
+
+        llvm::Function::arg_iterator par = func->arg_begin();
+        llvm::Value* val = par++;
+        val->setName(t.children[1]->token.getTokenName());
+        //func->get*/
+    }
+
     void CodeGeneration::functionDefinition(Tree::Tree& t, SymbolTable s, llvm::Module* m) {
 
-        m->getOrInsertFunction(t.children[1]->token.getTokenName(),
+        ScopeName sc(0, t.children[1]->token.getTokenName());
+        llvm::Constant * c;
+
+        llvm::Function *func = llvm::cast<llvm::Function>(
+                c = m->getOrInsertFunction(t.children[1]->token.getTokenName(),
                 getTypefromString(t.children[0]->token.getTokenName()),
-                NULL);
+                NULL));
+
+        for (unsigned int k = 0; k < std::stoi(s[sc][2]); k++) {
+
+            if (!s[sc][3 + k].compare("inteiro"))
+                func->setAttributes(llvm::IntegerType::get(llvm::getGlobalContext(), 32));
+            if (!s[sc][3 + k].compare("flutuante"))
+                func->setAttributes(llvm::);
+        }
+        //llvm::Constant * c = m->getOrInsertFunction(t.children[1]->token.getTokenName(),
+        //        getTypefromString(t.children[0]->token.getTokenName()), NULL);
+
+
+
         currentFunction = t.children[0]->token.getTokenName();
+        currentType = getTypefromString(t.children[0]->token.getTokenName());
     }
 
     void CodeGeneration::generateCode(Tree::Tree& t, SymbolTable s, llvm::Module* m, int l) {
 
         if (!t.exp.compare(VARDECSTRING) && l == 1)
             globalVariableDeclaration(t, m);
+
+        if (!t.exp.compare(VARDECSTRING) && l == 3)
+            paramDeclaration(t, m);
 
         if (!t.exp.compare(FUNCDECSTRING))
             functionDefinition(t, s, m);

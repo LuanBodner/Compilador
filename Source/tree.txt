@@ -4,5 +4,18 @@ Declaration
         global0
     FunctionDecStatement
         vazio
+        func
+        ParametersDecStatement
+            VariableDecStatement
+                inteiro
+                a
+        CompoundStatement
+            ExpressionStatement
+                AttributionStatement
+                    a
+                    OperationExpression
+                        10
+    FunctionDecStatement
+        vazio
         principal
         ParametersDecStatement

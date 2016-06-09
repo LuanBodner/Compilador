@@ -25,11 +25,11 @@ namespace Semantic {
     SemanticAnalysis::~SemanticAnalysis() {
     }
 
-    int SemanticAnalysis::verifyTable(scopeName key, Tree::Tree& tree) {
+    int SemanticAnalysis::verifyTable(ScopeName key, Tree::Tree& tree) {
 
         for (; key.first >= 0; key.first--) {
 
-            boost::unordered_map<scopeName, vectorString>::const_iterator entry;
+            boost::unordered_map<ScopeName, vectorString>::const_iterator entry;
             entry = symbolTable.find(key);
 
             if (entry != symbolTable.end())
@@ -52,7 +52,7 @@ namespace Semantic {
         if (level == 1) scopeL = 0;
         else scopeL = scope;
 
-        scopeName t(scopeL, tree.children[1]->token.getTokenName());
+        ScopeName t(scopeL, tree.children[1]->token.getTokenName());
 
         if (symbolTable.find(t) != symbolTable.end())
             error.declarationScopeError(tree.children[1]->token);
@@ -72,7 +72,7 @@ namespace Semantic {
         else symbolTable[t].push_back(IN);
     }
 
-    void SemanticAnalysis::parameterTypes(Tree::Tree& tree, scopeName scope) {
+    void SemanticAnalysis::parameterTypes(Tree::Tree& tree, ScopeName scope) {
 
         if (!tree.children.empty())
             for (unsigned int i = 0; i < tree.children.size(); i++)
@@ -84,7 +84,7 @@ namespace Semantic {
         int auxScope = scope;
         scope = 0;
 
-        scopeName s(scope, tree.children[1]->token.getTokenName());
+        ScopeName s(scope, tree.children[1]->token.getTokenName());
 
         if (symbolTable.find(s) != symbolTable.end())
             error.declarationScopeError(tree.children[1]->token);
@@ -112,7 +112,7 @@ namespace Semantic {
 
         if (tree.children.size()) {
 
-            scopeName sn(scope, tree.children[0]->token.getTokenName());
+            ScopeName sn(scope, tree.children[0]->token.getTokenName());
 
             if (tree.children[0]->token.getTokenType() == Token::IDENTIFIER) {
 
@@ -167,7 +167,7 @@ namespace Semantic {
 
         if (tree.children.size()) {
 
-            scopeName sn(scope, tree.children[0]->token.getTokenName());
+            ScopeName sn(scope, tree.children[0]->token.getTokenName());
 
             if (tree.children[0]->token.getTokenType() == Token::IDENTIFIER) {
 
@@ -202,9 +202,9 @@ namespace Semantic {
 
     void SemanticAnalysis::functionCallStatement(Tree::Tree& tree) {
 
-        scopeName sn(0, tree.children[0]->token.getTokenName());
+        ScopeName sn(0, tree.children[0]->token.getTokenName());
 
-        boost::unordered_map<scopeName, vectorString>::const_iterator entry;
+        boost::unordered_map<ScopeName, vectorString>::const_iterator entry;
         entry = symbolTable.find(sn);
         unsigned int index = 3;
 
@@ -231,7 +231,7 @@ namespace Semantic {
 
     void SemanticAnalysis::attributionExpression(Tree::Tree& tree) {
 
-        scopeName sn(scope, tree.children[0]->token.getTokenName());
+        ScopeName sn(scope, tree.children[0]->token.getTokenName());
 
         sn.first = verifyTable(sn, *tree.children[0]);
 
@@ -246,7 +246,7 @@ namespace Semantic {
 
     void SemanticAnalysis::readStatement(Tree::Tree& tree) {
 
-        scopeName sn(scope, tree.children[0]->token.getTokenName());
+        ScopeName sn(scope, tree.children[0]->token.getTokenName());
 
         sn.first = verifyTable(sn, *tree.children[0]);
 

@@ -1,3 +1,8 @@
 inteiro: global0
+
+vazio func(inteiro:a)
+    a:=(10)
+fim
+
 vazio principal()
 fim

@@ -39,7 +39,7 @@
 
 namespace CodeGeneration {
 
-    typedef boost::unordered_map<scopeName, vectorString> SymbolTable;
+    typedef boost::unordered_map<ScopeName, vectorString> SymbolTable;
     typedef std::pair<int, std::string> variable;
     typedef std::pair <LLVMValueRef, std::string> llvmVariableValue;
 
@@ -57,6 +57,7 @@ namespace CodeGeneration {
         void attributionStatement(Tree::Tree&, LLVMBuilderRef);
         void expressionStatement(Tree::Tree&, SymbolTable, LLVMBuilderRef);
         //Transformed
+        void paramDeclaration(Tree::Tree&, llvm::Module*);
         void globalVariableDeclaration(Tree::Tree&, llvm::Module*);
         llvm::Type* getTypefromString(std::string);
         void functionDefinition(Tree::Tree&, SymbolTable, llvm::Module*);

@@ -12,7 +12,7 @@
 #include <boost/unordered_map.hpp>
 #include "SyntaxAnalysis.h"
 
-typedef std::pair<int, std::string> scopeName;
+typedef std::pair<int, std::string> ScopeName;
 typedef std::vector<std::string> vectorString;
 
 #define GL "Global"
@@ -39,13 +39,13 @@ namespace Semantic {
         void printTable();
 
         /* Table of Symbols */
-        boost::unordered_map<scopeName, vectorString> symbolTable;
+        boost::unordered_map<ScopeName, vectorString> symbolTable;
 
     private:
         CompilerErrors::CompilerErrors error;
 
         /* Verifies if variables were already declared */
-        int verifyTable(scopeName, Tree::Tree&);
+        int verifyTable(ScopeName, Tree::Tree&);
 
         /* Semantic verification of the language */
         void readStatement(Tree::Tree&);
@@ -56,7 +56,7 @@ namespace Semantic {
         void operationExpression(Tree::Tree&);
         void operationExpression(Tree::Tree&, Token::TokenType);
         void expressionStatement(Tree::Tree&);
-        void parameterTypes(Tree::Tree&, scopeName);
+        void parameterTypes(Tree::Tree&, ScopeName);
         void returnStatement(Tree::Tree&);
     };
 }
