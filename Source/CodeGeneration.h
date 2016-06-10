@@ -21,6 +21,7 @@
 //#include <llvm-c/BitWriter.h>
 //#include <llvm/IR/Value.h>
 //Bibliotecas do C++
+#include <llvm/Support/FileSystem.h>
 #include <llvm/IR/Module.h>
 #include <llvm/IR/Attributes.h>
 #include <llvm/IR/PassManager.h>
@@ -42,8 +43,6 @@
 namespace CodeGeneration {
 
     typedef boost::unordered_map<ScopeName, vectorString> SymbolTable;
-    typedef std::pair<int, std::string> variable;
-    typedef std::pair <LLVMValueRef, std::string> llvmVariableValue;
 
     class CodeGeneration {
     public:
@@ -52,12 +51,12 @@ namespace CodeGeneration {
         void treeAnalyzer(Tree::Tree&, SymbolTable);
 
     private:
-        boost::unordered_map<variable, llvmVariableValue> variablesHash;
+        boost::unordered_map<ScopeName, llvm::Instruction*> variablesHash;
+        boost::unordered_map<ScopeName, llvm::Value*> paramHash;
 
-        LLVMTypeRef llvmTokenType(int);
-        void attributionStatement(Tree::Tree&, LLVMBuilderRef);
-
-        //Transformed
+        llvm::Value* getHashValue(std::string);
+        llvm::Value* operationsExpression(Tree::Tree&, llvm::Module*);
+        void attributionStatement(Tree::Tree&, llvm::Module*);
         void localVariableDeclaration(Tree::Tree&, llvm::Module*);
         void expressionStatement(Tree::Tree&, SymbolTable, llvm::Module*);
         void paramDeclaration(Tree::Tree&, llvm::Module*);
@@ -65,6 +64,7 @@ namespace CodeGeneration {
         llvm::Type* getTypefromString(std::string, llvm::Module*);
         void functionDefinition(Tree::Tree&, SymbolTable, llvm::Module*);
         void generateCode(Tree::Tree&, SymbolTable, llvm::Module*, int);
+        void printHashTable();
     };
 }
 #endif /* CODEGENERATION_H */

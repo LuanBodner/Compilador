@@ -12,7 +12,7 @@ lib:
 	#$(CC) SyntaxAnalysis.cpp -c $(OPT) $(CFLAGS) $(DEBUG)
 	#$(CC) CompilerErrors.cpp -c $(OPT) $(CFLAGS) $(DEBUG)
 	#$(CC) Tree.cpp -c $(OPT) $(CFLAGS) $(DEBUG)
-	$(CC) SemanticAnalysis.cpp -c $(OPT) $(CFLAGS) $(DEBUG)
+	#$(CC) SemanticAnalysis.cpp -c $(OPT) $(CFLAGS) $(DEBUG)
 	$(CC) CodeGeneration.cpp -c $(OPT) `llvm-config --cflags` $(CFLAGS) $(DEBUG)
 
 main:
@@ -28,4 +28,4 @@ clean:
 	rm -f tree.txt token.txt symbols.txt tiny.bc tiny.ll
 
 cleanf:
-	rm -f tree.txt token.txt symbols.txt tiny.bc tiny.ll
+	rm -f tree.txt token.txt symbols.txt tiny.bc tiny.ll referenceTable.txt
