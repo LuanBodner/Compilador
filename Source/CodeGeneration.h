@@ -30,6 +30,8 @@
 #include <llvm/IR/PassManagerInternal.h>
 #include <llvm/IR/AssemblyAnnotationWriter.h>
 #include <llvm/IR/LLVMContext.h>
+#include <llvm/IR/BasicBlock.h>
+#include <llvm/IR/IRBuilder.h>
 #include <llvm/Bitcode/BitstreamWriter.h>
 #include <llvm/Bitcode/ReaderWriter.h>
 #include <llvm/Passes/PassBuilder.h>
@@ -53,13 +55,14 @@ namespace CodeGeneration {
         boost::unordered_map<variable, llvmVariableValue> variablesHash;
 
         LLVMTypeRef llvmTokenType(int);
-        void localVariableDeclaration(Tree::Tree&, LLVMBuilderRef);
         void attributionStatement(Tree::Tree&, LLVMBuilderRef);
-        void expressionStatement(Tree::Tree&, SymbolTable, LLVMBuilderRef);
+
         //Transformed
+        void localVariableDeclaration(Tree::Tree&, llvm::Module*);
+        void expressionStatement(Tree::Tree&, SymbolTable, llvm::Module*);
         void paramDeclaration(Tree::Tree&, llvm::Module*);
         void globalVariableDeclaration(Tree::Tree&, llvm::Module*);
-        llvm::Type* getTypefromString(std::string);
+        llvm::Type* getTypefromString(std::string, llvm::Module*);
         void functionDefinition(Tree::Tree&, SymbolTable, llvm::Module*);
         void generateCode(Tree::Tree&, SymbolTable, llvm::Module*, int);
     };

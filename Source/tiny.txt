@@ -1,7 +1,19 @@
 inteiro: global0
 
-vazio func(inteiro:a)
+vazio bar(flutuante:c, inteiro:d)
+    c:=(11.1)
+    d:=(12)
+
+    inteiro: k
+    k := (100)
+fim
+
+vazio foo(inteiro:a,flutuante:b)
     a:=(10)
+    b:=(11.1)
+
+    flutuante: l
+    l := (8.8)
 fim
 
 vazio principal()

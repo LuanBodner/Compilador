@@ -13,7 +13,7 @@ namespace CodeGeneration {
 
     int scope = 0;
     std::string currentFunction;
-    llvm::Type* currentType;
+    unsigned int paramIndex;
 
     CodeGeneration::CodeGeneration() {
     }
@@ -21,21 +21,21 @@ namespace CodeGeneration {
     CodeGeneration::~CodeGeneration() {
     }
 
-    llvm::Type* CodeGeneration::getTypefromString(std::string s) {
+    llvm::Type* CodeGeneration::getTypefromString(std::string s, llvm::Module* m) {
 
-        if (!s.compare("vazio"))
-            return llvm::Type::getVoidTy(llvm::getGlobalContext());
-        if (!s.compare("flutuante"))
-            return llvm::Type::getFloatTy(llvm::getGlobalContext());
-        if (!s.compare("inteiro"))
-            return llvm::Type::getInt32Ty(llvm::getGlobalContext());
+        if (!s.compare(VOIDS))
+            return llvm::Type::getVoidTy(m->getContext());
+        if (!s.compare(FLOATS))
+            return llvm::Type::getFloatTy(m->getContext());
+        if (!s.compare(INTS))
+            return llvm::Type::getInt32Ty(m->getContext());
 
         return NULL;
     }
 
     void CodeGeneration::globalVariableDeclaration(Tree::Tree& t, llvm::Module* m) {
 
-        llvm::Type *type = getTypefromString(t.children[0]->token.getTokenName());
+        llvm::Type *type = getTypefromString(t.children[0]->token.getTokenName(), m);
 
         llvm::GlobalVariable * glvar =
                 new llvm::GlobalVariable(*m, type, false,
@@ -46,45 +46,57 @@ namespace CodeGeneration {
 
     void CodeGeneration::paramDeclaration(Tree::Tree& t, llvm::Module* m) {
 
-        /*t.children[1]->token.print();
+        llvm::Function * func = m->getFunction(currentFunction);
+        llvm::Function::arg_iterator cargs = func->arg_begin();
 
-        llvm::Type* ty = llvm::cast<llvm::Type>(currentType);
-        llvm::Constant * c = m->getOrInsertFunction(currentFunction, ty);
+        for (int i = 0; i < paramIndex; i++)
+            cargs++;
+        cargs->setName(t.children[1]->token.getTokenName());
 
-        llvm::Function *func = llvm::cast<llvm::Function>(c);
-
-        //func->setAttributes();
-
-        llvm::Function::arg_iterator par = func->arg_begin();
-        llvm::Value* val = par++;
-        val->setName(t.children[1]->token.getTokenName());
-        //func->get*/
+        paramIndex++;
     }
 
+    /*llvm::BasicBlock */
     void CodeGeneration::functionDefinition(Tree::Tree& t, SymbolTable s, llvm::Module* m) {
 
         ScopeName sc(0, t.children[1]->token.getTokenName());
-        llvm::Constant * c;
 
-        llvm::Function *func = llvm::cast<llvm::Function>(
-                c = m->getOrInsertFunction(t.children[1]->token.getTokenName(),
-                getTypefromString(t.children[0]->token.getTokenName()),
-                NULL));
+        std::vector<llvm::Type*> param;
 
-        for (unsigned int k = 0; k < std::stoi(s[sc][2]); k++) {
+        for (int i = 0; i < std::stoi(s[sc][2]); i++)
+            param.push_back(getTypefromString(s[sc][3 + i], m));
 
-            if (!s[sc][3 + k].compare("inteiro"))
-                func->setAttributes(llvm::IntegerType::get(llvm::getGlobalContext(), 32));
-            if (!s[sc][3 + k].compare("flutuante"))
-                func->setAttributes(llvm::);
-        }
-        //llvm::Constant * c = m->getOrInsertFunction(t.children[1]->token.getTokenName(),
-        //        getTypefromString(t.children[0]->token.getTokenName()), NULL);
+        llvm::FunctionType * ftype = llvm::FunctionType::get(
+                getTypefromString(t.children[0]->token.getTokenName(), m),
+                param, false);
 
+        llvm::Function * func = llvm::Function::Create(ftype, llvm::GlobalValue::ExternalLinkage, sc.second, m);
+        func->setCallingConv(llvm::CallingConv::C);
 
+        currentFunction = sc.second;
+        paramIndex = 0;
 
-        currentFunction = t.children[0]->token.getTokenName();
-        currentType = getTypefromString(t.children[0]->token.getTokenName());
+        llvm::BasicBlock::Create(m->getContext(), std::string("entry_").append(sc.second), func, 0);
+        //return block;
+    }
+
+    void CodeGeneration::localVariableDeclaration(Tree::Tree& t, llvm::Module* m) {
+
+        llvm::Function * func = m->getFunction(currentFunction);
+        llvm::Function::iterator b = func->begin();
+       
+        llvm::BasicBlock* block = b;
+
+        llvm::AllocaInst * variable = new llvm::AllocaInst(
+                getTypefromString(t.children[0]->token.getTokenName(), m),
+                t.children[1]->token.getTokenName(), block);
+        variable->setAlignment(4);
+    }
+
+    void CodeGeneration::expressionStatement(Tree::Tree& t, SymbolTable s, llvm::Module* m) {
+
+        if (!t.children[0]->exp.compare(VARDECSTRING))
+            localVariableDeclaration(*t.children[0], m);
     }
 
     void CodeGeneration::generateCode(Tree::Tree& t, SymbolTable s, llvm::Module* m, int l) {
@@ -94,6 +106,9 @@ namespace CodeGeneration {
 
         if (!t.exp.compare(VARDECSTRING) && l == 3)
             paramDeclaration(t, m);
+
+        if (!t.exp.compare(EXPSTRING))
+            expressionStatement(t, s, m);
 
         if (!t.exp.compare(FUNCDECSTRING))
             functionDefinition(t, s, m);
@@ -116,6 +131,34 @@ namespace CodeGeneration {
             std::cout << "Error Creating the Module";
             exit(EXIT_FAILURE);
         }
+
+        /*llvm::Constant* c = mod->getOrInsertFunction("mul_add",
+                llvm::IntegerType::get(mod->getContext(), 32),
+                llvm::IntegerType::get(mod->getContext(), 32),
+                llvm::IntegerType::get(mod->getContext(), 32),
+                llvm::IntegerType::get(mod->getContext(), 32),
+                NULL);
+
+        llvm::Function* mul_add = llvm::cast<llvm::Function>(c);
+        mul_add->setCallingConv(llvm::CallingConv::C);
+
+        llvm::Function::arg_iterator args = mul_add->arg_begin();
+        llvm::Value* x = args++;
+        x->setName("x");
+        llvm::Value* y = args++;
+        y->setName("y");
+        llvm::Value* z = args++;
+        z->setName("z");
+
+        llvm::BasicBlock* block = llvm::BasicBlock::Create(llvm::getGlobalContext(), "entry", mul_add);
+        llvm::IRBuilder<> builder(block);
+
+        llvm::Value* tmp = builder.CreateBinOp(llvm::Instruction::Mul,
+                x, y, "tmp");
+        llvm::Value* tmp2 = builder.CreateBinOp(llvm::Instruction::Add,
+                tmp, z, "tmp2");
+
+        builder.CreateRet(tmp2);*/
 
         generateCode(t, s, mod, 0);
 
