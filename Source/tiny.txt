@@ -1,11 +1,14 @@
 inteiro: global0
 
-vazio bar(flutuante:c, inteiro:d)
-    c:=(11.1)
+vazio bar(inteiro:c, inteiro:d)
+    c:=(11+51*10)
     d:=(12)
 
     inteiro: k
     k := (100)
+
+    flutuante: m
+    m := (10.0)
 fim
 
 vazio foo(inteiro:a,flutuante:b)

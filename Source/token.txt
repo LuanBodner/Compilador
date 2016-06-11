@@ -1,0 +1,240 @@
+"inteiro" == INTEGER
+	LINE : 1
+	COLUMN : 1
+":" == DOUBLE_POINT
+	LINE : 1
+	COLUMN : 2
+"global0" == IDENTIFIER
+	LINE : 1
+	COLUMN : 3
+"vazio" == VOID
+	LINE : 3
+	COLUMN : 1
+"bar" == IDENTIFIER
+	LINE : 3
+	COLUMN : 2
+"(" == OPEN
+	LINE : 3
+	COLUMN : 3
+"inteiro" == INTEGER
+	LINE : 3
+	COLUMN : 4
+":" == DOUBLE_POINT
+	LINE : 3
+	COLUMN : 5
+"c" == IDENTIFIER
+	LINE : 3
+	COLUMN : 6
+"," == COMMA
+	LINE : 3
+	COLUMN : 7
+"inteiro" == INTEGER
+	LINE : 3
+	COLUMN : 8
+":" == DOUBLE_POINT
+	LINE : 3
+	COLUMN : 9
+"d" == IDENTIFIER
+	LINE : 3
+	COLUMN : 10
+")" == CLOSE
+	LINE : 3
+	COLUMN : 11
+"c" == IDENTIFIER
+	LINE : 4
+	COLUMN : 1
+":=" == ATTRIBUTION
+	LINE : 4
+	COLUMN : 2
+"(" == OPEN
+	LINE : 4
+	COLUMN : 3
+"11" == NUMBER_INTEGER
+	LINE : 4
+	COLUMN : 4
+"+" == SUM
+	LINE : 4
+	COLUMN : 5
+"51" == NUMBER_INTEGER
+	LINE : 4
+	COLUMN : 6
+"*" == MULTIPLICATION
+	LINE : 4
+	COLUMN : 7
+"10" == NUMBER_INTEGER
+	LINE : 4
+	COLUMN : 8
+")" == CLOSE
+	LINE : 4
+	COLUMN : 9
+"d" == IDENTIFIER
+	LINE : 5
+	COLUMN : 1
+":=" == ATTRIBUTION
+	LINE : 5
+	COLUMN : 2
+"(" == OPEN
+	LINE : 5
+	COLUMN : 3
+"12" == NUMBER_INTEGER
+	LINE : 5
+	COLUMN : 4
+")" == CLOSE
+	LINE : 5
+	COLUMN : 5
+"inteiro" == INTEGER
+	LINE : 7
+	COLUMN : 1
+":" == DOUBLE_POINT
+	LINE : 7
+	COLUMN : 2
+"k" == IDENTIFIER
+	LINE : 7
+	COLUMN : 3
+"k" == IDENTIFIER
+	LINE : 8
+	COLUMN : 1
+":=" == ATTRIBUTION
+	LINE : 8
+	COLUMN : 2
+"(" == OPEN
+	LINE : 8
+	COLUMN : 3
+"100" == NUMBER_INTEGER
+	LINE : 8
+	COLUMN : 4
+")" == CLOSE
+	LINE : 8
+	COLUMN : 5
+"flutuante" == FLOAT
+	LINE : 10
+	COLUMN : 1
+":" == DOUBLE_POINT
+	LINE : 10
+	COLUMN : 2
+"m" == IDENTIFIER
+	LINE : 10
+	COLUMN : 3
+"m" == IDENTIFIER
+	LINE : 11
+	COLUMN : 1
+":=" == ATTRIBUTION
+	LINE : 11
+	COLUMN : 2
+"(" == OPEN
+	LINE : 11
+	COLUMN : 3
+"10.0" == NUMBER_FLOAT
+	LINE : 11
+	COLUMN : 4
+")" == CLOSE
+	LINE : 11
+	COLUMN : 5
+"fim" == END
+	LINE : 12
+	COLUMN : 1
+"vazio" == VOID
+	LINE : 14
+	COLUMN : 1
+"foo" == IDENTIFIER
+	LINE : 14
+	COLUMN : 2
+"(" == OPEN
+	LINE : 14
+	COLUMN : 3
+"inteiro" == INTEGER
+	LINE : 14
+	COLUMN : 4
+":" == DOUBLE_POINT
+	LINE : 14
+	COLUMN : 5
+"a" == IDENTIFIER
+	LINE : 14
+	COLUMN : 6
+"," == COMMA
+	LINE : 14
+	COLUMN : 7
+"flutuante" == FLOAT
+	LINE : 14
+	COLUMN : 8
+":" == DOUBLE_POINT
+	LINE : 14
+	COLUMN : 9
+"b" == IDENTIFIER
+	LINE : 14
+	COLUMN : 10
+")" == CLOSE
+	LINE : 14
+	COLUMN : 11
+"a" == IDENTIFIER
+	LINE : 15
+	COLUMN : 1
+":=" == ATTRIBUTION
+	LINE : 15
+	COLUMN : 2
+"(" == OPEN
+	LINE : 15
+	COLUMN : 3
+"10" == NUMBER_INTEGER
+	LINE : 15
+	COLUMN : 4
+")" == CLOSE
+	LINE : 15
+	COLUMN : 5
+"b" == IDENTIFIER
+	LINE : 16
+	COLUMN : 1
+":=" == ATTRIBUTION
+	LINE : 16
+	COLUMN : 2
+"(" == OPEN
+	LINE : 16
+	COLUMN : 3
+"11.1" == NUMBER_FLOAT
+	LINE : 16
+	COLUMN : 4
+")" == CLOSE
+	LINE : 16
+	COLUMN : 5
+"flutuante" == FLOAT
+	LINE : 18
+	COLUMN : 1
+":" == DOUBLE_POINT
+	LINE : 18
+	COLUMN : 2
+"l" == IDENTIFIER
+	LINE : 18
+	COLUMN : 3
+"l" == IDENTIFIER
+	LINE : 19
+	COLUMN : 1
+":=" == ATTRIBUTION
+	LINE : 19
+	COLUMN : 2
+"(" == OPEN
+	LINE : 19
+	COLUMN : 3
+"8.8" == NUMBER_FLOAT
+	LINE : 19
+	COLUMN : 4
+")" == CLOSE
+	LINE : 19
+	COLUMN : 5
+"fim" == END
+	LINE : 20
+	COLUMN : 1
+"vazio" == VOID
+	LINE : 22
+	COLUMN : 1
+"principal" == IDENTIFIER
+	LINE : 22
+	COLUMN : 2
+"(" == OPEN
+	LINE : 22
+	COLUMN : 3
+")" == CLOSE
+	LINE : 22
+	COLUMN : 4
+"fim" == END
+	LINE : 23
+	COLUMN : 1

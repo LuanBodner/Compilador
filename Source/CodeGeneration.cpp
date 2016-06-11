@@ -86,6 +86,7 @@ namespace CodeGeneration {
     void CodeGeneration::localVariableDeclaration(Tree::Tree& t, llvm::Module* m) {
 
         llvm::Function * func = m->getFunction(currentFunction);
+
         llvm::Function::iterator b = func->begin();
 
         ScopeName sc(scope, t.children[1]->token.getTokenName());
@@ -98,7 +99,6 @@ namespace CodeGeneration {
         variable->setAlignment(4);
 
         variablesHash[sc] = variable;
-        //std::cout << "Added Var: " << variablesHash[sc]->getName().data() << std::endl;
     }
 
     void CodeGeneration::printHashTable() {
@@ -124,12 +124,27 @@ namespace CodeGeneration {
     }
 
     llvm::Value * CodeGeneration::operationsExpression(Tree::Tree& t, llvm::Module* m) {
-        
-        
-        
-        //for (unsigned int i = 0; i < t.children.size(); i++)
-        //    if (!t.active)
-        //       operationsExpression(*t.children[i], m);
+
+        for (unsigned int i = 0; i < t.children.size(); i++)
+            if (t.children[i])
+                operationsExpression(*t.children[i], m);
+
+        //llvm::Function * func = m->getFunction(currentFunction);
+        //llvm::Function::iterator b = func->begin();
+
+        //while ((b + 1) != b->end())
+        //    b++;
+
+
+        std::cout << t.exp << std::endl;
+        if (t.children.size())
+            t.children[0]->token.print();
+
+        if (!t.exp.compare(MULTEXPSTRING)) {
+
+        }
+
+        return NULL;
     }
 
     void CodeGeneration::attributionStatement(Tree::Tree& t, llvm::Module* m) {
@@ -137,9 +152,14 @@ namespace CodeGeneration {
         llvm::Value * val;
         //t.children[0]->token.print();
 
+        llvm::Function * func = m->getFunction(currentFunction);
+        llvm::BasicBlock * b = func->begin();
+
         val = getHashValue(t.children[0]->token.getTokenName());
 
-        operationsExpression(* t.children[1], m);
+        //operationsExpression(* t.children[1], m);
+
+        llvm::StoreInst * storeVal = new llvm::StoreInst(varConst, val, b);
     }
 
     void CodeGeneration::expressionStatement(Tree::Tree& t, SymbolTable s, llvm::Module * m) {
