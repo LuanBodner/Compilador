@@ -12,15 +12,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <iostream>
-//Bibliotecas do C
-//#include <llvm-c/Core.h>
-//#include <llvm/DebugInfo/DIContext.h>
-//#include <llvm-c/ExecutionEngine.h>
-//#include <llvm-c/Target.h>
-//#include <llvm-c/Analysis.h>
-//#include <llvm-c/BitWriter.h>
-//#include <llvm/IR/Value.h>
-//Bibliotecas do C++
 #include <llvm/Support/FileSystem.h>
 #include <llvm/IR/Module.h>
 #include <llvm/IR/Attributes.h>
@@ -53,6 +44,8 @@ namespace CodeGeneration {
     private:
         boost::unordered_map<ScopeName, llvm::Instruction*> variablesHash;
         boost::unordered_map<ScopeName, llvm::Value*> paramHash;
+        
+        
 
         llvm::Value* getHashValue(std::string);
         llvm::Value* operationsExpression(Tree::Tree&, llvm::Module*);

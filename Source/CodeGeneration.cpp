@@ -42,8 +42,6 @@ namespace CodeGeneration {
                 llvm::GlobalVariable::CommonLinkage, 0,
                 t.children[1]->token.getTokenName());
         glvar->setAlignment(4);
-
-        //variablesHash.emplace()
     }
 
     void CodeGeneration::paramDeclaration(Tree::Tree& t, llvm::Module* m) {
@@ -129,19 +127,13 @@ namespace CodeGeneration {
             if (t.children[i])
                 operationsExpression(*t.children[i], m);
 
-        //llvm::Function * func = m->getFunction(currentFunction);
-        //llvm::Function::iterator b = func->begin();
-
-        //while ((b + 1) != b->end())
-        //    b++;
-
-
         std::cout << t.exp << std::endl;
         if (t.children.size())
             t.children[0]->token.print();
 
         if (!t.exp.compare(MULTEXPSTRING)) {
 
+            
         }
 
         return NULL;
@@ -149,17 +141,6 @@ namespace CodeGeneration {
 
     void CodeGeneration::attributionStatement(Tree::Tree& t, llvm::Module* m) {
 
-        llvm::Value * val;
-        //t.children[0]->token.print();
-
-        llvm::Function * func = m->getFunction(currentFunction);
-        llvm::BasicBlock * b = func->begin();
-
-        val = getHashValue(t.children[0]->token.getTokenName());
-
-        //operationsExpression(* t.children[1], m);
-
-        llvm::StoreInst * storeVal = new llvm::StoreInst(varConst, val, b);
     }
 
     void CodeGeneration::expressionStatement(Tree::Tree& t, SymbolTable s, llvm::Module * m) {
