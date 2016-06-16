@@ -13,13 +13,12 @@ lib:
 	#$(CC) CompilerErrors.cpp -c $(OPT) $(CFLAGS) $(DEBUG)
 	#$(CC) Tree.cpp -c $(OPT) $(CFLAGS) $(DEBUG)
 	#$(CC) SemanticAnalysis.cpp -c $(OPT) $(CFLAGS) $(DEBUG)
-	$(CC) CodeGeneration.cpp -c $(OPT) `llvm-config --cflags` $(CFLAGS) $(DEBUG)
-
+	$(CC) llvmCodeGeneration.cpp -c $(OPT) `llvm-config --cflags` $(CFLAGS) $(DEBUG)
 main:
 	$(CC) main.cpp -c $(OPT) $(CFLAGS) $(DEBUG) -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS
  
 link_main:
-	$(CC) main.o Token.o LexicalAnalyzer.o SyntaxAnalysis.o CompilerErrors.o Tree.o SemanticAnalysis.o CodeGeneration.o $(LDFLAGS) -o compiler
+	$(CC) main.o Token.o LexicalAnalyzer.o SyntaxAnalysis.o CompilerErrors.o Tree.o SemanticAnalysis.o llvmCodeGeneration.o $(LDFLAGS) -o compiler
 	
 clean:
 	rm -f *.out

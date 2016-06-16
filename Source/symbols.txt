@@ -8,4 +8,5 @@
 2, b / flutuante / Used / Initialized
 2, a / inteiro / Used / Initialized
 0, bar / vazio / Function / 2 / inteiro / inteiro
+0, global1 / flutuante / Global / Unused / Not Initialized
 0, global0 / inteiro / Global / Unused / Not Initialized

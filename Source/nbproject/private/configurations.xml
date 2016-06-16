@@ -16,6 +16,8 @@
       <in>Token.h</in>
       <in>Tree.cpp</in>
       <in>Tree.h</in>
+      <in>llvmCodeGeneration.cpp</in>
+      <in>llvmCodeGeneration.h</in>
       <in>main.cpp</in>
     </df>
   </logicalFolder>

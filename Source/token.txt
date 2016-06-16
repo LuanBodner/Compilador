@@ -8,131 +8,140 @@
 	LINE : 1
 	COLUMN : 3
 "vazio" == VOID
-	LINE : 3
+	LINE : 2
 	COLUMN : 1
 "bar" == IDENTIFIER
-	LINE : 3
+	LINE : 2
 	COLUMN : 2
 "(" == OPEN
-	LINE : 3
+	LINE : 2
 	COLUMN : 3
 "inteiro" == INTEGER
-	LINE : 3
+	LINE : 2
 	COLUMN : 4
 ":" == DOUBLE_POINT
-	LINE : 3
+	LINE : 2
 	COLUMN : 5
 "c" == IDENTIFIER
-	LINE : 3
+	LINE : 2
 	COLUMN : 6
 "," == COMMA
-	LINE : 3
+	LINE : 2
 	COLUMN : 7
 "inteiro" == INTEGER
-	LINE : 3
+	LINE : 2
 	COLUMN : 8
 ":" == DOUBLE_POINT
-	LINE : 3
+	LINE : 2
 	COLUMN : 9
 "d" == IDENTIFIER
-	LINE : 3
+	LINE : 2
 	COLUMN : 10
 ")" == CLOSE
-	LINE : 3
+	LINE : 2
 	COLUMN : 11
 "c" == IDENTIFIER
-	LINE : 4
+	LINE : 3
 	COLUMN : 1
 ":=" == ATTRIBUTION
-	LINE : 4
+	LINE : 3
 	COLUMN : 2
 "(" == OPEN
-	LINE : 4
+	LINE : 3
 	COLUMN : 3
 "11" == NUMBER_INTEGER
-	LINE : 4
+	LINE : 3
 	COLUMN : 4
 "+" == SUM
-	LINE : 4
+	LINE : 3
 	COLUMN : 5
 "51" == NUMBER_INTEGER
-	LINE : 4
+	LINE : 3
 	COLUMN : 6
 "*" == MULTIPLICATION
-	LINE : 4
+	LINE : 3
 	COLUMN : 7
 "10" == NUMBER_INTEGER
-	LINE : 4
+	LINE : 3
 	COLUMN : 8
 ")" == CLOSE
-	LINE : 4
+	LINE : 3
 	COLUMN : 9
 "d" == IDENTIFIER
-	LINE : 5
+	LINE : 4
 	COLUMN : 1
 ":=" == ATTRIBUTION
-	LINE : 5
+	LINE : 4
 	COLUMN : 2
 "(" == OPEN
-	LINE : 5
+	LINE : 4
 	COLUMN : 3
 "12" == NUMBER_INTEGER
-	LINE : 5
+	LINE : 4
 	COLUMN : 4
 ")" == CLOSE
-	LINE : 5
+	LINE : 4
 	COLUMN : 5
 "inteiro" == INTEGER
-	LINE : 7
+	LINE : 6
 	COLUMN : 1
 ":" == DOUBLE_POINT
-	LINE : 7
+	LINE : 6
 	COLUMN : 2
 "k" == IDENTIFIER
-	LINE : 7
+	LINE : 6
 	COLUMN : 3
 "k" == IDENTIFIER
-	LINE : 8
+	LINE : 7
 	COLUMN : 1
 ":=" == ATTRIBUTION
-	LINE : 8
+	LINE : 7
 	COLUMN : 2
 "(" == OPEN
-	LINE : 8
+	LINE : 7
 	COLUMN : 3
 "100" == NUMBER_INTEGER
-	LINE : 8
+	LINE : 7
 	COLUMN : 4
 ")" == CLOSE
-	LINE : 8
+	LINE : 7
 	COLUMN : 5
 "flutuante" == FLOAT
-	LINE : 10
+	LINE : 9
 	COLUMN : 1
 ":" == DOUBLE_POINT
-	LINE : 10
+	LINE : 9
 	COLUMN : 2
 "m" == IDENTIFIER
-	LINE : 10
+	LINE : 9
 	COLUMN : 3
 "m" == IDENTIFIER
-	LINE : 11
+	LINE : 10
 	COLUMN : 1
 ":=" == ATTRIBUTION
-	LINE : 11
+	LINE : 10
 	COLUMN : 2
 "(" == OPEN
-	LINE : 11
+	LINE : 10
 	COLUMN : 3
 "10.0" == NUMBER_FLOAT
-	LINE : 11
+	LINE : 10
 	COLUMN : 4
 ")" == CLOSE
-	LINE : 11
+	LINE : 10
 	COLUMN : 5
 "fim" == END
-	LINE : 12
+	LINE : 11
 	COLUMN : 1
+"flutuante" == FLOAT
+	LINE : 13
+	COLUMN : 1
+":" == DOUBLE_POINT
+	LINE : 13
+	COLUMN : 2
+"global1" == IDENTIFIER
+	LINE : 13
+	COLUMN : 3
 "vazio" == VOID
 	LINE : 14
 	COLUMN : 1

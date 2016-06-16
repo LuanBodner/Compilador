@@ -14,7 +14,7 @@
 #include "LexicalAnalyzer.h"
 #include "SyntaxAnalysis.h"
 #include "SemanticAnalysis.h"
-#include "CodeGeneration.h"
+#include "llvmCodeGeneration.h"
 
 int main(int argc, char** argv) {
 
@@ -37,7 +37,7 @@ int main(int argc, char** argv) {
 
     synx.getTree().printTree(output);
 
-    CodeGeneration::CodeGeneration cgen;
+    llvmCodeGeneration::llvmCodeGeneration cgen;
     cgen.treeAnalyzer(subTree, semantic.symbolTable);
 
     system("rm -f tempTiny.txt");

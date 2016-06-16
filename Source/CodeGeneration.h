@@ -44,8 +44,10 @@ namespace CodeGeneration {
     private:
         boost::unordered_map<ScopeName, llvm::Instruction*> variablesHash;
         boost::unordered_map<ScopeName, llvm::Value*> paramHash;
-        
-        
+
+        llvm::IRBuilder<> * builder;
+        llvm::Module * mod;
+        llvm::BasicBlock * block;
 
         llvm::Value* getHashValue(std::string);
         llvm::Value* operationsExpression(Tree::Tree&, llvm::Module*);

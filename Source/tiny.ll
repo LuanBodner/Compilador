@@ -1,6 +1,7 @@
 ; ModuleID = 'tiny.bc'
 
 @global0 = common global i32, align 4
+@global1 = common global float, align 4
 
 define void @bar(i32 %c, i32 %d) {
 entry_bar:

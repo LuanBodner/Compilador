@@ -50,6 +50,9 @@ Declaration
                                         m
                                         OperationExpression
                                             10.0
+    VariableDecStatement
+        flutuante
+        global1
     FunctionDecStatement
         vazio
         foo

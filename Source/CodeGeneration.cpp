@@ -43,7 +43,7 @@ namespace CodeGeneration {
                 t.children[1]->token.getTokenName());
         glvar->setAlignment(4);
     }
-
+    
     void CodeGeneration::paramDeclaration(Tree::Tree& t, llvm::Module* m) {
 
         llvm::Function * func = m->getFunction(currentFunction);
@@ -133,7 +133,7 @@ namespace CodeGeneration {
 
         if (!t.exp.compare(MULTEXPSTRING)) {
 
-            
+
         }
 
         return NULL;
@@ -184,40 +184,11 @@ namespace CodeGeneration {
             std::cout << "Error Creating the Module";
             exit(EXIT_FAILURE);
         }
-
-        /*llvm::Constant* c = mod->getOrInsertFunction("mul_add",
-                llvm::IntegerType::get(mod->getContext(), 32),
-                llvm::IntegerType::get(mod->getContext(), 32),
-                llvm::IntegerType::get(mod->getContext(), 32),
-                llvm::IntegerType::get(mod->getContext(), 32),
-                NULL);
-
-        llvm::Function* mul_add = llvm::cast<llvm::Function>(c);
-        mul_add->setCallingConv(llvm::CallingConv::C);
-
-        llvm::Function::arg_iterator args = mul_add->arg_begin();
-        llvm::Value* x = args++;
-        x->setName("x");
-        llvm::Value* y = args++;
-        y->setName("y");
-        llvm::Value* z = args++;
-        z->setName("z");
-
-        llvm::BasicBlock* block = llvm::BasicBlock::Create(llvm::getGlobalContext(), "entry", mul_add);
-        llvm::IRBuilder<> builder(block);
-
-        llvm::Value* tmp = builder.CreateBinOp(llvm::Instruction::Mul,
-                x, y, "tmp");
-        llvm::Value* tmp2 = builder.CreateBinOp(llvm::Instruction::Add,
-                tmp, z, "tmp2");
-
-        builder.CreateRet(tmp2);*/
-
-        generateCode(t, s, mod, 0);
+        //generateCode(t, s, mod, 0);
 
         std::error_code ERR;
 
-        llvm::raw_fd_ostream *out = new llvm::raw_fd_ostream("tiny.bc", ERR, llvm::sys::fs::F_None);
+        llvm::raw_fd_ostream *out = new llvm::raw_fd_ostream("tinyCodeG.bc", ERR, llvm::sys::fs::F_None);
         llvm::WriteBitcodeToFile(mod, *out);
 
         printHashTable();
@@ -225,6 +196,6 @@ namespace CodeGeneration {
         delete out;
         delete mod;
 
-        system("llvm-dis tiny.bc");
+        system("llvm-dis tinyCodeG.bc");
     }
 }
