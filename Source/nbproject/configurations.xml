@@ -10,7 +10,6 @@
       <in>Token.cpp</in>
       <in>Tree.cpp</in>
       <in>llvmCodeGeneration.cpp</in>
-      <in>llvmCodeGeneration.h</in>
       <in>main.cpp</in>
     </df>
     <logicalFolder name="ExternalFiles"
@@ -45,9 +44,13 @@
           <buildCommand>${MAKE} -f Makefile</buildCommand>
           <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
           <executablePath>compiler</executablePath>
+          <cTool>
+            <standard>10</standard>
+          </cTool>
           <ccTool>
+            <standard>8</standard>
             <incDir>
-              <pElem>../build/include/</pElem>
+              <pElem>../build/include</pElem>
             </incDir>
           </ccTool>
         </makeTool>
@@ -94,9 +97,9 @@
         <ccTool flags="0">
         </ccTool>
       </item>
-      <item path="llvmCodeGeneration.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="llvmCodeGeneration.h" ex="false" tool="3" flavor2="0">
+      <item path="llvmCodeGeneration.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="8">
         <ccTool flags="0">

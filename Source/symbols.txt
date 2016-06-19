@@ -1,11 +1,12 @@
-2, l / flutuante / Used / Initialized
-1, m / flutuante / Used / Initialized
+3, a / inteiro / Used / Initialized
+2, l / inteiro / Used / Initialized
+1, m / inteiro / Used / Initialized
 1, k / inteiro / Used / Initialized
 1, d / inteiro / Used / Initialized
 0, principal / vazio / Function / 0
-0, foo / vazio / Function / 2 / inteiro / flutuante
+0, foo / vazio / Function / 2 / inteiro / inteiro
 1, c / inteiro / Used / Initialized
-2, b / flutuante / Used / Initialized
+2, b / inteiro / Used / Initialized
 2, a / inteiro / Used / Initialized
 0, bar / vazio / Function / 2 / inteiro / inteiro
 0, global1 / flutuante / Global / Unused / Not Initialized

@@ -29,11 +29,11 @@ namespace Lexical {
 
     private:
         CompilerErrors::CompilerErrors error;
-        
+
         /* Loads a string from the file and remove the blank space */
         bool loadString(std::string&, std::ifstream&, int&, int&);
         void removeBlankSpace(std::string&);
-        
+
         /* Collects and stores the tokens */
         Token::Token tokenInserter(std::string&, std::string,
                 Token::TokenType, boost::regex, int, int);

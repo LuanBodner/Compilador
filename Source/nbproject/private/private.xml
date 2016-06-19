@@ -7,7 +7,23 @@
         <activeConfTypeElem>0</activeConfTypeElem>
         <activeConfIndexElem>0</activeConfIndexElem>
     </data>
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="3">
+        <file>
+            <url>llvmCodeGeneration.cpp</url>
+            <bookmark id="3">
+                <name/>
+                <line>180</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>llvmCodeGen.cpp</url>
+            <bookmark id="2">
+                <name/>
+                <line>47</line>
+                <key/>
+            </bookmark>
+        </file>
         <file>
             <url>Tree.cpp</url>
             <bookmark id="1">
@@ -19,14 +35,19 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/home/lbodner/Compilador/Source/llvmCodeGeneration.cpp</file>
+            <file>file:/home/lbodner/Compilador/Source/tree.txt</file>
+            <file>file:/home/lbodner/Compilador/Source/referenceTable.txt</file>
             <file>file:/home/lbodner/Compilador/Source/CodeGeneration.cpp</file>
-            <file>file:/home/lbodner/Compilador/Source/SemanticAnalysis.cpp</file>
-            <file>file:/home/lbodner/Compilador/Source/Token.h</file>
-            <file>file:/home/lbodner/Compilador/Source/Token.cpp</file>
-            <file>file:/home/lbodner/Compilador/Source/tiny.ll</file>
-            <file>file:/home/lbodner/Compilador/Source/SemanticAnalysis.h</file>
-            <file>file:/home/lbodner/Compilador/Source/Tree.cpp</file>
+            <file>file:/home/lbodner/Compilador/Source/llvmCodeGeneration.h</file>
             <file>file:/home/lbodner/Compilador/Source/tiny.txt</file>
+            <file>file:/home/lbodner/Compilador/Source/LexicalAnalyzer.h</file>
         </group>
     </open-files>
+    <preferences xmlns="http://www.netbeans.org/ns/auxiliary-configuration-preferences/1">
+        <module name="org-netbeans-modules-cnd-discovery">
+            <property name="model-folder" value="/home/lbodner/Compilador/Source"/>
+            <property name="rootFolder" value="/home/lbodner/Compilador/Source"/>
+        </module>
+    </preferences>
 </project-private>

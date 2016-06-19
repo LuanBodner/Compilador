@@ -219,7 +219,7 @@ namespace Semantic {
 
                     if (!symbolTable[sn][index].compare(FLOATS))
                         operationExpression(*tree.children[i], Token::FLOAT);
-                    
+
                     else if (!symbolTable[sn][index].compare(INTS))
                         operationExpression(*tree.children[i], Token::INTEGER);
                 }

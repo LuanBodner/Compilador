@@ -52,21 +52,9 @@
 "11" == NUMBER_INTEGER
 	LINE : 3
 	COLUMN : 4
-"+" == SUM
-	LINE : 3
-	COLUMN : 5
-"51" == NUMBER_INTEGER
-	LINE : 3
-	COLUMN : 6
-"*" == MULTIPLICATION
-	LINE : 3
-	COLUMN : 7
-"10" == NUMBER_INTEGER
-	LINE : 3
-	COLUMN : 8
 ")" == CLOSE
 	LINE : 3
-	COLUMN : 9
+	COLUMN : 5
 "d" == IDENTIFIER
 	LINE : 4
 	COLUMN : 1
@@ -106,7 +94,7 @@
 ")" == CLOSE
 	LINE : 7
 	COLUMN : 5
-"flutuante" == FLOAT
+"inteiro" == INTEGER
 	LINE : 9
 	COLUMN : 1
 ":" == DOUBLE_POINT
@@ -124,7 +112,7 @@
 "(" == OPEN
 	LINE : 10
 	COLUMN : 3
-"10.0" == NUMBER_FLOAT
+"10" == NUMBER_INTEGER
 	LINE : 10
 	COLUMN : 4
 ")" == CLOSE
@@ -163,7 +151,7 @@
 "," == COMMA
 	LINE : 14
 	COLUMN : 7
-"flutuante" == FLOAT
+"inteiro" == INTEGER
 	LINE : 14
 	COLUMN : 8
 ":" == DOUBLE_POINT
@@ -199,13 +187,13 @@
 "(" == OPEN
 	LINE : 16
 	COLUMN : 3
-"11.1" == NUMBER_FLOAT
+"11" == NUMBER_INTEGER
 	LINE : 16
 	COLUMN : 4
 ")" == CLOSE
 	LINE : 16
 	COLUMN : 5
-"flutuante" == FLOAT
+"inteiro" == INTEGER
 	LINE : 18
 	COLUMN : 1
 ":" == DOUBLE_POINT
@@ -223,7 +211,7 @@
 "(" == OPEN
 	LINE : 19
 	COLUMN : 3
-"8.8" == NUMBER_FLOAT
+"8" == NUMBER_INTEGER
 	LINE : 19
 	COLUMN : 4
 ")" == CLOSE
@@ -244,6 +232,30 @@
 ")" == CLOSE
 	LINE : 22
 	COLUMN : 4
+"inteiro" == INTEGER
+	LINE : 24
+	COLUMN : 1
+":" == DOUBLE_POINT
+	LINE : 24
+	COLUMN : 2
+"a" == IDENTIFIER
+	LINE : 24
+	COLUMN : 3
+"a" == IDENTIFIER
+	LINE : 25
+	COLUMN : 1
+":=" == ATTRIBUTION
+	LINE : 25
+	COLUMN : 2
+"(" == OPEN
+	LINE : 25
+	COLUMN : 3
+"10" == NUMBER_INTEGER
+	LINE : 25
+	COLUMN : 4
+")" == CLOSE
+	LINE : 25
+	COLUMN : 5
 "fim" == END
-	LINE : 23
+	LINE : 26
 	COLUMN : 1

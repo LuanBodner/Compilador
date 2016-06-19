@@ -19,8 +19,6 @@ namespace llvmCodeGeneration {
     }
 
     llvmCodeGeneration::~llvmCodeGeneration() {
-
-        //delete module;
     }
 
     llvm::Type * llvmCodeGeneration::getTypefromString(std::string s) {
@@ -55,6 +53,9 @@ namespace llvmCodeGeneration {
         for (int i = 0; i < paramIndex; i++)
             cargs++;
         cargs->setName(t.children[1]->token.getTokenName());
+        
+        ScopeName sc(scope, cargs->getName().data());
+        paramHash[sc] = cargs;
 
         paramIndex++;
     }
@@ -92,33 +93,37 @@ namespace llvmCodeGeneration {
                 getTypefromString(t.children[0]->token.getTokenName()),
                 t.children[1]->token.getTokenName(), block);
         variable->setAlignment(4);
+
+        variablesHash[sc] = variable;
     }
 
-    void llvmCodeGeneration::attributionStatement(Tree::Tree& t) {
+    llvm::Value * llvmCodeGeneration::expressionGenerator(Tree::Tree& t) {
+        return NULL;
+    }
 
-        llvm::Constant * c0 = llvm::ConstantInt::get(llvm::IntegerType::getInt32Ty(module->getContext()), 32, false);
-        llvm::Constant * c1 = llvm::ConstantInt::get(llvm::IntegerType::getInt32Ty(module->getContext()), 32, false);
+    llvm::Value * llvmCodeGeneration::operationsExpression(Tree::Tree& t, llvm::Type * type) {
 
-        //llvm::Value * v1 = new llvm::Value(llvm::IntegerType::getInt32Ty(module->getContext()));
-        // v1->setName("v1");
-        //llvm::Value * v2 = new llvm::Value(llvm::IntegerType::getInt32Ty(module->getContext()));
-        //v2->setName("v2");
-        //builder->SetInsertPoint(block);
+        return llvm::ConstantInt::get(type, 10);
+    }
 
-        std::cout << builder->GetInsertBlock()->getName().data() << std::endl;
-        llvm::Value * v = builder->CreateBinOp(llvm::Instruction::Add, c0, c1, "temp");
+    void llvmCodeGeneration::attributionStatement(Tree::Tree& t, SymbolTable s) {
 
-        //builder->CreateRet(v);
+        ScopeName sc(scope, t.children[0]->token.getTokenName());
 
-        //std::error_code ERR;
+        llvm::AllocaInst * variable = getVariableAllocation(sc.second);
+        llvm::Value * op = operationsExpression(t, getTypefromString(s[sc][0]));
 
-        //llvm::raw_fd_ostream *out = new llvm::raw_fd_ostream("tiny.bc", ERR, llvm::sys::fs::F_None);
-        //llvm::WriteBitcodeToFile(module, *out);
+        if (variable != NULL) {
 
-        //delete out;
+            std::cout << variable->getName().data() << std::endl;
+            builder->CreateStore(op, variable);
+        } else {
 
-        //system("llvm-dis tiny.bc");
-        //exit(0);
+            llvm::Value * param = getParamValue(sc.second);
+
+            std::cout << param->getName().data() << std::endl;
+            builder->CreateStore(op, param);
+        }
     }
 
     void llvmCodeGeneration::expressionStatement(Tree::Tree& t, SymbolTable s) {
@@ -127,7 +132,8 @@ namespace llvmCodeGeneration {
             localVariableDeclaration(*t.children[0]);
 
         if (!t.children[0]->exp.compare(ATTSTRING))
-            attributionStatement(*t.children[0]);
+            attributionStatement(*t.children[0], s);
+
     }
 
     void llvmCodeGeneration::generateCode(Tree::Tree& t, SymbolTable s, int l) {
@@ -147,6 +153,7 @@ namespace llvmCodeGeneration {
         l++;
 
         for (unsigned int i = 0; i < t.children.size(); i++)
+
             if (!t.active)
                 generateCode(*t.children[i], s, l);
     }
@@ -164,6 +171,8 @@ namespace llvmCodeGeneration {
 
         generateCode(t, s, 0);
 
+        printHashTable();
+
         std::error_code ERR;
 
         llvm::raw_fd_ostream *out = new llvm::raw_fd_ostream("tiny.bc", ERR, llvm::sys::fs::F_None);
@@ -172,34 +181,83 @@ namespace llvmCodeGeneration {
         delete out;
 
         system("llvm-dis tiny.bc");
+    }
+
+    void llvmCodeGeneration::printHashTable() {
+
+        std::ofstream out("referenceTable.txt");
+
+        for (const auto &v : variablesHash)
+            out << v.first.first << ", "
+                << v.first.second << " = "
+                << v.second->getName().data() << "\n";
+
+        for (const auto &v : paramHash)
+            out << v.first.first << ", "
+                << v.first.second << " = "
+                << v.second->getName().data() << "\n";
+    }
+
+    llvm::AllocaInst * llvmCodeGeneration::getVariableAllocation(std::string n) {
+
+        return (variablesHash.find(ScopeName(scope, n)) != variablesHash.end())
+                ? variablesHash[ScopeName(scope, n)] : NULL;
+    }
+
+    llvm::Value * llvmCodeGeneration::getParamValue(std::string n) {
+
+        return (paramHash.find(ScopeName(scope, n)) != paramHash.end())
+                ? paramHash[ScopeName(scope, n)] : NULL;
+    }
+
+    llvm::Constant * llvmCodeGeneration::create() {
+
+        return llvm::ConstantInt::get(llvm::IntegerType::getInt32Ty(module->getContext()), 30);
+    }
+
+    void llvmCodeGeneration::testFunction() {
+
+        module = new llvm::Module("Tiny", llvm::getGlobalContext());
+
+        llvm::Constant* c = module->getOrInsertFunction("mul_add",
+                llvm::IntegerType::get(module->getContext(), 32),
+                llvm::IntegerType::get(module->getContext(), 32),
+                llvm::IntegerType::get(module->getContext(), 32),
+                llvm::IntegerType::get(module->getContext(), 32),
+                NULL);
+
+        function = llvm::cast<llvm::Function>(c);
+        function->setCallingConv(llvm::CallingConv::C);
+
+        llvm::Function::arg_iterator args = function->arg_begin();
+        llvm::Value* x = args++;
+        x->setName("x");
+        llvm::Value* y = args++;
+        y->setName("y");
+        llvm::Value* z = args++;
+        z->setName("z");
+
+        block = llvm::BasicBlock::Create(llvm::getGlobalContext(), "entry", function);
+        builder = new llvm::IRBuilder<>(block);
+
+        llvm::AllocaInst * var = new llvm::AllocaInst(llvm::IntegerType::getInt32Ty(module->getContext()), "Name", block);
+
+        llvm::Value * val = create();
+
+        //llvm::StoreInst * str = new llvm::StoreInst(var, val, block);
+
+        builder->CreateStore(val, var);
+
+        builder->CreateRet(val);
+
+        std::error_code ERR;
+
+        llvm::raw_fd_ostream *out = new llvm::raw_fd_ostream("test.bc", ERR, llvm::sys::fs::F_None);
+        llvm::WriteBitcodeToFile(module, *out);
+
+        delete out;
+
+        system("llvm-dis test.bc");
 
     }
 }
-
-/*llvm::Constant* c = mod->getOrInsertFunction("mul_add",
-               llvm::IntegerType::get(mod->getContext(), 32),
-               llvm::IntegerType::get(mod->getContext(), 32),
-               llvm::IntegerType::get(mod->getContext(), 32),
-               llvm::IntegerType::get(mod->getContext(), 32),
-               NULL);
-
-       llvm::Function* mul_add = llvm::cast<llvm::Function>(c);
-       mul_add->setCallingConv(llvm::CallingConv::C);
-
-       llvm::Function::arg_iterator args = mul_add->arg_begin();
-       llvm::Value* x = args++;
-       x->setName("x");
-       llvm::Value* y = args++;
-       y->setName("y");
-       llvm::Value* z = args++;
-       z->setName("z");
-
-       llvm::BasicBlock* block = llvm::BasicBlock::Create(llvm::getGlobalContext(), "entry", mul_add);
-       llvm::IRBuilder<> builder(block);
-
-       llvm::Value* tmp = builder.CreateBinOp(llvm::Instruction::Mul,
-               x, y, "tmp");
-       llvm::Value* tmp2 = builder.CreateBinOp(llvm::Instruction::Add,
-               tmp, z, "tmp2");
-
-       builder.CreateRet(tmp2);*/

@@ -18,10 +18,6 @@ Declaration
                     c
                     OperationExpression
                         11
-                        SumExpression
-                            51
-                            MultiplicationExpression
-                                10
             CompoundStatement
                 ExpressionStatement
                     AttributionStatement
@@ -42,14 +38,14 @@ Declaration
                         CompoundStatement
                             ExpressionStatement
                                 VariableDecStatement
-                                    flutuante
+                                    inteiro
                                     m
                             CompoundStatement
                                 ExpressionStatement
                                     AttributionStatement
                                         m
                                         OperationExpression
-                                            10.0
+                                            10
     VariableDecStatement
         flutuante
         global1
@@ -61,7 +57,7 @@ Declaration
                 inteiro
                 a
             VariableDecStatement
-                flutuante
+                inteiro
                 b
         CompoundStatement
             ExpressionStatement
@@ -74,19 +70,30 @@ Declaration
                     AttributionStatement
                         b
                         OperationExpression
-                            11.1
+                            11
                 CompoundStatement
                     ExpressionStatement
                         VariableDecStatement
-                            flutuante
+                            inteiro
                             l
                     CompoundStatement
                         ExpressionStatement
                             AttributionStatement
                                 l
                                 OperationExpression
-                                    8.8
+                                    8
     FunctionDecStatement
         vazio
         principal
         ParametersDecStatement
+        CompoundStatement
+            ExpressionStatement
+                VariableDecStatement
+                    inteiro
+                    a
+            CompoundStatement
+                ExpressionStatement
+                    AttributionStatement
+                        a
+                        OperationExpression
+                            10

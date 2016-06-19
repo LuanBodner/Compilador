@@ -39,43 +39,62 @@ namespace llvmCodeGeneration {
     public:
         llvmCodeGeneration();
         virtual ~llvmCodeGeneration();
+
+        /* Kicks off the generation */
         void treeAnalyzer(Tree::Tree&, SymbolTable);
 
+        /* Alloca Instruction table */
+        boost::unordered_map<ScopeName, llvm::AllocaInst*> variablesHash;
+
+        /* Function Parameters table */
+        boost::unordered_map<ScopeName, llvm::Value*> paramHash;
+
+        void testFunction();
+        llvm::Constant * create();
     private:
 
-        //Current Builder
+        /* Current Builder */
         llvm::IRBuilder<> * builder;
 
-        //tiny Module
+        /* tiny Module */
         llvm::Module * module;
 
-        //Current function
+        /* Current function */
         llvm::Function * function;
 
-        //Current basic block
+        /* Current basic block */
         llvm::BasicBlock * block;
 
-        //Gets the string(inteiro,flutuante) and returns its type
+        /* Gets the string(inteiro,flutuante) and returns its type */
         llvm::Type * getTypefromString(std::string);
 
-        //Variable declaration
+        /* Math OP*/
+        llvm::Value * expressionGenerator(Tree::Tree&);
+        llvm::Value * operationsExpression(Tree::Tree&, llvm::Type*);
+
+        /* Variable declaration */
         void localVariableDeclaration(Tree::Tree&);
 
-        //Attribution
-        void attributionStatement(Tree::Tree&);
+        /* Attribution */
+        void attributionStatement(Tree::Tree&, SymbolTable);
 
-        //Generic expression handler
+        /* Generic expression handler */
         void expressionStatement(Tree::Tree&, SymbolTable);
 
-        //Function declaration, number of parameters defined and named
+        /* Function declaration, number of parameters defined and named */
         void functionDefinition(Tree::Tree&, SymbolTable);
         void paramDeclaration(Tree::Tree&);
 
-        //Global variables
+        /* Global variables */
         void globalVariableDeclaration(Tree::Tree&);
 
-        //Tree navigator
+        /* Tree navigator */
         void generateCode(Tree::Tree&, SymbolTable, int);
+
+        /* Table operations */
+        void printHashTable();
+        llvm::Value * getParamValue(std::string);
+        llvm::AllocaInst * getVariableAllocation(std::string);
 
     };
 }
