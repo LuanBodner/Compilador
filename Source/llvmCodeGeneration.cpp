@@ -53,11 +53,17 @@ namespace llvmCodeGeneration {
         for (int i = 0; i < paramIndex; i++)
             cargs++;
 
-        llvm::Value * value = cargs;
+        llvm::Argument * value = cargs;
         value->setName(t.children[1]->token.getTokenName());
 
-        ScopeName sc(scope, value->getName().data());
-        paramHash[sc] = value;
+        llvm::AllocaInst * arg = new llvm::AllocaInst(value->getType(),
+                value->getName().str().append(".addr"), block);
+        arg->setAlignment(4);
+
+        builder->CreateStore(value, arg);
+
+        ScopeName sc(scope, arg->getName().str());
+        paramHash[sc] = arg;
 
         paramIndex++;
     }
@@ -118,6 +124,12 @@ namespace llvmCodeGeneration {
 
         if (variable != NULL)
             builder->CreateStore(op, variable);
+        else {
+
+            std::string name = sc.second;
+            variable = getParamValue(name.append(".addr"));
+            builder->CreateStore(op, variable);
+        }
     }
 
     void llvmCodeGeneration::expressionStatement(Tree::Tree& t, SymbolTable s) {
@@ -198,7 +210,7 @@ namespace llvmCodeGeneration {
                 ? variablesHash[ScopeName(scope, n)] : NULL;
     }
 
-    llvm::Value * llvmCodeGeneration::getParamValue(std::string n) {
+    llvm::AllocaInst * llvmCodeGeneration::getParamValue(std::string n) {
 
         return (paramHash.find(ScopeName(scope, n)) != paramHash.end())
                 ? paramHash[ScopeName(scope, n)] : NULL;

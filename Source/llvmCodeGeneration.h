@@ -47,7 +47,7 @@ namespace llvmCodeGeneration {
         boost::unordered_map<ScopeName, llvm::AllocaInst*> variablesHash;
 
         /* Function Parameters table */
-        boost::unordered_map<ScopeName, llvm::Value*> paramHash;
+        boost::unordered_map<ScopeName, llvm::AllocaInst*> paramHash;
 
         void testFunction();
         llvm::Constant * create();
@@ -93,7 +93,7 @@ namespace llvmCodeGeneration {
 
         /* Table operations */
         void printHashTable();
-        llvm::Value * getParamValue(std::string);
+        llvm::AllocaInst * getParamValue(std::string);
         llvm::AllocaInst * getVariableAllocation(std::string);
 
     };
