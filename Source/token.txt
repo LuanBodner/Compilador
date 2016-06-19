@@ -119,143 +119,143 @@
 	LINE : 10
 	COLUMN : 5
 "fim" == END
-	LINE : 11
+	LINE : 12
 	COLUMN : 1
 "flutuante" == FLOAT
-	LINE : 13
+	LINE : 14
 	COLUMN : 1
 ":" == DOUBLE_POINT
-	LINE : 13
+	LINE : 14
 	COLUMN : 2
 "global1" == IDENTIFIER
-	LINE : 13
+	LINE : 14
 	COLUMN : 3
 "vazio" == VOID
-	LINE : 14
+	LINE : 15
 	COLUMN : 1
 "foo" == IDENTIFIER
-	LINE : 14
+	LINE : 15
 	COLUMN : 2
 "(" == OPEN
-	LINE : 14
+	LINE : 15
 	COLUMN : 3
 "inteiro" == INTEGER
-	LINE : 14
+	LINE : 15
 	COLUMN : 4
 ":" == DOUBLE_POINT
-	LINE : 14
+	LINE : 15
 	COLUMN : 5
 "a" == IDENTIFIER
-	LINE : 14
+	LINE : 15
 	COLUMN : 6
 "," == COMMA
-	LINE : 14
+	LINE : 15
 	COLUMN : 7
 "inteiro" == INTEGER
-	LINE : 14
+	LINE : 15
 	COLUMN : 8
 ":" == DOUBLE_POINT
-	LINE : 14
+	LINE : 15
 	COLUMN : 9
 "b" == IDENTIFIER
-	LINE : 14
+	LINE : 15
 	COLUMN : 10
 ")" == CLOSE
-	LINE : 14
+	LINE : 15
 	COLUMN : 11
 "a" == IDENTIFIER
-	LINE : 15
+	LINE : 16
 	COLUMN : 1
 ":=" == ATTRIBUTION
-	LINE : 15
+	LINE : 16
 	COLUMN : 2
 "(" == OPEN
-	LINE : 15
+	LINE : 16
 	COLUMN : 3
 "10" == NUMBER_INTEGER
-	LINE : 15
+	LINE : 16
 	COLUMN : 4
 ")" == CLOSE
-	LINE : 15
+	LINE : 16
 	COLUMN : 5
 "b" == IDENTIFIER
-	LINE : 16
+	LINE : 17
 	COLUMN : 1
 ":=" == ATTRIBUTION
-	LINE : 16
+	LINE : 17
 	COLUMN : 2
 "(" == OPEN
-	LINE : 16
+	LINE : 17
 	COLUMN : 3
 "11" == NUMBER_INTEGER
-	LINE : 16
+	LINE : 17
 	COLUMN : 4
 ")" == CLOSE
-	LINE : 16
+	LINE : 17
 	COLUMN : 5
 "inteiro" == INTEGER
-	LINE : 18
+	LINE : 19
 	COLUMN : 1
 ":" == DOUBLE_POINT
-	LINE : 18
-	COLUMN : 2
-"l" == IDENTIFIER
-	LINE : 18
-	COLUMN : 3
-"l" == IDENTIFIER
-	LINE : 19
-	COLUMN : 1
-":=" == ATTRIBUTION
 	LINE : 19
 	COLUMN : 2
-"(" == OPEN
+"l" == IDENTIFIER
 	LINE : 19
 	COLUMN : 3
-"8" == NUMBER_INTEGER
-	LINE : 19
-	COLUMN : 4
-")" == CLOSE
-	LINE : 19
-	COLUMN : 5
-"fim" == END
+"l" == IDENTIFIER
 	LINE : 20
 	COLUMN : 1
-"vazio" == VOID
-	LINE : 22
-	COLUMN : 1
-"principal" == IDENTIFIER
-	LINE : 22
-	COLUMN : 2
-"(" == OPEN
-	LINE : 22
-	COLUMN : 3
-")" == CLOSE
-	LINE : 22
-	COLUMN : 4
-"inteiro" == INTEGER
-	LINE : 24
-	COLUMN : 1
-":" == DOUBLE_POINT
-	LINE : 24
-	COLUMN : 2
-"a" == IDENTIFIER
-	LINE : 24
-	COLUMN : 3
-"a" == IDENTIFIER
-	LINE : 25
-	COLUMN : 1
 ":=" == ATTRIBUTION
-	LINE : 25
+	LINE : 20
 	COLUMN : 2
 "(" == OPEN
-	LINE : 25
+	LINE : 20
 	COLUMN : 3
-"10" == NUMBER_INTEGER
-	LINE : 25
+"8" == NUMBER_INTEGER
+	LINE : 20
 	COLUMN : 4
 ")" == CLOSE
-	LINE : 25
+	LINE : 20
 	COLUMN : 5
 "fim" == END
+	LINE : 21
+	COLUMN : 1
+"vazio" == VOID
+	LINE : 23
+	COLUMN : 1
+"principal" == IDENTIFIER
+	LINE : 23
+	COLUMN : 2
+"(" == OPEN
+	LINE : 23
+	COLUMN : 3
+")" == CLOSE
+	LINE : 23
+	COLUMN : 4
+"inteiro" == INTEGER
+	LINE : 25
+	COLUMN : 1
+":" == DOUBLE_POINT
+	LINE : 25
+	COLUMN : 2
+"a" == IDENTIFIER
+	LINE : 25
+	COLUMN : 3
+"a" == IDENTIFIER
 	LINE : 26
+	COLUMN : 1
+":=" == ATTRIBUTION
+	LINE : 26
+	COLUMN : 2
+"(" == OPEN
+	LINE : 26
+	COLUMN : 3
+"10" == NUMBER_INTEGER
+	LINE : 26
+	COLUMN : 4
+")" == CLOSE
+	LINE : 26
+	COLUMN : 5
+"fim" == END
+	LINE : 27
 	COLUMN : 1

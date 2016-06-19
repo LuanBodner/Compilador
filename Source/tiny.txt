@@ -8,6 +8,7 @@ vazio bar(inteiro:c, inteiro:d)
 
     inteiro: m
     m := (10)
+
 fim
 
 flutuante: global1

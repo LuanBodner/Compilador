@@ -41,7 +41,7 @@ namespace llvmCodeGeneration {
 
         llvm::GlobalVariable * glvar =
                 new llvm::GlobalVariable(*module, type, false,
-                llvm::GlobalVariable::CommonLinkage, 0,
+                llvm::GlobalVariable::LinkageTypes::CommonLinkage, 0,
                 t.children[1]->token.getTokenName());
         glvar->setAlignment(4);
     }
@@ -118,18 +118,31 @@ namespace llvmCodeGeneration {
     void llvmCodeGeneration::attributionStatement(Tree::Tree& t, SymbolTable s) {
 
         ScopeName sc(scope, t.children[0]->token.getTokenName());
+        std::string name = sc.second;
 
         llvm::AllocaInst * variable = getVariableAllocation(sc.second);
+        //llvm::GlobalVariable * global;
+
+        if (!variable) {
+
+            variable = getParamValue(name.append(".addr"));
+
+            /*if (!variable) {
+                std::cout << sc.second << std::endl;
+                global = module->getNamedGlobal(sc.second);
+
+                if (!global)
+                    std::cout << "Erro\n";
+                //std::cout << global->getName().str() << std::endl;
+            }*/
+        }
+
         llvm::Value * op = operationsExpression(*t.children[1], getTypefromString(s[sc][0]));
 
-        if (variable != NULL)
+        if (variable)
             builder->CreateStore(op, variable);
-        else {
-
-            std::string name = sc.second;
-            variable = getParamValue(name.append(".addr"));
-            builder->CreateStore(op, variable);
-        }
+        //else
+        //builder->CreateStore(op, global);
     }
 
     void llvmCodeGeneration::expressionStatement(Tree::Tree& t, SymbolTable s) {
