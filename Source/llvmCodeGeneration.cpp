@@ -52,10 +52,12 @@ namespace llvmCodeGeneration {
 
         for (int i = 0; i < paramIndex; i++)
             cargs++;
-        cargs->setName(t.children[1]->token.getTokenName());
-        
-        ScopeName sc(scope, cargs->getName().data());
-        paramHash[sc] = cargs;
+
+        llvm::Value * value = cargs;
+        value->setName(t.children[1]->token.getTokenName());
+
+        ScopeName sc(scope, value->getName().data());
+        paramHash[sc] = value;
 
         paramIndex++;
     }
@@ -98,6 +100,7 @@ namespace llvmCodeGeneration {
     }
 
     llvm::Value * llvmCodeGeneration::expressionGenerator(Tree::Tree& t) {
+
         return NULL;
     }
 
@@ -111,19 +114,10 @@ namespace llvmCodeGeneration {
         ScopeName sc(scope, t.children[0]->token.getTokenName());
 
         llvm::AllocaInst * variable = getVariableAllocation(sc.second);
-        llvm::Value * op = operationsExpression(t, getTypefromString(s[sc][0]));
+        llvm::Value * op = operationsExpression(*t.children[1], getTypefromString(s[sc][0]));
 
-        if (variable != NULL) {
-
-            std::cout << variable->getName().data() << std::endl;
+        if (variable != NULL)
             builder->CreateStore(op, variable);
-        } else {
-
-            llvm::Value * param = getParamValue(sc.second);
-
-            std::cout << param->getName().data() << std::endl;
-            builder->CreateStore(op, param);
-        }
     }
 
     void llvmCodeGeneration::expressionStatement(Tree::Tree& t, SymbolTable s) {
@@ -243,8 +237,6 @@ namespace llvmCodeGeneration {
         llvm::AllocaInst * var = new llvm::AllocaInst(llvm::IntegerType::getInt32Ty(module->getContext()), "Name", block);
 
         llvm::Value * val = create();
-
-        //llvm::StoreInst * str = new llvm::StoreInst(var, val, block);
 
         builder->CreateStore(val, var);
 
