@@ -105,13 +105,15 @@ namespace llvmCodeGeneration {
         variablesHash[sc] = variable;
     }
 
-    llvm::Value * llvmCodeGeneration::expressionGenerator(Tree::Tree& t) {
+    llvm::Constant * llvmCodeGeneration::expressionGenerator(Tree::Tree& t) {
 
-        return NULL;
+        std::cout << t.exp << std::endl;
+
     }
 
     llvm::Value * llvmCodeGeneration::operationsExpression(Tree::Tree& t, llvm::Type * type) {
 
+        expressionGenerator(t);
         return llvm::ConstantInt::get(type, 10);
     }
 
@@ -121,28 +123,25 @@ namespace llvmCodeGeneration {
         std::string name = sc.second;
 
         llvm::AllocaInst * variable = getVariableAllocation(sc.second);
-        //llvm::GlobalVariable * global;
+        llvm::GlobalVariable * global;
 
         if (!variable) {
 
             variable = getParamValue(name.append(".addr"));
 
-            /*if (!variable) {
-                std::cout << sc.second << std::endl;
-                global = module->getNamedGlobal(sc.second);
+            if (!variable) {
 
-                if (!global)
-                    std::cout << "Erro\n";
-                //std::cout << global->getName().str() << std::endl;
-            }*/
+                sc.first = 0;
+                global = module->getNamedGlobal(sc.second.c_str());
+            }
         }
 
         llvm::Value * op = operationsExpression(*t.children[1], getTypefromString(s[sc][0]));
 
         if (variable)
             builder->CreateStore(op, variable);
-        //else
-        //builder->CreateStore(op, global);
+        else
+            builder->CreateStore(op, global);
     }
 
     void llvmCodeGeneration::expressionStatement(Tree::Tree& t, SymbolTable s) {

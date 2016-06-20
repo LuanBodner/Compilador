@@ -15,6 +15,7 @@ entry_bar:
   store i32 10, i32* %k
   %m = alloca i32, align 4
   store i32 10, i32* %m
+  store i32 10, i32* @global0
 }
 
 define void @foo(i32 %a, i32 %b) {

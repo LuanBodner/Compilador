@@ -18,6 +18,8 @@ Declaration
                     c
                     OperationExpression
                         11
+                        SumExpression
+                            10
             CompoundStatement
                 ExpressionStatement
                     AttributionStatement
@@ -46,6 +48,12 @@ Declaration
                                         m
                                         OperationExpression
                                             10
+                                CompoundStatement
+                                    ExpressionStatement
+                                        AttributionStatement
+                                            global0
+                                            OperationExpression
+                                                10
     VariableDecStatement
         flutuante
         global1

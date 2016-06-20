@@ -1,6 +1,6 @@
 inteiro: global0
 vazio bar(inteiro:c, inteiro:d)
-    c:=(11)
+    c:=(11+10)
     d:=(12)
 
     inteiro: k
@@ -8,6 +8,8 @@ vazio bar(inteiro:c, inteiro:d)
 
     inteiro: m
     m := (10)
+
+    global0:=(10)
 
 fim
 

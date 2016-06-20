@@ -70,7 +70,7 @@ namespace llvmCodeGeneration {
 
         /* Math OP*/
         llvm::Value * expressionGenerator(Tree::Tree&);
-        llvm::Value * operationsExpression(Tree::Tree&, llvm::Type*);
+        llvm::Constant * operationsExpression(Tree::Tree&, llvm::Type*);
 
         /* Variable declaration */
         void localVariableDeclaration(Tree::Tree&);
@@ -95,7 +95,6 @@ namespace llvmCodeGeneration {
         void printHashTable();
         llvm::AllocaInst * getParamValue(std::string);
         llvm::AllocaInst * getVariableAllocation(std::string);
-
     };
 }
 
