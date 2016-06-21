@@ -18,18 +18,26 @@ Declaration
                     c
                     OperationExpression
                         2
-                        MultiplicationExpression
-                            3
                         SumExpression
-                            4
-                            SubtractionExpression
-                                5
+                            2
+                            MultiplicationExpression
+                                3
+                            SumExpression
+                                4
+                                SubtractionExpression
+                                    5
+                                    MultiplicationExpression
+                                        10
+                                    SumExpression
+                                        5
             CompoundStatement
                 ExpressionStatement
                     AttributionStatement
                         d
                         OperationExpression
-                            12
+                            10
+                            SubtractionExpression
+                                12
                 CompoundStatement
                     ExpressionStatement
                         VariableDecStatement

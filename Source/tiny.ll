@@ -10,7 +10,7 @@ entry_bar:
   %d.addr = alloca i32, align 4
   store i32 %d, i32* %d.addr
   store i32 7, i32* %c.addr
-  store i32 12, i32* %d.addr
+  store i32 -2, i32* %d.addr
   %k = alloca i32, align 4
   store i32 100, i32* %k
   %m = alloca i32, align 4

@@ -133,32 +133,32 @@ namespace llvmCodeGeneration {
                 if (t.children[k] != NULL && !t.children[k]->exp.compare(SUMEXPSTRING)) {
 
                     std::cout << "Soma\n";
-                    llvm::Value * c = builder->CreateAdd(dequeOp[dequeOp.size() - 2],
-                            dequeOp[dequeOp.size() - 1], "tempAdd");
+                    llvm::Value * c = builder->CreateAdd(dequeOp[dequeOp.size() - 1],
+                            dequeOp[dequeOp.size() - 2], "tempAdd");
                     dequeOp.erase(dequeOp.end() - 2, dequeOp.end());
                     dequeOp.push_front(c);
 
                 } else if (t.children[k] != NULL && !t.children[k]->exp.compare(SUBEXPSTRING)) {
 
                     std::cout << "Subtração\n";
-                    llvm::Value * c = builder->CreateSub(dequeOp[dequeOp.size() - 2],
-                            dequeOp[dequeOp.size() - 1], "tempSub");
+                    llvm::Value * c = builder->CreateSub(dequeOp[dequeOp.size() - 1],
+                            dequeOp[dequeOp.size() - 2], "tempSub");
                     dequeOp.erase(dequeOp.end() - 2, dequeOp.end());
                     dequeOp.push_front(c);
 
                 } else if (t.children[k] != NULL && !t.children[k]->exp.compare(MULTEXPSTRING)) {
 
                     std::cout << "Multiplicação\n";
-                    llvm::Value * c = builder->CreateMul(dequeOp[dequeOp.size() - 2],
-                            dequeOp[dequeOp.size() - 1], "tempMul");
+                    llvm::Value * c = builder->CreateMul(dequeOp[dequeOp.size() - 1],
+                            dequeOp[dequeOp.size() - 2], "tempMul");
                     dequeOp.erase(dequeOp.end() - 2, dequeOp.end());
                     dequeOp.push_front(c);
 
                 } else if (t.children[k] != NULL && !t.children[k]->exp.compare(DIVEXPSTRING)) {
 
                     std::cout << "Divisão\n";
-                    llvm::Value * c = builder->CreateUDiv(dequeOp[dequeOp.size() - 2],
-                            dequeOp[dequeOp.size() - 1], "tempDiv");
+                    llvm::Value * c = builder->CreateUDiv(dequeOp[dequeOp.size() - 1],
+                            dequeOp[dequeOp.size() - 2], "tempDiv");
                     dequeOp.erase(dequeOp.end() - 2, dequeOp.end());
                     dequeOp.push_front(c);
 
@@ -169,6 +169,7 @@ namespace llvmCodeGeneration {
 
     llvm::Value * llvmCodeGeneration::operationsExpression(Tree::Tree& t, llvm::Type * type) {
 
+        dequeOp.clear();
         expressionGenerator(t);
         return llvm::ConstantInt::get(type, 10);
     }
@@ -193,8 +194,7 @@ namespace llvmCodeGeneration {
         }
 
         operationsExpression(*t.children[1], getTypefromString(s[sc][0]));
-        llvm::Value * op = dequeOp[dequeOp.size() - 1];
-        std::cout << "Size " << dequeOp.size() << std::endl;
+        llvm::Value * op = dequeOp[0];
 
         if (variable)
             builder->CreateStore(op, variable);
