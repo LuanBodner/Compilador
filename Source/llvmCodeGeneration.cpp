@@ -13,6 +13,8 @@ namespace llvmCodeGeneration {
     std::string currentFunction;
     int paramIndex;
 
+    std::vector<llvm::Value*> priorityVector;
+
     llvmCodeGeneration::llvmCodeGeneration() {
 
         module = new llvm::Module("Tiny", llvm::getGlobalContext());
@@ -105,10 +107,60 @@ namespace llvmCodeGeneration {
         variablesHash[sc] = variable;
     }
 
-    llvm::Constant * llvmCodeGeneration::expressionGenerator(Tree::Tree& t) {
+    llvm::Constant * llvmCodeGeneration::generateValue(Tree::Tree& t) {
 
-        std::cout << t.exp << std::endl;
+        if (t.token.getTokenType() == Token::NUMBER_INTEGER) {
 
+            std::cout << t.token.getTokenName() << std::endl;
+            return llvm::ConstantInt::get(llvm::IntegerType::getInt32Ty(module->getContext()), std::stoi(t.token.getTokenName()));
+        }
+        
+        return NULL;
+    }
+
+    void llvmCodeGeneration::expressionGenerator(Tree::Tree& t) {
+
+        for (unsigned int i = 0; i < t.children.size(); i++)
+            if (!t.active)
+                expressionGenerator(*t.children[i]);
+
+        if (t.children.size()) {
+
+            priorityVector.push_back(generateValue(*t.children[0]));
+
+            for (int k = 1; k < t.children.size(); k++) {
+
+                if (t.children[k] != NULL && !t.children[k]->exp.compare(SUMEXPSTRING)) {
+
+                    std::cout << "Soma\n";
+                    llvm::Value * c = builder->CreateAdd(priorityVector[0], priorityVector[1], "tempAdd");
+                    priorityVector.pop_back();
+                    priorityVector[0] = c;
+
+                } else if (t.children[k] != NULL && !t.children[k]->exp.compare(SUBEXPSTRING)) {
+
+                    std::cout << "Subtração\n";
+                    llvm::Value * c = builder->CreateSub(priorityVector[0], priorityVector[1], "tempSub");
+                    priorityVector.pop_back();
+                    priorityVector[0] = c;
+
+                } else if (t.children[k] != NULL && !t.children[k]->exp.compare(MULTEXPSTRING)) {
+
+                    std::cout << "Multiplicação\n";
+                    llvm::Value * c = builder->CreateMul(priorityVector[0], priorityVector[1], "tempMul");
+                    priorityVector.pop_back();
+                    priorityVector[0] = c;
+
+                } else if (t.children[k] != NULL && !t.children[k]->exp.compare(DIVEXPSTRING)) {
+
+                    std::cout << "Divisão\n";
+                    llvm::Value * c = builder->CreateUDiv(priorityVector[0], priorityVector[1], "tempDiv");
+                    priorityVector.pop_back();
+                    priorityVector[0] = c;
+
+                }
+            }
+        }
     }
 
     llvm::Value * llvmCodeGeneration::operationsExpression(Tree::Tree& t, llvm::Type * type) {
@@ -136,7 +188,9 @@ namespace llvmCodeGeneration {
             }
         }
 
-        llvm::Value * op = operationsExpression(*t.children[1], getTypefromString(s[sc][0]));
+        operationsExpression(*t.children[1], getTypefromString(s[sc][0]));
+        llvm::Value * op = priorityVector[priorityVector.size() - 1];
+        std::cout << "Size " << priorityVector.size() << std::endl;
 
         if (variable)
             builder->CreateStore(op, variable);

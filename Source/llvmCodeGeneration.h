@@ -69,8 +69,9 @@ namespace llvmCodeGeneration {
         llvm::Type * getTypefromString(std::string);
 
         /* Math OP*/
-        llvm::Value * expressionGenerator(Tree::Tree&);
-        llvm::Constant * operationsExpression(Tree::Tree&, llvm::Type*);
+        llvm::Constant * generateValue(Tree::Tree&);
+        void expressionGenerator(Tree::Tree&);
+        llvm::Value * operationsExpression(Tree::Tree&, llvm::Type*);
 
         /* Variable declaration */
         void localVariableDeclaration(Tree::Tree&);
