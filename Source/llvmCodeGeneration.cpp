@@ -13,7 +13,7 @@ namespace llvmCodeGeneration {
     std::string currentFunction;
     int paramIndex;
 
-    std::vector<llvm::Value*> priorityVector;
+    std::deque<llvm::Value*> dequeOp;
 
     llvmCodeGeneration::llvmCodeGeneration() {
 
@@ -114,7 +114,7 @@ namespace llvmCodeGeneration {
             std::cout << t.token.getTokenName() << std::endl;
             return llvm::ConstantInt::get(llvm::IntegerType::getInt32Ty(module->getContext()), std::stoi(t.token.getTokenName()));
         }
-        
+
         return NULL;
     }
 
@@ -126,37 +126,41 @@ namespace llvmCodeGeneration {
 
         if (t.children.size()) {
 
-            priorityVector.push_back(generateValue(*t.children[0]));
+            dequeOp.push_back(generateValue(*t.children[0]));
 
             for (int k = 1; k < t.children.size(); k++) {
 
                 if (t.children[k] != NULL && !t.children[k]->exp.compare(SUMEXPSTRING)) {
 
                     std::cout << "Soma\n";
-                    llvm::Value * c = builder->CreateAdd(priorityVector[0], priorityVector[1], "tempAdd");
-                    priorityVector.pop_back();
-                    priorityVector[0] = c;
+                    llvm::Value * c = builder->CreateAdd(dequeOp[dequeOp.size() - 2],
+                            dequeOp[dequeOp.size() - 1], "tempAdd");
+                    dequeOp.erase(dequeOp.end() - 2, dequeOp.end());
+                    dequeOp.push_front(c);
 
                 } else if (t.children[k] != NULL && !t.children[k]->exp.compare(SUBEXPSTRING)) {
 
                     std::cout << "Subtração\n";
-                    llvm::Value * c = builder->CreateSub(priorityVector[0], priorityVector[1], "tempSub");
-                    priorityVector.pop_back();
-                    priorityVector[0] = c;
+                    llvm::Value * c = builder->CreateSub(dequeOp[dequeOp.size() - 2],
+                            dequeOp[dequeOp.size() - 1], "tempSub");
+                    dequeOp.erase(dequeOp.end() - 2, dequeOp.end());
+                    dequeOp.push_front(c);
 
                 } else if (t.children[k] != NULL && !t.children[k]->exp.compare(MULTEXPSTRING)) {
 
                     std::cout << "Multiplicação\n";
-                    llvm::Value * c = builder->CreateMul(priorityVector[0], priorityVector[1], "tempMul");
-                    priorityVector.pop_back();
-                    priorityVector[0] = c;
+                    llvm::Value * c = builder->CreateMul(dequeOp[dequeOp.size() - 2],
+                            dequeOp[dequeOp.size() - 1], "tempMul");
+                    dequeOp.erase(dequeOp.end() - 2, dequeOp.end());
+                    dequeOp.push_front(c);
 
                 } else if (t.children[k] != NULL && !t.children[k]->exp.compare(DIVEXPSTRING)) {
 
                     std::cout << "Divisão\n";
-                    llvm::Value * c = builder->CreateUDiv(priorityVector[0], priorityVector[1], "tempDiv");
-                    priorityVector.pop_back();
-                    priorityVector[0] = c;
+                    llvm::Value * c = builder->CreateUDiv(dequeOp[dequeOp.size() - 2],
+                            dequeOp[dequeOp.size() - 1], "tempDiv");
+                    dequeOp.erase(dequeOp.end() - 2, dequeOp.end());
+                    dequeOp.push_front(c);
 
                 }
             }
@@ -189,8 +193,8 @@ namespace llvmCodeGeneration {
         }
 
         operationsExpression(*t.children[1], getTypefromString(s[sc][0]));
-        llvm::Value * op = priorityVector[priorityVector.size() - 1];
-        std::cout << "Size " << priorityVector.size() << std::endl;
+        llvm::Value * op = dequeOp[dequeOp.size() - 1];
+        std::cout << "Size " << dequeOp.size() << std::endl;
 
         if (variable)
             builder->CreateStore(op, variable);

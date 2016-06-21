@@ -17,15 +17,13 @@ Declaration
                 AttributionStatement
                     c
                     OperationExpression
-                        1
+                        2
+                        MultiplicationExpression
+                            3
                         SumExpression
-                            2
-                            MultiplicationExpression
-                                3
-                            SumExpression
-                                4
-                                SubtractionExpression
-                                    5
+                            4
+                            SubtractionExpression
+                                5
             CompoundStatement
                 ExpressionStatement
                     AttributionStatement
