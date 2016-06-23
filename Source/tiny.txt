@@ -1,7 +1,7 @@
 inteiro: global0
 vazio bar(inteiro:c, inteiro:d)
    
-    c:=(2+2*3+4-5*10+5)
+    c:=(1+1)
     d:=(10-12)
 
     inteiro: k

@@ -107,13 +107,36 @@ namespace llvmCodeGeneration {
         variablesHash[sc] = variable;
     }
 
+    llvm::Value * llvmCodeGeneration::getVariableFromTable(std::string n) {
+
+        ScopeName sc(scope, n);
+        std::string name = sc.second;
+
+        llvm::AllocaInst * variable = getVariableAllocation(sc.second);
+        llvm::GlobalVariable * global;
+
+        if (!variable) {
+
+            variable = getParamValue(name.append(".addr"));
+
+            if (!variable) {
+
+                sc.first = 0;
+                global = module->getNamedGlobal(sc.second.c_str());
+
+                return global;
+            }
+        }
+
+        return variable;
+    }
+
     llvm::Constant * llvmCodeGeneration::generateValue(Tree::Tree& t) {
 
-        if (t.token.getTokenType() == Token::NUMBER_INTEGER) {
-
-            std::cout << t.token.getTokenName() << std::endl;
+        if (t.token.getTokenType() == Token::NUMBER_INTEGER)
             return llvm::ConstantInt::get(llvm::IntegerType::getInt32Ty(module->getContext()), std::stoi(t.token.getTokenName()));
-        }
+        if (t.token.getTokenType() == Token::IDENTIFIER)
+            return llvm::cast<llvm::Constant>(getVariableFromTable(t.token.getTokenName()));
 
         return NULL;
     }
@@ -121,8 +144,7 @@ namespace llvmCodeGeneration {
     void llvmCodeGeneration::expressionGenerator(Tree::Tree& t) {
 
         for (unsigned int i = 0; i < t.children.size(); i++)
-            if (!t.active)
-                expressionGenerator(*t.children[i]);
+            expressionGenerator(*t.children[i]);
 
         if (t.children.size()) {
 
@@ -132,36 +154,28 @@ namespace llvmCodeGeneration {
 
                 if (t.children[k] != NULL && !t.children[k]->exp.compare(SUMEXPSTRING)) {
 
-                    std::cout << "Soma\n";
                     llvm::Value * c = builder->CreateAdd(dequeOp[dequeOp.size() - 1],
                             dequeOp[dequeOp.size() - 2], "tempAdd");
                     dequeOp.erase(dequeOp.end() - 2, dequeOp.end());
                     dequeOp.push_front(c);
-
                 } else if (t.children[k] != NULL && !t.children[k]->exp.compare(SUBEXPSTRING)) {
 
-                    std::cout << "Subtração\n";
                     llvm::Value * c = builder->CreateSub(dequeOp[dequeOp.size() - 1],
                             dequeOp[dequeOp.size() - 2], "tempSub");
                     dequeOp.erase(dequeOp.end() - 2, dequeOp.end());
                     dequeOp.push_front(c);
-
                 } else if (t.children[k] != NULL && !t.children[k]->exp.compare(MULTEXPSTRING)) {
 
-                    std::cout << "Multiplicação\n";
                     llvm::Value * c = builder->CreateMul(dequeOp[dequeOp.size() - 1],
                             dequeOp[dequeOp.size() - 2], "tempMul");
                     dequeOp.erase(dequeOp.end() - 2, dequeOp.end());
                     dequeOp.push_front(c);
-
                 } else if (t.children[k] != NULL && !t.children[k]->exp.compare(DIVEXPSTRING)) {
 
-                    std::cout << "Divisão\n";
                     llvm::Value * c = builder->CreateUDiv(dequeOp[dequeOp.size() - 1],
                             dequeOp[dequeOp.size() - 2], "tempDiv");
                     dequeOp.erase(dequeOp.end() - 2, dequeOp.end());
                     dequeOp.push_front(c);
-
                 }
             }
         }
@@ -171,7 +185,8 @@ namespace llvmCodeGeneration {
 
         dequeOp.clear();
         expressionGenerator(t);
-        return llvm::ConstantInt::get(type, 10);
+
+        return dequeOp[0];
     }
 
     void llvmCodeGeneration::attributionStatement(Tree::Tree& t, SymbolTable s) {
@@ -193,8 +208,7 @@ namespace llvmCodeGeneration {
             }
         }
 
-        operationsExpression(*t.children[1], getTypefromString(s[sc][0]));
-        llvm::Value * op = dequeOp[0];
+        llvm::Value * op = operationsExpression(*t.children[1], getTypefromString(s[sc][0]));
 
         if (variable)
             builder->CreateStore(op, variable);

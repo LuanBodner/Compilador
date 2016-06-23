@@ -69,6 +69,7 @@ namespace llvmCodeGeneration {
         llvm::Type * getTypefromString(std::string);
 
         /* Math OP*/
+        llvm::Value * getVariableFromTable(std::string);
         llvm::Constant * generateValue(Tree::Tree&);
         void expressionGenerator(Tree::Tree&);
         llvm::Value * operationsExpression(Tree::Tree&, llvm::Type*);

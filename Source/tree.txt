@@ -17,19 +17,9 @@ Declaration
                 AttributionStatement
                     c
                     OperationExpression
-                        2
+                        1
                         SumExpression
-                            2
-                            MultiplicationExpression
-                                3
-                            SumExpression
-                                4
-                                SubtractionExpression
-                                    5
-                                    MultiplicationExpression
-                                        10
-                                    SumExpression
-                                        5
+                            1
             CompoundStatement
                 ExpressionStatement
                     AttributionStatement
@@ -59,7 +49,7 @@ Declaration
                                     AttributionStatement
                                         m
                                         OperationExpression
-                                            10
+                                            c
                                 CompoundStatement
                                     ExpressionStatement
                                         AttributionStatement
