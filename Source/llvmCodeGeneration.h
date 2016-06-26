@@ -70,18 +70,24 @@ namespace llvmCodeGeneration {
 
         /* Math OP*/
         llvm::Value * getVariableFromTable(std::string);
-        llvm::Constant * generateValue(Tree::Tree&);
+        llvm::Value * generateValue(Tree::Tree&);
         void expressionGenerator(Tree::Tree&);
-        llvm::Value * operationsExpression(Tree::Tree&, llvm::Type*);
+        llvm::Value * operationsExpression(Tree::Tree&);
 
         /* Variable declaration */
         void localVariableDeclaration(Tree::Tree&);
+
+        /* Return Statement */
+        void returnStatement(Tree::Tree&);
 
         /* Attribution */
         void attributionStatement(Tree::Tree&, SymbolTable);
 
         /* Generic expression handler */
         void expressionStatement(Tree::Tree&, SymbolTable);
+
+        /* Function Call Statement */
+        llvm::CallInst * functionCallStatement(Tree::Tree&);
 
         /* Function declaration, number of parameters defined and named */
         void functionDefinition(Tree::Tree&, SymbolTable);

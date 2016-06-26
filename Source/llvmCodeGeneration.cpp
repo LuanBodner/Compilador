@@ -28,7 +28,7 @@ namespace llvmCodeGeneration {
         if (!s.compare(VOIDS))
             return llvm::Type::getVoidTy(module->getContext());
         if (!s.compare(FLOATS))
-            return llvm::Type::getFloatTy(module->getContext());
+            return llvm::Type::getDoubleTy(module->getContext());
         if (!s.compare(INTS))
             return llvm::Type::getInt32Ty(module->getContext());
 
@@ -131,12 +131,42 @@ namespace llvmCodeGeneration {
         return variable;
     }
 
-    llvm::Constant * llvmCodeGeneration::generateValue(Tree::Tree& t) {
+    void printDequeOp() {
+
+        for (int i = 0; i < dequeOp.size(); i++) {
+
+            llvm::ConstantInt * c = llvm::cast<llvm::ConstantInt>(dequeOp[i]);
+            std::cout << c->getZExtValue() << " ";
+        }
+        std::cout << "\n";
+    }
+
+    llvm::Value * llvmCodeGeneration::generateValue(Tree::Tree& t) {
 
         if (t.token.getTokenType() == Token::NUMBER_INTEGER)
             return llvm::ConstantInt::get(llvm::IntegerType::getInt32Ty(module->getContext()), std::stoi(t.token.getTokenName()));
-        if (t.token.getTokenType() == Token::IDENTIFIER)
-            return llvm::cast<llvm::Constant>(getVariableFromTable(t.token.getTokenName()));
+        else if (t.token.getTokenType() == Token::NUMBER_FLOAT)
+            return llvm::ConstantFP::get(llvm::IntegerType::getDoubleTy(module->getContext()), std::stof(t.token.getTokenName()));
+        else if (t.token.getTokenType() == Token::IDENTIFIER) {
+
+            ScopeName sc(scope, t.token.getTokenName());
+
+            llvm::Value * variable = getVariableAllocation(sc.second);
+            std::string name = t.token.getTokenName();
+
+            if (!variable) {
+
+                variable = getParamValue(name.append(".addr"));
+
+                if (!variable) {
+
+                    sc.first = 0;
+                    variable = module->getNamedGlobal(sc.second.c_str());
+                }
+            }
+
+            return variable;
+        }
 
         return NULL;
     }
@@ -154,26 +184,22 @@ namespace llvmCodeGeneration {
 
                 if (t.children[k] != NULL && !t.children[k]->exp.compare(SUMEXPSTRING)) {
 
-                    llvm::Value * c = builder->CreateAdd(dequeOp[dequeOp.size() - 1],
-                            dequeOp[dequeOp.size() - 2], "tempAdd");
+                    llvm::Value * c = builder->CreateAdd(dequeOp[dequeOp.size() - 1], dequeOp[dequeOp.size() - 2], "tempAdd");
                     dequeOp.erase(dequeOp.end() - 2, dequeOp.end());
                     dequeOp.push_front(c);
                 } else if (t.children[k] != NULL && !t.children[k]->exp.compare(SUBEXPSTRING)) {
 
-                    llvm::Value * c = builder->CreateSub(dequeOp[dequeOp.size() - 1],
-                            dequeOp[dequeOp.size() - 2], "tempSub");
+                    llvm::Value * c = builder->CreateSub(dequeOp[dequeOp.size() - 1], dequeOp[dequeOp.size() - 2], "tempSub");
                     dequeOp.erase(dequeOp.end() - 2, dequeOp.end());
                     dequeOp.push_front(c);
                 } else if (t.children[k] != NULL && !t.children[k]->exp.compare(MULTEXPSTRING)) {
 
-                    llvm::Value * c = builder->CreateMul(dequeOp[dequeOp.size() - 1],
-                            dequeOp[dequeOp.size() - 2], "tempMul");
+                    llvm::Value * c = builder->CreateMul(dequeOp[dequeOp.size() - 1], dequeOp[dequeOp.size() - 2], "tempMul");
                     dequeOp.erase(dequeOp.end() - 2, dequeOp.end());
                     dequeOp.push_front(c);
                 } else if (t.children[k] != NULL && !t.children[k]->exp.compare(DIVEXPSTRING)) {
 
-                    llvm::Value * c = builder->CreateUDiv(dequeOp[dequeOp.size() - 1],
-                            dequeOp[dequeOp.size() - 2], "tempDiv");
+                    llvm::Value * c = builder->CreateUDiv(dequeOp[dequeOp.size() - 1], dequeOp[dequeOp.size() - 2], "tempDiv");
                     dequeOp.erase(dequeOp.end() - 2, dequeOp.end());
                     dequeOp.push_front(c);
                 }
@@ -181,7 +207,7 @@ namespace llvmCodeGeneration {
         }
     }
 
-    llvm::Value * llvmCodeGeneration::operationsExpression(Tree::Tree& t, llvm::Type * type) {
+    llvm::Value * llvmCodeGeneration::operationsExpression(Tree::Tree& t) {
 
         dequeOp.clear();
         expressionGenerator(t);
@@ -194,8 +220,7 @@ namespace llvmCodeGeneration {
         ScopeName sc(scope, t.children[0]->token.getTokenName());
         std::string name = sc.second;
 
-        llvm::AllocaInst * variable = getVariableAllocation(sc.second);
-        llvm::GlobalVariable * global;
+        llvm::Value * variable = getVariableAllocation(sc.second);
 
         if (!variable) {
 
@@ -204,16 +229,32 @@ namespace llvmCodeGeneration {
             if (!variable) {
 
                 sc.first = 0;
-                global = module->getNamedGlobal(sc.second.c_str());
+                variable = module->getNamedGlobal(sc.second.c_str());
             }
         }
 
-        llvm::Value * op = operationsExpression(*t.children[1], getTypefromString(s[sc][0]));
+        llvm::Value * op = operationsExpression(*t.children[1]);
 
-        if (variable)
-            builder->CreateStore(op, variable);
-        else
-            builder->CreateStore(op, global);
+        builder->CreateStore(op, variable);
+    }
+
+    llvm::CallInst * llvmCodeGeneration::functionCallStatement(Tree::Tree& t) {
+
+        llvm::Function * func = module->getFunction(t.children[0]->token.getTokenName());
+
+        std::vector<llvm::Value*> values;
+
+        for (int i = 1; i < t.children.size(); i++)
+            values.push_back(operationsExpression(*t.children[i]));
+
+        return builder->CreateCall(func, values);
+    }
+
+    void llvmCodeGeneration::returnStatement(Tree::Tree& t) {
+
+        llvm::Value * val = operationsExpression(*t.children[0]);
+
+        builder->CreateRet(val);
     }
 
     void llvmCodeGeneration::expressionStatement(Tree::Tree& t, SymbolTable s) {
@@ -224,6 +265,11 @@ namespace llvmCodeGeneration {
         if (!t.children[0]->exp.compare(ATTSTRING))
             attributionStatement(*t.children[0], s);
 
+        if (!t.children[0]->exp.compare(FUNCCALLSTRING))
+            functionCallStatement(*t.children[0]);
+
+        if (!t.children[0]->exp.compare(RETURNSTRING))
+            returnStatement(*t.children[0]);
     }
 
     void llvmCodeGeneration::generateCode(Tree::Tree& t, SymbolTable s, int l) {
@@ -298,54 +344,5 @@ namespace llvmCodeGeneration {
 
         return (paramHash.find(ScopeName(scope, n)) != paramHash.end())
                 ? paramHash[ScopeName(scope, n)] : NULL;
-    }
-
-    llvm::Constant * llvmCodeGeneration::create() {
-
-        return llvm::ConstantInt::get(llvm::IntegerType::getInt32Ty(module->getContext()), 30);
-    }
-
-    void llvmCodeGeneration::testFunction() {
-
-        module = new llvm::Module("Tiny", llvm::getGlobalContext());
-
-        llvm::Constant* c = module->getOrInsertFunction("mul_add",
-                llvm::IntegerType::get(module->getContext(), 32),
-                llvm::IntegerType::get(module->getContext(), 32),
-                llvm::IntegerType::get(module->getContext(), 32),
-                llvm::IntegerType::get(module->getContext(), 32),
-                NULL);
-
-        function = llvm::cast<llvm::Function>(c);
-        function->setCallingConv(llvm::CallingConv::C);
-
-        llvm::Function::arg_iterator args = function->arg_begin();
-        llvm::Value* x = args++;
-        x->setName("x");
-        llvm::Value* y = args++;
-        y->setName("y");
-        llvm::Value* z = args++;
-        z->setName("z");
-
-        block = llvm::BasicBlock::Create(llvm::getGlobalContext(), "entry", function);
-        builder = new llvm::IRBuilder<>(block);
-
-        llvm::AllocaInst * var = new llvm::AllocaInst(llvm::IntegerType::getInt32Ty(module->getContext()), "Name", block);
-
-        llvm::Value * val = create();
-
-        builder->CreateStore(val, var);
-
-        builder->CreateRet(val);
-
-        std::error_code ERR;
-
-        llvm::raw_fd_ostream *out = new llvm::raw_fd_ostream("test.bc", ERR, llvm::sys::fs::F_None);
-        llvm::WriteBitcodeToFile(module, *out);
-
-        delete out;
-
-        system("llvm-dis test.bc");
-
     }
 }

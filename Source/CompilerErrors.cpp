@@ -214,14 +214,16 @@ namespace CompilerErrors {
         exit(EXIT_FAILURE);
     }
 
-    void CompilerErrors::expressionTypeWarning(Token::Token token) {
+    void CompilerErrors::expressionTypeError(Token::Token token) {
 
-        std::cout << "\033[1;35mWarning\033[0m; Unexpected Type; "
+        std::cout << "\033[1;31mError\033[0m; Unexpected Type; "
                 << "\033[1;36mLine\033[0m: " << token.getTokenLine() << "; "
                 << "\033[1;36mColumn\033[0m: " << token.getTokenColumn() << "; "
                 << "\033[1;32mReceived\033[0m: " << token.getTokenName() << "';\n";
 
         printLine(token.getTokenLine());
+        
+        exit(EXIT_FAILURE);
     }
 
     void CompilerErrors::voidAttributionError(Token::Token token) {

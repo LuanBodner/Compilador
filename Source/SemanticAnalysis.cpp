@@ -131,7 +131,7 @@ namespace Semantic {
                     error.voidAttributionError(tree.children[0]->token);
 
                 else if (symbolTable[sn][0].compare(otype))
-                    error.expressionTypeWarning(tree.children[0]->token);
+                    error.expressionTypeError(tree.children[0]->token);
 
                 if (!symbolTable[sn][1].compare(NUV))
                     symbolTable[sn][1] = UV;
@@ -148,7 +148,7 @@ namespace Semantic {
 
                 if ((otype.compare(INTS) && t == Token::NUMBER_INTEGER) ||
                         (otype.compare(FLOATS) && t == Token::NUMBER_FLOAT))
-                    error.expressionTypeWarning(tree.children[0]->token);
+                    error.expressionTypeError(tree.children[0]->token);
             }
 
             for (unsigned int i = 0; i < tree.children.size(); i++) {
@@ -184,7 +184,7 @@ namespace Semantic {
 
                 else if ((symbolTable[sn][0].compare(FLOATS) && ttype == Token::FLOAT) ||
                         (symbolTable[sn][0].compare(INTS) && ttype == Token::INTEGER))
-                    error.expressionTypeWarning(tree.children[0]->token);
+                    error.expressionTypeError(tree.children[0]->token);
 
                 if (!symbolTable[sn][1].compare(NUV))
                     symbolTable[sn][1] = UV;
@@ -192,7 +192,7 @@ namespace Semantic {
                     && ttype == Token::INTEGER) ||
                     (tree.children[0]->token.getTokenType() == Token::NUMBER_INTEGER
                     && ttype == Token::FLOAT))
-                error.expressionTypeWarning(tree.children[0]->token);
+                error.expressionTypeError(tree.children[0]->token);
 
             for (unsigned int i = 0; i < tree.children.size(); i++)
                 if (tree.children[i])
@@ -225,7 +225,7 @@ namespace Semantic {
                 }
             } else
                 error.functionCallError(tree.children[0]->token);
-        } else
+        } else if (sn.second.compare("leia") && sn.second.compare("escreva"))
             error.functionCallScopeError(tree.children[0]->token);
     }
 

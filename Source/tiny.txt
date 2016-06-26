@@ -1,30 +1,10 @@
-inteiro: global0
-vazio bar(inteiro:c, inteiro:d)
-   
-    c:=(1+1)
-    d:=(10-12)
+inteiro: n
+vazio fatorial(inteiro: f)
+    inteiro: ret
 
-    inteiro: k
-    k := (100)
-
-    inteiro: m
-    m := (10)
-
-    global0:=(10)
-
+    ret := (10)
+    f := (ret)
 fim
-
-flutuante: global1
-vazio foo(inteiro:a, inteiro:b)
-    a:=(10)
-    b:=(11)
-
-    inteiro: l
-    l := (8)
-fim
-
 vazio principal()
 
-    inteiro: a
-    a := (10)
 fim

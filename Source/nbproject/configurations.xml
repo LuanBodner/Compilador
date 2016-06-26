@@ -49,9 +49,6 @@
           </cTool>
           <ccTool>
             <standard>8</standard>
-            <incDir>
-              <pElem>../build/include</pElem>
-            </incDir>
           </ccTool>
         </makeTool>
         <preBuild>
@@ -62,6 +59,7 @@
       <item path="CodeGeneration.cpp" ex="false" tool="1" flavor2="8">
         <ccTool flags="1">
           <incDir>
+            <pElem>../build/include</pElem>
             <pElem>/usr/include</pElem>
           </incDir>
           <preprocessorList>
@@ -75,30 +73,58 @@
       </item>
       <item path="CompilerErrors.cpp" ex="false" tool="1" flavor2="8">
         <ccTool flags="0">
+          <incDir>
+            <pElem>../build/include</pElem>
+          </incDir>
         </ccTool>
       </item>
       <item path="LexicalAnalyzer.cpp" ex="false" tool="1" flavor2="8">
         <ccTool flags="0">
+          <incDir>
+            <pElem>../build/include</pElem>
+          </incDir>
         </ccTool>
       </item>
       <item path="SemanticAnalysis.cpp" ex="false" tool="1" flavor2="8">
         <ccTool flags="0">
+          <incDir>
+            <pElem>../build/include</pElem>
+          </incDir>
         </ccTool>
       </item>
       <item path="SyntaxAnalysis.cpp" ex="false" tool="1" flavor2="8">
         <ccTool flags="0">
+          <incDir>
+            <pElem>../build/include</pElem>
+          </incDir>
         </ccTool>
       </item>
       <item path="Token.cpp" ex="false" tool="1" flavor2="8">
         <ccTool flags="0">
+          <incDir>
+            <pElem>../build/include</pElem>
+          </incDir>
         </ccTool>
       </item>
       <item path="Tree.cpp" ex="false" tool="1" flavor2="8">
         <ccTool flags="0">
+          <incDir>
+            <pElem>../build/include</pElem>
+          </incDir>
         </ccTool>
       </item>
       <item path="llvmCodeGeneration.cpp" ex="false" tool="1" flavor2="8">
-        <ccTool flags="0">
+        <ccTool flags="1">
+          <incDir>
+            <pElem>/usr/include</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>NDEBUG</Elem>
+            <Elem>_GNU_SOURCE</Elem>
+            <Elem>__STDC_CONSTANT_MACROS</Elem>
+            <Elem>__STDC_FORMAT_MACROS</Elem>
+            <Elem>__STDC_LIMIT_MACROS</Elem>
+          </preprocessorList>
         </ccTool>
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="8">

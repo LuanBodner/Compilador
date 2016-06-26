@@ -4,13 +4,13 @@
 ":" == DOUBLE_POINT
 	LINE : 1
 	COLUMN : 2
-"global0" == IDENTIFIER
+"n" == IDENTIFIER
 	LINE : 1
 	COLUMN : 3
 "vazio" == VOID
 	LINE : 2
 	COLUMN : 1
-"bar" == IDENTIFIER
+"fatorial" == IDENTIFIER
 	LINE : 2
 	COLUMN : 2
 "(" == OPEN
@@ -22,46 +22,22 @@
 ":" == DOUBLE_POINT
 	LINE : 2
 	COLUMN : 5
-"c" == IDENTIFIER
+"f" == IDENTIFIER
 	LINE : 2
 	COLUMN : 6
-"," == COMMA
+")" == CLOSE
 	LINE : 2
 	COLUMN : 7
 "inteiro" == INTEGER
-	LINE : 2
-	COLUMN : 8
-":" == DOUBLE_POINT
-	LINE : 2
-	COLUMN : 9
-"d" == IDENTIFIER
-	LINE : 2
-	COLUMN : 10
-")" == CLOSE
-	LINE : 2
-	COLUMN : 11
-"c" == IDENTIFIER
-	LINE : 4
+	LINE : 3
 	COLUMN : 1
-":=" == ATTRIBUTION
-	LINE : 4
+":" == DOUBLE_POINT
+	LINE : 3
 	COLUMN : 2
-"(" == OPEN
-	LINE : 4
+"ret" == IDENTIFIER
+	LINE : 3
 	COLUMN : 3
-"1" == NUMBER_INTEGER
-	LINE : 4
-	COLUMN : 4
-"+" == SUM
-	LINE : 4
-	COLUMN : 5
-"1" == NUMBER_INTEGER
-	LINE : 4
-	COLUMN : 6
-")" == CLOSE
-	LINE : 4
-	COLUMN : 7
-"d" == IDENTIFIER
+"ret" == IDENTIFIER
 	LINE : 5
 	COLUMN : 1
 ":=" == ATTRIBUTION
@@ -73,216 +49,39 @@
 "10" == NUMBER_INTEGER
 	LINE : 5
 	COLUMN : 4
-"-" == SUBTRACTION
-	LINE : 5
-	COLUMN : 5
-"12" == NUMBER_INTEGER
-	LINE : 5
-	COLUMN : 6
 ")" == CLOSE
 	LINE : 5
-	COLUMN : 7
-"inteiro" == INTEGER
-	LINE : 7
-	COLUMN : 1
-":" == DOUBLE_POINT
-	LINE : 7
-	COLUMN : 2
-"k" == IDENTIFIER
-	LINE : 7
-	COLUMN : 3
-"k" == IDENTIFIER
-	LINE : 8
-	COLUMN : 1
-":=" == ATTRIBUTION
-	LINE : 8
-	COLUMN : 2
-"(" == OPEN
-	LINE : 8
-	COLUMN : 3
-"100" == NUMBER_INTEGER
-	LINE : 8
-	COLUMN : 4
-")" == CLOSE
-	LINE : 8
 	COLUMN : 5
-"inteiro" == INTEGER
-	LINE : 10
-	COLUMN : 1
-":" == DOUBLE_POINT
-	LINE : 10
-	COLUMN : 2
-"m" == IDENTIFIER
-	LINE : 10
-	COLUMN : 3
-"m" == IDENTIFIER
-	LINE : 11
+"f" == IDENTIFIER
+	LINE : 6
 	COLUMN : 1
 ":=" == ATTRIBUTION
-	LINE : 11
+	LINE : 6
 	COLUMN : 2
 "(" == OPEN
-	LINE : 11
+	LINE : 6
 	COLUMN : 3
-"c" == IDENTIFIER
-	LINE : 11
+"ret" == IDENTIFIER
+	LINE : 6
 	COLUMN : 4
 ")" == CLOSE
-	LINE : 11
-	COLUMN : 5
-"global0" == IDENTIFIER
-	LINE : 13
-	COLUMN : 1
-":=" == ATTRIBUTION
-	LINE : 13
-	COLUMN : 2
-"(" == OPEN
-	LINE : 13
-	COLUMN : 3
-"10" == NUMBER_INTEGER
-	LINE : 13
-	COLUMN : 4
-")" == CLOSE
-	LINE : 13
+	LINE : 6
 	COLUMN : 5
 "fim" == END
-	LINE : 15
-	COLUMN : 1
-"flutuante" == FLOAT
-	LINE : 17
-	COLUMN : 1
-":" == DOUBLE_POINT
-	LINE : 17
-	COLUMN : 2
-"global1" == IDENTIFIER
-	LINE : 17
-	COLUMN : 3
-"vazio" == VOID
-	LINE : 18
-	COLUMN : 1
-"foo" == IDENTIFIER
-	LINE : 18
-	COLUMN : 2
-"(" == OPEN
-	LINE : 18
-	COLUMN : 3
-"inteiro" == INTEGER
-	LINE : 18
-	COLUMN : 4
-":" == DOUBLE_POINT
-	LINE : 18
-	COLUMN : 5
-"a" == IDENTIFIER
-	LINE : 18
-	COLUMN : 6
-"," == COMMA
-	LINE : 18
-	COLUMN : 7
-"inteiro" == INTEGER
-	LINE : 18
-	COLUMN : 8
-":" == DOUBLE_POINT
-	LINE : 18
-	COLUMN : 9
-"b" == IDENTIFIER
-	LINE : 18
-	COLUMN : 10
-")" == CLOSE
-	LINE : 18
-	COLUMN : 11
-"a" == IDENTIFIER
-	LINE : 19
-	COLUMN : 1
-":=" == ATTRIBUTION
-	LINE : 19
-	COLUMN : 2
-"(" == OPEN
-	LINE : 19
-	COLUMN : 3
-"10" == NUMBER_INTEGER
-	LINE : 19
-	COLUMN : 4
-")" == CLOSE
-	LINE : 19
-	COLUMN : 5
-"b" == IDENTIFIER
-	LINE : 20
-	COLUMN : 1
-":=" == ATTRIBUTION
-	LINE : 20
-	COLUMN : 2
-"(" == OPEN
-	LINE : 20
-	COLUMN : 3
-"11" == NUMBER_INTEGER
-	LINE : 20
-	COLUMN : 4
-")" == CLOSE
-	LINE : 20
-	COLUMN : 5
-"inteiro" == INTEGER
-	LINE : 22
-	COLUMN : 1
-":" == DOUBLE_POINT
-	LINE : 22
-	COLUMN : 2
-"l" == IDENTIFIER
-	LINE : 22
-	COLUMN : 3
-"l" == IDENTIFIER
-	LINE : 23
-	COLUMN : 1
-":=" == ATTRIBUTION
-	LINE : 23
-	COLUMN : 2
-"(" == OPEN
-	LINE : 23
-	COLUMN : 3
-"8" == NUMBER_INTEGER
-	LINE : 23
-	COLUMN : 4
-")" == CLOSE
-	LINE : 23
-	COLUMN : 5
-"fim" == END
-	LINE : 24
+	LINE : 7
 	COLUMN : 1
 "vazio" == VOID
-	LINE : 26
+	LINE : 8
 	COLUMN : 1
 "principal" == IDENTIFIER
-	LINE : 26
+	LINE : 8
 	COLUMN : 2
 "(" == OPEN
-	LINE : 26
+	LINE : 8
 	COLUMN : 3
 ")" == CLOSE
-	LINE : 26
+	LINE : 8
 	COLUMN : 4
-"inteiro" == INTEGER
-	LINE : 28
-	COLUMN : 1
-":" == DOUBLE_POINT
-	LINE : 28
-	COLUMN : 2
-"a" == IDENTIFIER
-	LINE : 28
-	COLUMN : 3
-"a" == IDENTIFIER
-	LINE : 29
-	COLUMN : 1
-":=" == ATTRIBUTION
-	LINE : 29
-	COLUMN : 2
-"(" == OPEN
-	LINE : 29
-	COLUMN : 3
-"10" == NUMBER_INTEGER
-	LINE : 29
-	COLUMN : 4
-")" == CLOSE
-	LINE : 29
-	COLUMN : 5
 "fim" == END
-	LINE : 30
+	LINE : 10
 	COLUMN : 1

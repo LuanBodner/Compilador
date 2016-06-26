@@ -3,29 +3,22 @@ Declaration
         inteiro
         n
     FunctionDecStatement
-        vazio
+        inteiro
         fatorial
         ParametersDecStatement
             VariableDecStatement
                 inteiro
-                f
+                n
         CompoundStatement
             ExpressionStatement
                 VariableDecStatement
                     inteiro
-                    ret
+                    fat
             CompoundStatement
                 ExpressionStatement
-                    AttributionStatement
+                    VariableDecStatement
+                        inteiro
                         ret
-                        OperationExpression
-                            10
-                CompoundStatement
-                    ExpressionStatement
-                        AttributionStatement
-                            f
-                            OperationExpression
-                                ret
     FunctionDecStatement
         vazio
         principal

@@ -40,7 +40,7 @@ int main(int argc, char** argv) {
     llvmCodeGeneration::llvmCodeGeneration cgen;
     cgen.treeAnalyzer(subTree, semantic.symbolTable);
     //cgen.testFunction();
-    
+
     system("rm -f tempTiny.txt");
 
     return EXIT_SUCCESS;

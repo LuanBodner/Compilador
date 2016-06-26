@@ -12,7 +12,7 @@ lib:
 	#$(CC) SyntaxAnalysis.cpp -c $(OPT) $(CFLAGS) $(DEBUG)
 	#$(CC) CompilerErrors.cpp -c $(OPT) $(CFLAGS) $(DEBUG)
 	#$(CC) Tree.cpp -c $(OPT) $(CFLAGS) $(DEBUG)
-	#$(CC) SemanticAnalysis.cpp -c $(OPT) $(CFLAGS) $(DEBUG)
+	$(CC) SemanticAnalysis.cpp -c $(OPT) $(CFLAGS) $(DEBUG)
 	$(CC) llvmCodeGeneration.cpp -c $(OPT) `llvm-config --cflags` $(CFLAGS) $(DEBUG)
 main:
 	$(CC) main.cpp -c $(OPT) $(CFLAGS) $(DEBUG) -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS
