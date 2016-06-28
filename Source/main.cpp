@@ -37,10 +37,8 @@ int main(int argc, char** argv) {
 
     synx.getTree().printTree(output);
 
-
     llvmCodeGeneration::llvmCodeGeneration cgen;
     cgen.treeAnalyzer(subTree, semantic.symbolTable);
-
 
     system("rm -f tempTiny.txt");
 

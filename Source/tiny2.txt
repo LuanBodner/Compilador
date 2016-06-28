@@ -2,13 +2,13 @@ inteiro fatorial(inteiro: n)
 
     inteiro: fat
     inteiro: ret
-    
-    se(n > 0) então 
+
+    se (n > 0) então 
         fat := (1)
         repita
             fat := (fat * n)
             n := (n-1)
-        ate(n=0)
+        ate (n = 0)
         ret := (fat)
     senão
         ret := (0)
@@ -18,9 +18,9 @@ inteiro fatorial(inteiro: n)
 fim
 
 vazio principal()
-
+    
     inteiro: n
-   
+
     leia(n)
-    fatorial(n)
+    escreve(fatorial(n))
 fim
