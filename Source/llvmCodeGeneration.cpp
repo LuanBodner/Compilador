@@ -257,6 +257,14 @@ namespace llvmCodeGeneration {
         builder->CreateRet(val);
     }
 
+    void llvmCodeGeneration::whileStatement(Tree::Tree& t) {
+
+        llvm::BasicBlock * loopBody = llvm::BasicBlock::Create(llvm::getGlobalContext(), "loopBody", function);
+
+        builder->CreateBr(loopBody);
+        builder->SetInsertPoint(loopBody);
+    }
+
     void llvmCodeGeneration::expressionStatement(Tree::Tree& t, SymbolTable s) {
 
         if (!t.children[0]->exp.compare(VARDECSTRING))

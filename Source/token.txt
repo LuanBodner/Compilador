@@ -1,87 +1,261 @@
 "inteiro" == INTEGER
 	LINE : 1
 	COLUMN : 1
-":" == DOUBLE_POINT
+"bar" == IDENTIFIER
 	LINE : 1
-	COLUMN : 2
-"n" == IDENTIFIER
-	LINE : 1
-	COLUMN : 3
-"vazio" == VOID
-	LINE : 2
-	COLUMN : 1
-"fatorial" == IDENTIFIER
-	LINE : 2
 	COLUMN : 2
 "(" == OPEN
-	LINE : 2
+	LINE : 1
 	COLUMN : 3
 "inteiro" == INTEGER
-	LINE : 2
+	LINE : 1
 	COLUMN : 4
 ":" == DOUBLE_POINT
-	LINE : 2
+	LINE : 1
 	COLUMN : 5
-"f" == IDENTIFIER
-	LINE : 2
+"c" == IDENTIFIER
+	LINE : 1
 	COLUMN : 6
-")" == CLOSE
-	LINE : 2
+"," == COMMA
+	LINE : 1
 	COLUMN : 7
 "inteiro" == INTEGER
-	LINE : 3
-	COLUMN : 1
+	LINE : 1
+	COLUMN : 8
 ":" == DOUBLE_POINT
+	LINE : 1
+	COLUMN : 9
+"d" == IDENTIFIER
+	LINE : 1
+	COLUMN : 10
+")" == CLOSE
+	LINE : 1
+	COLUMN : 11
+"c" == IDENTIFIER
 	LINE : 3
-	COLUMN : 2
-"ret" == IDENTIFIER
-	LINE : 3
-	COLUMN : 3
-"ret" == IDENTIFIER
-	LINE : 5
 	COLUMN : 1
 ":=" == ATTRIBUTION
-	LINE : 5
+	LINE : 3
 	COLUMN : 2
 "(" == OPEN
-	LINE : 5
+	LINE : 3
 	COLUMN : 3
+"2" == NUMBER_INTEGER
+	LINE : 3
+	COLUMN : 4
+"+" == SUM
+	LINE : 3
+	COLUMN : 5
+"3" == NUMBER_INTEGER
+	LINE : 3
+	COLUMN : 6
+"-" == SUBTRACTION
+	LINE : 3
+	COLUMN : 7
+"4" == NUMBER_INTEGER
+	LINE : 3
+	COLUMN : 8
+"*" == MULTIPLICATION
+	LINE : 3
+	COLUMN : 9
+"5" == NUMBER_INTEGER
+	LINE : 3
+	COLUMN : 10
+")" == CLOSE
+	LINE : 3
+	COLUMN : 11
+"d" == IDENTIFIER
+	LINE : 4
+	COLUMN : 1
+":=" == ATTRIBUTION
+	LINE : 4
+	COLUMN : 2
+"(" == OPEN
+	LINE : 4
+	COLUMN : 3
+"12" == NUMBER_INTEGER
+	LINE : 4
+	COLUMN : 4
+")" == CLOSE
+	LINE : 4
+	COLUMN : 5
+"retorna" == RETURN
+	LINE : 6
+	COLUMN : 1
+"(" == OPEN
+	LINE : 6
+	COLUMN : 2
 "10" == NUMBER_INTEGER
-	LINE : 5
-	COLUMN : 4
-")" == CLOSE
-	LINE : 5
-	COLUMN : 5
-"f" == IDENTIFIER
-	LINE : 6
-	COLUMN : 1
-":=" == ATTRIBUTION
-	LINE : 6
-	COLUMN : 2
-"(" == OPEN
 	LINE : 6
 	COLUMN : 3
-"ret" == IDENTIFIER
-	LINE : 6
-	COLUMN : 4
 ")" == CLOSE
 	LINE : 6
-	COLUMN : 5
+	COLUMN : 4
 "fim" == END
 	LINE : 7
 	COLUMN : 1
 "vazio" == VOID
-	LINE : 8
+	LINE : 9
 	COLUMN : 1
-"principal" == IDENTIFIER
-	LINE : 8
+"foo" == IDENTIFIER
+	LINE : 9
 	COLUMN : 2
 "(" == OPEN
-	LINE : 8
+	LINE : 9
+	COLUMN : 3
+"inteiro" == INTEGER
+	LINE : 9
+	COLUMN : 4
+":" == DOUBLE_POINT
+	LINE : 9
+	COLUMN : 5
+"a" == IDENTIFIER
+	LINE : 9
+	COLUMN : 6
+"," == COMMA
+	LINE : 9
+	COLUMN : 7
+"flutuante" == FLOAT
+	LINE : 9
+	COLUMN : 8
+":" == DOUBLE_POINT
+	LINE : 9
+	COLUMN : 9
+"b" == IDENTIFIER
+	LINE : 9
+	COLUMN : 10
+")" == CLOSE
+	LINE : 9
+	COLUMN : 11
+"a" == IDENTIFIER
+	LINE : 10
+	COLUMN : 1
+":=" == ATTRIBUTION
+	LINE : 10
+	COLUMN : 2
+"(" == OPEN
+	LINE : 10
+	COLUMN : 3
+"10" == NUMBER_INTEGER
+	LINE : 10
+	COLUMN : 4
+")" == CLOSE
+	LINE : 10
+	COLUMN : 5
+"b" == IDENTIFIER
+	LINE : 11
+	COLUMN : 1
+":=" == ATTRIBUTION
+	LINE : 11
+	COLUMN : 2
+"(" == OPEN
+	LINE : 11
+	COLUMN : 3
+"11.0" == NUMBER_FLOAT
+	LINE : 11
+	COLUMN : 4
+")" == CLOSE
+	LINE : 11
+	COLUMN : 5
+"inteiro" == INTEGER
+	LINE : 13
+	COLUMN : 1
+":" == DOUBLE_POINT
+	LINE : 13
+	COLUMN : 2
+"l" == IDENTIFIER
+	LINE : 13
+	COLUMN : 3
+"l" == IDENTIFIER
+	LINE : 14
+	COLUMN : 1
+":=" == ATTRIBUTION
+	LINE : 14
+	COLUMN : 2
+"(" == OPEN
+	LINE : 14
+	COLUMN : 3
+"8" == NUMBER_INTEGER
+	LINE : 14
+	COLUMN : 4
+")" == CLOSE
+	LINE : 14
+	COLUMN : 5
+"foo" == IDENTIFIER
+	LINE : 16
+	COLUMN : 1
+"(" == OPEN
+	LINE : 16
+	COLUMN : 2
+"11" == NUMBER_INTEGER
+	LINE : 16
+	COLUMN : 3
+"," == COMMA
+	LINE : 16
+	COLUMN : 4
+"12.0" == NUMBER_FLOAT
+	LINE : 16
+	COLUMN : 5
+")" == CLOSE
+	LINE : 16
+	COLUMN : 6
+"fim" == END
+	LINE : 17
+	COLUMN : 1
+"vazio" == VOID
+	LINE : 19
+	COLUMN : 1
+"principal" == IDENTIFIER
+	LINE : 19
+	COLUMN : 2
+"(" == OPEN
+	LINE : 19
 	COLUMN : 3
 ")" == CLOSE
-	LINE : 8
+	LINE : 19
 	COLUMN : 4
+"inteiro" == INTEGER
+	LINE : 21
+	COLUMN : 1
+":" == DOUBLE_POINT
+	LINE : 21
+	COLUMN : 2
+"a" == IDENTIFIER
+	LINE : 21
+	COLUMN : 3
+"a" == IDENTIFIER
+	LINE : 22
+	COLUMN : 1
+":=" == ATTRIBUTION
+	LINE : 22
+	COLUMN : 2
+"(" == OPEN
+	LINE : 22
+	COLUMN : 3
+"10" == NUMBER_INTEGER
+	LINE : 22
+	COLUMN : 4
+")" == CLOSE
+	LINE : 22
+	COLUMN : 5
+"foo" == IDENTIFIER
+	LINE : 24
+	COLUMN : 1
+"(" == OPEN
+	LINE : 24
+	COLUMN : 2
+"0" == NUMBER_INTEGER
+	LINE : 24
+	COLUMN : 3
+"," == COMMA
+	LINE : 24
+	COLUMN : 4
+"0.0" == NUMBER_FLOAT
+	LINE : 24
+	COLUMN : 5
+")" == CLOSE
+	LINE : 24
+	COLUMN : 6
 "fim" == END
-	LINE : 10
+	LINE : 25
 	COLUMN : 1

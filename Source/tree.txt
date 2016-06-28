@@ -1,32 +1,99 @@
 Declaration
-    VariableDecStatement
-        inteiro
-        n
     FunctionDecStatement
-        vazio
-        fatorial
+        inteiro
+        bar
         ParametersDecStatement
             VariableDecStatement
                 inteiro
-                f
+                c
+            VariableDecStatement
+                inteiro
+                d
         CompoundStatement
             ExpressionStatement
-                VariableDecStatement
-                    inteiro
-                    ret
+                AttributionStatement
+                    c
+                    OperationExpression
+                        2
+                        SumExpression
+                            3
+                            SubtractionExpression
+                                4
+                                MultiplicationExpression
+                                    5
             CompoundStatement
                 ExpressionStatement
                     AttributionStatement
-                        ret
+                        d
                         OperationExpression
-                            10
+                            12
                 CompoundStatement
                     ExpressionStatement
-                        AttributionStatement
-                            f
+                        ReturnStatement
                             OperationExpression
-                                ret
+                                10
+                            retorna
+    FunctionDecStatement
+        vazio
+        foo
+        ParametersDecStatement
+            VariableDecStatement
+                inteiro
+                a
+            VariableDecStatement
+                flutuante
+                b
+        CompoundStatement
+            ExpressionStatement
+                AttributionStatement
+                    a
+                    OperationExpression
+                        10
+            CompoundStatement
+                ExpressionStatement
+                    AttributionStatement
+                        b
+                        OperationExpression
+                            11.0
+                CompoundStatement
+                    ExpressionStatement
+                        VariableDecStatement
+                            inteiro
+                            l
+                    CompoundStatement
+                        ExpressionStatement
+                            AttributionStatement
+                                l
+                                OperationExpression
+                                    8
+                        CompoundStatement
+                            ExpressionStatement
+                                FunctionCallStatement
+                                    foo
+                                    OperationExpression
+                                        11
+                                    OperationExpression
+                                        12.0
     FunctionDecStatement
         vazio
         principal
         ParametersDecStatement
+        CompoundStatement
+            ExpressionStatement
+                VariableDecStatement
+                    inteiro
+                    a
+            CompoundStatement
+                ExpressionStatement
+                    AttributionStatement
+                        a
+                        OperationExpression
+                            10
+                CompoundStatement
+                    ExpressionStatement
+                        FunctionCallStatement
+                            foo
+                            OperationExpression
+                                0
+                            OperationExpression
+                                0.0

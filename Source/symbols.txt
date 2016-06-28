@@ -1,5 +1,9 @@
+3, a / inteiro / Used / Initialized
+2, l / inteiro / Used / Initialized
+1, d / inteiro / Used / Initialized
 0, principal / vazio / Function / 0
-1, ret / inteiro / Used / Initialized
-1, f / inteiro / Used / Initialized
-0, fatorial / vazio / Function / 1 / inteiro
-0, n / inteiro / Global / Unused / Not Initialized
+0, foo / vazio / Function / 2 / inteiro / flutuante
+1, c / inteiro / Used / Initialized
+2, b / flutuante / Used / Initialized
+2, a / inteiro / Used / Initialized
+0, bar / inteiro / Function / 2 / inteiro / inteiro
