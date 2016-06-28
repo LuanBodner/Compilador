@@ -1,0 +1,26 @@
+inteiro fatorial(inteiro: n)
+
+    inteiro: fat
+    inteiro: ret
+    
+    se(n > 0) então 
+        fat := (1)
+        repita
+            fat := (fat * n)
+            n := (n-1)
+        ate(n=0)
+        ret := (fat)
+    senão
+        ret := (0)
+    fim
+
+    retorna(ret)
+fim
+
+vazio principal()
+
+    inteiro: n
+   
+    leia(n)
+    fatorial(n)
+fim

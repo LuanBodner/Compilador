@@ -1,6 +1,0 @@
-3, a = a
-2, l = l
-2, b.addr = b.addr
-2, a.addr = a.addr
-1, d.addr = d.addr
-1, c.addr = c.addr

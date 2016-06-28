@@ -174,7 +174,7 @@ namespace Semantic {
                 sn.first = verifyTable(sn, *tree.children[0]);
 
                 if (!symbolTable[sn][symbolTable[sn].size() - 1].compare(NIN))
-                    error.variableNotDefinedError(tree.children[0]->token);
+                    error.variableNotInitialized(tree.children[0]->token);
 
                 if (!symbolTable[sn][1].compare(FU))
                     functionCallStatement(tree);
@@ -195,7 +195,7 @@ namespace Semantic {
                 error.expressionTypeError(tree.children[0]->token);
 
             for (unsigned int i = 0; i < tree.children.size(); i++)
-                if (tree.children[i])
+                if (tree.children.size())
                     operationExpression(*tree.children[i], ttype);
         }
     }
@@ -203,8 +203,7 @@ namespace Semantic {
     void SemanticAnalysis::functionCallStatement(Tree::Tree& tree) {
 
         ScopeName sn(0, tree.children[0]->token.getTokenName());
-
-        boost::unordered_map<ScopeName, vectorString>::const_iterator entry;
+        boost::unordered_map<ScopeName, vectorString>::iterator entry;
         entry = symbolTable.find(sn);
         unsigned int index = 3;
 
@@ -219,13 +218,13 @@ namespace Semantic {
 
                     if (!symbolTable[sn][index].compare(FLOATS))
                         operationExpression(*tree.children[i], Token::FLOAT);
-
+                   
                     else if (!symbolTable[sn][index].compare(INTS))
                         operationExpression(*tree.children[i], Token::INTEGER);
                 }
             } else
                 error.functionCallError(tree.children[0]->token);
-        } else if (sn.second.compare("leia") && sn.second.compare("escreva"))
+        } else if (sn.second.compare("leia") && sn.second.compare("escreve"))
             error.functionCallScopeError(tree.children[0]->token);
     }
 
@@ -328,7 +327,7 @@ namespace Semantic {
 
             for (const auto &p : symbolTable)
                 if (p.second[1].compare(FU))
-                    if (!p.second[1].compare(NUV))
+                    if (!p.second[1].compare(NUV) || (!p.second[1].compare(GL) && !p.second[2].compare(NUV)))
                         error.variableNotUsedWarning(p.first.second, p.second[0]);
         }
     }

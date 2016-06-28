@@ -214,6 +214,13 @@ namespace CompilerErrors {
         exit(EXIT_FAILURE);
     }
 
+    void CompilerErrors::variableNotInitialized(Token::Token token) {
+
+        std::cout << "\033[1;31mError\033[0m; Variable not Initialized; ";
+
+        printError(token);
+    }
+
     void CompilerErrors::expressionTypeError(Token::Token token) {
 
         std::cout << "\033[1;31mError\033[0m; Unexpected Type; "
@@ -222,7 +229,7 @@ namespace CompilerErrors {
                 << "\033[1;32mReceived\033[0m: " << token.getTokenName() << "';\n";
 
         printLine(token.getTokenLine());
-        
+
         exit(EXIT_FAILURE);
     }
 
