@@ -18,7 +18,7 @@
 
 int main(int argc, char** argv) {
 
-    if (argc < 4) {
+    if (argc < 5) {
 
         std::cout << "Wrong number of arguments\n";
         return EXIT_FAILURE;
@@ -33,14 +33,14 @@ int main(int argc, char** argv) {
     Semantic::SemanticAnalysis semantic;
     Tree::Tree subTree = synx.getTree();
     semantic.treeAnalyzer(subTree);
-    semantic.printTable();
+    semantic.printTable(argv[4]);
 
     synx.getTree().printTree(output);
 
-    /*
+
     llvmCodeGeneration::llvmCodeGeneration cgen;
     cgen.treeAnalyzer(subTree, semantic.symbolTable);
-     */
+
 
     system("rm -f tempTiny.txt");
 

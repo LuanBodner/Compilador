@@ -27,4 +27,5 @@ clean:
 	rm -f tree.txt token.txt symbols.txt tiny.bc tiny.ll
 
 cleanf:
-	rm -f tree.txt token.txt symbols.txt tiny.bc tiny.ll referenceTable.txt 
+	rm -f tree.txt  token.txt  symbol.txt tiny.bc tiny.ll referenceTable.txt 
+	rm -f tree2.txt token2.txt symbol2.txt tiny.bc tiny.ll referenceTable.txt 

@@ -36,7 +36,7 @@ namespace Semantic {
 
         /* Kicks off the semantic analysis */
         void treeAnalyzer(Tree::Tree&, int level = 0);
-        void printTable();
+        void printTable(std::string);
 
         /* Table of Symbols */
         boost::unordered_map<ScopeName, vectorString> symbolTable;

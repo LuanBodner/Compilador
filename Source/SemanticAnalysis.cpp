@@ -218,7 +218,7 @@ namespace Semantic {
 
                     if (!symbolTable[sn][index].compare(FLOATS))
                         operationExpression(*tree.children[i], Token::FLOAT);
-                   
+
                     else if (!symbolTable[sn][index].compare(INTS))
                         operationExpression(*tree.children[i], Token::INTEGER);
                 }
@@ -332,9 +332,9 @@ namespace Semantic {
         }
     }
 
-    void SemanticAnalysis::printTable() {
+    void SemanticAnalysis::printTable(std::string name) {
 
-        std::ofstream file("symbols.txt");
+        std::ofstream file(name, std::ofstream::out);
 
         for (const auto &p : symbolTable) {
 
