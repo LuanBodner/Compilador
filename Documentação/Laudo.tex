@@ -54,14 +54,6 @@ Quando dado \textit{token} é analisado, o seu conteúdo é armazenado em um vet
 
 Os \textit{tokens} são analisados de acordo com expressões regulares. As mais importantes listadas a seguir:
 
-\begin{itemize}
-\item 
-\begin{lstlisting}
-	^\\b[A-Za-zÀ-ú_][A-Za-zÀ-ú0-9_]*
-\end{lstlisting}
-
-\end{itemize}
-
 \begin{lstlisting}
 	static std::vector<Token::Token> tokens;
 \end{lstlisting}
@@ -202,4 +194,115 @@ Portanto, a cada erro encontrado, o programa mostra a mensagem de erro e é fina
 \tab \tab \tab | <returnCom>\\
 \tab \tab \tab | <variableDec>\\
 \tab \tab \tab | <attributionExp>\\
+\newpage
+\section*{Análise Semântica}
+
+Para fazer a análise Semântica da linguagem, sendo essa a "terceira" passada pelo código foi criada a classe \textit{SemanticAnalysis}. Essa classe por sua vez passa pela AST e gera uma tabela de símbolos, como exemplificada a seguir:
+
+\begin{lstlisting}
+
+0, principal / vazio / Function / 0
+1, ret / inteiro / Used / Initialized
+1, f / inteiro / Used / Initialized
+0, fatorial / vazio / Function / 1 / inteiro
+0, n / inteiro / Global / Unused / Not Initialized
+
+\end{lstlisting}
+
+Essa tabela é representada no programa como uma \textit{hashtable}, cuja estrutura é definida da seguinte maneira:
+
+\begin{lstlisting}
+
+typedef std::pair<int, std::string> ScopeName;
+typedef std::vector<std::string> vectorString;
+
+boost::unordered_map<ScopeName, vectorString> symbolTable;
+
+\end{lstlisting}
+
+As colunas armazenadas nessa tabela são:
+\begin{itemize}
+\item Escopo(chave)
+\item Nome(chave)
+\item Tipo
+\end{itemize}
+A partir daqui, a tabela se diferencia entre funções e variaveis, sendo que para funções, as próximas colunas são:
+\begin{itemize}
+\item \textit{Flag} definindo se é uma função
+\item Número de parâmetros
+\item Tipo de cada um dos parâmetros
+\end{itemize}
+Para variáveis:
+\begin{itemize}
+\item \textit{Flag} definindo se é global
+\item \textit{Flag} definindo se foi ou não utilizada
+\item \textit{Flag} definindo se foi ou não inicializada
+\end{itemize}
+
+Não foi utilizada nenhuma técnica em especial para geração dessa tabela, sendo que ela foi preenchida conforme os dados foram descobertos na AST.
+
+Além disso, a adição da análise semântica levou à modificação da classe de Erros, que foi atualizada agora para gerar os \textit{warnings} e erros da anpalise semântica, o cabeçalho das novas funções adicionadas são:
+
+\begin{lstlisting}
+        void declarationScopeError(Token::Token);
+        void variableNotDeclaredError(Token::Token);
+        void functionCallError(Token::Token);
+        void functionCallScopeError(Token::Token);
+        void variableNotDefinedError(Token::Token);
+        void variableVoidError(Token::Token);
+        void expressionTypeError(Token::Token);
+        void returnIgnoredWarning(Token::Token);
+        void voidAttributionError(Token::Token);
+        void functionWithoutReturnWarning(std::string);
+        void returnMayBeIgnoredWarning(Token::Token);
+        void variableNotUsedWarning(std::string, std::string);
+        void mainDeclarationError();
+        void tooManyReturnsError(Token::Token);
+\end{lstlisting}
+
+Além dessas adições, o esquema de mensagem de erro e \textit{warnings} também foi modificada de forma que elas sejam visualmente mais simples de perceber e produzam mais informações para o programador. Entre as melhorias citadas estão:
+
+\begin{itemize}
+\item Mensagens com cores
+\item printar os \textit{tokens} onde o erro se encontra
+\end{itemize}
+
+A estrutura da AST não foi modificada, e a geração de código é feita em cima da tabela de simbolos gerada e da própria árvore.
+
+\section*{Geração de Código}
+Para a geração de código, inicialmente foi utilizada a classe \textit{CodeGeneration}, que foi refatorada em uma nova classe \textit{llvmCodeGeneration}, devido aos diversos erros gerados. A classe inicial então foi reutilizada quando adequada.
+
+Como váriaveis da classe, foram armazenadas as referencias dos módulos responsáveis pela adição de instruções e contexto dos módulos.
+
+\begin{lstlisting}
+
+        /* Current Builder */
+        llvm::IRBuilder<> * builder;
+
+        /* tiny Module */
+        llvm::Module * module;
+
+        /* Current function */
+        llvm::Function * function;
+
+        /* Current basic block */
+        llvm::BasicBlock * block;
+\end{lstlisting}
+
+Conforme as variáveis são definidas ou declaradas, sejam elas globais ou locais, elas são armazenadas em duas \textit{hashtables} separadas, para que a origem da variável seja distinguível.
+
+\begin{lstlisting}
+
+    	typedef boost::unordered_map<ScopeName, vectorString> SymbolTable;
+      
+        /* Alloca Instruction table */
+        boost::unordered_map<ScopeName, llvm::AllocaInst*> variablesHash;
+
+        /* Function Parameters table */
+        boost::unordered_map<ScopeName, llvm::AllocaInst*> paramHash;
+\end{lstlisting}
+
+A geração de código não foi concluída, portanto não foi possível aplicar nenhuma forma de otimização de código.
+
+
 \end{document}
